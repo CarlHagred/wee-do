@@ -1,7 +1,7 @@
 function App() {
   return (
     <div className="App">
-      Hello WeeDo
+      Ni är fantastiska
     </div>
   );
 }
