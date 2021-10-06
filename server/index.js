@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/routes.js";
+import mongoose from "mongoose";
 
 //configuration of env file
 dotenv.config();
@@ -27,4 +28,22 @@ app.use(
 
 app.use(morgan("dev"));
 
-app.listen(PORT, () => console.log(`Server up and running on port: ${PORT}`));
+
+//Database connection
+const CONNECTION_URI = process.env.CONNECTION_DB_URI;
+const databaseConnection = async () => {
+  try {
+    await mongoose.connect(CONNECTION_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    app.listen(PORT, () => {
+      console.log(
+        `Server upp and running, and connected to database on port: ${PORT}`
+      );
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+databaseConnection();
