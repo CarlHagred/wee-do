@@ -16,6 +16,12 @@
         }
 };
 
+STATUSKODER VI SKA ANVÄNDA:
+200: allt är bra 
+404: resource finns ej  
+409: conflict, tex en användare som försöker läggas till finns redan i databasen    
+500: server error
+
 
 */
 

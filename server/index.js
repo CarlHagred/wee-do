@@ -5,6 +5,14 @@ import morgan from "morgan";
 import routes from "./routes/routes.js";
 import mongoose from "mongoose";
 
+/* 
+    FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
+    1. ligg i mappen /wee-do/server/ och skriv "npm install"
+        för att installera samtliga dependencies
+    2. skriv "npm start" i terminalen (se till att ligga i servermappen)
+    3. se i terminalen så det står: "Server upp and running, and connected to database on port: 8000"
+*/
+
 //configuration of env file
 dotenv.config();
 
@@ -27,7 +35,6 @@ app.use(
 );
 
 app.use(morgan("dev"));
-
 
 //Database connection
 const CONNECTION_URI = process.env.CONNECTION_DB_URI;
