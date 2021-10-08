@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-const Aktivities  = () => {
+const Activities  = () => {
     return (
         <div>
             <h2>Login succeeded</h2>
@@ -8,4 +8,4 @@ const Aktivities  = () => {
         </div>
     )
 }; 
-export default Aktivities; 
+export default Activities; 
