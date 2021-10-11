@@ -1,10 +1,14 @@
-import React from 'react'; 
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Exercises = () => {
-    return (
-        <div>
-            <h2>Lista med övningar</h2>
-        </div>
-    )
-}; 
-export default Exercises; 
+  return (
+    <div>
+      <h2>Lista med övningar</h2>
+      <ul>
+        <Link to="/">Tillbaka till förstasidan</Link>
+      </ul>
+    </div>
+  );
+};
+export default Exercises;
