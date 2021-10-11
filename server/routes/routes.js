@@ -1,6 +1,7 @@
 import express from "express";
 
-import { getTest, postPatient } from "../controllers/routerLogic.js";
+import { getTest } from "../controllers/routerLogic.js";
+import { postPatient } from "../controllers/admin/adminEndpoints.js";
 
 const router = express.Router();
 
