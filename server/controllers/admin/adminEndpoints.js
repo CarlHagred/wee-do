@@ -1,5 +1,4 @@
 import Patient from "../../models/patient.js";
-import bcrypt from "bcrypt";
 
 export const postPatient = async (req, res) => {
   const createRandomName = () => Math.random().toString(20).substr(2, 6);
@@ -17,9 +16,8 @@ export const postPatient = async (req, res) => {
     }
     //om det inte finns en patient med samma namn så skapas patienten
     if (!doc) {
-      const hashedUsername = await bcrypt.hash(name, 10);
       const newPatient = new Patient({
-        name: hashedUsername,
+        name: name,
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
