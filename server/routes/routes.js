@@ -9,7 +9,8 @@ import {
 const router = express.Router();
 
 router.get("/test", getTest);
-router.post("/newpatient", postPatient);
+router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
+
 
 export default router;
