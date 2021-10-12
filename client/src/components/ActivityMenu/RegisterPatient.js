@@ -13,7 +13,7 @@ const RegisterPatient = () => {
 
   return (
     <div>
-      <button onClick={handleEvent}>Register patient</button>
+      <button onClick={handleEvent}>Registrera ny patient</button>
       <p>{newPatient}</p>
     </div>
   );
