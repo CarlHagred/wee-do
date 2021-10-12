@@ -6,6 +6,6 @@ import { postPatient } from "../controllers/admin/adminEndpoints.js";
 const router = express.Router();
 
 router.get("/test", getTest);
-router.post("/newpatient", postPatient);
+router.get("/newpatient", postPatient);
 
 export default router;
