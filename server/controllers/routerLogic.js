@@ -28,9 +28,21 @@ STATUSKODER VI SKA ANVÄNDA:
 import Patient from "../models/patient.js";
 
 export const getTest = (req, res) => {
-  console.log("detta funkar");
+    console.log("detta funkar");
 
-  try {
-    res.status(200).json("detta funkar");
-  } catch (error) {}
+    try {
+        res.status(200).json("detta funkar");
+    } catch (error) {}
+};
+
+
+
+export const logInPatient = async(req, res) => {
+    try {
+
+        res.status(200).json("Login fungerar");
+
+    } catch (error) {
+        res.status(404).json("Det fungerar inte")
+    }
 };
