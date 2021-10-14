@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 
 import { getTest } from "../controllers/routerLogic.js";
 import {
@@ -6,14 +7,15 @@ import {
   getPatients,
 } from "../controllers/admin/adminEndpoints.js";
 
-//import { loginPatient } from "../controllers/patient/patientEndpoints.js";
+import { loginPatient } from "../controllers/patient/patientEndpoints.js";
 
 const router = express.Router();
 
 router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
-//router.get("/loginpatient", loginPatient)
+router.post("/loginpatient", loginPatient);
+
 
 
 

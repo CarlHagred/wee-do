@@ -4,6 +4,11 @@ import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/routes.js";
 import mongoose from "mongoose";
+import passport from "passport";
+
+
+
+import initializeStrategy from "./controllers/config/passportConfig.js"
 
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
@@ -20,12 +25,20 @@ const PORT = process.env.PORT;
 
 const app = express();
 
-//middleware
+
+//middleware with passport
 app.use(
   cors({
     origin: "*",
   })
 );
+
+// app.use(session({ secret: "cats" })); om man ska ha denna?
+//app.use(passport.initializeStrategy());
+app.use("local-login", initializeStrategy)
+//app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use(express.json());
 
@@ -53,3 +66,5 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
+
+export default app
