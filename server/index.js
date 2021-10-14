@@ -5,6 +5,7 @@ import morgan from "morgan";
 import routes from "./routes/routes.js";
 import mongoose from "mongoose";
 import passport from "passport";
+import session from "express-session";
 
 
 
@@ -33,10 +34,10 @@ app.use(
   })
 );
 
-// app.use(session({ secret: "cats" })); om man ska ha denna?
+app.use(session({ secret: "cats" })); // Ha secret session, tillfällig ska sedan läggas in i session
 //app.use(passport.initializeStrategy());
 app.use("local-login", initializeStrategy)
-//app.use(passport.initialize())
+app.use(passport.initialize())
 app.use(passport.session())
 
 

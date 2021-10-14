@@ -2,27 +2,28 @@ import React, {useState} from "react";
 import { ThemeProvider } from "styled-components";
 import Button from "../../components/Styled/Button";
 import PatientTheme from "../../Themes/PatientTheme";
-import { loginPatient } from "../../api/index";
+import { getPatient, loginPatient } from "../../api/index";
 
 
 const LoginPatient = () => {
-    const [login, setLogin] = useState("Du är inte inloggad")
+    const [loginUser, setLogin] = useState("Du är inte inloggad")
+    const [data, setData] = useState(null);
 
     const handleEvent = async () => {
-      const loginNewPatient = await loginPatient();
-      console.log(loginNewPatient.data);
-      setLogin(`Patienten är inloggad, namn: ${loginNewPatient.data}`)
+      const patient = await getPatient();
+      if(loginUser === patient){
+        console.log("Patienten matchar")
+        await loginPatient();
+      }
+      console.log("Hittat alla");
+      console.log(patient);
+      //const patientislogin = await loginPatient();
+      //console.log("patientislogin");
+      setLogin(`Patienten är inloggad, namn: ${patient.data}`)
     }
-    /*
-    const handleEvent = async () => {
-        const patientUser = await loginPatient();
-        setLogin(patientUser.data)
-        console.log(patientUser.data);
-        setLogin('Patienten är inloggad')
-      };*/
  
     return (
-      <form action="/login" method="POST">
+      <div>
         <input type="text" id="login" placeholder="Ange Användarnamn... "
         onChange={(e) => setLogin(e.target.value)}>
         </input>
@@ -32,9 +33,10 @@ const LoginPatient = () => {
                     <Button onClick={handleEvent} >Logga in</Button>
             </ThemeProvider>
         </div>
-        <p>Användare: {login}</p>
+        <p>Användare: {loginUser}</p>
 
-      </form>
+      </div>
+      
     );
   };
   

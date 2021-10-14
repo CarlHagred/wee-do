@@ -23,24 +23,15 @@ export const loginPatient = async (req, res) => {
     ))
 }
 
-/*
-export const loginPatient = async (req, res) => {
-    Passport.authenticate("local-login", function (error, user, info){
-        if (error){
-            return res.status(500).json({
-                message: error || "something hände"
-            })
-        }
-
-        req.loginPatient(user, function (error, data){
-            if (error){
-                return res.status(500).json({
-                    message: error || "something hände"
-                })
-            }
-        });
-
-        user.isAuthenticated = true;
-        return res.json(user);
-    })(req, res)
-}*/
+//hämta en patient
+export const getPatient = async (req, res) => {
+    try {
+      const patient = await Patient.collection("patientSchema").findOne({}, function(err, result){
+          if(err) throw err;
+          console.log(result.name);
+      });
+      res.status(200).json(patient);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+  };
