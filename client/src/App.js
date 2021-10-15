@@ -19,6 +19,7 @@ import Help from "./pages/Help";
 import About from "./pages/About";
 import NotFoundPage from "./pages/404";
 import Showcase from "./pages/Showcase";
+import Statistics from "./pages/Statistics";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
           <Route exact path="/showcase" component={Showcase} />
+          <Route exact path="/statistik/:name" component={Statistics} />
         </Layout>
         <Route component={NotFoundPage} />
       </Switch>
