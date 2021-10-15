@@ -34,14 +34,3 @@ export const getTest = (req, res) => {
     res.status(200).json("detta funkar");
   } catch (error) {}
 };
-
-//Test för postpatient
-export const postPatient = async (req, res) => {
-  try {
-    const newPatient = new Patient({
-      name: "Test1",
-    });
-    await newPatient.save();
-    console.log("patient skapad");
-  } catch (error) {}
-};
