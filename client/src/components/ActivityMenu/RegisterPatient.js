@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../Styled/Button";
 import { getNewPatient } from "../../api/index";
 
 const RegisterPatient = () => {
