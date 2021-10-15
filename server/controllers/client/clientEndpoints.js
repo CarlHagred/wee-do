@@ -1,7 +1,8 @@
-export const getVideo = async (req, res) => {
+export const getVideoUrl = async (req, res) => {
   try {
-    //Lägg till kod för att skicka tillbaka yt-länk från databasen
-    res.status(200).json('test');
+    //qrkoden som skickas i requesten nås med req.query.qr
+    //TODO Lägg till kod för att skicka tillbaka yt-länk från databasen
+    res.status(200).json(req.query.qr);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

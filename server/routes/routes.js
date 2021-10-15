@@ -5,14 +5,13 @@ import {
   postPatient,
   getPatients,
 } from '../controllers/admin/adminEndpoints.js';
-
-import { getVideo } from '../controllers/client/clientEndpoints';
+import { getVideoUrl } from '../controllers/client/clientEndpoints.js';
 
 const router = express.Router();
 
 router.get('/test', getTest);
 router.get('/newpatient', postPatient);
 router.get('/getpatients', getPatients);
-router.get('/getvideo', getVideo);
+router.get('/getvideourl', getVideoUrl);
 
 export default router;
