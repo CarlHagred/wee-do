@@ -5,6 +5,7 @@ const ScanQr = () => {
   return (
     <div>
       <h2>Camera-page</h2>
+      <br />
       <ul>
         <Link to="/">Tillbaka till förstasidan</Link>
       </ul>

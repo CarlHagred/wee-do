@@ -21,18 +21,17 @@ const PORT = process.env.PORT;
 const app = express();
 
 //middleware
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 app.use(express.json());
 
 app.use(routes);
 
 app.use(express.static("public")); //osäker om nödvändig
-
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
 
 app.use(morgan("dev"));
 
