@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getAllPatients } from "../../api";
 
 const SearchPatient = () => {
@@ -27,7 +28,16 @@ const SearchPatient = () => {
           }
         })
         .map((patient) => (
-          <p key={patient._id}>{patient.name}</p>
+          <p>
+            <Link
+              to={`/statistik/${patient.name}`}
+              target="_blank"
+              key={patient._id}
+            >
+              {patient.name}
+            </Link>
+            <hr></hr>
+          </p>
         ))}
     </div>
   );
