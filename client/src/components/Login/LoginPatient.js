@@ -9,7 +9,24 @@ const LoginPatient = () => {
     const [loginUser, setLogin] = useState("Du är inte inloggad")
     const [data, setData] = useState(null);
 
-    const handleEvent = async () => {
+    const testaLogin = async () => {
+      
+      const name = document.getElementById("login").value;
+      console.log(name);
+
+      const patient = await getPatient();
+      if (name === patient){
+        await loginPatient();
+        console.log(patient);
+      }
+      setLogin(`Patienten är inloggad, namn: ${name}`)
+      console.log(patient);
+    }
+
+
+    const handleEvent = async (event) => {
+      const testa = event;
+      console.log(testa);
       const patient = await getPatient();
       if(loginUser === patient){
         console.log("Patienten matchar")
@@ -23,14 +40,14 @@ const LoginPatient = () => {
     }
  
     return (
-      <div>
-        <input type="text" id="login" placeholder="Ange Användarnamn... "
+      <div >
+        <input type="text" name="name" id="login" placeholder="Ange Användarnamn... "
         onChange={(e) => setLogin(e.target.value)}>
         </input>
         <hr/>
         <div>
             <ThemeProvider theme={PatientTheme}>
-                    <Button onClick={handleEvent} >Logga in</Button>
+                    <Button onClick={testaLogin}>Logga in</Button>
             </ThemeProvider>
         </div>
         <p>Användare: {loginUser}</p>

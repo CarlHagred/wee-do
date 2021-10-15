@@ -23,14 +23,29 @@ export const loginPatient = async (req, res) => {
     ))
 }
 
+// TESTA LOGGA IN PATIEN
+export const testLoginPatiet = async (req, res) => {
+    passport.authenticate("local", (err, user, info) => {
+        if (err) throw err;
+        if (!user) res.send("No User Exists");
+        else{
+            req.login(user, (err) => {
+                if(err) throw err;
+                res.send("Successfully authenticated");
+                console.log(req.user);
+            })
+        }
+    })
+}
+
 //hämta en patient
 export const getPatient = async (req, res) => {
     try {
-      const patient = await Patient.collection("patientSchema").findOne({}, function(err, result){
-          if(err) throw err;
-          console.log(result.name);
-      });
-      res.status(200).json(patient);
+        const name = req.body;
+        console.log(name);
+        const patient = await Patient.findOne(name)
+        res.status(200).json(patient);
+        
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
