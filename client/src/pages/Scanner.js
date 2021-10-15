@@ -12,7 +12,6 @@ const ScanQr = () => {
       </ul>
       <h1>Scanna</h1>
       <ScanCamera />
-      <p>Skane image</p>
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Input from "../components/styled/Input";
-import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
-import PatientTheme from "../themes/PatientTheme";
-import Paragraph from "../components/styled/Paragraph";
-import Button from "../components/styled/Button";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Input from '../components/styled/Input';
+import styled from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import PatientTheme from '../themes/PatientTheme';
+import Paragraph from '../components/styled/Paragraph';
+import Button from '../components/styled/Button';
 
 const PlaceKitten = styled.div`
   text-align: center;

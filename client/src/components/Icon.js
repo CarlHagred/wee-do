@@ -1,8 +1,8 @@
-import User from "./icons/User";
+import User from './icons/User';
 
 const variants = {
   user: User,
-  dog: "🐶",
+  dog: '🐶',
 };
 
 const Icon = ({ name, ...props }) => {
