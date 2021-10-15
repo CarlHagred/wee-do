@@ -7,7 +7,9 @@ const Activities = () => {
   return (
     <div>
       <h2>Login succeeded</h2>
+      <br />
       <h3>Aktivitetspanel</h3>
+      <br />
       <RegisterPatient />
       <hr />
       <SearchPatient />

@@ -1,4 +1,4 @@
-import User from "./Icons/User";
+import User from "./icons/User";
 
 const variants = {
   user: User,
