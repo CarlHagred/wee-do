@@ -34,7 +34,7 @@ app.use(
   })
 );
 
-app.use(session({ secret: "cats" })); // Ha secret session, tillfällig ska sedan läggas in i session
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true })); // Ha secret session, tillfällig ska sedan läggas in i session
 //app.use(passport.initializeStrategy());
 app.use("local-login", initializeStrategy)
 app.use(passport.initialize())

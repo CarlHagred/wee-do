@@ -3,7 +3,7 @@ import Patient from "../../models/patient.js";
 import passport from "passport";
 import passportLocal from "passport-local";
 const LocalStrategy = passportLocal.Strategy;
-
+/*
 export const loginPatient = async (req, res) => {
     passport.use(new LocalStrategy(
         function (name, done){
@@ -19,11 +19,35 @@ export const loginPatient = async (req, res) => {
 
                 return done (null, patient);
             });
-        }
+        }§
     ))
+}*/
+
+export const authPatient = async (req, res) =>{
+    try {
+        const name = req.query.username;
+        const patient = await Patient.findOne({name: name})
+        console.log(patient);
+        res.status(200).json(req.query.username)
+        
+        if(!patient){
+            return res.send(done(null, false));
+        };
+
+        if(patient){
+            return res.send(done(null, patient));
+        };
+
+        return done(null, patient);
+
+        
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
 }
 
 // TESTA LOGGA IN PATIEN
+/*
 export const testLoginPatiet = async (req, res) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
@@ -36,15 +60,16 @@ export const testLoginPatiet = async (req, res) => {
             })
         }
     })
-}
+}*/
 
 //hämta en patient
+
 export const getPatient = async (req, res) => {
     try {
-        const name = req.body;
-        console.log(name);
-        const patient = await Patient.findOne(name)
-        res.status(200).json(patient);
+        const name = req.query.username;
+        const patient = await Patient.findOne({name: name})
+        console.log(patient);
+        res.status(200).json(req.query.username)
         
     } catch (error) {
       res.status(404).json({ message: error.message });

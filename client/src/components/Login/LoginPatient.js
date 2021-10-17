@@ -1,43 +1,59 @@
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom"
 import { ThemeProvider } from "styled-components";
 import Button from "../../components/Styled/Button";
 import PatientTheme from "../../Themes/PatientTheme";
-import { getPatient, loginPatient } from "../../api/index";
+import { loginPatient } from "../../api/index";
 
 
 const LoginPatient = () => {
     const [loginUser, setLogin] = useState("Du är inte inloggad")
-    const [data, setData] = useState(null);
+    const history = useHistory();
 
-    const testaLogin = async () => {
+    const testaLogin = async (username) => {
       
       const name = document.getElementById("login").value;
       console.log(name);
 
-      const patient = await getPatient();
+      const params = {
+        username: name
+      }
+
+      const patient = await loginPatient(params);
+      
+      console.log(patient);
+      setLogin(`Patienten är inloggad, namn: ${patient}`)
+
+
+      if(username.toString){
+        history.push('/')
+      }
+    }
+    
+      
+
+
+      /*const patient = await getPatient();
       if (name === patient){
         await loginPatient();
         console.log(patient);
-      }
-      setLogin(`Patienten är inloggad, namn: ${name}`)
-      console.log(patient);
-    }
+      }*/
+    
 
-
-    const handleEvent = async (event) => {
-      const testa = event;
-      console.log(testa);
-      const patient = await getPatient();
-      if(loginUser === patient){
-        console.log("Patienten matchar")
-        await loginPatient();
-      }
-      console.log("Hittat alla");
-      console.log(patient);
-      //const patientislogin = await loginPatient();
-      //console.log("patientislogin");
-      setLogin(`Patienten är inloggad, namn: ${patient.data}`)
-    }
+      /*
+      const handleEvent = async (event, username) => {
+        const name = document.getElementById("login")
+        const patient = await getPatient(name);
+        if(loginUser === patient){
+          console.log("Patienten matchar")
+          await loginPatient();
+        }
+        console.log(patient);
+        //const patientislogin = await loginPatient();
+        //console.log("patientislogin");
+        setLogin(`Patienten är inloggad, namn: ${patient}`)
+      }*/
+    
  
     return (
       <div >
@@ -55,6 +71,6 @@ const LoginPatient = () => {
       </div>
       
     );
-  };
+};
   
-  export default LoginPatient;
+export default LoginPatient;

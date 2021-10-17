@@ -4,21 +4,22 @@ import passport from "passport";
 import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
-  getPatients,
+  getPatients
 } from "../controllers/admin/adminEndpoints.js";
 
 import { 
-  loginPatient,
-  getPatient
+  authPatient,
+  getPatient,
 } from "../controllers/patient/patientEndpoints.js";
+
 
 const router = express.Router();
 
 router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
-router.get("/getpatient", getPatient);
-router.post("/loginpatient", loginPatient);
+router.post("/login", authPatient);
+
 
 
 
