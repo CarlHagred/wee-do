@@ -6,6 +6,10 @@ import { ThemeProvider } from "styled-components";
 import PatientTheme from "../themes/PatientTheme";
 import Paragraph from "../components/styled/Paragraph";
 import Button from "../components/styled/Button";
+import { data } from "../data";
+import StatTable from "../components/styled/StatTable";
+import UserTable from "../components/styled/UserTable";
+import { users } from "../users";
 
 const PlaceKitten = styled.div`
   text-align: center;
@@ -28,6 +32,8 @@ const MainPage = () => {
       <ThemeProvider theme={PatientTheme}>
         <Button>Logga in</Button>
       </ThemeProvider>
+      <StatTable data={data} />
+      <UserTable users={users}/>
 
       <StyledLinks>
         <h2>Tillfällig länklista:</h2>

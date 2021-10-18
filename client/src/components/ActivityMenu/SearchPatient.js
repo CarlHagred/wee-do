@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllPatients } from "../../api";
+import UserTable from "../styled/UserTable";
 
 const SearchPatient = () => {
   const [patients, setPatients] = useState([]);
@@ -28,9 +29,12 @@ const SearchPatient = () => {
         })
         .map((patient) => (
           <p key={patient._id}>{patient.name}</p>
+
         ))}
     </div>
   );
 };
 
 export default SearchPatient;
+
+

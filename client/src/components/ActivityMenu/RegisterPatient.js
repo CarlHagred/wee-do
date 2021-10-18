@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getNewPatient } from "../../api/index";
+import UserTable from "../styled/UserTable";
 
 const RegisterPatient = () => {
   const [newPatient, setNewPatient] = useState("Ingen patient är skapad");
