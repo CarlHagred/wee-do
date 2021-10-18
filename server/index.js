@@ -24,9 +24,11 @@ const PORT = process.env.PORT;
 const app = express();
 
 //middleware with passport
+app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 
@@ -40,20 +42,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.json());
-
-app.use(
-  session({
-    secret: "cats-are-cute",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-initializeStrategy(passport);
+localStrategy(passport);
 app.use(express.static("public")); //osäker om nödvändig
 
 app.use(routes);

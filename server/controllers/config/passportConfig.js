@@ -1,16 +1,16 @@
 import Patient from "../../models/patient.js";
-import passport from "passport";
 import passportLocal from "passport-local";
 
 const LocalStrategy = passportLocal.Strategy;
 
-export const initializeStrategy = (passport) => {
+const initializeStrategy = (passport) => {
   passport.use(
     new LocalStrategy((name, done) => {
+      console.log(name);
       Patient.findOne({ name: name }, (err, user) => {
         if (err) throw err;
         if (!user) return done(null, false);
-        return done(null, false);
+        return done(null, user);
       });
     })
   );
@@ -22,7 +22,7 @@ export const initializeStrategy = (passport) => {
   passport.deserializeUser((id, cb) => {
     Patient.findOne({ _id: id }, (err, user) => {
       const patientInformation = {
-        username: user.username,
+        name: user.name,
       };
       cb(err, patientInformation);
     });

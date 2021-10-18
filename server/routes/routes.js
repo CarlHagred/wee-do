@@ -4,23 +4,16 @@ import passport from "passport";
 import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
-  getPatients
+  getPatients,
 } from "../controllers/admin/adminEndpoints.js";
 
-import { 
-  loginPatient,
-  getPatient,
-} from "../controllers/patient/patientEndpoints.js";
-
+import { loginPatient } from "../controllers/patient/patientEndpoints.js";
 
 const router = express.Router();
 
 router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
-router.get("/getpatient", getPatient)
-router.post("/login", loginPatient);
-
-
+router.post("/loginpatient", loginPatient);
 
 export default router;
