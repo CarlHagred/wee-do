@@ -8,22 +8,13 @@ import AdminTheme from "../themes/AdminTheme";
 import Input from "../components/styled/Input";
 import SearchBar from "../components/styled/SearchBar";
 
-// Notera att knapparna behöver wrappas med en ThemeProvider
-// Välj tema: PatientTheme eller AdminTheme
-// Detta gäller även disabled och outlined-knapparna
-// Se nedan för exempel
-
-const Wrapper = styled.div`
-  padding-bottom: 10rem;
-`;
-
 const StyledHeader = styled.h2`
   font-size: 1.5em;
 `;
 
 const Showcase = () => {
   return (
-    <Wrapper>
+    <>
       <Link to="/">Tillbaka till förstasidan</Link>
       <br />
       <br />
@@ -76,7 +67,7 @@ const Showcase = () => {
           Disabled
         </Button>
       </ThemeProvider>
-    </Wrapper>
+    </>
   );
 };
 export default Showcase;

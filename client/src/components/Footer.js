@@ -17,7 +17,7 @@ const Row = styled.div`
 
 const Col = styled.div`
   flex: ${(props) => props.size};
-  padding: 15px;
+  padding: 1rem;
 `;
 
 const Footer = () => {

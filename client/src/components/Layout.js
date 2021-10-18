@@ -8,7 +8,7 @@ const PageContainer = styled.div`
   min-height: 100vh;
 
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 1rem 15rem 1rem;
 `;
 
 const Layout = ({ children }) => {

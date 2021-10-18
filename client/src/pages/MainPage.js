@@ -1,11 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../components/styled/Input';
-import styled from 'styled-components';
-import { ThemeProvider } from 'styled-components';
-import PatientTheme from '../themes/PatientTheme';
-import Paragraph from '../components/styled/Paragraph';
-import Button from '../components/styled/Button';
+import React from "react";
+import { Link } from "react-router-dom";
+import Input from "../components/styled/Input";
+import styled from "styled-components";
+import Button from "../components/styled/Button";
 
 const PlaceKitten = styled.div`
   text-align: center;
@@ -22,12 +19,10 @@ const MainPage = () => {
   return (
     <>
       <PlaceKitten>
-        <img src="http://placekitten.com/340/250" align="center" />
+        <img src="http://placekitten.com/340/250" align="center" alt="Mjau" />
       </PlaceKitten>
       <Input type="text" placeholder="Användarnamn.." />
-      <ThemeProvider theme={PatientTheme}>
-        <Button>Logga in</Button>
-      </ThemeProvider>
+      <Button>Logga in</Button>
 
       <StyledLinks>
         <h2>Tillfällig länklista:</h2>
