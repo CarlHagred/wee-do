@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../../api";
+import SearchBar from "../styled/SearchBar";
 
 const SearchPatient = () => {
   const [patients, setPatients] = useState([]);
@@ -14,12 +15,13 @@ const SearchPatient = () => {
     fetchData();
   }, [patients]);
   return (
-    <div>
-      <input
-        type="text"
+    <>
+      <SearchBar
         placeholder="Sök efter en patient... "
-        onChange={(e) => setSearchedName(e.target.value)}
-      ></input>
+        onChange={(e) => {
+          setSearchedName(e.target.value);
+        }}
+      />
 
       {patients
         .filter((patient) => {
@@ -28,18 +30,13 @@ const SearchPatient = () => {
           }
         })
         .map((patient) => (
-          <p>
-            <Link
-              to={`/statistik/${patient.name}`}
-              target="_blank"
-              key={patient._id}
-            >
+          <p key={patient._id}>
+            <Link to={`/statistik/${patient.name}`} target="_blank">
               {patient.name}
             </Link>
-            <hr></hr>
           </p>
         ))}
-    </div>
+    </>
   );
 };
 
