@@ -1,37 +1,34 @@
 import Patient from "../../models/patient.js";
 import passport from "passport";
 import passportLocal from "passport-local";
-import { authPatient } from "../patient/patientEndpoints.js";
 
 const LocalStrategy = passportLocal.Strategy;
-/*
-export const initializeStrategy = async (req, res) => passport.use(new LocalStrategy(
-    function authenticateUser (username, done) {
-      Patient.findOne({ name: Patient }, async (err, user) => {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        return done(null, user);
-      });
-    },
-  ));*/
 
-export const initializeStrategy = () => {
-  passport.use(new LocalStrategy(authPatient));
 
-  passport.serializeUser((user, done) => {
-    console.log("Serialize user");
-    console.log(user);
+export const initializeStrategy = (passport) => {
+  passport.use(
+    new LocalStrategy((name, done) => {
+      Patient.findOne({name: name}, (err, user) => {
+        if(err) throw err;
+        if(!user) return done(null, false);
+        return done(null, false)
+      })
+    })
+  )
 
-    done(null, user.id)
+  passport.serializeUser((user, cb) => {
+    cb(null, user.id);
   })
 
-  passport.deserializeUser((id, done) => {
-    console.log("---------> Deserialize Id")
-    console.log(id)
-
-    done (null, id)
+  passport.deserializeUser((id, cb) => {
+    Patient.findOne({_id: id}, (err, user) => {
+      const patientInformation = {
+        username: user.username,
+      }
+      cb(err, patientInformation);
+    })
   })
-
 }
+
 
 export default initializeStrategy;

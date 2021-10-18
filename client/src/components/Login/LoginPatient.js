@@ -3,14 +3,14 @@ import {useHistory} from "react-router-dom"
 import { ThemeProvider } from "styled-components";
 import Button from "../../components/Styled/Button";
 import PatientTheme from "../../Themes/PatientTheme";
-import { loginPatient } from "../../api/index";
+import { loginPatient, getPatient } from "../../api";
 
 
 const LoginPatient = () => {
     const [loginUser, setLogin] = useState("Du är inte inloggad")
     const history = useHistory();
 
-    const testaLogin = async (username) => {
+    const loginNewPatient = async (username) => {
       
       const name = document.getElementById("login").value;
       console.log(name);
@@ -24,35 +24,31 @@ const LoginPatient = () => {
       console.log(patient);
       setLogin(`Patienten är inloggad, namn: ${patient}`)
 
+      if(username.toString){
+        history.push('/')
+      }
+    }
+
+    const getAPatient = async (username) => {
+      
+      const name = document.getElementById("login").value;
+      console.log(name);
+
+      const params = {
+        username: name
+      }
+
+      const patient = await getPatient(params);
+      
+      console.log(patient);
+      setLogin(`Patienten är inloggad, namn: ${patient}`)
 
       if(username.toString){
         history.push('/')
       }
     }
     
-      
-
-
-      /*const patient = await getPatient();
-      if (name === patient){
-        await loginPatient();
-        console.log(patient);
-      }*/
     
-
-      /*
-      const handleEvent = async (event, username) => {
-        const name = document.getElementById("login")
-        const patient = await getPatient(name);
-        if(loginUser === patient){
-          console.log("Patienten matchar")
-          await loginPatient();
-        }
-        console.log(patient);
-        //const patientislogin = await loginPatient();
-        //console.log("patientislogin");
-        setLogin(`Patienten är inloggad, namn: ${patient}`)
-      }*/
     
  
     return (
@@ -63,7 +59,11 @@ const LoginPatient = () => {
         <hr/>
         <div>
             <ThemeProvider theme={PatientTheme}>
-                    <Button onClick={testaLogin}>Logga in</Button>
+                    <Button onClick={loginNewPatient}>Logga in</Button>
+            </ThemeProvider>
+
+            <ThemeProvider theme={PatientTheme}>
+                    <Button onClick={getAPatient}>Hämta Användare</Button>
             </ThemeProvider>
         </div>
         <p>Användare: {loginUser}</p>

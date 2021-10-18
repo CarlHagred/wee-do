@@ -8,7 +8,7 @@ import {
 } from "../controllers/admin/adminEndpoints.js";
 
 import { 
-  authPatient,
+  loginPatient,
   getPatient,
 } from "../controllers/patient/patientEndpoints.js";
 
@@ -18,9 +18,8 @@ const router = express.Router();
 router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
-router.post("/login", authPatient);
-
-
+router.get("/getpatient", getPatient)
+router.post("/login", loginPatient);
 
 
 
