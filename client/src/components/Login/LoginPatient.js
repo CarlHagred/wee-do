@@ -1,41 +1,76 @@
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom"
 import { ThemeProvider } from "styled-components";
 import Button from "../../components/Styled/Button";
 import PatientTheme from "../../Themes/PatientTheme";
-import { loginPatient } from "../../api/index";
+import { loginPatient, getPatient } from "../../api";
 
 
 const LoginPatient = () => {
-    const [login, setLogin] = useState("Du är inte inloggad")
+    const [loginUser, setLogin] = useState("Du är inte inloggad")
+    const history = useHistory();
 
-    const handleEvent = async () => {
-      const loginNewPatient = await loginPatient();
-      console.log(loginNewPatient.data);
-      setLogin(`Patienten är inloggad, namn: ${loginNewPatient.data}`)
+    const loginNewPatient = async (username) => {
+      
+      const name = document.getElementById("login").value;
+      console.log(name);
+
+      const params = {
+        username: name
+      }
+
+      const patient = await loginPatient(params);
+      
+      console.log(patient);
+      setLogin(`Patienten är inloggad, namn: ${patient}`)
+
+      if(username.toString){
+        history.push('/')
+      }
     }
-    /*
-    const handleEvent = async () => {
-        const patientUser = await loginPatient();
-        setLogin(patientUser.data)
-        console.log(patientUser.data);
-        setLogin('Patienten är inloggad')
-      };*/
+
+    const getAPatient = async (username) => {
+      
+      const name = document.getElementById("login").value;
+      console.log(name);
+
+      const params = {
+        username: name
+      }
+
+      const patient = await getPatient(params);
+      
+      console.log(patient);
+      setLogin(`Patienten är inloggad, namn: ${patient}`)
+
+      if(username.toString){
+        history.push('/')
+      }
+    }
+    
+    
+    
  
     return (
-      <form action="/login" method="POST">
-        <input type="text" id="login" placeholder="Ange Användarnamn... "
+      <div >
+        <input type="text" name="name" id="login" placeholder="Ange Användarnamn... "
         onChange={(e) => setLogin(e.target.value)}>
         </input>
         <hr/>
         <div>
             <ThemeProvider theme={PatientTheme}>
-                    <Button onClick={handleEvent} >Logga in</Button>
+                    <Button onClick={loginNewPatient}>Logga in</Button>
+            </ThemeProvider>
+
+            <ThemeProvider theme={PatientTheme}>
+                    <Button onClick={getAPatient}>Hämta Användare</Button>
             </ThemeProvider>
         </div>
-        <p>Användare: {login}</p>
+        <p>Användare: {loginUser}</p>
 
-      </form>
+      </div>
+      
     );
-  };
+};
   
-  export default LoginPatient;
+export default LoginPatient;

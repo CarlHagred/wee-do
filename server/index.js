@@ -6,8 +6,7 @@ import routes from "./routes/routes.js";
 import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
-
-import initializeStrategy from "./controllers/config/passportConfig.js";
+import localStrategy from "./controllers/config/passportConfig.js";
 
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
@@ -30,6 +29,16 @@ app.use(
     origin: "*",
   })
 );
+
+app.use(
+  session({
+    secret: "cats",
+    resave: false,
+    saveUninitialized: true,
+  })
+); // Ha secret session, tillfällig ska sedan läggas in i session
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.json());
 

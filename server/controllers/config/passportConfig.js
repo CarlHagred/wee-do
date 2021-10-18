@@ -4,20 +4,29 @@ import passportLocal from "passport-local";
 
 const LocalStrategy = passportLocal.Strategy;
 
-const initializeStrategy = (passport) => {
+export const initializeStrategy = (passport) => {
   passport.use(
-    new LocalStrategy((username, done) => {
-      Patient.findOne({ name: username }, (err, user) => {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false);
-        }
-        return done(null, user);
+    new LocalStrategy((name, done) => {
+      Patient.findOne({ name: name }, (err, user) => {
+        if (err) throw err;
+        if (!user) return done(null, false);
+        return done(null, false);
       });
     })
   );
+
+  passport.serializeUser((user, cb) => {
+    cb(null, user.id);
+  });
+
+  passport.deserializeUser((id, cb) => {
+    Patient.findOne({ _id: id }, (err, user) => {
+      const patientInformation = {
+        username: user.username,
+      };
+      cb(err, patientInformation);
+    });
+  });
 };
 
 export default initializeStrategy;
