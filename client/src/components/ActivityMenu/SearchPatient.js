@@ -25,9 +25,7 @@ const SearchPatient = () => {
 
       {patients
         .filter((patient) => {
-          if (patient.name.includes(searchedName)) {
-            return patient;
-          }
+          return patient.name.includes(searchedName) ? patient : null;
         })
         .map((patient) => (
           <p key={patient._id}>
