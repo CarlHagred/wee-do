@@ -14,7 +14,7 @@ const RegisterPatient = () => {
   const handleEvent = async () => {
     const newPatientName = await getNewPatient();
     console.log(newPatientName.data);
-    setNewPatient(`Patient skapad, namn: ${newPatientName.data}`);
+    setNewPatient(`Patient skapad, id: ${newPatientName.data}`);
   };
 
   return (
