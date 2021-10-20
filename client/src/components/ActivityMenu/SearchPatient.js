@@ -11,8 +11,8 @@ const StyledTable = styled.table`
   width: 100%;
   margin: 1em 0;
   justify-content: left;
-  border-radius: 4px;
-
+  border-radius: 4px; 
+  
   td,th {
     padding: 5px 10px;
     border-radius: 4px;
