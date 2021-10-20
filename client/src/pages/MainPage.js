@@ -31,6 +31,12 @@ const MainPage = () => {
           <Link to="/activities">Activities</Link>
         </ul>
         <ul>
+          <Link to="/searchpatientpage">Sök patient</Link>
+        </ul>
+        <ul>
+          <Link to="/registerpatientpage">Registrera patient</Link>
+        </ul>
+        <ul>
           <Link to="/exercises">Exercises</Link>
         </ul>
         <ul>
