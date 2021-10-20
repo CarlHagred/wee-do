@@ -6,11 +6,11 @@ export const loginPatient = (req, res, next) => {
   //console.log(req.body);
   passport.authenticate("local", (err, user, info) => {
     //console.log(user);
-    if (err) throw err;
+    if (err) {return err, null};
     if (!user) res.send("Ingen användare finns!");
     else {
       req.logIn(user, (err) => {
-        if (err) throw err;
+        if (err) {return err, null};
         res.send("LYCKAD AUTH");
         //console.log(user);
       });

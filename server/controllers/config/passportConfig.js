@@ -6,12 +6,11 @@ const LocalStrategy = passportLocal.Strategy;
 
 const initializeStrategy = (passport) => {
   passport.use(
-    new LocalStrategy({usernameField: 'name', passwordField: 'name', passReqToCallback: true},
+    new LocalStrategy({usernameField: 'name', passwordField: 'name'},
       (name, password, done) => {
       Patient.findOne({ name: name }, (err, user) => {
-        //console.log(name);
-        if (err) throw err;
-        if (!user) return done(null, false);
+        if (err) {return done(err)};
+        if (!user) {return done(null, false, {message: "Användare finns ej!"})};
         return done(null, user);
       });
     })
