@@ -42,9 +42,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-localStrategy(passport);
 app.use(express.static("public")); //osäker om nödvändig
-
+localStrategy(passport);
 app.use(routes);
 app.use(morgan("dev"));
 
