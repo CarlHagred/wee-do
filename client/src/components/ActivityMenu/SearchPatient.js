@@ -93,8 +93,4 @@ const SearchPatient = () => {
   );
 };
 
-
-
-
-
 export default SearchPatient;
