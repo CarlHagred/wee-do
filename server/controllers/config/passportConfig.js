@@ -1,9 +1,9 @@
 import Patient from "../../models/patient.js";
 import passportLocal from "passport-local";
-//import passport from "passport";
 
 const LocalStrategy = passportLocal.Strategy;
 
+//Definition av en lokal strategi för hur vi hanterar autentisering av ett angivet användarnamn
 const initializeStrategy = (passport) => {
   passport.use(
     new LocalStrategy({usernameField: 'name', passwordField: 'name'},
@@ -16,11 +16,12 @@ const initializeStrategy = (passport) => {
     })
   );
 
+  //Skapar en session där cookiens ID är namnet på användaren
   passport.serializeUser((user, done) => {
-    console.log("Blir nu serialized");
     done(null, user.id);
   });
 
+  //Hittar sessionens ID och avslutar sessionen
   passport.deserializeUser((id, done) => {
     Patient.findOne({ _id: id }, (err, user) => {
       const patientInformation = {

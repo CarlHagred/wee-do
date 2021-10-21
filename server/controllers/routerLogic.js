@@ -28,9 +28,8 @@ STATUSKODER VI SKA ANVÄNDA:
 import Patient from "../models/patient.js";
 
 export const getTest = (req, res) => {
-  console.log("detta funkar");
 
   try {
-    res.status(200).json("detta funkar");
+    res.status(200).json("This works");
   } catch (error) {}
 };

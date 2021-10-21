@@ -8,6 +8,7 @@ export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
 export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
 
+//API-call tills servern som hämtar användaren som har blivit autentiserad och skickar vidare användaren till Scanner-sidan
 export const loginPatient = (params) => {
   axios({
     method: "POST",
@@ -16,8 +17,18 @@ export const loginPatient = (params) => {
     url: `${serverUrl}/loginpatient`,
   }).then((res) => {
     if(res.data === "auth"){
-      console.log(res.data)
       window.location = "/scanner"
     }
+  });
+};
+
+//Hämtar användare som är inloggad och förstör cookien som är skapad i backend
+export const logoutPatient = () => {
+  axios({
+    method: "DELETE",
+    withCredentials: true,
+    url: `${serverUrl}/logoutpatient`,
+  }).then((res) => {
+    window.location.reload()
   });
 };
