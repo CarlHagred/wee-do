@@ -1,16 +1,18 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-const Statistics = () => {
+const PatientStatistics = () => {
   const { name } = useParams();
 
   return (
-    <div>
+    <>
+      <h2>Statistik</h2>
+
       <p>Test för stats: namn {name}</p>
       <ul>
         <Link to="/">Tillbaka till förstasidan</Link>
       </ul>
-    </div>
+    </>
   );
 };
-export default Statistics;
+export default PatientStatistics;

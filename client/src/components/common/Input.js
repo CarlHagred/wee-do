@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+// OBS! Ej helt klar behöver ha props och onChange samt styling för
+// lösenord
+
 const Input = styled.input`
   width: 100%;
   box-sizing: border-box;

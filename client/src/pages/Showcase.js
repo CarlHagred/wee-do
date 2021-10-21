@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Button from "../components/styled/Button";
-import Paragraph from "../components/styled/Paragraph";
-import PatientTheme from "../themes/PatientTheme";
-import AdminTheme from "../themes/AdminTheme";
-import Input from "../components/styled/Input";
-import SearchBar from "../components/styled/SearchBar";
+import Button from "../components/common/Button";
+import PatientTheme from "../styling/themes/PatientTheme";
+import AdminTheme from "../styling/themes/AdminTheme";
+import Input from "../components/common/Input";
+import SearchBar from "../components/common/SearchBar";
 
 const StyledHeader = styled.h2`
   font-size: 1.5em;
@@ -30,7 +29,7 @@ const Showcase = () => {
       <StyledHeader>Buttons</StyledHeader>
       <br />
       <ThemeProvider theme={PatientTheme}>
-        <Paragraph>Patient Theme</Paragraph>
+        <p>Patient Theme</p>
 
         <Button>Small</Button>
 
@@ -40,7 +39,7 @@ const Showcase = () => {
       </ThemeProvider>
 
       <ThemeProvider theme={AdminTheme}>
-        <Paragraph>Admin Theme</Paragraph>
+        <p>Admin Theme</p>
         <Button>Small</Button>
         <Button icon="user">Small with Icon</Button>
 
@@ -48,7 +47,7 @@ const Showcase = () => {
         <Button icon="user" size="lg">
           Large with Icon
         </Button>
-        <Paragraph>Outlined</Paragraph>
+        <p>Outlined</p>
 
         <Button outlined>Outlined small</Button>
 
@@ -60,7 +59,7 @@ const Showcase = () => {
           Outlined Large
         </Button>
 
-        <Paragraph>Disabled</Paragraph>
+        <p>Disabled</p>
 
         <Button disabled>Disabled</Button>
         <Button disabled size="lg">

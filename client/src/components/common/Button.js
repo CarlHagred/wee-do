@@ -1,8 +1,4 @@
 import styled, { css } from "styled-components";
-import Icon from "../Icon";
-
-// För att använda en knapp så måste den wrappas med ThemeProvider
-// Se Showcase.js för exempel
 
 const StyledButton = styled.button`
   display: flex;
@@ -45,17 +41,6 @@ const StyledButton = styled.button`
         `}
 `;
 
-const Button = (props) => (
-  <StyledButton size={props.size} {...props}>
-    {props.icon && (
-      <Icon
-        height={props.size === "lg" ? 24 : 16}
-        width={props.size === "lg" ? 24 : 16}
-        name={props.icon}
-      />
-    )}
-    {props.children}
-  </StyledButton>
-);
+const Button = (props) => <StyledButton size={props.size} {...props} />;
 
 export default Button;
