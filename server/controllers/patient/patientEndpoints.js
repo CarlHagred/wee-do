@@ -11,9 +11,13 @@ export const loginPatient = (req, res, next) => {
     else {
       req.logIn(user, (err) => {
         if (err) {return err, null};
-        res.send("LYCKAD AUTH");
-        //console.log(user);
+        res.send("auth");
+        console.log(user);
       });
     }
   })(req, res, next);
 };
+
+export const getSession = (req, res) => {
+  res.json(req.user)
+}

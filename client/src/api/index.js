@@ -6,6 +6,8 @@ export const getNewPatient = () => axios.get(`${serverUrl}/newpatient`);
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
+export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
+
 export const loginPatient = (params) => {
   axios({
     method: "POST",
@@ -13,6 +15,9 @@ export const loginPatient = (params) => {
     withCredentials: true,
     url: `${serverUrl}/loginpatient`,
   }).then((res) => {
-    console.log(res.data);
+    if(res.data === "auth"){
+      console.log(res.data)
+      window.location = "/scanner"
+    }
   });
 };
