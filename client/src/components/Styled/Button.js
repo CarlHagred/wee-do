@@ -1,9 +1,6 @@
 import styled, { css } from "styled-components";
 import Icon from "../Icon";
 
-// För att använda en knapp så måste den wrappas med ThemeProvider
-// Se Showcase.js för exempel
-
 const StyledButton = styled.button`
   display: flex;
   gap: 8px;
@@ -40,7 +37,7 @@ const StyledButton = styled.button`
         `
       : css`
           &:hover {
-            background: ${(props) => props.theme.palette.hoover};
+            background: ${(props) => props.theme.palette.hover};
           }
         `}
 `;

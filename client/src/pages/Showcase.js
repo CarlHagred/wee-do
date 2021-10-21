@@ -7,6 +7,7 @@ import PatientTheme from "../themes/PatientTheme";
 import AdminTheme from "../themes/AdminTheme";
 import Input from "../components/styled/Input";
 import SearchBar from "../components/styled/SearchBar";
+import NavBar from "../components/styled/NavBar";
 
 const StyledHeader = styled.h2`
   font-size: 1.5em;
@@ -15,9 +16,6 @@ const StyledHeader = styled.h2`
 const Showcase = () => {
   return (
     <>
-      <Link to="/">Tillbaka till förstasidan</Link>
-      <br />
-      <br />
       <StyledHeader>Sökfält</StyledHeader>
       <br />
       <SearchBar />
