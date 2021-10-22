@@ -1,8 +1,6 @@
 import React from "react";
-
-// libaries
-import { IoMdSearch } from "react-icons/io";
 import styled from "styled-components";
+import { IoMdSearch } from "react-icons/io";
 
 const StyledSearch = styled.div`
   display: flex;

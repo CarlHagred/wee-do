@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Icon from "../../styling/Icons";
 
 const StyledButton = styled.button`
   display: flex;
@@ -41,6 +42,17 @@ const StyledButton = styled.button`
         `}
 `;
 
-const Button = (props) => <StyledButton size={props.size} {...props} />;
+const Button = (props) => (
+  <StyledButton size={props.size} {...props}>
+    {props.icon && (
+      <Icon
+        height={props.size === "lg" ? 24 : 16}
+        width={props.size === "lg" ? 24 : 16}
+        name={props.icon}
+      />
+    )}
+    {props.children}
+  </StyledButton>
+);
 
 export default Button;
