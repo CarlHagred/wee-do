@@ -1,7 +1,11 @@
 import { ImQrcode } from "react-icons/im";
 import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload } from "react-icons/md";
+import { IoMdSearch } from "react-icons/io";
 import { BiError } from "react-icons/bi";
+
+// Ikoner hämtas från https://react-icons.github.io/react-icons/
+// Nya ikoner importeras och läggs in i variants
 
 const variants = {
   qrcode: ImQrcode,
@@ -9,6 +13,7 @@ const variants = {
   add_user: FaUserPlus,
   upload: MdUpload,
   trash: FaTrashAlt,
+  search: IoMdSearch,
   error: BiError,
 };
 

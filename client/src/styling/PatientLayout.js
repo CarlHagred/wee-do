@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
+import { ThemeProvider } from "styled-components";
+import PatientTheme from "./themes/PatientTheme";
 
 const PageContainer = styled.div`
   position: relative;
@@ -13,11 +15,13 @@ const PageContainer = styled.div`
 
 const Layout = ({ children }) => {
   return (
-    <PageContainer>
-      <Header />
-      {children}
-      <Footer />
-    </PageContainer>
+    <ThemeProvider theme={PatientTheme}>
+      <PageContainer>
+        <Header />
+        {children}
+        <Footer />
+      </PageContainer>
+    </ThemeProvider>
   );
 };
 export default Layout;
