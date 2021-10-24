@@ -17,6 +17,7 @@ import Showcase from "./pages/Showcase";
 import Statistics from "./pages/Statistics";
 import { ThemeProvider } from "styled-components";
 import AdminTheme from "./themes/AdminTheme";
+import PatientActivityMenu from "./pages/PatientActivityMenu"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/showcase" component={Showcase} />
             <Route exact path="/statistik/:name" component={Statistics} />
+            <Route exact path="/activitymenu" component={PatientActivityMenu}/>
           </ThemeProvider>
         </Layout>
         <Route component={NotFoundPage} />

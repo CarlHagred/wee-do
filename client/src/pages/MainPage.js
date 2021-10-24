@@ -39,6 +39,9 @@ const MainPage = () => {
         <ul>
           <Link to="/showcase">Components Showcase</Link>
         </ul>
+        <ul>
+          <Link to="/activitymenu">Patient aktivitets meny</Link>
+        </ul>
       </StyledLinks>
     </>
   );
