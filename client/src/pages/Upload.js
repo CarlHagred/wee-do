@@ -1,17 +1,17 @@
+import UpploadVideo from "../components/activityMenu/UpploadVideo";
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchPatient from "../components/activityMenu/SearchPatient";
 
-
-const SearchPatientPage = () => {
+const Upload = () => {
     return (
-      <div>
+        <div>
         <br />
         <ul>
           <Link to="/">Tillbaka till förstasidan</Link>
         </ul>
-        <SearchPatient />
+        <UpploadVideo />
       </div>
     );
-  };
-  export default SearchPatientPage;
+}
+ 
+export default Upload;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RegisterPatient from "../components/ActivityMenu/RegisterPatient";
-import SearchPatient from "../components/ActivityMenu/SearchPatient";
+import RegisterPatient from "../components/activityMenu/RegisterPatient";
+import SearchPatient from "../components/activityMenu/SearchPatient";
 
 const Activities = () => {
   return (

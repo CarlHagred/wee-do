@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RegisterPatient from "../components/ActivityMenu/RegisterPatient";
+import RegisterPatient from "../components/activityMenu/RegisterPatient";
 
 
 const RegisterPatientPage = () => {

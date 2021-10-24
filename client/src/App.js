@@ -19,6 +19,8 @@ import { ThemeProvider } from "styled-components";
 import AdminTheme from "./themes/AdminTheme";
 import SearchPatientPage from "./pages/SearchPatientPage";
 import RegisterPatientPage from "./pages/RegisterPatientPage";
+import UploadVideo from "./pages/Upload"; 
+import UploadSucceeded from "./pages/UploadSucceeded";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/showcase" component={Showcase} />
             <Route exact path="/statistik/:name" component={Statistics} />
+            <Route exact path="/upload" component={UploadVideo}/>
+            <Route exact path="/success" component={UploadSucceeded}/>
           </ThemeProvider>
         </Layout>
         <Route component={NotFoundPage} />

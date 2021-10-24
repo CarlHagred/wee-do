@@ -37,6 +37,9 @@ const MainPage = () => {
           <Link to="/registerpatientpage">Registrera patient</Link>
         </ul>
         <ul>
+          <Link to="/upload">Ladda upp en ny övning</Link>
+        </ul>
+        <ul>
           <Link to="/exercises">Exercises</Link>
         </ul>
         <ul>
