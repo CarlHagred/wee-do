@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import AdminTheme from "../../styling/themes/AdminTheme";
+import AdminTheme from "../../themes/AdminTheme";
 import Hamburger from "hamburger-react";
-import Icon from "../../styling/Icons";
+import Icon from "../common/Icons";
 
-// https://hamburger-react.netlify.app/
+// Hamburgermenyn använder sig av en animerad ikon
+// från https://hamburger-react.netlify.app/
+
+// Kod nedan behöver städas lite, inte klar med det ännu //Josefine
 
 const StyledIcon = styled(Icon)`
   margin-right: 10px;

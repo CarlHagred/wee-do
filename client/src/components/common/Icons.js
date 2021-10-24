@@ -5,7 +5,7 @@ import { IoMdSearch } from "react-icons/io";
 import { BiError } from "react-icons/bi";
 
 // Ikoner hämtas från https://react-icons.github.io/react-icons/
-// Nya ikoner importeras och läggs in i variants
+// Fler ikoner?: Nya ikoner importeras och läggs in i variants
 
 const variants = {
   qrcode: ImQrcode,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../../api";
+import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import styled from "styled-components";
 
@@ -52,7 +53,7 @@ const SearchPatient = () => {
     fetchData();
   }, [patients]);
   return (
-    <>
+    <AdminLayout>
       <SearchBar
         placeholder="Sök efter en patient... "
         onChange={(e) => {
@@ -88,7 +89,7 @@ const SearchPatient = () => {
             </tbody>
           ))}
       </StyledTable>
-    </>
+    </AdminLayout>
   );
 };
 

@@ -8,7 +8,7 @@ const StyledWrapper = styled.div`
 const PlaceHolder = () => {
   return (
     <StyledWrapper>
-      <img src="http://placebeer.com/400/200" alt="Placeholder" width="100%" />
+      <img src="http://placebear.com/400/200" alt="Placeholder" width="100%" />
     </StyledWrapper>
   );
 };

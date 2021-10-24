@@ -1,14 +1,6 @@
 import React from "react";
 import GlobalStyle from "./globalStyle";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-
-//THemes
-import PatientTheme from "./styling/themes/PatientTheme";
-
-//Components
-import PatientLayout from "./styling/PatientLayout";
-import AdminLayout from "./styling/AdminLayout";
 
 //Common Pages
 import NotFoundPage from "./pages/common/404";
@@ -30,7 +22,6 @@ import SearchPatient from "./pages/admin/SearchPatient";
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
-import styled from "styled-components";
 
 function App() {
   return (
@@ -40,8 +31,6 @@ function App() {
         <Route exact path="/" component={PatientLogin} />
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
-      </Switch>
-      <Switch>
         <Route exact path="/admin" component={AdminLogin} />
         <Route exact path="/admin/statistik" component={PatientStatistics} />
         <Route

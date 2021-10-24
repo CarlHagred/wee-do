@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "../../components/common/Button";
 import PlaceHolder from "../../components/common/PlaceHolder";
-
-import PatientLayout from "./../../styling/PatientLayout";
+import PatientLayout from "../../components/patient/PatientLayout";
 
 const PatientLogin = () => {
   return (

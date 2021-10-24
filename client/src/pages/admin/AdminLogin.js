@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "../../components/common/Button";
 import PlaceHolder from "../../components/common/PlaceHolder";
-
-import AdminLayout from "../../styling/AdminLayout";
+import AdminLayout from "../../components/admin/AdminLayout";
 
 const AdminLogin = () => {
   return (

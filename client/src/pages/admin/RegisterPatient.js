@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getNewPatient } from "../../api/index";
+import AdminLayout from "../../components/admin/AdminLayout";
 import styled from "styled-components";
 import Button from "../../components/common/Button";
 
@@ -18,10 +19,10 @@ const RegisterPatient = () => {
   };
 
   return (
-    <>
+    <AdminLayout>
       <Button onClick={handleEvent}>Registrera ny patient</Button>
       <StyledNewPatient>{newPatient}</StyledNewPatient>
-    </>
+    </AdminLayout>
   );
 };
 

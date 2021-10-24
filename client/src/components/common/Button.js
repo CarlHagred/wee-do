@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Icon from "../../styling/Icons";
+import Icon from "./Icons";
 
 const StyledButton = styled.button`
   display: flex;

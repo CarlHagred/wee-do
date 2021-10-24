@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
-import AdminTheme from "./themes/AdminTheme";
-import Navbar from "../components/admin/Navbar";
+import AdminTheme from "../../themes/AdminTheme";
+import Navbar from "./Navbar";
 
 const PageContainer = styled.div`
   position: relative;

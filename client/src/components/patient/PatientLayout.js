@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Footer from "../components/common/Footer";
-import Header from "../components/common/Header";
+import Footer from "../common/Footer";
+import Header from "../common/Header";
 import { ThemeProvider } from "styled-components";
-import PatientTheme from "./themes/PatientTheme";
+import PatientTheme from "../../themes/PatientTheme";
 
 const PageContainer = styled.div`
   position: relative;

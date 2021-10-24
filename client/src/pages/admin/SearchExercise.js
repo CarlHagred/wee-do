@@ -1,15 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import AdminLayout from "../../components/admin/AdminLayout";
 
 const SearchExercise = () => {
   return (
-    <>
+    <AdminLayout>
       <h2>Sök övning</h2>
-      <br />
-      <ul>
-        <Link to="/">Tillbaka till förstasidan</Link>
-      </ul>
-    </>
+    </AdminLayout>
   );
 };
 export default SearchExercise;

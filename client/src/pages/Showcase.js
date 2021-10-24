@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Button from "../components/common/Button";
-import PatientTheme from "../styling/themes/PatientTheme";
-import AdminTheme from "../styling/themes/AdminTheme";
+import PatientTheme from "../themes/PatientTheme";
+import AdminTheme from "../themes/AdminTheme";
 import SearchBar from "../components/common/SearchBar";
 import UserInput from "../components/common/UserInput";
 import PasswordInput from "../components/common/PasswordInput";
@@ -15,8 +14,6 @@ const StyledHeader = styled.h2`
 const Showcase = () => {
   return (
     <>
-      <Link to="/">Tillbaka till förstasidan</Link>
-      <br />
       <br />
       <StyledHeader>Ikoner</StyledHeader>
       <br />
