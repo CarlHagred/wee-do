@@ -19,6 +19,9 @@ export const loginPatient = (params) => {
     if(res.data === "auth"){
       window.location = "/activitypanel"
     }
+    else{
+      console.log("Användare finns ej");
+    }
   });
 };
 
