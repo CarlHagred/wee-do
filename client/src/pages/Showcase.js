@@ -1,23 +1,34 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Button from "../components/Styled/Button";
-import Title from "../components/Styled/Title";
-import Paragraph from "../components/Styled/Paragraph";
-import AdminTheme from "../Themes/AdminTheme";
-import PatientTheme from "../Themes/PatientTheme";
+import Button from "../components/styled/Button";
+import Paragraph from "../components/styled/Paragraph";
+import PatientTheme from "../themes/PatientTheme";
+import AdminTheme from "../themes/AdminTheme";
+import Input from "../components/styled/Input";
+import SearchBar from "../components/styled/SearchBar";
 
-const Wrapper = styled.section`
-  text-align: center;
+const StyledHeader = styled.h2`
+  font-size: 1.5em;
 `;
 
 const Showcase = () => {
   return (
-    <Fragment>
-      <Wrapper>
-        <Title>WeeDo</Title>
-        <Paragraph>Styled Components</Paragraph>
-      </Wrapper>
+    <>
+      <Link to="/">Tillbaka till förstasidan</Link>
+      <br />
+      <br />
+      <StyledHeader>Sökfält</StyledHeader>
+      <br />
+      <SearchBar />
+      <StyledHeader>Inputfält</StyledHeader>
+      <br />
+      <Input type="text" placeholder="Användarnamn.." />
+      <Input type="text" placeholder="Lösenord.." />
+      <br />
 
+      <StyledHeader>Buttons</StyledHeader>
+      <br />
       <ThemeProvider theme={PatientTheme}>
         <Paragraph>Patient Theme</Paragraph>
 
@@ -56,7 +67,7 @@ const Showcase = () => {
           Disabled
         </Button>
       </ThemeProvider>
-    </Fragment>
+    </>
   );
 };
 export default Showcase;

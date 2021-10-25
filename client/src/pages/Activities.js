@@ -5,17 +5,15 @@ import SearchPatient from "../components/ActivityMenu/SearchPatient";
 
 const Activities = () => {
   return (
-    <div>
-      <h2>Login succeeded</h2>
-      <h3>Aktivitetspanel</h3>
-      <RegisterPatient />
-      <hr />
-      <SearchPatient />
-      <hr />
+    <>
       <ul>
         <Link to="/">Tillbaka till förstasidan</Link>
       </ul>
-    </div>
+      <br />
+      <br />
+      <RegisterPatient />
+      <SearchPatient />
+    </>
   );
 };
 export default Activities;

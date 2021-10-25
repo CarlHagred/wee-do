@@ -1,37 +1,38 @@
 import styled, { css } from "styled-components";
 import Icon from "../Icon";
 
-const StyledButton = styled.button.attrs()`
+// För att använda en knapp så måste den wrappas med ThemeProvider
+// Se Showcase.js för exempel
+
+const StyledButton = styled.button`
   display: flex;
   gap: 8px;
-  align-items: center;
   justify-content: center;
 
   background: ${(props) => props.theme.palette.brand};
 
   color: white;
 
-  font-size: ${(p) => (p.size === "lg" ? "2" : "1")}em;
+  font-size: ${(props) => (props.size === "lg" ? "2" : "1")}em;
   font-weight: bold;
 
   width: 100%;
   margin: 1em 0;
   padding: 0.5em 1em;
 
-  border: none;
   border-radius: 2em;
 
   cursor: pointer;
 
-  ${(p) =>
-    p.disabled
+  ${(props) =>
+    props.disabled
       ? css`
           cursor: not-allowed;
           border: none;
           background: #ccc;
           color: white;
         `
-      : p.outlined
+      : props.outlined
       ? css`
           border: 1px solid black;
           background: none;

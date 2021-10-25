@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getSession, logoutPatient } from "../api";
-
+import ScanCamera from '../components/Scanner/ScanCamera';
 
 const ScanQr = () => {
 
@@ -20,10 +20,14 @@ const ScanQr = () => {
       <h2>Camera-page</h2>
       <p>Välkommen {user.name}!</p>
       <button onClick={logoutPatient}>Logga ut</button>
+      <br />
       <ul>
-        <Link to="/">Tillbaka till förstasidan</Link>
+        <Link to="/">Tillbaka</Link>
       </ul>
+      <h1>Scanna</h1>
+      <ScanCamera />
     </div>
   );
 };
+
 export default ScanQr;

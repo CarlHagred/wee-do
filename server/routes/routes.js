@@ -1,12 +1,12 @@
 import express from "express";
 import passport from "passport";
 
-
-import { getTest } from "../controllers/routerLogic.js";
+import { getTest } from '../controllers/routerLogic.js';
 import {
   postPatient,
   getPatients,
-} from "../controllers/admin/adminEndpoints.js";
+} from '../controllers/admin/adminEndpoints.js';
+import { getVideoUrl } from '../controllers/client/clientEndpoints.js';
 
 import { loginPatient, getSession, deleteSession } from "../controllers/patient/patientEndpoints.js";
 
@@ -18,5 +18,6 @@ router.get("/getpatients", getPatients);
 router.post("/loginpatient", loginPatient);
 router.get("/getsession", getSession);
 router.delete("/logoutpatient", deleteSession)
+router.get('/getvideourl', getVideoUrl);
 
 export default router;

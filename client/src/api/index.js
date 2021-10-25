@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const serverUrl = "http://localhost:8000";
+const serverUrl = 'http://localhost:8000';
 
 export const getNewPatient = () => axios.get(`${serverUrl}/newpatient`);
 
@@ -32,3 +32,5 @@ export const logoutPatient = () => {
     window.location.reload()
   });
 };
+export const getVideoUrl = (params) =>
+  axios.get(`${serverUrl}/getvideourl`, { params });
