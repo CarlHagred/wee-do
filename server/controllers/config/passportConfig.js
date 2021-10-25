@@ -10,7 +10,7 @@ const initializeStrategy = (passport) => {
       (name, password, done) => {
       Patient.findOne({ name: name }, (err, user) => {
         if (err) {return done(err)};
-        if (!user) {return done(null, false, {message: "Användare finns ej!"})};
+        if (!user) {return done(null, false, console.log("Användare finns ej!"))};
         return done(null, user);
       });
     })

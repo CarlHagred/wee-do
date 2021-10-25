@@ -17,7 +17,7 @@ export const loginPatient = (params) => {
     url: `${serverUrl}/loginpatient`,
   }).then((res) => {
     if(res.data === "auth"){
-      window.location = "/scanner"
+      window.location = "/activitypanel"
     }
   });
 };
