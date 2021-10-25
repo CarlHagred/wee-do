@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import Button from "../components/styled/Button";
-import Paragraph from "../components/styled/Paragraph";
+import Button from "../components/common/Button";
 import PatientTheme from "../themes/PatientTheme";
 import AdminTheme from "../themes/AdminTheme";
-import Input from "../components/styled/Input";
-import SearchBar from "../components/styled/SearchBar";
+import SearchBar from "../components/common/SearchBar";
+import UserInput from "../components/common/UserInput";
+import PasswordInput from "../components/common/PasswordInput";
 
 const StyledHeader = styled.h2`
   font-size: 1.5em;
@@ -15,22 +14,40 @@ const StyledHeader = styled.h2`
 const Showcase = () => {
   return (
     <>
-      <Link to="/">Tillbaka till förstasidan</Link>
       <br />
+      <StyledHeader>Ikoner</StyledHeader>
       <br />
+      <ThemeProvider theme={PatientTheme}>
+        <Button outlined icon="user" size="lg">
+          user
+        </Button>
+        <Button outlined icon="add_user" size="lg">
+          add_user
+        </Button>
+        <Button outlined icon="qrcode" size="lg">
+          qrcode
+        </Button>
+        <Button outlined icon="upload" size="lg">
+          upload
+        </Button>
+        <Button outlined icon="trash" size="lg">
+          trash
+        </Button>
+      </ThemeProvider>
+
       <StyledHeader>Sökfält</StyledHeader>
       <br />
       <SearchBar />
       <StyledHeader>Inputfält</StyledHeader>
       <br />
-      <Input type="text" placeholder="Användarnamn.." />
-      <Input type="text" placeholder="Lösenord.." />
+      <UserInput type="text" placeholder="Användarnamn.." />
+      <PasswordInput type="pwd" placeholder="Lösenord.." />
       <br />
 
       <StyledHeader>Buttons</StyledHeader>
       <br />
       <ThemeProvider theme={PatientTheme}>
-        <Paragraph>Patient Theme</Paragraph>
+        <p>Patient Theme</p>
 
         <Button>Small</Button>
 
@@ -40,7 +57,7 @@ const Showcase = () => {
       </ThemeProvider>
 
       <ThemeProvider theme={AdminTheme}>
-        <Paragraph>Admin Theme</Paragraph>
+        <p>Admin Theme</p>
         <Button>Small</Button>
         <Button icon="user">Small with Icon</Button>
 
@@ -48,7 +65,7 @@ const Showcase = () => {
         <Button icon="user" size="lg">
           Large with Icon
         </Button>
-        <Paragraph>Outlined</Paragraph>
+        <p>Outlined</p>
 
         <Button outlined>Outlined small</Button>
 
@@ -60,7 +77,7 @@ const Showcase = () => {
           Outlined Large
         </Button>
 
-        <Paragraph>Disabled</Paragraph>
+        <p>Disabled</p>
 
         <Button disabled>Disabled</Button>
         <Button disabled size="lg">
