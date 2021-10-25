@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/routes.js";
+import videoRouters from "./routes/videoRoutes.js"; 
 import mongoose from "mongoose";
 
 /* 
@@ -30,6 +31,7 @@ app.use(
 app.use(express.json());
 
 app.use(routes);
+app.use(videoRouters); 
 
 app.use(express.static("public")); //osäker om nödvändig
 
