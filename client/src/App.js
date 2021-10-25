@@ -17,6 +17,8 @@ import Showcase from "./pages/Showcase";
 import Statistics from "./pages/Statistics";
 import { ThemeProvider } from "styled-components";
 import AdminTheme from "./themes/AdminTheme";
+import SearchPatientPage from "./pages/SearchPatientPage";
+import RegisterPatientPage from "./pages/RegisterPatientPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <ThemeProvider theme={AdminTheme}>
             <Route exact path="/" component={MainPage} />
             <Route exact path="/activities" component={Activities} />
+            <Route exact path="/searchpatientpage" component={SearchPatientPage} />
+            <Route exact path="/registerpatientpage" component={RegisterPatientPage} />
             <Route exact path="/scanner" component={ScanQr} />
             <Route exact path="/exercises" component={Exercises} />
             <Route exact path="/help" component={Help} />
