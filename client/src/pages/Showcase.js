@@ -6,6 +6,8 @@ import AdminTheme from "../themes/AdminTheme";
 import SearchBar from "../components/common/SearchBar";
 import UserInput from "../components/common/UserInput";
 import PasswordInput from "../components/common/PasswordInput";
+import RsLogo from "../components/images/RsLogo";
+import WdLogo from "../components/images/WdLogo";
 
 const StyledHeader = styled.h2`
   font-size: 1.5em;
@@ -14,6 +16,8 @@ const StyledHeader = styled.h2`
 const Showcase = () => {
   return (
     <>
+      <RsLogo />
+      <WdLogo />
       <br />
       <StyledHeader>Ikoner</StyledHeader>
       <br />
