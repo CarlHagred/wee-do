@@ -32,7 +32,6 @@ function App() {
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
-        <Route exact path="/admin/statistik" component={PatientStatistics} />
         <Route
           exact
           path="/admin/register/exercise"
@@ -42,6 +41,11 @@ function App() {
           exact
           path="/admin/register/patient"
           component={RegisterPatient}
+        />
+        <Route
+          exact
+          path="/admin/statistics/:name"
+          component={PatientStatistics}
         />
         <Route exact path="/admin/search/exercise" component={SearchExercise} />
         <Route exact path="/admin/search/patient" component={SearchPatient} />

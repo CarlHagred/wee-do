@@ -78,7 +78,7 @@ const SearchPatient = () => {
               <tr>
                 <td>
                   <Link
-                    to={`/statistik/${patient.name}`}
+                    to={`/admin/statistics/${patient.name}`}
                     target="_blank"
                     key={patient._id}
                   >
