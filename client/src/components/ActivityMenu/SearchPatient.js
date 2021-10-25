@@ -17,17 +17,17 @@ const StyledTable = styled.table`
     padding: 5px 10px;
     border-radius: 4px;
     font-family: "Roboto", sans-serif;
-    font-size: 1em;
+    font-size: 1.2em;
     text-align: left; 
   } 
 
   tbody tr {
     :nth-of-type(odd) {
-      background-color: rgb(216, 228, 255, 33%);
+      background-color: rgb(229, 229, 229, 100%);
 
     }
     :nth-of-type(even) {
-        background-color: rgb(216, 228, 255, 33%);
+        background-color: rgb(229, 229, 229, 100%);
       }
     :hover {
       background: rgb(108, 153, 255, 33%);
@@ -38,6 +38,7 @@ const StyledTable = styled.table`
     background-color: #c2c2c2;
     border-radius: 4px;
     font-size: 1.2em;
+    font-weight: bold;
 
   }
 `;
@@ -79,12 +80,12 @@ const SearchPatient = () => {
         })
         .map((patient) => (
           <tbody>
-          <tr>
+          <tr >
             <td>
             <Link to={`/statistik/${patient.name}`} target="_blank" key={patient._id}>
               {patient.name}
-            </Link>
-            </td>
+              </Link>
+            </td> 
           </tr>
           </tbody>
         ))}
