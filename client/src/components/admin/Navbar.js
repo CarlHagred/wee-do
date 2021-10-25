@@ -15,10 +15,14 @@ const StyledIcon = styled(Icon)`
 `;
 
 const StyledMobileNav = styled.div`
+  display: none;
   background: ${(props) => props.theme.palette.brand};
   max-height: ${(p) => (p.open ? "500px" : 0)};
   overflow: hidden;
   transition: 250ms max-height ease-in-out;
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const NavbarMenu = styled.nav`
@@ -26,8 +30,6 @@ const NavbarMenu = styled.nav`
   height: 70px;
   list-style-type: none;
   background: ${(props) => props.theme.palette.brand};
-  @media (max-width: 768px) {
-  }
 `;
 
 const NavbarItem = styled(Link)`
@@ -38,7 +40,7 @@ const NavbarItem = styled(Link)`
   height: 100%;
   font-size: 1em;
   &:hover {
-    background-color: #3165db;
+    background-color: ${(props) => props.theme.palette.hover};
   }
   @media (max-width: 768px) {
     display: none;
@@ -47,34 +49,21 @@ const NavbarItem = styled(Link)`
 `;
 
 const NavbarItemBurger = styled(Link)`
-  display: none;
-  @media (max-width: 768px) {
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    color: white;
-    height: 100%;
-    font-size: 1.2em;
-    &:hover {
-      background-color: #3165db;
-    }
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  color: white;
+  height: 100%;
+  font-size: 1.2em;
+  &:hover {
+    background-color: ${(props) => props.theme.palette.hover};
   }
 `;
 
-const LogOut = styled(Link)`
-  display: none;
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    color: white;
-    height: 100%;
-    font-size: 1.3em;
-    background: #6c98ff;
-    &:hover {
-      background-color: #3165db;
-    }
-  }
+const LogOut = styled(NavbarItemBurger)`
+  justify-content: center;
+  font-size: 1.3em;
+  background: #6c98ff;
 `;
 
 const NavbarBurger = styled.button`
@@ -92,7 +81,6 @@ const NavbarLogo = styled(Link)`
   color: white;
   height: 100%;
   font-size: 1.8em;
-
   @media (max-width: 768px) {
     display: flex;
     align-self: center;
@@ -125,7 +113,9 @@ const Navbar = () => {
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
         <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-        <NavbarItem last>Logga ut</NavbarItem>
+        <NavbarItem to="/admin/search/exercise" last="true">
+          Logga ut
+        </NavbarItem>
       </NavbarMenu>
 
       <StyledMobileNav open={open}>
@@ -147,7 +137,9 @@ const Navbar = () => {
           <StyledIcon size="1.5em" name="search" /> Sök övning
         </NavbarItemBurger>
 
-        <LogOut onClick={closeMenu}>Logga ut</LogOut>
+        <LogOut to="/admin/logout" onClick={closeMenu}>
+          Logga ut
+        </LogOut>
       </StyledMobileNav>
     </>
   );

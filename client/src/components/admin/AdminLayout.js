@@ -12,11 +12,6 @@ const PageContainer = styled.div`
   padding: 1rem 1rem 15rem 1rem;
 `;
 
-// OBS! Navbar ska endast vara synlig efter login
-// vilket måste hanteras på något sätt
-// Ska vi ha någon footer för admin?
-// Ska vi ha hjälpavsnitt och "om WeeDo"?
-
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={AdminTheme}>

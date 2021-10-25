@@ -37,7 +37,7 @@ const StyledButton = styled.button`
         `
       : css`
           &:hover {
-            background: ${(props) => props.theme.palette.hoover};
+            background: ${(props) => props.theme.palette.hover};
           }
         `}
 `;

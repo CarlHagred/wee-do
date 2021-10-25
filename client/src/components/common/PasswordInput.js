@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-// Jobbar på att få till lite snyggare och smartare input-fält för login
-
 const StyledInput = styled.input`
   width: 100%;
   box-sizing: border-box;

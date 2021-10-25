@@ -49,7 +49,6 @@ function App() {
         />
         <Route exact path="/admin/search/exercise" component={SearchExercise} />
         <Route exact path="/admin/search/patient" component={SearchPatient} />
-
         <Route exact path="/help" component={Help} />
         <Route exact path="/about" component={About} />
         <Route exact path="/showcase" component={Showcase} />
