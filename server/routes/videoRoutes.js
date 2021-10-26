@@ -1,17 +1,14 @@
-import express from 'express';
+import express, { json } from 'express';
 import { readFile } from "fs/promises"; 
-
 import fs from "fs"; 
 import multer from "multer"
 import { v4 as uuid } from "uuid";  
-
 
 import {
   authorize,
   redirectToLogin,
   uploadVideo
 } from '../controllers/admin/uploadNewVideo.js';
-
 
 const router = express.Router();
 
@@ -72,6 +69,6 @@ router.get('/oauth2callback?', async (req, res) =>{
         title,
         description,
         file: fs.createReadStream(`videos/${filename}`)
-    });
+    })
 });
 export default router; 

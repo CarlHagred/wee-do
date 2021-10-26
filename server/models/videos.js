@@ -1,9 +1,19 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; 
 
-const videosInfo = mongoose.Schema({
-  title: String,
-  videoId: String
-});
+const videoSchema = mongoose.Schema({
+  videoId : {
+    type: String
+  },
+  title: {
+    type: String
+  },  
+  description : {
+    type: String
+  }, 
+  thumbnail : {
+    type: String
+  }
+}, {timestamps: true})
 
-const videos = mongoose.model("Videos", videosInfo);
-export default videos;
+const Videos = mongoose.model("Videos", videoSchema);
+export default Videos; 
