@@ -3,9 +3,8 @@ import * as React from "react";
 function RsLogo(props) {
   return (
     <svg
-      width={751}
-      height={693}
-      fill="none"
+      viewBox="0 0 751 693"
+      fill="fill"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

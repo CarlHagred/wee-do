@@ -16,8 +16,16 @@ const StyledHeader = styled.h2`
 const Showcase = () => {
   return (
     <>
-      <RsLogo />
-      <WdLogo />
+      <br />
+      <StyledHeader>Logotyper - SVG</StyledHeader>
+      <br />
+      <RsLogo width="10%" height="10%" />
+      <br />
+      <WdLogo width="25%" height="25%" />
+      <WdLogo width="100" height="50" fill="#FF0000" />
+      <br />
+      {/* Fill ändrar färg på svg:n. Går ej att göra på RSLogo, då får man gå in i svg:n*/}
+
       <br />
       <StyledHeader>Ikoner</StyledHeader>
       <br />
