@@ -10,22 +10,25 @@ const StyledNewPatient = styled.p`
   border-radius: 5px;
   border-style:solid; 
   border-color: white;
-  background-color: rgb(177, 238, 156, 100%);
+  color: green;
 `;
+
 
 const RegisterPatient = () => {
   const [newPatient, setNewPatient] = useState("");
 
+  
   const handleEvent = async () => {
     const newPatientName = await getNewPatient();
     console.log(newPatientName.data);
-    setNewPatient(`${newPatientName.data}`);
+    setNewPatient(`Ny patient registrerad med ID: ${newPatientName.data}`);
+    
   };
 
   return (
     <>
-      <Button onClick={handleEvent}>Registrera ny patient</Button>
-      <StyledNewPatient>Ny patient registrerad med ID: <br></br><br></br>{newPatient}</StyledNewPatient>
+    <Button onClick={handleEvent}>Registrera ny patient</Button> 
+    <StyledNewPatient> <br></br><br></br>{newPatient}</StyledNewPatient> 
     </>
   );
 };
