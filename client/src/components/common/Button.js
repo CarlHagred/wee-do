@@ -35,6 +35,13 @@ const StyledButton = styled.button`
           background: none;
           color: #707070;
         `
+      : props.neutral
+          ? css`
+            background: #8a8883;
+            &:hover{
+              background: #4a4946; 
+            }       
+          `
       : css`
           &:hover {
             background: ${(props) => props.theme.palette.hover};

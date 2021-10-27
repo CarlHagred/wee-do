@@ -25,7 +25,7 @@ const PatientActivityPanel = () => {
             <Link to="/">
                 <Button size="lg" icon="statistics">Se statistik</Button>
             </Link>
-            <Button onClick={logout} icon="exit" color="#8a8883">
+            <Button onClick={logout} neutral icon="exit" color="#8a8883">
                 Logga ut
             </Button>
              
