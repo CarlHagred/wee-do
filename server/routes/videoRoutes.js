@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 import fs from "fs"; 
 import multer from "multer"
 import { v4 as uuid } from "uuid";  
-
+import postVideoToDb from '../controllers/admin/retrieveVideo.js';
 import {
   authorize,
   redirectToLogin,
@@ -71,4 +71,8 @@ router.get('/oauth2callback?', async (req, res) =>{
         file: fs.createReadStream(`videos/${filename}`)
     })
 });
+
+router.post('/uploadDatabase', ()=>{
+    postVideoToDb(); 
+})
 export default router; 

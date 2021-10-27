@@ -4,7 +4,20 @@
     margin: 0;
     color: "#333"
 }
-.upload-save-vid h1{
+.save-video #save-video-in-db{
+    background-color: #3C77FF; 
+    border-radius: 25px;
+    color: white;
+    padding: 10px ;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 100px;
+    font-weight: bold;
+}
+h1{
     text-align: center;
     font-size: 24pt;
 }
@@ -12,6 +25,7 @@
     margin-top: 20px;
     width: 100%;
 }
+
 .upload-save-vid button{
     background-color: #3C77FF; 
     border-radius: 25px;

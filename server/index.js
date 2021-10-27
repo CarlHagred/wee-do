@@ -5,7 +5,6 @@ import morgan from "morgan";
 import routes from "./routes/routes.js";
 import videoRouters from "./routes/videoRoutes.js"; 
 import mongoose from "mongoose";
-import retrieveVidInfo from "./controllers/admin/fetchVideoInfo.js"
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -32,7 +31,6 @@ app.use(express.json());
 
 app.use(routes);
 app.use(videoRouters); 
-
 app.use(express.static("public")); //osäker om nödvändig
 
 app.use(morgan("dev"));
@@ -55,4 +53,3 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
-retrieveVidInfo(); 

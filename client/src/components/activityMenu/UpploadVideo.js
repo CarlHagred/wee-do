@@ -2,18 +2,15 @@ import React, {useState} from 'react';
 import '../styled/SaveVideo.css'; //Tillfälligt css. Ska stylas med styled component sen
 import axios from 'axios'; 
 
-const WeeDo_API_KEY = 'AIzaSyCCp8P3NT_n7Vmi99R8bH3MzsIjymKiSjc';
-
-
-const UpploadVideo = (props) => {
+const UpploadVideo = () => {
     const [form, setForm] = useState({
         title: "", 
         description: "", 
         file: null
     })
     
-    const [title, setTitle] = useState(""); 
-    const [description, setDescription] = useState(""); 
+    /* const [title, setTitle] = useState(""); 
+    const [description, setDescription] = useState(""); */
     
 
     function handleChange(event){
@@ -22,23 +19,6 @@ const UpploadVideo = (props) => {
             ...form, 
             [event.target.name]: inputValue
         })
-    }
-
-    const saveVideoToDatabase = (event) => {
-        event.preventDefault(); 
-        
-        const variables = {
-         
-            title:title,
-            description: description 
-        }
-        axios.post('/updateDatabase', variables).then(response =>{
-            if  (response.data.success){
-                console.log("Övningen finns nu på weedos-databas"); 
-            }else{
-                console.log("Övning uppladningen till weedos-databas misslyckades"); 
-            }
-        }); 
     }
     function handleSubmit(event){
         
@@ -67,10 +47,6 @@ const UpploadVideo = (props) => {
                     <button type="submit" id="upload-new-video">Ladda upp ny övning</button>
                 </div>
             </form>
-            <div className="save-video">
-                    <button onClick={saveVideoToDatabase} id="save-video-in-db">Updatera WeeDo Databas</button>
-                    <input type="text" id="video-url-input" placeholder="Klistra in videolänken här"/>
-            </div>
         </div>
     );
 }
