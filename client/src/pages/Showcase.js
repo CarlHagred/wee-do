@@ -69,6 +69,10 @@ const Showcase = () => {
       </StyledP>
       <StyledP>
         <Icon name="trash" size="2em" /> trash
+      </StyledP><StyledP>
+        <Icon name="exit" size="2em" /> exit
+      </StyledP><StyledP>
+        <Icon name="statistics" size="2em" /> statistics
       </StyledP>
 
       <StyledH2>Sökfält</StyledH2>
@@ -119,6 +123,11 @@ const Showcase = () => {
         <Button disabled size="lg">
           Disabled
         </Button>
+
+        <StyledP>Neutral</StyledP>
+        <Button neutral>Neutral small</Button>
+        <Button neutral size="lg">Neutral large</Button>
+        <Button neutral size="lg" icon="user">Neutral icon</Button>;
       </ThemeProvider>
     </ShowcaseWrapper>
   );
