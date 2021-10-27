@@ -1,10 +1,14 @@
+import { logoutPatient } from "../../api";
 
-const r = () => {
-window.confirm("Do you really want to Sign Out?");
- if(r === true)
-  {
-    console.log("logout :)")
+export const logout = (user) => {
+
+   if(window.confirm("Är du säker på att du vill logga ut?")){
+      logoutPatient();
+      window.location = "/"
+      console.log("logout :)");
+    };
   };
-};
 
-  export default r;
+
+
+export default logout;
