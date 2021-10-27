@@ -10,7 +10,7 @@ const StyledButton = styled.button`
 
   color: white;
 
-  font-size: ${(props) => (props.size === "lg" ? "2" : "1")}em;
+  font-size: ${(props) => (props.size === "lg" ? "2" : "1.2")}em;
   font-weight: bold;
 
   width: 100%;

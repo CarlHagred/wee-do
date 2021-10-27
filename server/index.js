@@ -4,6 +4,9 @@ import cors from "cors";
 import morgan from "morgan";
 import routes from "./routes/routes.js";
 import mongoose from "mongoose";
+import passport from "passport";
+import session from "express-session";
+import localStrategy from "./controllers/config/passportConfig.js";
 
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
@@ -20,19 +23,28 @@ const PORT = process.env.PORT;
 
 const app = express();
 
-//middleware
+//middleware with passport
+app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 
-app.use(express.json());
-
-app.use(routes);
+app.use(
+  session({
+    secret: "cats",
+    resave: false,
+    saveUninitialized: true,
+  })
+); // Ha secret session, tillfällig ska sedan läggas in i session
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static("public")); //osäker om nödvändig
-
+localStrategy(passport);
+app.use(routes);
 app.use(morgan("dev"));
 
 //Database connection
@@ -53,3 +65,5 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
+
+export default app;
