@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import Button from "../common/Button";
 import UserInput from "../common/UserInput";
 import PatientTheme from "../../themes/PatientTheme";
-import { loginPatient, logoutPatient } from "../../api";
+import { loginPatient } from "../../api";
 
 const LoginPatient = () => {
   const [loginName, setLoginName] = useState("");

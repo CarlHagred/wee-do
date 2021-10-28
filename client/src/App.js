@@ -22,6 +22,7 @@ import SearchPatient from "./pages/admin/SearchPatient";
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
+import AdminPanel from "./pages/admin/AdminPanel";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
+        <Route exact path="/adminpanel" component={AdminPanel}/>
         <Route
           exact
           path="/admin/register/exercise"

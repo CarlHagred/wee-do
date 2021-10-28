@@ -46,7 +46,7 @@ const initializeStrategy = (passport) => {
     } else {
       Admin.findOne({ _id: obj.id }, (err, user) => {
         const adminInformation = {
-          name: user.name,
+          username: user.username,
         };
         done(err, adminInformation);
       });
@@ -56,19 +56,16 @@ const initializeStrategy = (passport) => {
   passport.use(
     'adminLogin',
     new LocalStrategy(
-      { usernameField: 'name', passwordField: 'password' },
-      (name, password, done) => {
-        Admin.findOne({ name: name }, (err, user) => {
-          if (err) {
-            return done(err);
-          }
-          if (!user) {
-            return done(null, false, console.log('Användare finns ej!'));
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
+      (username, password, done) => {
+        Admin.findOne({ username: username }, (err, user) => {
+          if (err) return done(err);
+          
+          if (!user) return done(null, false, console.log('Användare finns ej!'));
+          
+          if(!password === user.password) return done(null, false, console.log('Lösenordet stämmer ej'));
+
+          return done(null, user)
+  
         });
       }
     )
