@@ -1,23 +1,27 @@
+/**
+ * Denna js fil hämtar ut info om den senaste inlagd övningen från 
+ * Youtube och skickar den vidare till videos collection i weedos databas
+ */
 import Videos from '../../models/videos.js'; 
 import {google} from 'googleapis'; 
 import dotenv from 'dotenv'; 
 dotenv.config(); 
-const api_key = process.env.API_KEY; 
-const channel_id = process.env.CHANNEL_ID; 
-const postVideo = () => {
-   
-    var videoId, title, description, thumbnail; 
+ 
+const api_key = process.env.API_KEY;
+const channel_Id = process.env.CHANNEL_ID; 
 
-    var service = google.youtube('v3');
+const postVideo = () => {
+    let videoId, title, description, thumbnail; 
+
+    const service = google.youtube('v3');
     service.search.list({
-        key: 'AIzaSyCCp8P3NT_n7Vmi99R8bH3MzsIjymKiSjc', 
-        channelId: 'UCq2AVCxH9FGBY2TyPQQAs_g', 
+        key: api_key, 
+        channelId: channel_Id, 
         order: 'date',
         part: 'snippet',
         maxResults: 1, 
     }).then((response) =>{
         const {data} = response;
-       // console.log(data); rätt data fetchas
          
         data.items.forEach(element => {
            
@@ -25,9 +29,6 @@ const postVideo = () => {
             title = element.snippet.title; 
             description = element.snippet.description; 
             thumbnail = element.snippet.thumbnails.high.url;
-            //Testar i consoleloga
-           /* console.log('videoId: '+ videoId +' title: ' + title 
-            + ' description: ' + description + ' High quality thumb: ' + thumbnail);*/
         }); 
         const video = new Videos({
             övningsId : videoId,

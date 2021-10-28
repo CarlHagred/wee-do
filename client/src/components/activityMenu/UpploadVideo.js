@@ -1,3 +1,7 @@
+/**
+ * Den här klassen skickar post video request till server och
+ * innehar även dess gui komponent  
+ */
 import React, {useState} from 'react'; 
 import axios from 'axios'; 
 import UserInput from '../common/UserInput';

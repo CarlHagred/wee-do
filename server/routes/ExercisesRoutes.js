@@ -1,14 +1,21 @@
+/**
+ * Denna js fil består av routes som laddar upp en ny övning till
+ * weedos youtube kanal, och sparar övningen även i server lokalmappen. 
+ * Längst ner postrequsten besvarar klienten om den vill ta till weedo databas
+ * info (videoId, videoTitel, videoBeskrivning, bild) om den senaste inlagd övningen
+ */
+
 import express, { json } from 'express';
 import { readFile } from "fs/promises"; 
 import fs from "fs"; 
 import multer from "multer"
 import { v4 as uuid } from "uuid";  
-import postVideoToDb from '../controllers/admin/retrieveVideo.js';
+import postVideoToDb from '../controllers/admin/RetrieveLastVideo.js';
 import {
   authorize,
   redirectToLogin,
   uploadVideo
-} from '../controllers/admin/uploadNewVideo.js';
+} from '../controllers/admin/UploadVideo.js';
 
 const router = express.Router();
 

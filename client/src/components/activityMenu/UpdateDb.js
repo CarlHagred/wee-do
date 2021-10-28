@@ -1,3 +1,8 @@
+/**
+ * Den här klassen skickar en post request till server för att
+ * uppdatera weedos databas med den senaste inlag övningen på Youtube, 
+ * dessutom har den gui komponent. 
+ */
 import axios from "axios";
 import Button from '../common/Button';
 

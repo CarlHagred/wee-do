@@ -1,3 +1,8 @@
+/**
+ * Här är videos collection som används för mongodb. 
+ * Det kan utökas med flera variabler vid behov 
+ */
+
 import mongoose from "mongoose"; 
 const  Schema = mongoose.Schema;
 const videoSchema = new Schema({
