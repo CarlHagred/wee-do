@@ -35,5 +35,7 @@ export const logoutPatient = () => {
     window.location.reload()
   });
 };
+
+//Exercise based requests 
 export const getVideoUrl = (params) =>
   axios.get(`${serverUrl}/getvideourl`, { params });

@@ -3,7 +3,7 @@ import axios from 'axios';
 import UserInput from '../common/UserInput';
 import TextArea from '../common/TextArea';
 import Button from '../common/Button';
-import Header from '../common/Header'
+
 const UpploadVideo = () => {
     const [form, setForm] = useState({
         title: "", 
@@ -26,7 +26,6 @@ const UpploadVideo = () => {
         })
     }
     function handleSubmit(event){
-        
         event.preventDefault(); 
         const videoData = new FormData(); 
         videoData.enctype = 'multipart/form-data'; 
@@ -39,7 +38,7 @@ const UpploadVideo = () => {
         
         .then(response => {
             console.log(response.data); 
-        })
+        }); 
     }
     return (
             <div className="upload-save-vid">
