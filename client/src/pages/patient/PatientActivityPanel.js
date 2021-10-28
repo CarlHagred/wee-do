@@ -19,7 +19,7 @@ const PatientActivityPanel = () => {
           <img src="http://placekitten.com/340/250" align="center" alt="Mjau" />
         </PlaceKitten>
         <ThemeProvider theme={PatientTheme}>
-            <Link to="/Scanner">
+            <Link to="/QrScanner">
                 <Button size="lg" icon="qrcode">Scanna QR-kod</Button>
             </Link>
             <Link to="/">
