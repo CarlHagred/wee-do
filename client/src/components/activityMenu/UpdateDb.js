@@ -1,5 +1,6 @@
 import axios from "axios";
-import '../styled/SaveVideo.css';
+import Button from '../common/Button';
+
 const UpdateDb = () => {
     const saveVideoToDatabase = (event) => {
         event.preventDefault(); 
@@ -9,8 +10,7 @@ const UpdateDb = () => {
     return (
         <div className="save-video"> 
             <br /> 
-            <br />          
-            <button onClick={saveVideoToDatabase} id="save-video-in-db">Updatera WeeDo Databas</button>
+            <Button onClick={saveVideoToDatabase}>Updatera WeeDo Databas</Button>
         </div>
     );
 }

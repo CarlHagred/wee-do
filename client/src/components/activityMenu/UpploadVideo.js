@@ -1,7 +1,9 @@
 import React, {useState} from 'react'; 
-import '../styled/SaveVideo.css'; //Tillfälligt css. Ska stylas med styled component sen
 import axios from 'axios'; 
-
+import UserInput from '../common/UserInput';
+import TextArea from '../common/TextArea';
+import Button from '../common/Button';
+import Header from '../common/Header'
 const UpploadVideo = () => {
     const [form, setForm] = useState({
         title: "", 
@@ -9,8 +11,11 @@ const UpploadVideo = () => {
         file: null
     })
     
-    /* const [title, setTitle] = useState(""); 
-    const [description, setDescription] = useState(""); */
+    /* 
+    const [title, setTitle] = useState(""); 
+    const [description, setDescription] = useState(""); 
+    const [thumbnail, setThumbnail] = useState(""); 
+    */
     
 
     function handleChange(event){
@@ -37,17 +42,19 @@ const UpploadVideo = () => {
         })
     }
     return (
-        <div className="upload-save-vid">
-            <h1>Ladda upp en ny övning</h1>
-            <form id="foo" onSubmit={handleSubmit}>
-                <div className="upload-video">
-                    <input onChange={handleChange} type="text" name="title" id="title"autoComplete="off" placeholder="Övningstitel" />
-                    <textarea onChange={handleChange} type="text" name="description" id="description" autoComplete="off" placeholder="Beskrivning" />
-                    <input onChange={handleChange} accept="video/mp4" type="file" name="file" id ="filechoose" placeholder="Add Video File" />                
-                    <button type="submit" id="upload-new-video">Ladda upp ny övning</button>
-                </div>
-            </form>
-        </div>
+            <div className="upload-save-vid">
+                <h1>Ladda upp en ny övning</h1>
+                <br />
+                <br />
+                <form id="foo" onSubmit={handleSubmit}>
+                    <div className="upload-video">
+                        <UserInput onChange={handleChange} placeholder="Övningstitel"/>
+                        <TextArea onChange={handleChange}/>
+                        <input onChange={handleChange} accept="video/mp4" type="file" name="file" id ="filechoose" placeholder="Add Video File" />           
+                        <Button type="submit">Ladda upp ny övning</Button>
+                    </div>
+                </form>
+            </div>
     );
 }
 export default UpploadVideo;
