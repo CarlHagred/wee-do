@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import Button from "../common/Button";
 import UserInput from "../common/UserInput";
 import PatientTheme from "../../themes/PatientTheme";
-import { loginPatient, logoutPatient } from "../../api";
+import { loginPatient } from "../../api";
 
 const LoginPatient = () => {
   const [loginName, setLoginName] = useState("");
@@ -12,25 +12,22 @@ const LoginPatient = () => {
     const postData = {
       name: loginName,
     };
-    
-    loginPatient(postData)
 
-    
+    loginPatient(postData);
   };
 
   return (
-    <div>
-      <p></p>
-      <ThemeProvider theme={PatientTheme}>
-        <UserInput theme={PatientTheme}
-         type="text" name="name" 
-         id="login" 
-         onChange={(e) => setLoginName(e.target.value)} 
-         placeholder="Skriv användarnamn här...">
-        </UserInput>
-        <Button onClick={handleSubmit}>Logga in</Button>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={PatientTheme}>
+      <UserInput
+        theme={PatientTheme}
+        type="text"
+        name="name"
+        id="login"
+        onChange={(e) => setLoginName(e.target.value)}
+        placeholder="Skriv användarnamn här..."
+      ></UserInput>
+      <Button onClick={handleSubmit}>Logga in</Button>
+    </ThemeProvider>
   );
 };
 

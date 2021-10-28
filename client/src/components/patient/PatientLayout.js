@@ -6,7 +6,6 @@ import PatientTheme from "../../themes/PatientTheme";
 
 const PageContainer = styled.div`
   position: relative;
-
   min-height: 100vh;
 
   margin: 0 auto;

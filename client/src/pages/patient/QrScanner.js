@@ -1,18 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PatientLayout from "../../components/patient/PatientLayout";
 import ScanCamera from "../../components/patient/ScanCamera";
+import styled from "styled-components";
+
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+`;
 
 const QrScanner = () => {
   return (
     <PatientLayout>
-      <h2>Camera-page</h2>
-      <br />
-      <ul>
-        <Link to="/">Tillbaka</Link>
-      </ul>
-      <h1>Scanna</h1>
-      <ScanCamera />
+      <StyledWrapper>
+        <ScanCamera />
+      </StyledWrapper>
     </PatientLayout>
   );
 };
