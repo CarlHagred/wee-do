@@ -2,7 +2,7 @@ import { ImQrcode } from "react-icons/im";
 import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
-import { BiError } from "react-icons/bi";
+import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
 
 // Ikoner hämtas från https://react-icons.github.io/react-icons/
 // Fler ikoner?: Nya ikoner importeras och läggs in i variants
@@ -15,6 +15,8 @@ const variants = {
   trash: FaTrashAlt,
   search: IoMdSearch,
   error: BiError,
+  exit: BiLogOut,
+  statistics: BiNotepad,
 };
 
 const Icon = ({ name, ...props }) => {
