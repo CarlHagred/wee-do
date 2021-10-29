@@ -4,20 +4,12 @@ import PatientTheme from "../../themes/PatientTheme";
 import styled, { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
 import logout from "../../components/common/Confirmation";
-
-
-const PlaceKitten = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
+import PlaceHolder from "../../components/common/PlaceHolder";
   
 const PatientActivityPanel = () => {
   return (
     <>
-        <PlaceKitten>
-          <img src="http://placekitten.com/340/250" align="center" alt="Mjau" />
-        </PlaceKitten>
+        <PlaceHolder/>
         <ThemeProvider theme={PatientTheme}>
             <Link to="/QrScanner">
                 <Button size="lg" icon="qrcode">Scanna QR-kod</Button>
