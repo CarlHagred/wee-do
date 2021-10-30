@@ -16,7 +16,7 @@ const ScanCamera = () => {
       qr: result.data,
     };
 
-    const videoUrl = await getVideoUrl(params);
+    const videoUrl =  getVideoUrl(params);
 
     alert(videoUrl.data);
     //Nedanstående if ska kolla om länken är gilltig och i så fall skicka till videospelaren med länken

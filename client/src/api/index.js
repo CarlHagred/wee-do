@@ -35,5 +35,19 @@ export const logoutPatient = () => {
     window.location.reload()
   });
 };
+<<<<<<< Updated upstream
 export const getVideoUrl = (params) =>
   axios.get(`${serverUrl}/getvideourl`, { params });
+=======
+
+//Exercise based requests 
+export const getVideoUrl = (params) =>{
+  axios.get(`${serverUrl}/getvideourl`, {params}).then((res) => {
+    if(res.data.success){
+      return res.data.url;
+    }
+    return res.data.url; 
+  })
+}
+  
+>>>>>>> Stashed changes
