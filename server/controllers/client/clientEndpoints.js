@@ -7,7 +7,7 @@ export const getVideoUrl = async (req, res) => {
     const title = req.query.qr; 
     
     Videos.findOne({övningsTitel: title}, function (err, isVideoInDb){
-      if(isVideoInDb !== null){
+      if(isVideoInDb != null){
         const videoId = isVideoInDb.övningsId; 
         let videoUrl = 'http://www.youtube.com/embed/'+videoId; 
         res.status(200).json({

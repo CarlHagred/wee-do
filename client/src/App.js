@@ -11,6 +11,7 @@ import Help from "./pages/common/Help";
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
 import QrScanner from "./pages/patient/QrScanner";
+import WatchExercise from "./pages/patient/WatchingExercise"; 
 
 //Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -32,6 +33,8 @@ function App() {
         <Route exact path="/" component={PatientLogin} />
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
+        <Route exact path="/watch" component={WatchExercise} />
+
         <Route exact path="/admin" component={AdminLogin} />
         <Route
           exact
