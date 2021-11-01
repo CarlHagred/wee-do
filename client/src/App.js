@@ -20,6 +20,7 @@ import RegisterPatient from "./pages/admin/RegisterPatient";
 import SearchExercise from "./pages/admin/SearchExercise";
 import SearchPatient from "./pages/admin/SearchPatient";
 import UploadSucceeded from "./pages/admin/UploadSucceeded";
+import Video from "./pages/admin/Video";
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
@@ -49,6 +50,11 @@ function App() {
           component={PatientStatistics}
         />
         <Route exact path="/admin/search/exercise" component={SearchExercise} />
+        <Route
+          exact
+          path="/admin/excercise/:name"
+          component={Video}
+        />
         <Route exact path="/admin/search/patient" component={SearchPatient} />
         <Route exact path="/help" component={Help} />
         <Route exact path="/about" component={About} />

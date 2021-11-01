@@ -6,6 +6,8 @@ export const getNewPatient = () => axios.get(`${serverUrl}/newpatient`);
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
+export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
+
 export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
 
 //API-call tills servern som hämtar användaren som har blivit autentiserad och skickar vidare användaren till Scanner-sidan
