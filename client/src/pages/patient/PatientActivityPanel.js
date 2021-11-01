@@ -1,14 +1,16 @@
 import React from "react";
 import Button from "../../components/common/Button";
 import PatientTheme from "../../themes/PatientTheme";
-import styled, { ThemeProvider } from "styled-components";
+import PatientLayout from "../../components/patient/PatientLayout";
+import { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
 import logout from "../../components/common/Confirmation";
 import PlaceHolder from "../../components/common/PlaceHolder";
   
 const PatientActivityPanel = () => {
   return (
-    <>
+    <>  
+        <PatientLayout >
         <PlaceHolder/>
         <ThemeProvider theme={PatientTheme}>
             <Link to="/QrScanner">
@@ -22,6 +24,7 @@ const PatientActivityPanel = () => {
             </Button>
              
         </ThemeProvider>
+        </PatientLayout>    
     </>
 );
 };

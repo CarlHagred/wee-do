@@ -19,7 +19,7 @@ const AdminPanel = () => {
     <AdminLayout>
       <PlaceHolder />
 
-      <h2>Vällkommen {admin.username}</h2>
+      <h2 style={{textAlign: "center"}}>Vällkommen {admin.username}</h2>
       <br />
       
     </AdminLayout>
