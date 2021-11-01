@@ -23,17 +23,16 @@ const AdminLogin = () => {
   return (
     <ThemeProvider theme={AdminTheme}>
       <Header />
-
-      <h2>Logga in - Admin</h2>
       <br />
+      <span id="adminError"></span>
       <UserInput theme={AdminTheme}
          type="text" name="name" 
-         id="login" 
+         id="adminUsername" 
          onChange={(e) => setLoginName(e.target.value)} 
          placeholder="Användarnamn"/>
       <UserInput theme={AdminTheme}
          type="text" name="name" 
-         id="login" 
+         id="adminPassword" 
          onChange={(e) => setLoginPassword(e.target.value)} 
          placeholder="Lösenord"/>
       <Button onClick={handleSubmit}>Logga in som admin</Button>

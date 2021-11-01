@@ -1,5 +1,3 @@
-//import Admin from '../../models/admin';
-
 import passport from 'passport';
 
 //Hanterar själva inloggning av en användare med hjälp av vår lokala strategi

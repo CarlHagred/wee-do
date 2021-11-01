@@ -31,7 +31,6 @@ const initializeStrategy = (passport) => {
     } else {
       done(null, { id: user.id, type: 'Admin' });
     }
-    //done(null, user.id);
   });
 
   //Hittar sessionens ID och avslutar sessionen
@@ -62,7 +61,7 @@ const initializeStrategy = (passport) => {
           
           if (!user) return done(null, false, console.log('Användare finns ej!'));
           
-          if(!password === user.password) return done(null, false, console.log('Lösenordet stämmer ej'));
+          if(password !== user.password) return done(null, false, console.log('Lösenordet stämmer ej'));
 
           return done(null, user)
   

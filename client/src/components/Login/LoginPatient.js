@@ -20,11 +20,11 @@ const LoginPatient = () => {
 
   return (
     <div>
-      <p></p>
       <ThemeProvider theme={PatientTheme}>
+        <span id="patientError"></span>
         <UserInput theme={PatientTheme}
          type="text" name="name" 
-         id="login" 
+         id="loginPatient" 
          onChange={(e) => setLoginName(e.target.value)} 
          placeholder="Skriv användarnamn här...">
         </UserInput>

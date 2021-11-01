@@ -9,8 +9,6 @@ const PatientLogin = () => {
     <PatientLayout>
       <PlaceHolder />
       <LoginPatient />
-      <h2>Logga in</h2>
-      <br />
     </PatientLayout>
   );
 };
