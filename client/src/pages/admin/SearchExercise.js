@@ -42,6 +42,18 @@ const StyledTable = styled.table`
   }
 `;
 
+const StyledTitle = styled.p`
+  font-weight: bold;
+`;
+
+const StyledViews = styled.p`
+  color: red;
+`;
+
+const StyledLink = styled.link`
+  sizes: "100X100";
+`;
+
 
 const SearchExercise = () => {
   const [videos, setVideos] = useState([]);
@@ -69,9 +81,7 @@ const SearchExercise = () => {
         </colgroup>
         <thead>
           <tr>
-            <td>Titel</td>
-            <td>Bild</td>
-            <td>Antal visningar</td>
+            <td>Övningar</td>
           </tr>
         </thead>
         {videos
@@ -80,23 +90,30 @@ const SearchExercise = () => {
           })
           .map((videos) => (
             <tbody>
-              <tr>
-                <td>
-                  <Link
+              <Link
                     to={`/admin/excercise/${videos.övningsTitel}`}
                     target="_blank"
                     key={videos._id}
                   >
+              <tr>
+                <td>
+                  <StyledTitle>
+                  
                     {videos.övningsTitel}
-                  </Link>
-                </td>
-                <td>
-                <img src={videos.övningsOmslag} alt="profile pic" width="50px" height="50px" />
-                </td>
-                <td>
-                {videos.__v}
+                  
+                  </StyledTitle>
+                
+                  <br></br>
+                  <img src={videos.övningsOmslag} alt="profile pic" width="250px" height="200px" />
+                  <br></br>
+                  <br></br>
+                  Antal visningar: {videos.__v}
                 </td>
               </tr>
+              <br></br>
+              <br></br>
+              <br></br>
+              </Link>
             </tbody>
           ))}
       </StyledTable>
