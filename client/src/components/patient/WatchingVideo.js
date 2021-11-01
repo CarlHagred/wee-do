@@ -13,7 +13,8 @@ const WatchExercise = () => {
     const showExercise = () => {
         console.log ("video input title: "+title) 
         axios.get('http://localhost:8000/getVideoUrl', {params: {titel: title}}).then(response => {
-            setVideoUrl(response.data); 
+            const ytParams = '?rel=0&modestbranding=1'; 
+            setVideoUrl(response.data+ytParams); 
             console.log('video url: '+ videoUrl); 
             //const videoUrl = getVideoUrl(title);
         });  
