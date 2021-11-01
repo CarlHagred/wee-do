@@ -12,10 +12,8 @@ const LoginPatient = () => {
     const postData = {
       name: loginName,
     };
-    
-    loginPatient(postData)
 
-    
+    loginPatient(postData);
   };
 
   return (
