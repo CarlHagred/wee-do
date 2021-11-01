@@ -69,7 +69,9 @@ const SearchExercise = () => {
         </colgroup>
         <thead>
           <tr>
-            <td>Övningstitel:</td>
+            <td>Titel</td>
+            <td>Bild</td>
+            <td>Antal visningar</td>
           </tr>
         </thead>
         {videos
@@ -87,6 +89,12 @@ const SearchExercise = () => {
                   >
                     {videos.övningsTitel}
                   </Link>
+                </td>
+                <td>
+                <img src={videos.övningsOmslag} alt="profile pic" width="50px" height="50px" />
+                </td>
+                <td>
+                {videos.__v}
                 </td>
               </tr>
             </tbody>
