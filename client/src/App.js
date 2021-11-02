@@ -26,7 +26,7 @@ import Showcase from "./pages/Showcase";
 import AdminPanel from "./pages/admin/AdminPanel";
 
 //Protected routes
-import { ProtectedRoute } from "./components/protectedRoutes/ProtectedRoutePatient";
+import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutePatient";
 
 function App() {
   return (
@@ -34,8 +34,8 @@ function App() {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
-        <ProtectedRoute exact path="/activitypanel" component={PatientActivityPanel} />
-        <ProtectedRoute exact path="/QrScanner" component={QrScanner} />
+        <ProtectedRoutePatient exact path="/activitypanel" component={PatientActivityPanel} />
+        <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
         <Route exact path="/adminpanel" component={AdminPanel}/>
         <Route
