@@ -1,6 +1,7 @@
 import Patient from '../../models/patient.js';
 import Admin from '../../models/admin.js';
 import passportLocal from 'passport-local';
+import bcrypt from "bcryptjs";
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -16,7 +17,7 @@ const initializeStrategy = (passport) => {
             return done(err);
           }
           if (!user) {
-            return done(null, false, console.log('Användare finns ej!'));
+            return done(null, false);
           }
           return done(null, user);
         });
@@ -59,11 +60,19 @@ const initializeStrategy = (passport) => {
         Admin.findOne({ username: username }, (err, user) => {
           if (err) return done(err);
           
-          if (!user) return done(null, false, console.log('Användare finns ej!'));
+          if (!user) return done(null, false);
           
-          if(password !== user.password) return done(null, false, console.log('Lösenordet stämmer ej'));
+          bcrypt.compare(password, user.password, (err, result) => {
+            if(err) {return done(err)};
 
-          return done(null, user)
+            if(result !== true) return done(null, false);
+            
+            return done(null, user);
+            
+  
+            
+          })
+          //return done(null, user)
   
         });
       }
