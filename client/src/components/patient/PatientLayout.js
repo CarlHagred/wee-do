@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Footer from "../common/Footer";
-import Header from "../common/Header";
+import WdLogo from "../images/WdLogo";
 import { ThemeProvider } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme";
 
@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={PatientTheme}>
       <PageContainer>
-        <Header />
+        <WdLogo />
         {children}
         <Footer />
       </PageContainer>

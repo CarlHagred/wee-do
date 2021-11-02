@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AdminTheme from "../../themes/AdminTheme";
 import Hamburger from "hamburger-react";
 import Icon from "../common/Icons";
+import { logoutAdminConformation } from "../common/Confirmation";
 
 // Hamburgermenyn använder sig av en animerad ikon
 // från https://hamburger-react.netlify.app/
@@ -108,12 +109,12 @@ const Navbar = () => {
           <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
         </NavbarBurger>
 
-        <NavbarLogo to="/admin/">WeeDo</NavbarLogo>
+        <NavbarLogo to="/adminpanel/">WeeDo</NavbarLogo>
         <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
         <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-        <NavbarItem to="/admin/search/exercise" last="true">
+        <NavbarItem onClick={logoutAdminConformation} last="true">
           Logga ut
         </NavbarItem>
       </NavbarMenu>
@@ -137,7 +138,7 @@ const Navbar = () => {
           <StyledIcon size="1.5em" name="search" /> Sök övning
         </NavbarItemBurger>
 
-        <LogOut to="/admin/logout" onClick={closeMenu}>
+        <LogOut onClick={logoutAdminConformation}>
           Logga ut
         </LogOut>
       </StyledMobileNav>
