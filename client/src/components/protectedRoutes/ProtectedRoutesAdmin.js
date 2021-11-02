@@ -4,7 +4,7 @@ import AdminPanel from "../../pages/admin/AdminPanel";
 
 
 export const ProtectedRouteAdmin = ({ component: Component, ...restOfProps }) => {
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const isAuthenticated = localStorage.getItem("isAuthenticatedAdmin");
   
   if(isAuthenticated !== "true"){
       window.location = "/admin"

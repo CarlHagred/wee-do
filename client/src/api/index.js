@@ -20,7 +20,7 @@ export const loginPatient = (params) => {
   }).then((res) => {
     if(res.data === "auth"){
       window.location = "/activitypanel"
-      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("isAuthenticatedPatient", "true");
       let error = document.getElementById("patientError");
       error.innerHTML = `<span></span>`;
       document.getElementById("loginPatient").style.borderColor = "green";
@@ -53,7 +53,7 @@ export const loginAdmin = (params) => {
   }).then((res) => {
     if(res.data === "auth"){ //Ändra namn?
       window.location = '/adminpanel' // Namn ska fixas
-      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("isAuthenticatedAdmin", "true");
       let error = document.getElementById("adminError");
       error.innerHTML = `<span></span>`;
       document.getElementById("adminUsername").style.borderColor = "green";
