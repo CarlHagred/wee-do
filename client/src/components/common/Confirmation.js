@@ -1,4 +1,4 @@
-import { logoutPatient } from "../../api";
+import { logoutPatient, logoutAdmin } from "../../api";
 
 export const logout = () => {
    if(window.confirm("Är du säker på att du vill logga ut?")){
@@ -7,6 +7,12 @@ export const logout = () => {
     };
   };
 
+export const logoutAdminConformation = () => {
+  if(window.confirm("Är du säker på att du vill logga ut?")){
+    logoutAdmin();
+    window.location = "/admin";
+  }
+};
 
 
-export default logout;
+export default logout + logoutAdminConformation;
