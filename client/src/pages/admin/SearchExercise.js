@@ -51,7 +51,6 @@ const StyledViews = styled.p`
 `;
 
 const StyledLink = styled.link`
-  sizes: "100X100";
 `;
 
 
