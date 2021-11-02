@@ -25,14 +25,17 @@ import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import Showcase from "./pages/Showcase";
 import AdminPanel from "./pages/admin/AdminPanel";
 
+//Protected routes
+import { ProtectedRoute } from "./components/protectedRoutes/ProtectedRoutePatient";
+
 function App() {
   return (
     <Router>
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
-        <Route exact path="/activitypanel" component={PatientActivityPanel} />
-        <Route exact path="/QrScanner" component={QrScanner} />
+        <ProtectedRoute exact path="/activitypanel" component={PatientActivityPanel} />
+        <ProtectedRoute exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
         <Route exact path="/adminpanel" component={AdminPanel}/>
         <Route
