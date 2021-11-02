@@ -1,6 +1,5 @@
 import React from 'react';
 import QRCode from 'react-qr-code';
-import PlaceHolder from '../../components/common/PlaceHolder';
 
 const QRCreator = (props) => {
   return (
