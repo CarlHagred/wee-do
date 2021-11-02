@@ -22,6 +22,7 @@ const AdminLogin = () => {
     loginAdmin(postData)
 
   }
+
   return (
     <AdminLayout>
     <ThemeProvider theme={AdminTheme}>
@@ -34,10 +35,10 @@ const AdminLogin = () => {
          onChange={(e) => setLoginName(e.target.value)} 
          placeholder="Användarnamn"/>
       <UserInput theme={AdminTheme}
-         type="text" name="name" 
+         type="password" name="name" 
          id="adminPassword" 
          onChange={(e) => setLoginPassword(e.target.value)} 
-         placeholder="Lösenord"/>
+         placeholder="Lösenord" secureTextEntry={true} />
       <Button onClick={handleSubmit}>Logga in</Button>
       <Footer/>
     </ThemeProvider>
