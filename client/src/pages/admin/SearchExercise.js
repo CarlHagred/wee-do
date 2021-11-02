@@ -46,12 +46,8 @@ const StyledTitle = styled.p`
   font-weight: bold;
 `;
 
-const StyledViews = styled.p`
-  color: red;
-`;
 
-const StyledLink = styled.link`
-`;
+
 
 
 const SearchExercise = () => {
@@ -116,10 +112,15 @@ const SearchExercise = () => {
             </tbody>
           ))}
       </StyledTable>
+      <footer></footer>
     </AdminLayout>
   );
 };
 export default SearchExercise;
+
+
+
+
 
 
 
