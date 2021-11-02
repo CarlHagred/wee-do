@@ -1,13 +1,13 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import PatientActivityPanel from "../../pages/patient/PatientActivityPanel";
+import AdminPanel from "../../pages/admin/AdminPanel";
 
 
-export const ProtectedRoutePatient = ({ component: Component, ...restOfProps }) => {
+export const ProtectedRouteAdmin = ({ component: Component, ...restOfProps }) => {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   
   if(isAuthenticated !== "true"){
-      window.location = "/"
+      window.location = "/admin"
   }
 
   console.log("this", isAuthenticated);
@@ -16,7 +16,7 @@ export const ProtectedRoutePatient = ({ component: Component, ...restOfProps }) 
     <Route
       {...restOfProps}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/"  />
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/admin"  />
       }
     />
   );
