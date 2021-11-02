@@ -2,8 +2,6 @@ import Videos from '../../models/videos.js';
 
 export const getVideoUrl = async (req, res) => {
   try {
-    //qrkoden som skickas i requesten nås med req.query.qr
-    //TODO Lägg till kod för att skicka tillbaka yt-länk från databasen
     const title = req.query.titel;
     console.log('Video title: ' + title);
     Videos.findOne({ övningsTitel: title }, function (err, isVideoInDb) {
