@@ -29,20 +29,4 @@ export const customDialogAdmin = async () => {
   }
 };
 
-export const logout = () => {
-   if(window.confirm("Är du säker på att du vill logga ut?")){
-      localStorage.clear()
-      logoutPatient();
-      window.location = "/"
-    };
-  };
-
-export const logoutAdminConformation = () => {
-  if(window.confirm("Är du säker på att du vill logga ut?")){
-    localStorage.clear()
-    logoutAdmin();
-    window.location = "/admin"
-  }
-};
-
 export default customDialogPatient + customDialogAdmin;
