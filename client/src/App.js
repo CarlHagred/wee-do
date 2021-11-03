@@ -34,7 +34,7 @@ function App() {
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
-        <Route exact path="/adminpanel" component={AdminPanel}/>
+        <Route exact path="/adminpanel" component={AdminPanel} />
         <Route
           exact
           path="/admin/register/exercise"

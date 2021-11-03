@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AdminTheme from "../../themes/AdminTheme";
 import Hamburger from "hamburger-react";
 import Icon from "../common/Icons";
@@ -33,14 +33,15 @@ const NavbarMenu = styled.nav`
   background: ${(props) => props.theme.palette.brand};
 `;
 
-const NavbarItem = styled(Link)`
+const NavbarItem = styled(NavLink)`
   display: flex;
   align-items: center;
   padding: 0 20px;
   color: white;
   height: 100%;
   font-size: 1em;
-  &:hover {
+  &:hover,
+  &.active {
     background-color: ${(props) => props.theme.palette.hover};
   }
   @media (max-width: 768px) {
@@ -49,14 +50,15 @@ const NavbarItem = styled(Link)`
   ${(p) => p.last && `margin-left: auto`}
 `;
 
-const NavbarItemBurger = styled(Link)`
+const NavbarItemBurger = styled(NavLink)`
   display: flex;
   padding: 20px;
   align-items: center;
   color: white;
   height: 100%;
   font-size: 1.2em;
-  &:hover {
+  &:hover,
+  &.active {
     background-color: ${(props) => props.theme.palette.hover};
   }
 `;
@@ -114,7 +116,12 @@ const Navbar = () => {
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
         <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-        <NavbarItem onClick={logoutAdminConformation} last="true">
+        <NavbarItem
+          to="/"
+          isActive={() => false}
+          onClick={logoutAdminConformation}
+          last="true"
+        >
           Logga ut
         </NavbarItem>
       </NavbarMenu>
@@ -138,7 +145,7 @@ const Navbar = () => {
           <StyledIcon size="1.5em" name="search" /> Sök övning
         </NavbarItemBurger>
 
-        <LogOut onClick={logoutAdminConformation}>
+        <LogOut to="/" isActive={() => false} onClick={logoutAdminConformation}>
           Logga ut
         </LogOut>
       </StyledMobileNav>
