@@ -9,6 +9,7 @@ export const logout = () => {
 
 export const logoutAdminConformation = () => {
   if(window.confirm("Är du säker på att du vill logga ut?")){
+    localStorage.clear()
     logoutAdmin();
     window.location = "/admin";
   }

@@ -21,6 +21,7 @@ import SearchExercise from './pages/admin/SearchExercise';
 import SearchPatient from './pages/admin/SearchPatient';
 import UploadSucceeded from './pages/admin/UploadSucceeded';
 import QRPreview from './pages/admin/QRPreview';
+import { ProtectedRouteAdmin } from './components/protectedRoutes/ProtectedRoutesAdmin';
 
 // Ta bort senare endast för showcase av components
 import Showcase from './pages/Showcase';
@@ -35,29 +36,29 @@ function App() {
         <Route exact path="/activitypanel" component={PatientActivityPanel} />
         <Route exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
-        <Route exact path="/adminpanel" component={AdminPanel} />
-        <Route
+        <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
+        <ProtectedRouteAdmin
           exact
           path="/admin/register/exercise"
           component={RegisterExercise}
         />
-        <Route
+        <ProtectedRouteAdmin
           exact
           path="/admin/register/patient"
           component={RegisterPatient}
         />
-        <Route
+        <ProtectedRouteAdmin
           exact
           path="/admin/statistics/:name"
           component={PatientStatistics}
         />
-        <Route exact path="/admin/search/exercise" component={SearchExercise} />
-        <Route exact path="/admin/search/patient" component={SearchPatient} />
+        <ProtectedRouteAdmin exact path="/admin/search/exercise" component={SearchExercise} />
+        <ProtectedRouteAdmin exact path="/admin/search/patient" component={SearchPatient} />
         <Route exact path="/help" component={Help} />
         <Route exact path="/test" component={QRPreview} />
         <Route exact path="/about" component={About} />
         <Route exact path="/showcase" component={Showcase} />
-        <Route exact path="/success" component={UploadSucceeded} />
+        <ProtectedRouteAdmin exact path="/success" component={UploadSucceeded} />
 
         <Route component={NotFoundPage} />
       </Switch>
