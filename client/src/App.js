@@ -21,7 +21,10 @@ import SearchExercise from './pages/admin/SearchExercise';
 import SearchPatient from './pages/admin/SearchPatient';
 import UploadSucceeded from './pages/admin/UploadSucceeded';
 import QRPreview from './pages/admin/QRPreview';
+
+//Protected Routes
 import { ProtectedRouteAdmin } from './components/protectedRoutes/ProtectedRoutesAdmin';
+import { ProtectedRoutePatient } from './components/protectedRoutes/ProtectedRoutesPatient';
 
 // Ta bort senare endast för showcase av components
 import Showcase from './pages/Showcase';
@@ -33,8 +36,8 @@ function App() {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
-        <Route exact path="/activitypanel" component={PatientActivityPanel} />
-        <Route exact path="/QrScanner" component={QrScanner} />
+        <ProtectedRoutePatient exact path="/activitypanel" component={PatientActivityPanel} />
+        <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <Route exact path="/admin" component={AdminLogin} />
         <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
         <ProtectedRouteAdmin

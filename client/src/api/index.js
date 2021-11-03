@@ -20,6 +20,7 @@ export const loginPatient = (params) => {
   }).then((res) => {
     if(res.data === "auth"){
       window.location = "/activitypanel"
+      localStorage.setItem("isAuthenticatedPatient", "true")
       let error = document.getElementById("patientError");
       error.innerHTML = `<span></span>`;
       document.getElementById("loginPatient").style.borderColor = "green";
