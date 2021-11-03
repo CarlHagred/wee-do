@@ -40,7 +40,8 @@ const NavbarItem = styled(NavLink)`
   color: white;
   height: 100%;
   font-size: 1em;
-  &:hover {
+  &:hover,
+  &.active {
     background-color: ${(props) => props.theme.palette.hover};
   }
   @media (max-width: 768px) {
