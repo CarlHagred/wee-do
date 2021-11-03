@@ -9,6 +9,7 @@ export const customDialogPatient = async () => {
     "Avbryt"
   )         
   if (conf) {
+    localStorage.clear();
     logoutPatient();
     window.location = "/"
   }
@@ -22,6 +23,23 @@ export const customDialogAdmin = async () => {
     "Avbryt"
   )         
   if (conf) {
+    localStorage.clear()
+    logoutAdmin();
+    window.location = "/admin"
+  }
+};
+
+export const logout = () => {
+   if(window.confirm("Är du säker på att du vill logga ut?")){
+      localStorage.clear()
+      logoutPatient();
+      window.location = "/"
+    };
+  };
+
+export const logoutAdminConformation = () => {
+  if(window.confirm("Är du säker på att du vill logga ut?")){
+    localStorage.clear()
     logoutAdmin();
     window.location = "/admin"
   }
