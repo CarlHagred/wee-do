@@ -60,7 +60,7 @@ function App() {
         />
         <Route exact path="/admin/search/patient" component={SearchPatient} />
         <Route exact path="/help" component={Help} />
-        <Route exact path="/test" component={QRPreview} />
+        <Route exact path="/admin/exercise/qrpreview" component={QRPreview} />
         <Route exact path="/about" component={About} />
         <Route exact path="/showcase" component={Showcase} />
         <Route exact path="/success" component={UploadSucceeded} />
