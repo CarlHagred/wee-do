@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import PatientActivityPanel from "../../pages/patient/PatientActivityPanel";
 
 
 export const ProtectedRouteAdmin = ({ component: Component, ...restOfProps }) => {
