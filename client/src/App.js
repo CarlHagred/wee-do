@@ -11,6 +11,7 @@ import Help from "./pages/common/Help";
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
 import QrScanner from "./pages/patient/QrScanner";
+import WatchExercise from "./pages/patient/WatchingExercise"; 
 
 //Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -36,6 +37,7 @@ function App() {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
+        <Route exact path="/watch" component={WatchExercise} />
         <ProtectedRoutePatient
           exact
           path="/activitypanel"
