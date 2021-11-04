@@ -10,7 +10,7 @@ import { readFile } from "fs/promises";
 import fs from "fs"; 
 import multer from "multer"
 import { v4 as uuid } from "uuid";  
-import postVideoToDb from '../controllers/admin/RetrieveLastVideo.js';
+import postVideoToDb from '../controllers/admin/updateDatabase.js';
 import {
   authorize,
   redirectToLogin,
@@ -79,7 +79,7 @@ router.get('/oauth2callback?', async (req, res) =>{
     })
 });
 
-router.post('/uploadDatabase', ()=>{
+router.post('/updateDatabase', ()=>{
     postVideoToDb(); 
 })
 export default router; 

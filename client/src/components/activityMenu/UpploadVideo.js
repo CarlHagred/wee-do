@@ -22,15 +22,17 @@ const UpploadVideo = () => {
     */
     
 
-    function handleChange(event){
+    const handleChange = (event) => {
         const inputValue = event.target.name === "file" ? event.target.files[0] : event.target.value; 
         setForm({
             ...form, 
             [event.target.name]: inputValue
         })
     }
-    function handleSubmit(event){
+    const handleSubmit = async (event) => {
         event.preventDefault(); 
+
+        console.log({form});
         const videoData = new FormData(); 
         videoData.enctype = 'multipart/form-data'; 
 
@@ -38,21 +40,17 @@ const UpploadVideo = () => {
         videoData.append("title", form.title); 
         videoData.append("description", form.description); 
 
-        axios.post("http://localhost:8000/upload", videoData)
-        
-        .then(response => {
-            console.log(response.data); 
-        }); 
+        await axios.post("http://localhost:8000/upload", videoData);         
     }
     return (
             <div className="upload-save-vid">
                 <h1>Ladda upp en ny övning</h1>
                 <br />
                 <br />
-                <form id="foo" onSubmit={handleSubmit}>
+                <form id="foo" action="/upload" method="POST" onSubmit={handleSubmit}>
                     <div className="upload-video">
-                        <UserInput onChange={handleChange} placeholder="Övningstitel"/>
-                        <TextArea onChange={handleChange}/>
+                        <UserInput onChange={handleChange} type="text" name="title" autoComplete="off" placeholder="Övningstitel"/>
+                        <TextArea onChange={handleChange} type="text" name="description" autoComplete="off"/>
                         <input onChange={handleChange} accept="video/mp4" type="file" name="file" id ="filechoose" placeholder="Add Video File" />           
                         <Button type="submit">Ladda upp ny övning</Button>
                     </div>
