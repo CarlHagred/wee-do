@@ -143,7 +143,7 @@ const Navbar = () => {
         </NavbarBurger>
 
         <NavbarLogo to="/adminpanel/">
-          <WdLogo width="4em" height="4em" fill="#FFFFFF" />
+          <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
         </NavbarLogo>
         <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
