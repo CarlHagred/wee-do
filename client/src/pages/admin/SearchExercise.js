@@ -48,8 +48,6 @@ const StyledTitle = styled.p`
 
 
 
-
-
 const SearchExercise = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
@@ -81,12 +79,12 @@ const SearchExercise = () => {
         </thead>
         {videos
           .filter((videos) => {
-            return videos.övningsTitel.includes(searchedName) ? videos : null;
+            return videos.videoTitle.includes(searchedName) ? videos : null;
           })
           .map((videos) => (
             <tbody>
               <Link
-                    to={`/admin/excercise/${videos.övningsTitel}`}
+                    to={`/admin/exercise/${videos.videoId}`}
                     target="_blank"
                     key={videos._id}
                   >
@@ -94,12 +92,12 @@ const SearchExercise = () => {
                 <td>
                   <StyledTitle>
                   
-                    {videos.övningsTitel}
+                    {videos.videoTitle}
                   
                   </StyledTitle>
                 
                   <br></br>
-                  <img src={videos.övningsOmslag} alt="profile pic" width="250px" height="200px" />
+                  <img src={videos.thumbnail} alt="profile pic" width="250px" height="200px" />
                   <br></br>
                   <br></br>
                   Antal visningar: {videos.__v}

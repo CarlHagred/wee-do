@@ -10,10 +10,10 @@ import Button from "../../components/common/Button";
 
 
 const Video = () => {
-  const { name } = useParams();
+  const { videoId } = useParams();
 
   const generateQr = async () => {
-    window.location.href = `/admin/exercise/qrpreview?text=${name}&link=www.youtube.com&image=hej`;
+    window.location.href = `/admin/exercise/qrpreview?text=${videoTitle}&link=www.youtube.com&image=hej`;
   };
   
   const deleteVideo = () => {
@@ -23,7 +23,8 @@ const Video = () => {
   return (
     <AdminLayout>
       <ThemeProvider theme={AdminTheme}>
-        <h1>{name}</h1>
+        
+        <h1>{videoId}</h1>
       
         <Button onClick={generateQr} icon="qrcode">Generera QR-kod</Button>
       

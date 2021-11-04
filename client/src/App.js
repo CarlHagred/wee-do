@@ -55,7 +55,7 @@ function App() {
         <Route exact path="/admin/search/exercise" component={SearchExercise} />
         <Route
           exact
-          path="/admin/excercise/:name"
+          path="/admin/exercise/:videoId"
           component={Video}
         />
         <Route exact path="/admin/search/patient" component={SearchPatient} />
