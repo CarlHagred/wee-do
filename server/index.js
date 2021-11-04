@@ -8,6 +8,7 @@ import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
 import videoRoutes from "./routes/ExercisesRoutes.js"; 
+import updateDb from '../server/controllers/admin/RetrieveLastVideo.js';
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -66,5 +67,4 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
-
 export default app;

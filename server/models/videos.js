@@ -6,11 +6,10 @@
 import mongoose from "mongoose"; 
 const  Schema = mongoose.Schema;
 const videoSchema = new Schema({
-  övningsId: String, 
-  övningsTitel: String,  
-  övningsBeskrivning: String,  
-  övningsOmslag: String 
-
+  videoId: String, 
+  videoTitle: String,  
+  description: String,  
+  thumbnail: String 
 }); 
 
 const Videos = mongoose.model("videos", videoSchema);
