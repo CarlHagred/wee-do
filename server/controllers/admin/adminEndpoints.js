@@ -3,6 +3,11 @@ import Patient from "../../models/patient.js";
 export const postPatient = async (req, res) => {
   const createRandomName = () => Math.random().toString(20).substr(2, 6);
   const name = createRandomName();
+  const testObj = {
+    vidId: "test",
+    scans: 0,
+    timesWatched: 0,
+  };
 
   Patient.findOne({ name: name }, async (err, doc) => {
     if (err) res.send(err);
@@ -18,6 +23,7 @@ export const postPatient = async (req, res) => {
     if (!doc) {
       const newPatient = new Patient({
         name: name,
+        statistics: [testObj],
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
@@ -32,6 +38,15 @@ export const getPatients = async (req, res) => {
   try {
     const patients = await Patient.find();
     res.status(200).json(patients);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getOnePatient = async (req, res) => {
+  try {
+    const patient = await Patient.findOne({ name: req.params.name });
+    res.status(200).json(patient);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

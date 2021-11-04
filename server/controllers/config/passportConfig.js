@@ -6,14 +6,20 @@ const LocalStrategy = passportLocal.Strategy;
 //Definition av en lokal strategi för hur vi hanterar autentisering av ett angivet användarnamn
 const initializeStrategy = (passport) => {
   passport.use(
-    new LocalStrategy({usernameField: 'name', passwordField: 'name'},
+    new LocalStrategy(
+      { usernameField: "name", passwordField: "name" },
       (name, password, done) => {
-      Patient.findOne({ name: name }, (err, user) => {
-        if (err) {return done(err)};
-        if (!user) {return done(null, false, console.log("Användare finns ej!"))};
-        return done(null, user);
-      });
-    })
+        Patient.findOne({ name: name }, (err, user) => {
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            return done(null, false, console.log("Användare finns ej!"));
+          }
+          return done(null, user);
+        });
+      }
+    )
   );
 
   //Skapar en session där cookiens ID är namnet på användaren

@@ -1,14 +1,19 @@
 import express from "express";
 import passport from "passport";
 
-import { getTest } from '../controllers/routerLogic.js';
+import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
   getPatients,
-} from '../controllers/admin/adminEndpoints.js';
-import { getVideoUrl } from '../controllers/client/clientEndpoints.js';
+  getOnePatient,
+} from "../controllers/admin/adminEndpoints.js";
+import { getVideoUrl } from "../controllers/client/clientEndpoints.js";
 
-import { loginPatient, getSession, deleteSession } from "../controllers/patient/patientEndpoints.js";
+import {
+  loginPatient,
+  getSession,
+  deleteSession,
+} from "../controllers/patient/patientEndpoints.js";
 
 const router = express.Router();
 
@@ -17,7 +22,8 @@ router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
 router.post("/loginpatient", loginPatient);
 router.get("/getsession", getSession);
-router.delete("/logoutpatient", deleteSession)
-router.get('/getvideourl', getVideoUrl);
+router.delete("/logoutpatient", deleteSession);
+router.get("/getvideourl", getVideoUrl);
+router.get("/getonepatient/:name", getOnePatient);
 
 export default router;
