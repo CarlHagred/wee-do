@@ -20,9 +20,10 @@ export const loginPatient = (params) => {
     withCredentials: true,
     url: `${serverUrl}/loginpatient`,
   }).then((res) => {
-    if (res.data === 'auth') {
-      window.location = '/activitypanel';
-      let error = document.getElementById('patientError');
+    if(res.data === "auth"){
+      window.location = "/activitypanel"
+      localStorage.setItem("isAuthenticatedPatient", "true")
+      let error = document.getElementById("patientError");
       error.innerHTML = `<span></span>`;
       document.getElementById('loginPatient').style.borderColor = 'green';
     } else {
@@ -51,10 +52,10 @@ export const loginAdmin = (params) => {
     withCredentials: true,
     url: `${serverUrl}/adminlogin`, //ska fixas
   }).then((res) => {
-    if (res.data === 'auth') {
-      //Ändra namn?
-      window.location = '/adminpanel'; // Namn ska fixas
-      let error = document.getElementById('adminError');
+    if(res.data === "auth"){ //Ändra namn?
+      window.location = '/adminpanel' // Namn ska fixas
+      localStorage.setItem("isAuthenticatedAdmin", "true")
+      let error = document.getElementById("adminError");
       error.innerHTML = `<span></span>`;
       document.getElementById('adminUsername').style.borderColor = 'green';
       document.getElementById('adminPassword').style.borderColor = 'green';
