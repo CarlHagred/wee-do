@@ -1,10 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
+
 import AdminTheme from "../../themes/AdminTheme";
 import Hamburger from "hamburger-react";
 import Icon from "../common/Icons";
 import { customDialogAdmin } from "../common/Confirmation";
+import WdLogo from "../images/WdLogo";
 
 // Hamburgermenyn använder sig av en animerad ikon
 // från https://hamburger-react.netlify.app/
@@ -140,7 +142,9 @@ const Navbar = () => {
           <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
         </NavbarBurger>
 
-        <NavbarLogo to="/adminpanel/">WeeDo</NavbarLogo>
+        <NavbarLogo to="/adminpanel/">
+          <WdLogo width="4em" height="4em" fill="#FFFFFF" />
+        </NavbarLogo>
         <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
