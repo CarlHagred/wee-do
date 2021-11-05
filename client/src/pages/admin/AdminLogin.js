@@ -10,6 +10,13 @@ import WdLogo from "../../components/images/WdLogo";
 import AdminLayout from "../../components/admin/AdminLayout"
 
 const AdminLogin = () => {
+
+  let isCookie = localStorage.getItem("isAuthenticatedAdmin")
+  if(isCookie !== null){
+    localStorage.clear();
+    window.location.reload();
+  }
+
   const [loginName, setLoginName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const handleSubmit = () => {
