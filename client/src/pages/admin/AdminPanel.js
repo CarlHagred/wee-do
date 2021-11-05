@@ -50,14 +50,6 @@ const PanelContainer = styled(NavLink)`
   }
 `;
 
-const RegisterPatient = styled(PanelContainer)``;
-
-const SearchPatient = styled(PanelContainer)``;
-
-const RegisterExercise = styled(PanelContainer)``;
-
-const SearchExercise = styled(PanelContainer)``;
-
 const StyledPanelText = styled.p`
   align-self: flex-start;
   color: white;
@@ -88,12 +80,12 @@ const AdminPanel = () => {
       </StyledHero>
 
       <PanelMenu theme={AdminTheme}>
-        <RegisterPatient to="/admin/register/patient">
+        <PanelContainer to="/admin/register/patient">
           <StyledPanelIcon name="add_user" size="3em" fill="white" />
           <StyledPanelText>Registrera patient</StyledPanelText>
-        </RegisterPatient>
+        </PanelContainer>
 
-        <SearchPatient to="/admin/search/patient">
+        <PanelContainer to="/admin/search/patient">
           <StyledPanelIcon
             name="search_patient"
             width="62"
@@ -101,14 +93,14 @@ const AdminPanel = () => {
             fill="white"
           />
           <StyledPanelText>Sök patient</StyledPanelText>
-        </SearchPatient>
+        </PanelContainer>
 
-        <RegisterExercise to="/admin/register/exercise">
+        <PanelContainer to="/admin/register/exercise">
           <StyledPanelIcon name="upload" size="3em" fill="white" />
           <StyledPanelText>Ladda upp övning</StyledPanelText>
-        </RegisterExercise>
+        </PanelContainer>
 
-        <SearchExercise to="/admin/search/exercise">
+        <PanelContainer to="/admin/search/exercise">
           <StyledPanelIcon
             name="search_exercise"
             width="62"
@@ -116,7 +108,7 @@ const AdminPanel = () => {
             fill="white"
           />
           <StyledPanelText>Sök övning</StyledPanelText>
-        </SearchExercise>
+        </PanelContainer>
       </PanelMenu>
     </AdminLayout>
   );
