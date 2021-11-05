@@ -6,6 +6,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import { getAdminSession } from "../../api";
 import hero from "../../components/images/AdminHeroBanner.png";
 import RegisterPatientTest from "../../components/images/RegisterPatientButton";
+import AdminTheme from "../../themes/AdminTheme";
 
 const StyledHero = styled.div`
   margin: -1rem -1rem 2rem -1rem;
@@ -28,13 +29,29 @@ const StyledHeroHeader = styled.h1`
   font-size: 3em;
 `;
 
-const RegisterPatient = styled.div``;
+const PanelMenu = styled.nav`
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+  margin-top: 20px;
+`;
 
-const SearchPatient = styled.div``;
+const PanelContainer = styled.div`
+  height: 135px;
+  width: 238px;
+  background: ${(props) => props.theme.palette.brand};
+  &:hover {
+    background-color: ${(props) => props.theme.palette.hover};
+  }
+`;
 
-const RegisterExercise = styled.div``;
+const RegisterPatient = styled(PanelContainer)``;
 
-const SearchExercise = styled.div``;
+const SearchPatient = styled(PanelContainer)``;
+
+const RegisterExercise = styled(PanelContainer)``;
+
+const SearchExercise = styled(PanelContainer)``;
 
 const AdminPanel = () => {
   const [admin, setAdmin] = useState("");
@@ -47,15 +64,16 @@ const AdminPanel = () => {
   });
   return (
     <AdminLayout>
-      <StyledHero />
-      <StyledHeroHeader>Välkommen {admin.username}</StyledHeroHeader>
+      {/* <StyledHero />
+      <StyledHeroHeader>Välkommen {admin.username}</StyledHeroHeader>*/}
 
       <RegisterPatientTest />
-
-      <RegisterPatient />
-      <SearchPatient />
-      <RegisterExercise />
-      <SearchExercise />
+      <PanelMenu theme={AdminTheme}>
+        <RegisterPatient />
+        <SearchPatient />
+        <RegisterExercise />
+        <SearchExercise />
+      </PanelMenu>
     </AdminLayout>
   );
 };
