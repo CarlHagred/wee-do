@@ -105,15 +105,15 @@ const Showcase = () => {
         <StyledP>Patient Theme</StyledP>
 
         <Button>Small</Button>
-
+        <br />
         <Button icon="user">Small with Icon</Button>
-
         <Button size="lg">Large</Button>
       </ThemeProvider>
 
       <ThemeProvider theme={AdminTheme}>
         <StyledP>Admin Theme</StyledP>
         <Button>Small</Button>
+        <br />
         <Button icon="user">Small with Icon</Button>
         <Button size="lg">Large</Button>
         <Button icon="user" size="lg">
