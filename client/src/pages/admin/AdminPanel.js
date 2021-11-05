@@ -90,9 +90,31 @@ const AdminPanel = () => {
           <StyledPanelIcon name="add_user" size="3em" fill="white" />
           <StyledPanelText>Registrera patient</StyledPanelText>
         </RegisterPatient>
-        <SearchPatient />
-        <RegisterExercise />
-        <SearchExercise />
+
+        <SearchPatient>
+          <StyledPanelIcon
+            name="search_patient"
+            width="62"
+            height="62"
+            fill="white"
+          />
+          <StyledPanelText>Sök patient</StyledPanelText>
+        </SearchPatient>
+
+        <RegisterExercise>
+          <StyledPanelIcon name="upload" size="3em" fill="white" />
+          <StyledPanelText>Ladda upp övning</StyledPanelText>
+        </RegisterExercise>
+
+        <SearchExercise>
+          <StyledPanelIcon
+            name="search_exercise"
+            width="62"
+            height="62"
+            fill="white"
+          />
+          <StyledPanelText>Sök övning</StyledPanelText>
+        </SearchExercise>
       </PanelMenu>
     </AdminLayout>
   );
