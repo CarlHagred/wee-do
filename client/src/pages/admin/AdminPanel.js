@@ -9,6 +9,23 @@ import RegisterPatientTest from "../../components/images/RegisterPatientButton";
 
 const StyledHero = styled.div`
   margin: -1rem -1rem 2rem -1rem;
+  width: 100vw;
+  height: 40vh;
+  background-image: url(${hero});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+`;
+
+const StyledHeroHeader = styled.h1`
+  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3em;
 `;
 
 const RegisterPatient = styled.div``;
@@ -30,12 +47,9 @@ const AdminPanel = () => {
   });
   return (
     <AdminLayout>
-      <StyledHero>
-        <img src={hero} alt="Activity Banner" width="100%" />
-      </StyledHero>
+      <StyledHero />
+      <StyledHeroHeader>Välkommen {admin.username}</StyledHeroHeader>
 
-      <h2 style={{ textAlign: "center" }}>Vällkommen {admin.username}</h2>
-      <br />
       <RegisterPatientTest />
 
       <RegisterPatient />
