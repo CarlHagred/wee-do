@@ -5,8 +5,8 @@ import styled from "styled-components";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { getAdminSession } from "../../api";
 import hero from "../../components/images/AdminHeroBanner.png";
-import RegisterPatientTest from "../../components/images/RegisterPatientButton";
 import AdminTheme from "../../themes/AdminTheme";
+import Icon from "../../components/common/Icons";
 
 const StyledHero = styled.div`
   margin: -1rem -1rem 2rem -1rem;
@@ -22,7 +22,7 @@ const StyledHero = styled.div`
 const StyledHeroHeader = styled.h1`
   text-align: center;
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -34,15 +34,32 @@ const PanelMenu = styled.nav`
   gap: 20px;
   list-style-type: none;
   margin-top: 20px;
+  justify-content: center;
 `;
 
 const PanelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 135px;
   width: 238px;
   background: ${(props) => props.theme.palette.brand};
   &:hover {
     background-color: ${(props) => props.theme.palette.hover};
   }
+`;
+
+const StyledPanelText = styled.p`
+  align-self: flex-start;
+  color: white;
+  font-size: 1.3em;
+  margin-left: 20px;
+`;
+
+const StyledPanelIcon = styled(Icon)`
+  align-self: flex-end;
+  color: white;
+  font-size: 1.3em;
+  margin: 20px 20px 10px 0;
 `;
 
 const RegisterPatient = styled(PanelContainer)``;
@@ -64,12 +81,15 @@ const AdminPanel = () => {
   });
   return (
     <AdminLayout>
-      {/* <StyledHero />
-      <StyledHeroHeader>Välkommen {admin.username}</StyledHeroHeader>*/}
+      <StyledHero>
+        <StyledHeroHeader>Välkommen {admin.username}</StyledHeroHeader>
+      </StyledHero>
 
-      <RegisterPatientTest />
       <PanelMenu theme={AdminTheme}>
-        <RegisterPatient />
+        <RegisterPatient>
+          <StyledPanelIcon name="add_user" size="3em" fill="white" />
+          <StyledPanelText>Registrera patient</StyledPanelText>
+        </RegisterPatient>
         <SearchPatient />
         <RegisterExercise />
         <SearchExercise />
