@@ -5,10 +5,19 @@ import styled from "styled-components";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { getAdminSession } from "../../api";
 import hero from "../../components/images/AdminHeroBanner.png";
+import RegisterPatientTest from "../../components/images/RegisterPatientButton";
 
 const StyledHero = styled.div`
   margin: -1rem -1rem 2rem -1rem;
 `;
+
+const RegisterPatient = styled.div``;
+
+const SearchPatient = styled.div``;
+
+const RegisterExercise = styled.div``;
+
+const SearchExercise = styled.div``;
 
 const AdminPanel = () => {
   const [admin, setAdmin] = useState("");
@@ -27,6 +36,12 @@ const AdminPanel = () => {
 
       <h2 style={{ textAlign: "center" }}>Vällkommen {admin.username}</h2>
       <br />
+      <RegisterPatientTest />
+
+      <RegisterPatient />
+      <SearchPatient />
+      <RegisterExercise />
+      <SearchExercise />
     </AdminLayout>
   );
 };
