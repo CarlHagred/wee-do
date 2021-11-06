@@ -60,10 +60,11 @@ const Video = () => {
                         allowfullscreen
                     ></iframe>
                 </p>
+                <br></br>
                 <Link to={`/admin/exercise/qrpreview/${videoId}`}>
                     <Button icon="qrcode">Generera QR-kod</Button>
                 </Link>
-
+                <br></br>
                 <Button onClick={deleteVideo} icon="trash">
                     Radera
                 </Button>

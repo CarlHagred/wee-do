@@ -22,6 +22,9 @@ import SearchPatient from "./pages/admin/SearchPatient";
 import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
 import Video from "./pages/admin/Video";
+import WatchExercise from "./components/patient/WatchingVideo";
+import { ProtectedRouteAdmin } from "./components/protectedRoutes/ProtectedRoutesAdmin";
+import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
