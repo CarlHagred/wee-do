@@ -11,7 +11,6 @@ import Help from "./pages/common/Help";
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
 import QrScanner from "./pages/patient/QrScanner";
-import WatchExercise from "./pages/patient/WatchingExercise"; 
 
 //Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -22,8 +21,8 @@ import SearchExercise from "./pages/admin/SearchExercise";
 import SearchPatient from "./pages/admin/SearchPatient";
 import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
-
-//Protected Routes
+import Video from "./pages/admin/Video";
+import WatchExercise from "./components/patient/WatchingVideo";
 import { ProtectedRouteAdmin } from "./components/protectedRoutes/ProtectedRoutesAdmin";
 import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
 
@@ -68,8 +67,18 @@ function App() {
         />
         <ProtectedRouteAdmin
           exact
+          path="/admin/exercise/:videoId"
+          component={Video}
+        />
+        <ProtectedRouteAdmin
+          exact
           path="/admin/search/patient"
           component={SearchPatient}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/exercise/qrpreview/:id"
+          component={QRPreview}
         />
         <Route exact path="/help" component={Help} />
         <Route exact path="/test" component={QRPreview} />
@@ -81,10 +90,10 @@ function App() {
           component={UploadSucceeded}
         />
 
-        <Route component={NotFoundPage} />
-      </Switch>
-    </Router>
-  );
+                <Route component={NotFoundPage} />
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
