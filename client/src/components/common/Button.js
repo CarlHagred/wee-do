@@ -13,8 +13,10 @@ const StyledButton = styled.button`
   font-size: ${(props) => (props.size === "lg" ? "2" : "1.2")}em;
   font-weight: bold;
 
+  margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
+  margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
+
   width: 100%;
-  margin: 1em 0;
   padding: 0.5em 1em;
 
   border-radius: 2em;
@@ -36,12 +38,12 @@ const StyledButton = styled.button`
           color: #707070;
         `
       : props.neutral
-          ? css`
-            background: #8a8883;
-            &:hover{
-              background: #4a4946; 
-            }       
-          `
+      ? css`
+          background: #8a8883;
+          &:hover {
+            background: #4a4946;
+          }
+        `
       : css`
           &:hover {
             background: ${(props) => props.theme.palette.hover};
