@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
+
 import Button from "../common/Button";
 import UserInput from "../common/UserInput";
 import PatientTheme from "../../themes/PatientTheme";
@@ -18,17 +19,20 @@ const LoginPatient = () => {
   };
 
   return (
-    <ThemeProvider theme={PatientTheme}>
-      <UserInput
-        theme={PatientTheme}
-        type="text"
-        name="name"
-        id="login"
-        onChange={(e) => setLoginName(e.target.value)}
-        placeholder="Skriv användarnamn här..."
-      ></UserInput>
-      <Button onClick={handleSubmit}>Logga in</Button>
-    </ThemeProvider>
+    <div>
+      <ThemeProvider theme={PatientTheme}>
+        <span id="patientError"></span>
+        <UserInput
+          theme={PatientTheme}
+          type="text"
+          name="name"
+          id="loginPatient"
+          onChange={(e) => setLoginName(e.target.value)}
+          placeholder="Skriv användarnamn här..."
+        ></UserInput>
+        <Button onClick={handleSubmit}>Logga in</Button>
+      </ThemeProvider>
+    </div>
   );
 };
 
