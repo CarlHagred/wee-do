@@ -5,6 +5,7 @@ import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
   getPatients,
+  getVideos,
   getOnePatient,
 } from "../controllers/admin/adminEndpoints.js";
 import { getVideoUrl } from "../controllers/client/clientEndpoints.js";
@@ -20,6 +21,7 @@ import {
   getAdminSession,
   deleteAdminSession,
 } from "../controllers/admin/adminLogin.js";
+import Videos from "../models/videos.js";
 
 const router = express.Router();
 
@@ -34,5 +36,6 @@ router.post("/adminlogin", loginAdmin);
 router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
+router.get("/getvideos", getVideos);
 
 export default router;
