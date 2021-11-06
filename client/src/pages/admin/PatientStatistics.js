@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { getOnePatient } from "../../api";
 
@@ -27,7 +27,8 @@ const PatientStatistics = () => {
       {patientStatistics.map((stat) => (
         <React.Fragment key={stat.vidId}>
           <br />
-          <p>Video: {stat.vidId}</p>
+          <Link to={`../exercise/${stat.vidId}`}>Video: {stat.vidId}</Link>{" "}
+          LÄNK!!! STYLA!!
           <p>Scans: {stat.scans}</p>
           <p>Antal visningar: {stat.timesWatched}</p>
           <br />

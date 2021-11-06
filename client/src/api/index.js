@@ -11,7 +11,8 @@ export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
 export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 
-export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
+export const getSession = () =>
+  axios.get(`${serverUrl}/getsession`, { withCredentials: true });
 
 export const getAdminSession = () =>
   axios.get(`${serverUrl}/getadminsession`, { withCredentials: true });
@@ -86,3 +87,9 @@ export const logoutAdmin = () => {
 
 export const getVideoUrl = (params) =>
   axios.get(`${serverUrl}/getvideourl`, { params });
+
+export const postScan = (name, videoId) =>
+  axios.post(`${serverUrl}/postscan/${name}`);
+
+export const postWatchedVideo = (name, videoId) =>
+  axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);

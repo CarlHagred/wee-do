@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const patientSchema = mongoose.Schema({
   name: String,
-  statistics: Object,
+  statistics: Array,
 });
 
 const Patient = mongoose.model("Patient", patientSchema);

@@ -14,6 +14,8 @@ import {
   loginPatient,
   getSession,
   deleteSession,
+  postWatchedVideo,
+  postScan,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -37,5 +39,7 @@ router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
+router.post("/postscan/:name/:videoId", postScan);
+router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 
 export default router;
