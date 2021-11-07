@@ -11,8 +11,6 @@ import WdLogo from "../images/WdLogo";
 // Hamburgermenyn använder sig av en animerad ikon
 // från https://hamburger-react.netlify.app/
 
-// Kod nedan behöver städas lite, inte klar med det ännu //Josefine
-
 const StyledIcon = styled(Icon)`
   margin-right: 10px;
 `;
@@ -97,7 +95,7 @@ const NavBarItemBurgerLogout = styled.div`
 const LogOut = styled(NavBarItemBurgerLogout)`
   justify-content: center;
   font-size: 1.3em;
-  background: #6c98ff;
+  background: #005999;
 `;
 
 const NavbarBurger = styled.button`
@@ -128,7 +126,7 @@ const StyledDivider = styled.hr`
   align-content: center;
   width: 90%;
   margin: 0 auto;
-  border: 1px solid #6c98ff; ;
+  border: 1px solid #005999; ;
 `;
 
 const Navbar = () => {
