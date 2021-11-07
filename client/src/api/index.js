@@ -6,8 +6,9 @@ export const getNewPatient = () => axios.get(`${serverUrl}/newpatient`);
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
-export const getSession = () =>
-  axios.get(`${serverUrl}/getsession`, { withCredentials: true });
+export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
+
+export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
 
 export const getAdminSession = () =>
   axios.get(`${serverUrl}/getadminsession`, { withCredentials: true });

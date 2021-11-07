@@ -1,4 +1,5 @@
 import Patient from "../../models/patient.js";
+import Videos from "../../models/videos.js";
 
 export const postPatient = async (req, res) => {
   const createRandomName = () => Math.random().toString(20).substr(2, 6);
@@ -32,6 +33,18 @@ export const getPatients = async (req, res) => {
   try {
     const patients = await Patient.find();
     res.status(200).json(patients);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+//Hämtar alla inlagda övningar
+export const getVideos = async (req, res) => {
+  try {
+    const videos = await Videos.find();
+    //const result = JSON.parse(JSON.stringify(videos))
+    //res.status(200).json(result);
+    res.status(200).json(videos);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
