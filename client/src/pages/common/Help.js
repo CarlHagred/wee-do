@@ -1,17 +1,33 @@
 import React from "react";
+import styled from "styled-components"
+import WdLogo from "../../components/images/WdLogo"
 import { ThemeProvider } from "styled-components";
+import PatientLayout from "../../components/patient/PatientLayout"
 import Footer from "../../components/common/Footer";
-import Header from "../../components/common/Header";
 import Button from "../../components/common/Button";
 import { Link } from "react-router-dom";
 import PatientTheme from "../../themes/PatientTheme";
 
+const StyledContainter = styled.div`
+  text-align: left;
+  margin: 2.3em;
+`
+
+const StyledH2 = styled.h2`
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+`
+
 const Help = () => {
   return (
     <>
+      <PatientLayout>
       <ThemeProvider theme={PatientTheme}>
-      <Header></Header>
-        <strong><h2>Hjälp</h2></strong>
+      <StyledContainter>
+        <WdLogo></WdLogo>
+        <StyledH2>Hjälp</StyledH2>
         <p><strong>Jag har tappat bort mitt användarnamn eller QR-kod:</strong></p>
         <p>
           Om du har tappat bort ditt användarnamn eller QR-kod måste du komma i kontakt med sjukhuset du besökte när du fick ditt användarnamn eller QR-kod och be om ett nytt. 
@@ -42,11 +58,13 @@ const Help = () => {
             Telefon: 077-67 30 000, knappval 2 (IT) följt av 5 (övrigt).
           </li>
           <br/>
-          <Button>
+        </StyledContainter>
+            <Button>
             <Link to="/">Tillbaka</Link>
-          </Button>
-      <Footer></Footer>
-    </ThemeProvider>
+            </Button>
+            <Footer></Footer>
+      </ThemeProvider>
+    </PatientLayout> 
     </>
   );
 };

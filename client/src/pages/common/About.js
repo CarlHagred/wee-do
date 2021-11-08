@@ -1,16 +1,31 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import styled from "styled-components";
+import WdLogo from "../../components/images/WdLogo"
+import PatientLayout from "../../components/patient/PatientLayout"
 import Footer from "../../components/common/Footer";
-import Header from "../../components/common/Header";
 import Button from "../../components/common/Button";
 import { Link } from "react-router-dom";
 import PatientTheme from "../../themes/PatientTheme";
 
+const StyledH2 = styled.h2`
+  text-align: center;
+  font-weight: 600;
+  font-size: 30px;
+`
+
+const StyledContainter = styled.div`
+  text-align: left;
+  margin: 2.3em;
+`
+
 const About = () => {
   return (
     <>
-    <Header></Header>
-      <strong><h1>Om WeeDo:</h1></strong>
+    <PatientLayout>
+    <WdLogo></WdLogo>
+    <StyledContainter>
+      <StyledH2>Om WeeDo:</StyledH2>
       <br/>
       <p>WeeDo är ett samarbete mellan Region Skåne och Malmö Universitetet.</p>
       <p>Vi är en grupp studenter som går vårt sista år som Informationsarkitekter och Systemutvecklare. 
@@ -28,12 +43,14 @@ const About = () => {
       <br/>
       <a href="https://mau.se/sok-utbildning/program/tgsya/">Systemutveckling</a>
       <br/>
+      </StyledContainter>
       <ThemeProvider theme={PatientTheme}>
         <Button>
           <Link to="/">Tillbaka</Link>
         </Button>
       </ThemeProvider>
     <Footer></Footer>
+    </PatientLayout>
     </>
   );
 };
