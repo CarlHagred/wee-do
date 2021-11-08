@@ -10,6 +10,7 @@ const videoSchema = new Schema({
   videoTitle: String,  
   description: String,  
   thumbnail: String 
+
 }); 
 
 const Videos = mongoose.model("videos", videoSchema);

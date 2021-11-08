@@ -44,7 +44,6 @@ const UpploadVideo = () => {
     }
     return (
             <div className="upload-save-vid">
-                <h1>Ladda upp en ny övning</h1>
                 <br />
                 <br />
                 <form id="foo" action="/upload" method="POST" onSubmit={handleSubmit}>

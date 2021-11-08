@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import RS_Logo from "../images/RsLogo";
+import RsLogo from "../images/RsLogo";
 
 const StyledFooter = styled.div`
   position: absolute;
@@ -26,7 +26,7 @@ const Footer = () => {
       <StyledFooter>
         <Row>
           <Col size={1}>
-            <RS_Logo width="92px" height="85px" alt="Region Skånes logotyp" />
+            <RsLogo width="92px" height="85px" alt="Region Skånes logotyp" />
           </Col>
         </Row>
 
