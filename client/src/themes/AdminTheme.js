@@ -1,7 +1,7 @@
 const AdminTheme = {
   palette: {
-    brand: "#3C77FF",
-    hover: "#3165DB",
+    brand: "#0B2367",
+    hover: "#007AB3",
   },
 };
 
