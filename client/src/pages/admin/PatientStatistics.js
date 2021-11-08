@@ -1,7 +1,47 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import { getOnePatient } from "../../api";
+
+const StyledContainer = styled.div`
+  h2 {
+    text-align: center;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+`
+const StyledPatient = styled.p`
+  background-color: #CCC;
+  padding: 4px;
+  border-radius: 3px;
+`
+const StyledLink = styled(Link)`
+  color: #0000FF;
+  :hover {
+    text-decoration: underline;
+    color: #1E90FF	;
+  }
+  :active {
+    color: #800080;
+  }
+`
+
+const StyledStatistics = styled.div`
+  background-color: rgb(247, 247, 248, 100%);
+  border: solid;
+  border-color: rgba(218, 223, 225, 0.3);
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  :hover{
+    background: rgb(108, 153, 255, 33%);
+  }
+`
+
 
 const PatientStatistics = () => {
   const { name } = useParams();
@@ -21,19 +61,21 @@ const PatientStatistics = () => {
 
   return (
     <AdminLayout>
+      <StyledContainer>
       <h2>Statistik</h2>
-
-      <p>Test för stats: namn {patient.name}</p>
+      <StyledPatient><strong>Användarnamn: </strong>{patient.name}</StyledPatient>
       {patientStatistics.map((stat) => (
         <React.Fragment key={stat.vidId}>
+          <StyledStatistics>
           <br />
-          <Link to={`../exercise/${stat.vidId}`}>Video: {stat.vidId}</Link>{" "}
-          LÄNK!!! STYLA!!
-          <p>Scans: {stat.scans}</p>
-          <p>Antal visningar: {stat.timesWatched}</p>
+          <p><strong>Video: </strong> <StyledLink to={`../exercise/${stat.vidId}`}>{stat.vidId}</StyledLink>{" "}</p>
+          <p><strong>Scans: </strong>{stat.scans}</p>
+          <p><strong>Antal visningar: </strong>{stat.timesWatched}</p>
           <br />
+          </StyledStatistics>
         </React.Fragment>
       ))}
+      </StyledContainer>
     </AdminLayout>
   );
 };
