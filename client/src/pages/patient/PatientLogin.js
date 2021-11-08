@@ -1,16 +1,21 @@
 import React from "react";
-import PlaceHolder from "../../components/common/PlaceHolder";
+import styled from "styled-components";
+
 import PatientLayout from "../../components/patient/PatientLayout";
 import LoginPatient from "../../components/Login/LoginPatient";
+import hero from "../../components/images/patient_hero.png";
 
+const StyledHero = styled.div`
+  margin: -1rem -1rem 2rem -1rem;
+`;
 
 const PatientLogin = () => {
   return (
     <PatientLayout>
-      <PlaceHolder />
+      <StyledHero>
+        <img src={hero} alt="WeeDo" width="100%" />
+      </StyledHero>
       <LoginPatient />
-      <h2>Logga in</h2>
-      <br />
     </PatientLayout>
   );
 };

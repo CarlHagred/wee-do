@@ -70,6 +70,25 @@ const Showcase = () => {
       <StyledP>
         <Icon name="trash" size="2em" /> trash
       </StyledP>
+      <StyledP>
+        <Icon name="exit" size="2em" /> exit
+      </StyledP>
+      <StyledP>
+        <Icon name="statistics" size="2em" /> statistics
+      </StyledP>
+
+      <StyledH2>Ikoner - SVG</StyledH2>
+      {/* Fill ändrar färg se exempel nedan */}
+      {/* Width och Height ändrar storlek */}
+
+      <StyledP>
+        <Icon name="search_patient" width="32" height="32" fill="black" />
+        search_patient (fill="färg")
+      </StyledP>
+      <StyledP>
+        <Icon name="search_exercise" width="32" height="32" fill="black" />{" "}
+        search_exercise (fill="färg")
+      </StyledP>
 
       <StyledH2>Sökfält</StyledH2>
       <br />
@@ -86,39 +105,42 @@ const Showcase = () => {
         <StyledP>Patient Theme</StyledP>
 
         <Button>Small</Button>
-
+        <br />
         <Button icon="user">Small with Icon</Button>
-
         <Button size="lg">Large</Button>
       </ThemeProvider>
 
       <ThemeProvider theme={AdminTheme}>
         <StyledP>Admin Theme</StyledP>
         <Button>Small</Button>
+        <br />
         <Button icon="user">Small with Icon</Button>
-
         <Button size="lg">Large</Button>
         <Button icon="user" size="lg">
           Large with Icon
         </Button>
         <StyledP>Outlined</StyledP>
-
         <Button outlined>Outlined small</Button>
-
         <Button outlined size="lg">
           Outlined Large
         </Button>
-
         <Button outlined size="lg" icon="user" color="black">
           Outlined Large
         </Button>
-
         <StyledP>Disabled</StyledP>
-
         <Button disabled>Disabled</Button>
         <Button disabled size="lg">
           Disabled
         </Button>
+        <StyledP>Neutral</StyledP>
+        <Button neutral>Neutral small</Button>
+        <Button neutral size="lg">
+          Neutral large
+        </Button>
+        <Button neutral size="lg" icon="user">
+          Neutral icon
+        </Button>
+        ;
       </ThemeProvider>
     </ShowcaseWrapper>
   );

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
 import AdminTheme from "../../themes/AdminTheme";
 import Hamburger from "hamburger-react";
 import Icon from "../common/Icons";
+import { customDialogAdmin } from "../common/Confirmation";
+import WdLogo from "../images/WdLogo";
 
 // Hamburgermenyn använder sig av en animerad ikon
 // från https://hamburger-react.netlify.app/
-
-// Kod nedan behöver städas lite, inte klar med det ännu //Josefine
 
 const StyledIcon = styled(Icon)`
   margin-right: 10px;
@@ -32,14 +33,15 @@ const NavbarMenu = styled.nav`
   background: ${(props) => props.theme.palette.brand};
 `;
 
-const NavbarItem = styled(Link)`
+const NavbarItem = styled(NavLink)`
   display: flex;
   align-items: center;
   padding: 0 20px;
   color: white;
   height: 100%;
   font-size: 1em;
-  &:hover {
+  &:hover,
+  &.active {
     background-color: ${(props) => props.theme.palette.hover};
   }
   @media (max-width: 768px) {
@@ -48,7 +50,37 @@ const NavbarItem = styled(Link)`
   ${(p) => p.last && `margin-left: auto`}
 `;
 
-const NavbarItemBurger = styled(Link)`
+const NavbarItemLogout = styled(NavbarItem)`
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+  height: 100%;
+  font-size: 1em;
+  &:hover,
+  &.active {
+    background-color: ${(props) => props.theme.palette.hover};
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+  ${(p) => p.last && `margin-left: auto`}
+`;
+
+const NavbarItemBurger = styled(NavLink)`
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  color: white;
+  height: 100%;
+  font-size: 1.2em;
+  &:hover,
+  &.active {
+    background-color: ${(props) => props.theme.palette.hover};
+  }
+`;
+
+const NavBarItemBurgerLogout = styled.div`
   display: flex;
   padding: 20px;
   align-items: center;
@@ -60,10 +92,10 @@ const NavbarItemBurger = styled(Link)`
   }
 `;
 
-const LogOut = styled(NavbarItemBurger)`
+const LogOut = styled(NavBarItemBurgerLogout)`
   justify-content: center;
   font-size: 1.3em;
-  background: #6c98ff;
+  background: #005999;
 `;
 
 const NavbarBurger = styled.button`
@@ -94,7 +126,7 @@ const StyledDivider = styled.hr`
   align-content: center;
   width: 90%;
   margin: 0 auto;
-  border: 1px solid #6c98ff; ;
+  border: 1px solid #005999; ;
 `;
 
 const Navbar = () => {
@@ -108,14 +140,21 @@ const Navbar = () => {
           <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
         </NavbarBurger>
 
-        <NavbarLogo to="/admin/">WeeDo</NavbarLogo>
+        <NavbarLogo to="/adminpanel/">
+          <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+        </NavbarLogo>
         <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
         <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
         <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-        <NavbarItem to="/admin/search/exercise" last="true">
+        <NavbarItemLogout
+          to="/"
+          isActive={() => false}
+          onClick={customDialogAdmin}
+          last="true"
+        >
           Logga ut
-        </NavbarItem>
+        </NavbarItemLogout>
       </NavbarMenu>
 
       <StyledMobileNav open={open}>
@@ -137,7 +176,7 @@ const Navbar = () => {
           <StyledIcon size="1.5em" name="search" /> Sök övning
         </NavbarItemBurger>
 
-        <LogOut to="/admin/logout" onClick={closeMenu}>
+        <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
           Logga ut
         </LogOut>
       </StyledMobileNav>

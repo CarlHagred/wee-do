@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
-
+import videoRoutes from "./routes/ExercisesRoutes.js"; 
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -45,6 +45,7 @@ app.use(passport.session());
 app.use(express.static("public")); //osäker om nödvändig
 localStrategy(passport);
 app.use(routes);
+app.use(videoRoutes); 
 app.use(morgan("dev"));
 
 //Database connection

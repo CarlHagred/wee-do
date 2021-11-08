@@ -25,10 +25,10 @@ const StyledTable = styled.table`
 
   tbody tr {
     :nth-of-type(odd) {
-      background-color: rgb(216, 228, 255, 33%);
+      background-color: rgb(247, 247, 248, 100%);
     }
     :nth-of-type(even) {
-      background-color: rgb(216, 228, 255, 33%);
+      background-color: rgb(247, 247, 248, 100%);
     }
     :hover {
       background: rgb(108, 153, 255, 33%);

@@ -1,10 +1,10 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import QrReader from "react-web-qr-reader";
-import { getVideoUrl } from "../../api/index";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import QrReader from 'react-web-qr-reader';
+import { getVideoUrl } from '../../api/index';
 
 const ScanCamera = () => {
-  const history = useHistory();
+  //const history = useHistory();
 
   const previewStyle = {
     height: 240,
@@ -13,15 +13,14 @@ const ScanCamera = () => {
 
   const handleScan = async (result) => {
     const params = {
-      qr: result.data,
+      titel: result.data,
     };
 
     const videoUrl = await getVideoUrl(params);
 
-    alert(videoUrl.data);
-    //Nedanstående if ska kolla om länken är gilltig och i så fall skicka till videospelaren med länken
-    if (result.toString) {
-      history.push("/");
+    if (videoUrl.data != 'http://www.youtube.com/embed/404') {
+      console.log(videoUrl.data);
+      window.location.href = `watch?title=${videoUrl.data}`;
     }
   };
 
