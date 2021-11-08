@@ -8,7 +8,7 @@ import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
 import videoRoutes from "./routes/ExercisesRoutes.js"; 
-import updateDb from './controllers/admin/updateDatabase.js';
+import updateDb from './controllers/admin/UpdateDatabase.js';
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -60,7 +60,9 @@ const databaseConnection = async () => {
       console.log(
         `Server upp and running, and connected to database on port: ${PORT}`
       );
-      updateDb();
+      updateDb().then(()=>{
+        console.log('Database updated...')
+      })
     });
   } catch (error) {
     console.log(error.message);

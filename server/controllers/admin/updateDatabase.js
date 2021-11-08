@@ -9,7 +9,7 @@ import axios from 'axios';
 dotenv.config(); 
  
 const url = process.env.FetchVidUrl; 
-const postVideo = async () => {
+const UpdateDatabase = async () => {
    
    try {
         const data =  await axios.get(url)
@@ -31,4 +31,4 @@ const postVideo = async () => {
     console.error(error)
     }
 }
-export default postVideo; 
+export default UpdateDatabase; 
