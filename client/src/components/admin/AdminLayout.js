@@ -10,12 +10,17 @@ const PageContainer = styled.div`
 
   margin: 0 auto;
   padding: 1rem 1rem 15rem 1rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+  }
 `;
 
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={AdminTheme}>
-      <Navbar />
       <PageContainer>{children}</PageContainer>
     </ThemeProvider>
   );
