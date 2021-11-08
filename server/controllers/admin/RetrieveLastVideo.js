@@ -31,13 +31,13 @@ const postVideo = () => {
             thumbnail = element.snippet.thumbnails.high.url;
         }); 
         const video = new Videos({
-            övningsId : videoId,
-            övningsTitel: title,                 
-            övningsBeskrivning: description, 
-            övningsOmslag: thumbnail
+            videoId : videoId,
+            videoTitle: title,                 
+            description: description, 
+            thumbnail: thumbnail
         }); 
 
-         Videos.findOne({övningsId: video.övningsId}, function(err, existingVideo){
+         Videos.findOne({videoId: video.videoId}, function(err, existingVideo){
             if(existingVideo == null){
                video.save();
                console.log('Övning skickades till db')  
