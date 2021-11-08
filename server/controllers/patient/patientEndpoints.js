@@ -64,8 +64,8 @@ export const postWatchedVideo = async (req, res) => {
             },
           },
           { safe: true, new: true },
-          () => {
-            console.log("stuff");
+          (err, doc) => {
+            console.log(doc);
           }
         );
       }

@@ -89,7 +89,7 @@ export const getVideoUrl = (params) =>
   axios.get(`${serverUrl}/getvideourl`, { params });
 
 export const postScan = (name, videoId) =>
-  axios.post(`${serverUrl}/postscan/${name}`);
+  axios.post(`${serverUrl}/postscan/${name}/${videoId}`);
 
 export const postWatchedVideo = (name, videoId) =>
   axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
