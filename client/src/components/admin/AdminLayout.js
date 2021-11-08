@@ -13,11 +13,21 @@ const PageContainer = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  return (
+  let url = "http://localhost:3000/admin"
+  if(window.location.href === url){
+    return (
     <ThemeProvider theme={AdminTheme}>
+      <PageContainer>{children}</PageContainer>
+    </ThemeProvider>
+  );}
+  if(window.location.href !== url){
+    return(
+      <ThemeProvider theme={AdminTheme}>
       <Navbar />
       <PageContainer>{children}</PageContainer>
     </ThemeProvider>
-  );
+    )
+  }
+  
 };
 export default Layout;
