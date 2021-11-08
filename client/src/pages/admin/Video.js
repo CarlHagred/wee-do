@@ -3,9 +3,11 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import AdminTheme from "../../themes/AdminTheme";
 import styled, { ThemeProvider } from "styled-components";
 import Button from "../../components/common/Button";
-import { getAllVideos } from "../../api";
+import { deleteVideoIndex, getAllVideos } from "../../api";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 const StyledTitle = styled.p`
     font-weight: bold;
@@ -24,8 +26,19 @@ const Video = () => {
         fetchData();
     }, [videos]);
 
-    const deleteVideo = () => {
-        console.log("Hej");
+
+    const handleEvent = () => {
+      const id = videoId;
+      console.log(id);
+      deleteVideoIndex(id);
+
+      /*axios.delete('http://localhost:8000/detetevideo', {
+        body: {
+        VideoId: videos.videoId
+        }
+      });
+      console.log(videoId);
+      deleteVideoIndex(videoId);*/
     };
 
     const videoUrl = "https://www.youtube.com/embed/" + videoId;
@@ -65,7 +78,7 @@ const Video = () => {
                     <Button icon="qrcode">Generera QR-kod</Button>
                 </Link>
                 <br></br>
-                <Button onClick={deleteVideo} icon="trash">
+                <Button onClick={handleEvent} icon="trash">
                     Radera
                 </Button>
             </ThemeProvider>

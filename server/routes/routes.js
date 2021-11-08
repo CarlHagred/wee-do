@@ -6,6 +6,7 @@ import {
   postPatient,
   getPatients,
   getVideos,
+  deleteVideos
 } from '../controllers/admin/adminEndpoints.js';
 import { getVideoUrl } from '../controllers/client/clientEndpoints.js';
 
@@ -33,5 +34,6 @@ router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get('/getvideourl', getVideoUrl);
 router.get('/getvideos', getVideos);
+router.delete('/deletevideo', deleteVideos)
 
 export default router;

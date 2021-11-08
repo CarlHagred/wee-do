@@ -8,6 +8,8 @@ export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
 export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 
+export const deleteVideoIndex = (params) => axios.delete(`${serverUrl}/deletevideo/`, {params});
+
 export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
 
 export const getAdminSession = () =>
