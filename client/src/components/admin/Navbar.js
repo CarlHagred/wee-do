@@ -50,7 +50,7 @@ const NavbarItem = styled(NavLink)`
   ${(p) => p.last && `margin-left: auto`}
 `;
 
-const NavbarItemLogout = styled(NavbarItem)`
+const NavbarItemLogout = styled.div`
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -148,7 +148,6 @@ const Navbar = () => {
         <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
         <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
         <NavbarItemLogout
-          to="/"
           isActive={() => false}
           onClick={customDialogAdmin}
           last="true"
