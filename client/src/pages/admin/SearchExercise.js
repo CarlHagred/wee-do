@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {getAllVideos } from "../../api";
+import { getAllVideos } from "../../api";
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import styled from "styled-components";
-
 
 const StyledTable = styled.table`
   caption-side: top;
@@ -46,8 +45,6 @@ const StyledTitle = styled.p`
   font-weight: bold;
 `;
 
-
-
 const SearchExercise = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
@@ -58,8 +55,7 @@ const SearchExercise = () => {
       setVideos(allVideos.data);
     };
     fetchData();
-  }, [videos]);
-
+  }, []);
   return (
     <AdminLayout>
       <SearchBar
@@ -85,28 +81,28 @@ const SearchExercise = () => {
           .map((videos) => (
             <tbody>
               <Link
-                    to={`/admin/exercise/${videos.videoId}`}
-                    target="_blank"
-                    key={videos._id}
-                  >
-              <tr>
-                <td>
-                  <StyledTitle>
-                  
-                    {videos.videoTitle}
-                  
-                  </StyledTitle>
-                
-                  <br></br>
-                  <img src={videos.thumbnail} alt="profile pic" width="250px" height="200px" />
-                  <br></br>
-                  <br></br>
-                  Antal visningar: {videos.__v}
-                </td>
-              </tr>
-              <br></br>
-              <br></br>
-              <br></br>
+                to={`/admin/exercise/${videos.videoId}`}
+                target="_blank"
+                key={videos._id}
+              >
+                <tr>
+                  <td>
+                    <StyledTitle>{videos.videoTitle}</StyledTitle>
+                    <br></br>
+                    <img
+                      src={videos.thumbnail}
+                      alt="profile pic"
+                      width="250px"
+                      height="200px"
+                    />
+                    <br></br>
+                    <br></br>
+                    Antal visningar: {videos.__v}
+                  </td>
+                </tr>
+                <br></br>
+                <br></br>
+                <br></br>
               </Link>
             </tbody>
           ))}
@@ -116,12 +112,3 @@ const SearchExercise = () => {
   );
 };
 export default SearchExercise;
-
-
-
-
-
-
-
-
-

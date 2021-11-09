@@ -13,7 +13,7 @@ const StyledInput = styled.input`
   background-repeat: no-repeat;
 
   padding: 8px 16px;
-  margin-bottom: 10px; ;
+  margin-bottom: 10px;
 `;
 
 const UserInput = (props) => {

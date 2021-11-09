@@ -19,6 +19,7 @@ export const postPatient = async (req, res) => {
     if (!doc) {
       const newPatient = new Patient({
         name: name,
+        statistics: [],
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
@@ -34,6 +35,15 @@ export const getPatients = async (req, res) => {
     const patients = await Patient.find();
     res.status(200).json(patients);
   } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getOnePatient = async (req, res) => {
+  try {
+    const patient = await Patient.findOne({ name: req.params.name });
+    res.status(200).json(patient);
+  } catch {
     res.status(404).json({ message: error.message });
   }
 };

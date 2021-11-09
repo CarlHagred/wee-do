@@ -17,7 +17,7 @@ const StyledButton = styled.button`
   margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
 
   width: 100%;
-  padding: 0.5em 1em;
+  padding: 0.3em 1em;
 
   border-radius: 2em;
 

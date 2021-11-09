@@ -72,7 +72,7 @@ const AdminPanel = () => {
       setAdmin(fetchedAdminSession.data);
     };
     fetchData();
-  });
+  }, []);
   return (
     <AdminLayout>
       <StyledHero>
