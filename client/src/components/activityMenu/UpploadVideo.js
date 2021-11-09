@@ -3,25 +3,16 @@
  * innehar även dess gui komponent  
  */
 import React, {useState} from 'react'; 
-import axios from 'axios'; 
 import UserInput from '../common/UserInput';
 import TextArea from '../common/TextArea';
 import Button from '../common/Button';
-
+import {postVideo} from '../../api/index.js'; 
 const UpploadVideo = () => {
     const [form, setForm] = useState({
         title: "", 
         description: "", 
         file: null
-    })
-    
-    /* 
-    const [title, setTitle] = useState(""); 
-    const [description, setDescription] = useState(""); 
-    const [thumbnail, setThumbnail] = useState(""); 
-    */
-    
-
+    });
     const handleChange = (event) => {
         const inputValue = event.target.name === "file" ? event.target.files[0] : event.target.value; 
         setForm({
@@ -39,14 +30,13 @@ const UpploadVideo = () => {
         videoData.append("videoFile", form.file); 
         videoData.append("title", form.title); 
         videoData.append("description", form.description); 
-
-        await axios.post("http://localhost:8000/upload", videoData);         
+        postVideo(videoData);         
     }
     return (
             <div className="upload-save-vid">
                 <br />
                 <br />
-                <form id="foo" action="/upload" method="POST" onSubmit={handleSubmit}>
+                <form id="foo" method="POST" onSubmit={handleSubmit}>
                     <div className="upload-video">
                         <UserInput onChange={handleChange} type="text" name="title" autoComplete="off" placeholder="Övningstitel"/>
                         <TextArea onChange={handleChange} type="text" name="description" autoComplete="off"/>

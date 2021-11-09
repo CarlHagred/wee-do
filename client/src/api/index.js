@@ -93,3 +93,6 @@ export const postScan = (name, videoId) =>
 
 export const postWatchedVideo = (name, videoId) =>
   axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
+
+export const postVideo = (videoData) =>
+   axios.post(`${serverUrl}/upload/`, videoData);
