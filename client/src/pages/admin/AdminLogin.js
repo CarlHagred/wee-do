@@ -3,9 +3,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
+import AdminTheme from "../../themes/AdminTheme";
 import { loginAdmin } from "../../api";
 
-import AdminTheme from "../../themes/AdminTheme";
 import Button from "../../components/common/Button";
 import UserInput from "../../components/common/UserInput";
 import WdLogo from "../../components/images/WdLogo";
@@ -13,8 +13,10 @@ import RsLogo from "../../components/images/RsLogo";
 import Icon from "../../components/common/Icons";
 
 const StyledBody = createGlobalStyle`
-  body {
+  @media (min-width: 740px) {
+    body {
     background-color: #F9F9F9;
+  }
   }
 `;
 
@@ -35,6 +37,11 @@ const StyledWrapper = styled(StyledContainerItem)`
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
   background-color: white;
+  @media (max-width: 740px) {
+    margin-top: 0;
+    flex-direction: column;
+    border: 0;
+  }
 `;
 
 const StyledHeroContainer = styled(StyledContainerItem)`
@@ -42,14 +49,21 @@ const StyledHeroContainer = styled(StyledContainerItem)`
   display: flex;
   flex-direction: column;
   align-content: center;
+  @media (max-width: 740px) {
+    margin-top: 0;
+  }
 `;
 
 const StyledLogo = styled(WdLogo)`
   width: 80%;
-  margin: 20px;
+  margin: 20px 0;
 `;
 
-const StyledIcon = styled(Icon)``;
+const StyledIcon = styled(Icon)`
+  @media (max-width: 740px) {
+    display: none;
+  }
+`;
 
 const StyledContentContainer = styled(StyledContainerItem)`
   background: white;
@@ -60,7 +74,7 @@ const StyledContentContainer = styled(StyledContainerItem)`
 `;
 
 const StyledLoginHeader = styled(StyledContainerItem)`
-  font-size: 2em;
+  font-size: 2rem;
   margin: 40px 0;
 `;
 

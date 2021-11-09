@@ -73,7 +73,7 @@ const StyledContentContainer = styled(StyledContainerItem)`
 `;
 
 const StyledLoginHeader = styled(StyledContainerItem)`
-  font-size: 2em;
+  font-size: 2rem;
   margin: 40px 0;
 `;
 
