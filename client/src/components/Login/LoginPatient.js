@@ -7,6 +7,12 @@ import PatientTheme from "../../themes/PatientTheme";
 import { loginPatient } from "../../api";
 
 const LoginPatient = () => {
+  let isCookie = localStorage.getItem("isAuthenticatedPatient")
+  if(isCookie !== null){
+    localStorage.clear();
+    window.location.reload();
+  }
+
   const [loginName, setLoginName] = useState("");
 
   const handleSubmit = () => {
@@ -16,6 +22,7 @@ const LoginPatient = () => {
     };
 
     loginPatient(postData);
+    localStorage.clear()
   };
 
   return (

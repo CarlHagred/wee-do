@@ -88,6 +88,13 @@ const StyledUserInput = styled(UserInput)`
 `;
 
 const AdminLogin = () => {
+
+  let isCookie = localStorage.getItem("isAuthenticatedAdmin")
+  if(isCookie !== null){
+    localStorage.clear();
+    window.location.reload();
+  }
+
   const [loginName, setLoginName] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const handleSubmit = () => {
