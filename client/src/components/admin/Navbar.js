@@ -132,29 +132,32 @@ const StyledDivider = styled.hr`
 const Navbar = () => {
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
+  const url = "http://localhost:3000/adminpanel"
 
-  return (
-    <>
-      <NavbarMenu theme={AdminTheme}>
-        <NavbarBurger>
-          <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
-        </NavbarBurger>
+  if(window.location.href !== url){
+    return (
+      <>
+        <NavbarMenu theme={AdminTheme}>
+          <NavbarBurger>
+            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+          </NavbarBurger>
 
-        <NavbarLogo to="/adminpanel/">
-          <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
-        </NavbarLogo>
-        <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
-        <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
-        <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
-        <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-        <NavbarItemLogout
-          isActive={() => false}
-          onClick={customDialogAdmin}
-          last="true"
-        >
-          Logga ut
-        </NavbarItemLogout>
-      </NavbarMenu>
+          <NavbarLogo to="/adminpanel">
+            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+          </NavbarLogo>
+          <NavbarItem to="/admin/register/patient">Registrera Patient</NavbarItem>
+          <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
+          <NavbarItem to="/admin/register/exercise">Ladda upp övning</NavbarItem>
+          <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
+          <NavbarItemLogout
+            isActive={() => false}
+            onClick={customDialogAdmin}
+            last="true"
+          >
+            Logga ut
+          </NavbarItemLogout>
+        </NavbarMenu>
+    
 
       <StyledMobileNav open={open}>
         <NavbarItemBurger to="/admin/register/patient" onClick={closeMenu}>
@@ -180,7 +183,38 @@ const Navbar = () => {
         </LogOut>
       </StyledMobileNav>
     </>
-  );
+  );}
+  if(window.location.href === url){
+    return (
+      <>
+        <NavbarMenu theme={AdminTheme}>
+          <NavbarBurger>
+            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+          </NavbarBurger>
+
+          <NavbarLogo to="/adminpanel">
+            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+          </NavbarLogo>
+          <NavbarItemLogout
+            isActive={() => false}
+            onClick={customDialogAdmin}
+            last="true"
+          >
+            Logga ut
+          </NavbarItemLogout>
+        </NavbarMenu>
+    
+
+      <StyledMobileNav open={open}>
+        <StyledDivider />
+
+        <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
+          Logga ut
+        </LogOut>
+      </StyledMobileNav>
+    </>
+    );
+  }
 };
 
 export default Navbar;
