@@ -31,7 +31,8 @@ const StyledTable = styled.table`
       background-color: rgb(247, 247, 248, 100%);
     }
     :hover {
-      background: rgb(108, 153, 255, 33%);
+      filter: brightness(130%);
+      background-color: ${(props) => props.theme.palette.hover};
     }
   }
   thead td {
@@ -75,7 +76,7 @@ const SearchPatient = () => {
           })
           .map((patient) => (
             <tbody>
-              <tr>
+              <tr key={patient._id}>
                 <td>
                   <Link
                     to={`/admin/statistics/${patient.name}`}
