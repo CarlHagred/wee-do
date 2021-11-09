@@ -1,62 +1,94 @@
 import React from "react";
 import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
 
-import PatientLayout from "../../components/patient/PatientLayout";
+import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/Login/LoginPatient";
+import WdLogo from "../../components/images/WdLogo";
+import RsLogo from "../../components/images/RsLogo";
 import hero from "../../components/images/patient_hero.png";
 
-const StyledHero = styled.div`
-  background-image: url(${hero});
-  margin: -1rem -1rem 0 -1rem;
-  background-image: url(${hero});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  @media (min-width: 768px) {
-    margin: 0;
-  }
-`;
-
-const StyledHeader = styled.h1`
-  font-size: 2em;
-  margin: 40px 0;
+const PageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   text-align: center;
 `;
 
-const LoginWrapper = styled.div`
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: center;
-    margin-top: 10rem;
-    background-color: white;
-    border: 1px solid #bfc1bf;
-    height: 420px;
-    width: 800px;
-  }
+const StyledContainerItem = styled.div`
+  font-size: 20px;
+  flex: 1;
 `;
 
-const LoginContainer = styled.div`
+const StyledWrapper = styled(StyledContainerItem)`
+  display: flex;
+  max-width: 800px;
+  border: 1px solid #bfc1bf;
+  margin-top: 20vh;
+`;
+
+const StyledHeroContainer = styled(StyledContainerItem)`
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  @media (min-width: 768px) {
-    margin: 0 20px;
-    width: 400px;
-  }
+  align-content: center;
+`;
+
+const StyledLogo = styled(WdLogo)`
+  width: 80%;
+  margin: 20px;
+`;
+
+const StyledHero = styled(hero)`
+  width: 100%;
+  object-fit: contain;
+`;
+
+const StyledContentContainer = styled(StyledContainerItem)`
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 20px;
+`;
+
+const StyledLoginHeader = styled(StyledContainerItem)`
+  font-size: 2em;
+  margin: 40px 0;
+`;
+
+const StyledLoginFooter = styled(StyledContainerItem)`
+  margin-top: 40px;
+  margin-bottom: 20px;
 `;
 
 const PatientLogin = () => {
   return (
-    <PatientLayout>
-      <LoginWrapper>
-        <StyledHero />
-        <LoginContainer>
-          <StyledHeader>Logga in</StyledHeader>
-          <LoginPatient />
-        </LoginContainer>
-      </LoginWrapper>
-    </PatientLayout>
+    <PageWrapper>
+      <ThemeProvider theme={PatientTheme}>
+        <StyledWrapper>
+          <StyledHeroContainer>
+            <StyledContainerItem>
+              <StyledHero />
+              <StyledLogo fill="white" />
+            </StyledContainerItem>
+          </StyledHeroContainer>
+
+          <StyledContentContainer>
+            <StyledLoginHeader>Logga in</StyledLoginHeader>
+
+            <StyledContainerItem>
+              <LoginPatient />
+            </StyledContainerItem>
+
+            <StyledLoginFooter>
+              <RsLogo width="92px" height="85px" alt="Region Skånes logotyp" />
+            </StyledLoginFooter>
+          </StyledContentContainer>
+        </StyledWrapper>
+      </ThemeProvider>
+    </PageWrapper>
   );
 };
-
 export default PatientLogin;
