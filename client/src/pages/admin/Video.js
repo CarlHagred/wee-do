@@ -28,7 +28,7 @@ const Video = () => {
 
 
     const handleEvent = () => {
-      const id = videoId;
+      const id = "0ff753";
       console.log(id);
       deleteVideoIndex(id);
 
