@@ -36,7 +36,7 @@ const UpploadVideo = () => {
             <div className="upload-save-vid">
                 <br />
                 <br />
-                <form id="foo" method="POST" onSubmit={handleSubmit}>
+                <form id="vid-submitting-form" onSubmit={handleSubmit}>
                     <div className="upload-video">
                         <UserInput onChange={handleChange} type="text" name="title" autoComplete="off" placeholder="Övningstitel"/>
                         <TextArea onChange={handleChange} type="text" name="description" autoComplete="off"/>
