@@ -8,6 +8,7 @@ import { loginPatient } from "../../api";
 
 const LoginPatient = () => {
   const [loginName, setLoginName] = useState("");
+
   const handleSubmit = () => {
     console.log(`försöker logga in med ${loginName}`);
     const postData = {

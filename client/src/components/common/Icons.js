@@ -1,6 +1,6 @@
 import { ImQrcode } from "react-icons/im";
 import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
-import { MdUpload } from "react-icons/md";
+import { MdUpload, MdAdminPanelSettings } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
 
@@ -20,6 +20,7 @@ const variants = {
   error: BiError,
   exit: BiLogOut,
   statistics: BiNotepad,
+  admin_panel: MdAdminPanelSettings,
   search_patient: SearchPatient,
   search_exercise: SearchExercise,
 };

@@ -2,6 +2,8 @@ import open from "open";
 
 import { google } from "googleapis";
 
+import updateDb from './updateDatabase.js';
+
 const service = google.youtube('v3');
 
 const OAuth2 = google.auth.OAuth2;
@@ -51,5 +53,7 @@ export const uploadVideo = async (auth, { title, description, file }) => {
             body: file
         }
     });
+    // Update the mongo after each upload.
+    updateDb(); 
 }
 

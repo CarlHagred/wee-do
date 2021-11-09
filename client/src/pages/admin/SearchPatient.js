@@ -52,7 +52,7 @@ const SearchPatient = () => {
       setPatients(allPatients.data);
     };
     fetchData();
-  }, [patients]);
+  }, []);
   return (
     <AdminLayout>
       <SearchBar

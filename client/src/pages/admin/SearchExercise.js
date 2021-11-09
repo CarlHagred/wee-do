@@ -41,7 +41,7 @@ const SearchExercise = () => {
       setVideos(allVideos.data);
     };
     fetchData();
-  }, [videos]);
+  }, []);
   return (
     <AdminLayout>
       <SearchBar
@@ -88,60 +88,4 @@ const SearchExercise = () => {
   );
 };
 export default SearchExercise;
-
-/*
-
- <StyledTable>
-        <colgroup>
-          <col />
-          <col />
-        </colgroup>
-        <thead>
-          <tr>
-            <td>Övningar</td>
-          </tr>
-        </thead>
-        {videos
-          .filter((videos) => {
-            return videos.videoTitle.includes(searchedName) ? videos : null;
-          })
-          .map((videos) => (
-            <tbody>
-              <Link
-                    to={`/admin/exercise/${videos.videoId}`}
-                    target="_blank"
-                    key={videos._id}
-                  >
-              <tr>
-                <td>
-                  <StyledTitle>
-                  
-                    {videos.videoTitle}
-                  
-                  </StyledTitle>
-                
-                  <br></br>
-                  <img src={videos.thumbnail} alt="profile pic" width="250px" height="200px" />
-                  <br></br>
-                  <br></br>
-                  Antal visningar: {videos.__v}
-                </td>
-              </tr>
-              <br></br>
-              <br></br>
-              <br></br>
-              </Link>
-            </tbody>
-          ))}
-      </StyledTable>
-
-*/
-
-
-
-
-
-
-
-
 
