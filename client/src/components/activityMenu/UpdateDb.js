@@ -9,13 +9,13 @@ import Button from '../common/Button';
 const UpdateDb = () => {
     const saveVideoToDatabase = (event) => {
         event.preventDefault(); 
-        axios.post('http://localhost:8000/uploadDatabase');
+        axios.post('http://localhost:8000/updateDatabase');
         console.log('Databasen uppdaterats')
     }
     return (
         <div className="save-video"> 
             <br /> 
-            <Button onClick={saveVideoToDatabase}>Updatera WeeDo Databas</Button>
+            <Button onClick={saveVideoToDatabase}>Uppdatera Databas</Button>
         </div>
     );
 }
