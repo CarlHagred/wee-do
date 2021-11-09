@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/Login/LoginPatient";
 import WdLogo from "../../components/images/WdLogo";
 import RsLogo from "../../components/images/RsLogo";
 import hero from "../../components/images/patient_hero.png";
+
+const StyledBody = createGlobalStyle`
+  @media (min-width: 740px) {
+    body {
+    background-color: #F9F9F9;
+  }
+  }
+`;
 
 const PageWrapper = styled.div`
   display: flex;
@@ -24,12 +32,21 @@ const StyledWrapper = styled(StyledContainerItem)`
   max-width: 800px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
+  background-color: white;
+  @media (max-width: 740px) {
+    margin-top: 0;
+    flex-direction: column;
+    border: 0;
+  }
 `;
 
 const StyledHeroContainer = styled(StyledContainerItem)`
   display: flex;
   position: relative;
   text-align: center;
+  @media (max-width: 740px) {
+    margin-top: 0;
+  }
 `;
 
 const StyledLogo = styled(WdLogo)`
@@ -41,7 +58,10 @@ const StyledLogo = styled(WdLogo)`
 
 const StyledHero = styled.img`
   object-fit: cover;
-  width: 378px;
+  width: 100%;
+  @media (max-width: 650px) {
+    width: 100%;
+  }
 `;
 
 const StyledContentContainer = styled(StyledContainerItem)`
@@ -65,6 +85,7 @@ const StyledLoginFooter = styled(StyledContainerItem)`
 const PatientLogin = () => {
   return (
     <PageWrapper>
+      <StyledBody />
       <ThemeProvider theme={PatientTheme}>
         <StyledWrapper>
           <StyledHeroContainer>

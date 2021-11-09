@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import { loginAdmin } from "../../api";
 
@@ -11,6 +11,12 @@ import UserInput from "../../components/common/UserInput";
 import WdLogo from "../../components/images/WdLogo";
 import RsLogo from "../../components/images/RsLogo";
 import Icon from "../../components/common/Icons";
+
+const StyledBody = createGlobalStyle`
+  body {
+    background-color: #F9F9F9;
+  }
+`;
 
 const PageWrapper = styled.div`
   display: flex;
@@ -28,6 +34,7 @@ const StyledWrapper = styled(StyledContainerItem)`
   max-width: 800px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
+  background-color: white;
 `;
 
 const StyledHeroContainer = styled(StyledContainerItem)`
@@ -81,6 +88,7 @@ const AdminLogin = () => {
 
   return (
     <PageWrapper>
+      <StyledBody />
       <ThemeProvider theme={AdminTheme}>
         <StyledWrapper>
           <StyledHeroContainer>
