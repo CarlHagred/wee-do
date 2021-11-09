@@ -17,6 +17,16 @@ export const getSession = () =>
 export const getAdminSession = () =>
   axios.get(`${serverUrl}/getadminsession`, { withCredentials: true });
 
+  
+export const deleteVideoIndex = async (params) => {
+  await axios.delete(`${serverUrl}/deletevideo`,{
+    data: {
+      videoId : params
+    }
+  }).then(response => {
+    console.log(response.statusText); 
+  })
+}
 //API-call tills servern som hämtar användaren som har blivit autentiserad och skickar vidare användaren till Scanner-sidan
 export const loginPatient = (params) => {
   axios({
