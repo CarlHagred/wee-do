@@ -28,9 +28,8 @@ const Video = () => {
 
 
     const handleEvent = () => {
-      const id = "0ff753";
-      console.log(id);
-      deleteVideoIndex(id);
+      console.log(videoId);
+      deleteVideoIndex(videoId);
 
       /*axios.delete('http://localhost:8000/detetevideo', {
         body: {

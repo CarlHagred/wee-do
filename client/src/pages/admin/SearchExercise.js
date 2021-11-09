@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getAllVideos } from "../../api";
+import {getAllVideos } from "../../api";
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import styled from "styled-components";
@@ -59,6 +59,7 @@ const SearchExercise = () => {
     };
     fetchData();
   }, [videos]);
+
   return (
     <AdminLayout>
       <SearchBar

@@ -52,8 +52,8 @@ export const getVideos = async (req, res) => {
 
 
 export const deleteVideos = async (req, res) => {
-console.log(req.params.videoId);
-    await Patient.deleteOne({"name": req.params.videoId});
+console.log(req.params.name);
+    await Videos.deleteOne({"videoId": req.params.name});
     /*.then(videos => {
       if(!videos){
         return req.sttus(404).send({
