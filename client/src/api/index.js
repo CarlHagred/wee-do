@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FaThumbsDown } from 'react-icons/fa';
 
 const serverUrl = 'http://localhost:8000';
 
@@ -8,7 +9,15 @@ export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
 export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 
-export const deleteVideoIndex = (params) => axios.delete(`${serverUrl}/deletevideo/`, {params});
+export const deleteVideoIndex = async (params) => {
+  await axios.delete(`${serverUrl}/deletevideo`,{
+    data: {
+      videoId : params
+    }
+  }).then(response => {
+    console.log(response.statusText); 
+  })
+}
 
 export const getSession = () => axios.get(`${serverUrl}/getsession`, {withCredentials: true});
 

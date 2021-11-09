@@ -15,7 +15,7 @@ const StyledTitle = styled.p`
 
 const Video = () => {
     const { videoId } = useParams();
-
+    const [vidID, setVidID] = useState(null); 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -26,18 +26,10 @@ const Video = () => {
         fetchData();
     }, [videos]);
 
-
+   
     const handleEvent = () => {
-      console.log(videoId);
-      deleteVideoIndex(videoId);
-
-      /*axios.delete('http://localhost:8000/detetevideo', {
-        body: {
-        VideoId: videos.videoId
-        }
-      });
-      console.log(videoId);
-      deleteVideoIndex(videoId);*/
+      console.log("testar vid id: "+videoId);
+      deleteVideoIndex(videoId); 
     };
 
     const videoUrl = "https://www.youtube.com/embed/" + videoId;
@@ -52,6 +44,7 @@ const Video = () => {
                             return videos.videoId.includes(videoId)
                                 ? videos
                                 : null;
+                                setVidID(videos.videoId); 
                         })
                         .map((videos) => (
                             <StyledTitle>

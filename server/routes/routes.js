@@ -34,6 +34,6 @@ router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get('/getvideourl', getVideoUrl);
 router.get('/getvideos', getVideos);
-router.delete('/deletevideo/:videoId', deleteVideos)
+router.delete('/deletevideo', deleteVideos)
 
 export default router;
