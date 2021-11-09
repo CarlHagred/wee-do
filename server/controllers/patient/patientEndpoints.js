@@ -35,7 +35,6 @@ export const deleteSession = (req, res) => {
 export const postScan = async (req, res) => {};
 
 export const postWatchedVideo = async (req, res) => {
-  console.log(req.params.videoId);
   Patient.findOneAndUpdate(
     {
       name: req.params.name,
@@ -47,11 +46,10 @@ export const postWatchedVideo = async (req, res) => {
     },
     (err, doc) => {
       if (doc) {
-        console.log(doc);
+        res.status(200).send("Success");
       }
 
       if (!doc) {
-        console.log("no doc");
         Patient.findOneAndUpdate(
           { name: req.params.name },
           {
@@ -65,7 +63,7 @@ export const postWatchedVideo = async (req, res) => {
           },
           { safe: true, new: true },
           (err, doc) => {
-            console.log(doc);
+            res.status(200).send("Success");
           }
         );
       }

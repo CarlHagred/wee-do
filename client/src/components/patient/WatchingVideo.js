@@ -5,13 +5,13 @@ const WatchExercise = () => {
   const search = window.location.search; // returns the URL query String
   const params = new URLSearchParams(search);
   const title = params.get("title");
-  console.log("title is: " + title);
+
   const ytParams = "?rel=0&modestbranding=1";
   const vid = title + ytParams;
   const videoId = title.split("/").pop();
-  console.log(videoId);
 
   const [patientName, setPatientName] = useState("");
+  const [watchedVideo, setWatchedVideo] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +22,10 @@ const WatchExercise = () => {
   }, []);
 
   const handleEvent = async () => {
-    console.log(patientName);
     const handleClick = await postWatchedVideo(patientName, videoId);
-    //handleClick == "Sucess" ? setstate : null;
+    handleClick.data == "Success"
+      ? setWatchedVideo(true)
+      : setWatchedVideo(false);
   };
 
   return (
@@ -32,9 +33,13 @@ const WatchExercise = () => {
       <div className="titleInput">
         <iframe src={vid} width="420" height="315" allowFullScreen></iframe>
       </div>
-      <button onClick={handleEvent}>
-        Jag har tittat på övningen och gjort den
-      </button>
+      {watchedVideo ? (
+        <p>Bra jobbat!</p>
+      ) : (
+        <button onClick={handleEvent}>
+          Jag har tittat på övningen och gjort den
+        </button>
+      )}
     </div>
   );
 };
