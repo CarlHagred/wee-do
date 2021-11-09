@@ -5,78 +5,91 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import { getOnePatient } from "../../api";
 
 const StyledContainer = styled.div`
-  h2 {
-    text-align: center;
-    font-size: 2.5em;
-  }
+    h2 {
+        text-align: center;
+        font-size: 2.5em;
+    }
 
-  p {
-    font-size: 1.2em;
-  }
-`
+    p {
+        font-size: 1.2em;
+    }
+`;
 const StyledPatient = styled.p`
-  background-color: #CCC;
-  padding: 4px;
-  border-radius: 3px;
-`
+    background-color: #ccc;
+    padding: 4px;
+    border-radius: 3px;
+`;
 const StyledLink = styled(Link)`
-  color: #0000FF;
-  :hover {
-    text-decoration: underline;
-    color: #1E90FF	;
-  }
-  :active {
-    color: #800080;
-  }
-`
+    color: #0000ff;
+    :hover {
+        text-decoration: underline;
+        color: #1e90ff;
+    }
+    :active {
+        color: #800080;
+    }
+`;
 
 const StyledStatistics = styled.div`
-  background-color: rgb(247, 247, 248, 100%);
-  border: solid;
-  border-color: rgba(218, 223, 225, 0.3);
-  border-radius: 4px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  :hover{
-    background: rgb(108, 153, 255, 33%);
-  }
-`
-
+    background-color: rgb(247, 247, 248, 100%);
+    border: solid;
+    border-color: rgba(218, 223, 225, 0.3);
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    :hover {
+        background: rgb(108, 153, 255, 33%);
+    }
+`;
 
 const PatientStatistics = () => {
-  const { name } = useParams();
-  const [patient, setPatient] = useState([]);
-  const [patientStatistics, setPatientStatistics] = useState([]);
-  const breakEffect = true;
+    const { name } = useParams();
+    const [patient, setPatient] = useState([]);
+    const [patientStatistics, setPatientStatistics] = useState([]);
+    const breakEffect = true;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedPatient = await getOnePatient(name);
-      console.log(fetchedPatient.data.statistics);
-      setPatient(fetchedPatient.data);
-      setPatientStatistics(fetchedPatient.data.statistics);
-    };
-    fetchData();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedPatient = await getOnePatient(name);
+            console.log(fetchedPatient.data.statistics);
+            setPatient(fetchedPatient.data);
+            setPatientStatistics(fetchedPatient.data.statistics);
+        };
+        fetchData();
+    }, []);
 
-  return (
-    <AdminLayout>
-      <StyledContainer>
-      <h2>Statistik</h2>
-      <StyledPatient><strong>Användarnamn: </strong>{patient.name}</StyledPatient>
-      {patientStatistics.map((stat) => (
-        <React.Fragment key={stat.vidId}>
-          <StyledStatistics>
-          <br />
-          <p><strong>Video: </strong> <StyledLink to={`../exercise/${stat.vidId}`}>{stat.vidId}</StyledLink>{" "}</p>
-          <p><strong>Scans: </strong>{stat.scans}</p>
-          <p><strong>Antal visningar: </strong>{stat.timesWatched}</p>
-          <br />
-          </StyledStatistics>
-        </React.Fragment>
-      ))}
-      </StyledContainer>
-    </AdminLayout>
-  );
+    return (
+        <AdminLayout>
+            <StyledContainer>
+                <h2>Statistik</h2>
+                <StyledPatient>
+                    <strong>Användarnamn: </strong>
+                    {patient.name}
+                </StyledPatient>
+                {patientStatistics.map((stat) => (
+                    <React.Fragment key={stat.vidId}>
+                        <StyledStatistics>
+                            <br />
+                            <p>
+                                <strong>Video: </strong>{" "}
+                                <StyledLink to={`../exercise/${stat.vidId}`}>
+                                    {stat.vidId}
+                                </StyledLink>{" "}
+                            </p>
+                            <p>
+                                <strong>Scans: </strong>
+                                {stat.scans}
+                            </p>
+                            <p>
+                                <strong>Antal visningar: </strong>
+                                {stat.timesWatched}
+                            </p>
+                            <br />
+                        </StyledStatistics>
+                    </React.Fragment>
+                ))}
+            </StyledContainer>
+        </AdminLayout>
+    );
 };
 export default PatientStatistics;
