@@ -27,22 +27,21 @@ const StyledWrapper = styled(StyledContainerItem)`
 `;
 
 const StyledHeroContainer = styled(StyledContainerItem)`
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
-  flex-direction: column;
-  align-content: center;
+  position: relative;
+  text-align: center;
 `;
 
 const StyledLogo = styled(WdLogo)`
-  width: 80%;
-  margin: 20px;
+  width: 60%;
+  position: absolute;
+  top: 10px;
+  left: 16px;
 `;
 
-const StyledHero = styled(hero)`
-  width: 100%;
-  object-fit: contain;
+const StyledHero = styled.img`
+  object-fit: cover;
+  width: 378px;
 `;
 
 const StyledContentContainer = styled(StyledContainerItem)`
@@ -69,10 +68,8 @@ const PatientLogin = () => {
       <ThemeProvider theme={PatientTheme}>
         <StyledWrapper>
           <StyledHeroContainer>
-            <StyledContainerItem>
-              <StyledHero />
-              <StyledLogo fill="white" />
-            </StyledContainerItem>
+            <StyledHero src={hero} />
+            <StyledLogo fill="black" />
           </StyledHeroContainer>
 
           <StyledContentContainer>
