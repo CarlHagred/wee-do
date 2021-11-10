@@ -11,24 +11,24 @@ import SearchExercise from "../images/IconSearchExercise";
 // Fler ikoner?: Nya ikoner importeras och läggs in i variants
 
 const variants = {
-  qrcode: ImQrcode,
-  user: FaUser,
-  add_user: FaUserPlus,
-  upload: MdUpload,
-  trash: FaTrashAlt,
-  search: IoMdSearch,
-  error: BiError,
-  exit: BiLogOut,
-  statistics: BiNotepad,
-  admin_panel: MdAdminPanelSettings,
-  search_patient: SearchPatient,
-  search_exercise: SearchExercise,
+    qrcode: ImQrcode,
+    user: FaUser,
+    add_user: FaUserPlus,
+    upload: MdUpload,
+    trash: FaTrashAlt,
+    search: IoMdSearch,
+    error: BiError,
+    exit: BiLogOut,
+    statistics: BiNotepad,
+    admin_panel: MdAdminPanelSettings,
+    search_patient: SearchPatient,
+    search_exercise: SearchExercise,
 };
 
 const Icon = ({ name, ...props }) => {
-  const Tag = name in variants ? variants[name] : variants.error;
+    const Tag = name in variants ? variants[name] : variants.error;
 
-  return <Tag {...props} />;
+    return <Tag {...props} />;
 };
 
 export default Icon;

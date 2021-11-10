@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import QRCreator from "../../components/admin/QRCreator";
-import { getAllVideos } from "../../api";
 import { useParams } from "react-router-dom";
+
+import { getAllVideos } from "../../api";
+
+import QRCreator from "../../components/admin/QRCreator";
 
 const QRPreview = () => {
     const { id } = useParams();
@@ -14,7 +16,7 @@ const QRPreview = () => {
             setVideos(allVideos.data.find((x) => x.videoId === id));
         };
         fetchData();
-    }, [videos]);
+    }, [videos, id]);
 
     return (
         <>

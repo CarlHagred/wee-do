@@ -1,12 +1,13 @@
 import React from "react";
+
 import AdminLayout from "../../components/admin/AdminLayout";
-import UpploadVideo from "../../components/activityMenu/UpploadVideo.js"
+import UploadVideo from "../../components/activityMenu/UploadVideo.js";
 
 const RegisterExercise = () => {
-  return (
-    <AdminLayout>
-      <UpploadVideo />
-    </AdminLayout>
-  );
+    return (
+        <AdminLayout>
+            <UploadVideo />
+        </AdminLayout>
+    );
 };
 export default RegisterExercise;
