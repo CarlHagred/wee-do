@@ -115,14 +115,14 @@ const Showcase = () => {
             {/* to="" för att ange sökväg */}
 
             <ThemeProvider theme={PatientTheme}>
-                <PanelButton to="/" icon="search_patient">
-                    Search Patient
+                <PanelButton to="/" icon="qrcode">
+                    Scanna övning
                 </PanelButton>
             </ThemeProvider>
             <br />
 
             <ThemeProvider theme={AdminTheme}>
-                <PanelButton icon="search_exercise">
+                <PanelButton to="/" icon="search_exercise">
                     Search Exercise
                 </PanelButton>
             </ThemeProvider>

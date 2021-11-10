@@ -36,6 +36,7 @@ const PanelButton = (props) => (
                 fill="white"
                 width="64"
                 height="64"
+                size="64"
             />
         )}
         <StyledPanelText>{props.children}</StyledPanelText>
