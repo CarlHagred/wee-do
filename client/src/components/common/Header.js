@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledTitle = styled.h1`
   font-size: 3em;
-  text-align: center;
+  text-align: auto;
 `;
 
 const Header = () => {

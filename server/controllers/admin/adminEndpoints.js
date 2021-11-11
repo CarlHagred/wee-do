@@ -59,7 +59,14 @@ export const getVideos = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-export const getVideoTitle = async (req, res) => {
-  const vidId = req.body.videoId; 
-  console.log("Video id recieved in server: " +vidId); 
+export const getVideoTitleById = async (req, res) => {
+
+  try {
+    const vidId = req.query.videoId;
+    const video = await Videos.find({videoId: vidId}) 
+    const title = video[0].videoTitle; 
+    res.json(title); 
+  } catch (error) {
+    res.json("Could not fetch the title of the video due to: "+error); 
+  } 
 }
