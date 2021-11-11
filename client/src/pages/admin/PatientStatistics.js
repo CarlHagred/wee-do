@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import AdminLayout from "../../components/admin/AdminLayout";
+
 import { getOnePatient } from "../../api";
+
+import AdminLayout from "../../components/admin/AdminLayout";
 
 const StyledContainer = styled.div`
     h2 {
@@ -46,17 +48,15 @@ const PatientStatistics = () => {
     const { name } = useParams();
     const [patient, setPatient] = useState([]);
     const [patientStatistics, setPatientStatistics] = useState([]);
-    const breakEffect = true;
 
     useEffect(() => {
         const fetchData = async () => {
             const fetchedPatient = await getOnePatient(name);
-            console.log(fetchedPatient.data.statistics);
             setPatient(fetchedPatient.data);
             setPatientStatistics(fetchedPatient.data.statistics);
         };
         fetchData();
-    }, []);
+    }, [name]);
 
     return (
         <AdminLayout>
