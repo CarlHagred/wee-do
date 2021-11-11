@@ -76,3 +76,15 @@ console.log("testar vid id i server : "+id);
       res.status(200).send({message: "Video deleted successfully!"})
     })
 };
+
+export const getVideoTitleById = async (req, res) => {
+
+  try {
+    const vidId = req.query.videoId;
+    const video = await Videos.find({videoId: vidId}) 
+    const title = video[0].videoTitle; 
+    res.json(title); 
+  } catch (error) {
+    res.json("Could not fetch the title of the video due to: "+error); 
+  } 
+};

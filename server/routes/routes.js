@@ -8,6 +8,7 @@ import {
   getVideos,
   getOnePatient,
   deleteVideos,
+  getVideoTitleById
 } from "../controllers/admin/adminEndpoints.js";
 import { getVideoUrl } from "../controllers/client/clientEndpoints.js";
 
@@ -43,5 +44,6 @@ router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
+router.get("/getVideoTitle", getVideoTitleById);
 
 export default router;

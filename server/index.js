@@ -60,7 +60,7 @@ const databaseConnection = async () => {
       console.log(
         `Server upp and running, and connected to database on port: ${PORT}`
       );
-      //Commentingthe auto updating of db, will think of another way in the next session
+      //Commenting the auto updating of db, will think of another way in the next session
      // updateDb().then(()=>{
      //   console.log('Database updated...')
      // })
