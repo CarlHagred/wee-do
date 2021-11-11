@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
+import AdminLayout from "../../components/admin/AdminLayout";
+import AdminTheme from "../../themes/AdminTheme";
+import styled, { ThemeProvider } from "styled-components";
+import Button from "../../components/common/Button";
+import { deleteVideoIndex, getAllVideos } from "../../api";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
-import { getAllVideos } from "../../api";
 
-import AdminLayout from "../../components/admin/AdminLayout";
-import Button from "../../components/common/Button";
 
 const StyledTitle = styled.p`
     font-weight: bold;
@@ -23,7 +24,7 @@ margin: auto;
 
 const Video = () => {
     const { videoId } = useParams();
-
+    const [vidID, setVidID] = useState(null); 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -34,8 +35,10 @@ const Video = () => {
         fetchData();
     }, [videos]);
 
-    const deleteVideo = () => {
-        console.log("Hej");
+   
+    const handleEvent = () => {
+      console.log("testar vid id: "+videoId);
+      deleteVideoIndex(videoId); 
     };
 
     const videoUrl = "https://www.youtube.com/embed/" + videoId;
@@ -72,7 +75,7 @@ const Video = () => {
                 <Button icon="qrcode">Generera QR-kod</Button>
             </Link>
             <br></br>
-            <Button onClick={deleteVideo} icon="trash">
+            <Button onClick={handleEvent} icon="trash">
                 Radera
             </Button>
         </AdminLayout>

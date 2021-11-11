@@ -59,14 +59,20 @@ export const getVideos = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-export const getVideoTitleById = async (req, res) => {
 
-  try {
-    const vidId = req.query.videoId;
-    const video = await Videos.find({videoId: vidId}) 
-    const title = video[0].videoTitle; 
-    res.json(title); 
-  } catch (error) {
-    res.json("Could not fetch the title of the video due to: "+error); 
-  } 
-}
+
+export const deleteVideos = async (req, res) => {
+// const data = JSON.stringify(req.body.videoId); 
+//res.send(req.body); 
+const id = req.body.videoId; 
+console.log("testar vid id i server : "+id);
+    await Videos.deleteOne({"videoId": id})
+    .then(videos => {
+      if(!videos){
+        return res.status(404).send({
+          message: "Video not fount with id: " + id
+        })
+      }
+      res.status(200).send({message: "Video deleted successfully!"})
+    })
+};
