@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import QrReader from "react-web-qr-reader";
 import { getVideoUrl } from "../../api/index";
 
@@ -16,7 +15,7 @@ const ScanCamera = () => {
 
         const videoUrl = await getVideoUrl(params);
 
-        if (videoUrl.data != "http://www.youtube.com/embed/404") {
+        if (videoUrl.data !== "http://www.youtube.com/embed/404") {
             window.location.href = `watch?title=${videoUrl.data}`;
         }
     };
