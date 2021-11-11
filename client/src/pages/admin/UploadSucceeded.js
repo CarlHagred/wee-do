@@ -1,7 +1,7 @@
 import React from "react";
 
 import AdminLayout from "../../components/admin/AdminLayout";
-import UpdateDb from "../../components/activityMenu/UpdateDb";
+import UpdateDb from "../../components/admin/UpdateDb";
 
 const UploadSucceeded = () => {
     return (

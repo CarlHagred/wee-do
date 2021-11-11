@@ -28,7 +28,7 @@ const LoginPatient = () => {
 
     return (
         <>
-            <span id="patientError"></span>
+            <span id="patientError" />
             <UserInput
                 theme={PatientTheme}
                 type="text"

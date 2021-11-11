@@ -31,7 +31,7 @@ const FlexItem = styled.div`
 export const VideoItem = (props) => {
     return (
         <>
-            <FlexItem {...props}></FlexItem>
+            <FlexItem {...props} />
         </>
     );
 };
@@ -39,16 +39,16 @@ export const VideoItem = (props) => {
 export const QrFlexbox = (props) => {
     return (
         <>
-            <StyledQrFlexbox {...props}></StyledQrFlexbox>
+            <StyledQrFlexbox {...props} />
         </>
     );
 };
 
 export const Flexbox = (props) => {
     return (
-        <div className="Flexbox">
-            <StyledFlexbox {...props}></StyledFlexbox>
-        </div>
+        <>
+            <StyledFlexbox {...props} />
+        </>
     );
 };
 

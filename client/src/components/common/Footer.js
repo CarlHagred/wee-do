@@ -36,7 +36,7 @@ const Footer = () => {
                 </Row>
 
                 <Row>
-                    <Col size={1}></Col>
+                    <Col size={1} />
                     <Col size={1}>
                         <Link to="/help">Hjälp</Link>
                     </Col>

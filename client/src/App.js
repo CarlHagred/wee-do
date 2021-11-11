@@ -14,6 +14,7 @@ import QrScanner from "./pages/patient/QrScanner";
 
 /* ===== Admin Pages ===== */
 import AdminLogin from "./pages/admin/AdminLogin";
+import AdminPanel from "./pages/admin/AdminPanel";
 import PatientStatistics from "./pages/admin/PatientStatistics";
 import RegisterExercise from "./pages/admin/RegisterExercise";
 import RegisterPatient from "./pages/admin/RegisterPatient";
@@ -28,7 +29,6 @@ import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRou
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
-import AdminPanel from "./pages/admin/AdminPanel";
 
 function App() {
     return (
