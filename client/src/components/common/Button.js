@@ -1,6 +1,16 @@
 import styled, { css } from "styled-components";
 import Icon from "./Icons";
 
+const ButtonContainer = styled.div`
+width: 300px;
+align-items: center;
+justify-content: center;
+display: flex;
+margin: auto;
+
+  
+`;
+
 const StyledButton = styled.button`
   display: flex;
   gap: 8px;
@@ -16,8 +26,10 @@ const StyledButton = styled.button`
   margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
   margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
 
-  width: 100%;
+  width: 300px;
+  align-items: middle;
   padding: 0.3em 1em;
+
 
   border-radius: 2em;
 
@@ -52,6 +64,7 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => (
+  <ButtonContainer>
   <StyledButton size={props.size} {...props}>
     {props.icon && (
       <Icon
@@ -62,6 +75,7 @@ const Button = (props) => (
     )}
     {props.children}
   </StyledButton>
+  </ButtonContainer>
 );
 
 export default Button;

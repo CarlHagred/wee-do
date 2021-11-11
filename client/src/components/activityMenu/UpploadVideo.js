@@ -41,6 +41,8 @@ const UpploadVideo = () => {
                         <UserInput onChange={handleChange} type="text" name="title" autoComplete="off" placeholder="Övningstitel"/>
                         <TextArea onChange={handleChange} type="text" name="description" autoComplete="off"/>
                         <input onChange={handleChange} accept="video/mp4" type="file" name="file" id ="filechoose" placeholder="Add Video File" />           
+                        <br></br>
+                        <br></br>
                         <Button type="submit">Ladda upp ny övning</Button>
                     </div>
                 </form>
