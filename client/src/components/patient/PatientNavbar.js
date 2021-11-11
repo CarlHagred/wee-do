@@ -9,9 +9,6 @@ import WdLogo from "../images/WdLogo";
 import Icon from "../common/Icons";
 import { customDialogPatient } from "../common/Confirmation";
 
-// Hamburgermenyn använder sig av en animerad ikon
-// från https://hamburger-react.netlify.app/
-
 const StyledIcon = styled(Icon)`
     margin-right: 10px;
 `;
@@ -34,6 +31,15 @@ const NavbarMenu = styled.nav`
     background: ${(props) => props.theme.palette.brand};
 `;
 
+const LeftContainer = styled.div`
+    display: flex;
+`;
+
+const RightContainer = styled.div`
+    display: flex;
+    ${(p) => p.last && `margin-left: auto`};
+`;
+
 const NavbarItem = styled(NavLink)`
     display: flex;
     align-items: center;
@@ -48,7 +54,6 @@ const NavbarItem = styled(NavLink)`
     @media (max-width: 768px) {
         display: none;
     }
-    ${(p) => p.last && `margin-left: auto`}
 `;
 
 const NavbarItemLogout = styled.div`
@@ -65,7 +70,6 @@ const NavbarItemLogout = styled.div`
     @media (max-width: 768px) {
         display: none;
     }
-    ${(p) => p.last && `margin-left: auto`}
 `;
 
 const NavbarItemBurger = styled(NavLink)`
@@ -134,7 +138,7 @@ const StyledDivider = styled.hr`
 const Navbar = () => {
     const closeMenu = () => setOpen(false);
     const [open, setOpen] = useState(false);
-    const url = "http://localhost:3000/";
+    const url = "http://localhost:3000/activitypanel";
 
     if (window.location.href !== url) {
         return (
@@ -157,19 +161,20 @@ const Navbar = () => {
                             alt="WeeDo Logo"
                         />
                     </NavbarLogo>
-
-                    <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
-                    <NavbarItem to="/statistics">Se statistik</NavbarItem>
-                    <NavbarItem to="/help">Hjälp</NavbarItem>
-                    <NavbarItem to="/about">Om WeeDo</NavbarItem>
-
-                    <NavbarItemLogout
-                        isActive={() => false}
-                        onClick={customDialogPatient}
-                        last="true"
-                    >
-                        Logga ut
-                    </NavbarItemLogout>
+                    <LeftContainer>
+                        <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
+                        <NavbarItem to="/statistics">Se statistik</NavbarItem>
+                        <NavbarItem to="/about">Om WeeDo</NavbarItem>
+                    </LeftContainer>
+                    <RightContainer last="true">
+                        <NavbarItem to="/help">Hjälp</NavbarItem>
+                        <NavbarItemLogout
+                            isActive={() => false}
+                            onClick={customDialogPatient}
+                        >
+                            Logga ut
+                        </NavbarItemLogout>
+                    </RightContainer>
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
@@ -224,18 +229,24 @@ const Navbar = () => {
                             alt="WeeDo Logo"
                         />
                     </NavbarLogo>
-                    <NavbarItemLogout
-                        isActive={() => false}
-                        onClick={customDialogPatient}
-                        last="true"
-                    >
-                        Logga ut
-                    </NavbarItemLogout>
+                    <LeftContainer />
+
+                    <RightContainer last="true">
+                        <NavbarItem to="/help">Hjälp</NavbarItem>
+                        <NavbarItemLogout
+                            isActive={() => false}
+                            onClick={customDialogPatient}
+                        >
+                            Logga ut
+                        </NavbarItemLogout>
+                    </RightContainer>
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
                     <StyledDivider />
-
+                    <NavbarItemBurger to="/help" onClick={closeMenu}>
+                        Hjälp
+                    </NavbarItemBurger>
                     <LogOut
                         to="/"
                         isActive={() => false}

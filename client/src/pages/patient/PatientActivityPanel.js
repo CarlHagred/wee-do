@@ -1,12 +1,9 @@
 import React from "react";
-import Button from "../../components/common/Button";
-import PatientTheme from "../../themes/PatientTheme";
-import PatientLayout from "../../components/patient/PatientLayout";
-import { ThemeProvider } from "styled-components";
-import { Link } from "react-router-dom";
-import { customDialogPatient } from "../../components/common/Confirmation";
-import PanelButton from "../../components/common/PanelButton";
 import styled from "styled-components";
+
+import PatientLayout from "../../components/patient/PatientLayout";
+import PanelButton from "../../components/common/PanelButton";
+import hero from "../../components/images/patient_hero.png";
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -14,6 +11,27 @@ const StyledWrapper = styled.div`
     align-items: center;
     padding-top: 3rem;
     flex-direction: column;
+`;
+
+const StyledHero = styled.div`
+    margin: -1rem -1rem 2rem -1rem;
+    width: 100vw;
+    height: 40vh;
+    background-image: url(${hero});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+`;
+
+const StyledHeroHeader = styled.h1`
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
 `;
 
 const PanelMenu = styled.nav`
@@ -25,15 +43,13 @@ const PanelMenu = styled.nav`
     justify-content: center;
 `;
 
-const StyledHeader = styled.h1`
-    text-align: center;
-    font-size: 3em;
-`;
-
 const PatientActivityPanel = () => {
     return (
         <PatientLayout>
-            <StyledHeader>Välkommen till WeeDo</StyledHeader>
+            <StyledHero>
+                <StyledHeroHeader>Välkommen till WeeDo</StyledHeroHeader>
+            </StyledHero>
+
             <PanelMenu>
                 <PanelButton to="/QrScanner" icon="qrcode">
                     Scanna övning

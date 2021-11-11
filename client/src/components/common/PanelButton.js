@@ -9,7 +9,8 @@ const StyledPanelButton = styled(NavLink)`
     min-height: 135px;
     min-width: 238px;
     background: ${(props) => props.theme.palette.brand};
-
+    border-radius: 2em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     &:hover {
         background-color: ${(props) => props.theme.palette.hover};
     }
