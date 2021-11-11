@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 
 import PatientTheme from "../../themes/PatientTheme";
-
 import Footer from "../common/Footer";
+import PatientNavbar from "./PatientNavbar";
 
 const PageContainer = styled.div`
     position: relative;
@@ -16,6 +16,7 @@ const PageContainer = styled.div`
 const Layout = ({ children }) => {
     return (
         <ThemeProvider theme={PatientTheme}>
+            <PatientNavbar />
             <PageContainer>
                 {children}
                 <Footer />

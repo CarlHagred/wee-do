@@ -8,6 +8,14 @@ import { customDialogPatient } from "../../components/common/Confirmation";
 import PanelButton from "../../components/common/PanelButton";
 import styled from "styled-components";
 
+const StyledWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    flex-direction: column;
+`;
+
 const PanelMenu = styled.nav`
     display: flex;
     flex-wrap: wrap;
@@ -17,25 +25,22 @@ const PanelMenu = styled.nav`
     justify-content: center;
 `;
 
+const StyledHeader = styled.h1`
+    text-align: center;
+    font-size: 3em;
+`;
+
 const PatientActivityPanel = () => {
     return (
         <PatientLayout>
+            <StyledHeader>Välkommen till WeeDo</StyledHeader>
             <PanelMenu>
                 <PanelButton to="/QrScanner" icon="qrcode">
                     Scanna övning
                 </PanelButton>
-                <PanelButton to="/" icon="statistics">
+                <PanelButton to="/statistics" icon="statistics">
                     Se statistik
                 </PanelButton>
-
-                <Button
-                    onClick={customDialogPatient}
-                    neutral
-                    icon="exit"
-                    color="#8a8883"
-                >
-                    Logga ut
-                </Button>
             </PanelMenu>
         </PatientLayout>
     );
