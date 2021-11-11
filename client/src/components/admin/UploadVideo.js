@@ -63,6 +63,8 @@ const UploadVideo = () => {
                         id="filechoose"
                         placeholder="Add Video File"
                     />
+                    <br></br>
+                    <br></br>
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
             </form>

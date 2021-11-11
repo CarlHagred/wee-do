@@ -12,6 +12,15 @@ const StyledTitle = styled.p`
     font-weight: bold;
 `;
 
+const VideoContainer = styled.div`
+/*max-width: 1000px;
+max-height: 750px;*/
+align-items: center;
+justify-content: center;
+display: flex;
+margin: auto;  
+`;
+
 const Video = () => {
     const { videoId } = useParams();
 
@@ -44,21 +53,20 @@ const Video = () => {
                             <p align="center">{videos.videoTitle}</p>
                         </StyledTitle>
                     ))}
-                <br></br>
-                <br></br>
-                <br></br>
+                <br/>
             </p>
-
-            <p align="center">
+        <VideoContainer>
+            
                 <iframe
                     title={videoUrl}
-                    width="560"
+                    width="540"
                     height="315"
                     src={videoUrl}
                     frameborder="0"
                     allowfullscreen
-                ></iframe>
-            </p>
+                ></iframe>  
+        
+        </VideoContainer>
             <br></br>
             <Link to={`/admin/exercise/qrpreview/${videoId}`}>
                 <Button icon="qrcode">Generera QR-kod</Button>
