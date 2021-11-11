@@ -63,7 +63,6 @@ const SearchExercise = () => {
                         <VideoItem key={videos._id}>
                             <Link
                                 to={`/admin/exercise/${videos.videoId}`}
-                                target="_blank"
                                 key={videos._id}
                             >
                                 <StyledTitle>{videos.videoTitle}</StyledTitle>

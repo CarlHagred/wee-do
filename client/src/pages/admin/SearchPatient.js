@@ -84,7 +84,6 @@ const SearchPatient = () => {
                                 <td>
                                     <Link
                                         to={`/admin/statistics/${patient.name}`}
-                                        target="_blank"
                                         key={patient._id}
                                     >
                                         {patient.name}

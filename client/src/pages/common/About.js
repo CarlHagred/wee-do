@@ -65,7 +65,7 @@ const About = () => {
                     <br />
                 </StyledContainter>
                 <Button>
-                    <Link to="/">Tillbaka</Link>
+                    <Link to="/activitypanel">Tillbaka</Link>
                 </Button>
             </PatientLayout>
         </>
