@@ -1,42 +1,38 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import QrReader from 'react-web-qr-reader';
-import { getVideoUrl } from '../../api/index';
+import React from "react";
+import QrReader from "react-web-qr-reader";
+import { getVideoUrl } from "../../api/index";
 
 const ScanCamera = () => {
-  //const history = useHistory();
-
-  const previewStyle = {
-    height: 240,
-    width: 320,
-  };
-
-  const handleScan = async (result) => {
-    const params = {
-      titel: result.data,
+    const previewStyle = {
+        height: 240,
+        width: 320,
     };
 
-    const videoUrl = await getVideoUrl(params);
+    const handleScan = async (result) => {
+        const params = {
+            id: result.data,
+        };
 
-    if (videoUrl.data != 'http://www.youtube.com/embed/404') {
-      console.log(videoUrl.data);
-      window.location.href = `watch?title=${videoUrl.data}`;
-    }
-  };
+        const videoUrl = await getVideoUrl(params);
 
-  const handleError = (error) => {
-    alert(`The code could not be scanned. Error: ${error}`);
-  };
+        if (videoUrl.data !== "http://www.youtube.com/embed/404") {
+            window.location.href = `watch?title=${videoUrl.data}`;
+        }
+    };
 
-  return (
-    <>
-      <QrReader
-        style={previewStyle}
-        onError={handleError}
-        onScan={handleScan}
-      />
-    </>
-  );
+    const handleError = (error) => {
+        alert(`The code could not be scanned. Error: ${error}`);
+    };
+
+    return (
+        <>
+            <QrReader
+                style={previewStyle}
+                onError={handleError}
+                onScan={handleScan}
+            />
+        </>
+    );
 };
 
 export default ScanCamera;

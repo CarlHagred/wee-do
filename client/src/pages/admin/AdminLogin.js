@@ -21,133 +21,149 @@ const StyledBody = createGlobalStyle`
 `;
 
 const PageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 `;
 
 const StyledContainerItem = styled.div`
-  font-size: 20px;
-  flex: 1;
+    font-size: 20px;
+    flex: 1;
 `;
 
 const StyledWrapper = styled(StyledContainerItem)`
-  display: flex;
-  max-width: 800px;
-  border: 1px solid #bfc1bf;
-  margin-top: 20vh;
-  background-color: white;
-  @media (max-width: 740px) {
-    margin-top: 0;
-    flex-direction: column;
-    border: 0;
-  }
+    display: flex;
+    max-width: 800px;
+    border: 1px solid #bfc1bf;
+    margin-top: 20vh;
+    background-color: white;
+    @media (max-width: 740px) {
+        margin-top: 0;
+        flex-direction: column;
+        border: 0;
+    }
 `;
 
 const StyledHeroContainer = styled(StyledContainerItem)`
-  background: ${(props) => props.theme.palette.brand};
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  @media (max-width: 740px) {
-    margin-top: 0;
-  }
+    background: ${(props) => props.theme.palette.brand};
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    @media (max-width: 740px) {
+        margin-top: 0;
+    }
 `;
 
 const StyledLogo = styled(WdLogo)`
-  width: 80%;
-  margin: 20px 0;
+    width: 80%;
+    margin: 20px 0;
 `;
 
 const StyledIcon = styled(Icon)`
-  @media (max-width: 740px) {
-    display: none;
-  }
+    @media (max-width: 740px) {
+        display: none;
+    }
 `;
 
 const StyledContentContainer = styled(StyledContainerItem)`
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 20px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20px;
 `;
 
 const StyledLoginHeader = styled(StyledContainerItem)`
-  font-size: 2rem;
-  margin: 40px 0;
+    font-size: 2rem;
+    margin: 40px 0;
 `;
 
 const StyledLoginFooter = styled(StyledContainerItem)`
-  margin-top: 40px;
-  margin-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
 `;
 
 const StyledUserInput = styled(UserInput)`
-  text-align: left;
+    text-align: left;
 `;
 
 const AdminLogin = () => {
-  const [loginName, setLoginName] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const handleSubmit = () => {
-    console.log(`försöker logga in med ${loginName}`);
-    const postData = {
-      username: loginName,
-      password: loginPassword,
+    let isCookie = localStorage.getItem("isAuthenticatedAdmin");
+    if (isCookie !== null) {
+        localStorage.clear();
+        window.location.reload();
+    }
+
+    const [loginName, setLoginName] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+    const handleSubmit = () => {
+        console.log(`försöker logga in med ${loginName}`);
+        const postData = {
+            username: loginName,
+            password: loginPassword,
+        };
+
+        loginAdmin(postData);
     };
 
-    loginAdmin(postData);
-  };
+    return (
+        <PageWrapper>
+            <StyledBody />
+            <ThemeProvider theme={AdminTheme}>
+                <StyledWrapper>
+                    <StyledHeroContainer>
+                        <StyledContainerItem>
+                            <StyledLogo fill="white" />
+                        </StyledContainerItem>
 
-  return (
-    <PageWrapper>
-      <StyledBody />
-      <ThemeProvider theme={AdminTheme}>
-        <StyledWrapper>
-          <StyledHeroContainer>
-            <StyledContainerItem>
-              <StyledLogo fill="white" />
-            </StyledContainerItem>
+                        <StyledContainerItem>
+                            <StyledIcon
+                                size="6em"
+                                name="admin_panel"
+                                fill="white"
+                            />
+                        </StyledContainerItem>
+                        <StyledContainerItem />
+                    </StyledHeroContainer>
 
-            <StyledContainerItem>
-              <StyledIcon size="6em" name="admin_panel" fill="white" />
-            </StyledContainerItem>
-            <StyledContainerItem />
-          </StyledHeroContainer>
+                    <StyledContentContainer>
+                        <StyledLoginHeader>Admin Login</StyledLoginHeader>
 
-          <StyledContentContainer>
-            <StyledLoginHeader>Admin Login</StyledLoginHeader>
+                        <StyledContainerItem>
+                            <span id="adminError"></span>
+                            <StyledUserInput
+                                theme={AdminTheme}
+                                type="text"
+                                name="name"
+                                id="adminUsername"
+                                onChange={(e) => setLoginName(e.target.value)}
+                                placeholder="Användarnamn"
+                            />
+                            <StyledUserInput
+                                theme={AdminTheme}
+                                type="password"
+                                name="name"
+                                id="adminPassword"
+                                onChange={(e) =>
+                                    setLoginPassword(e.target.value)
+                                }
+                                placeholder="Lösenord"
+                                secureTextEntry={true}
+                            />
+                            <Button onClick={handleSubmit}>Logga in</Button>
+                        </StyledContainerItem>
 
-            <StyledContainerItem>
-              <span id="adminError"></span>
-              <StyledUserInput
-                theme={AdminTheme}
-                type="text"
-                name="name"
-                id="adminUsername"
-                onChange={(e) => setLoginName(e.target.value)}
-                placeholder="Användarnamn"
-              />
-              <StyledUserInput
-                theme={AdminTheme}
-                type="password"
-                name="name"
-                id="adminPassword"
-                onChange={(e) => setLoginPassword(e.target.value)}
-                placeholder="Lösenord"
-                secureTextEntry={true}
-              />
-              <Button onClick={handleSubmit}>Logga in</Button>
-            </StyledContainerItem>
-
-            <StyledLoginFooter>
-              <RsLogo width="92px" height="85px" alt="Region Skånes logotyp" />
-            </StyledLoginFooter>
-          </StyledContentContainer>
-        </StyledWrapper>
-      </ThemeProvider>
-    </PageWrapper>
-  );
+                        <StyledLoginFooter>
+                            <RsLogo
+                                width="92px"
+                                height="85px"
+                                alt="Region Skånes logotyp"
+                            />
+                        </StyledLoginFooter>
+                    </StyledContentContainer>
+                </StyledWrapper>
+            </ThemeProvider>
+        </PageWrapper>
+    );
 };
 export default AdminLogin;
