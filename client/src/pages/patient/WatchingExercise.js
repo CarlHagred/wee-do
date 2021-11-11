@@ -8,7 +8,6 @@ export const StyledWrapper = styled.div`
   justify-content: center;
   padding-top: 3rem;
   flex-direction: column; 
-  text-align: center; 
 `;
 
 const WatchingExercise = () => {
