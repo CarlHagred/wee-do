@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getSession, postWatchedVideo } from "../../api";
+import { ThemeProvider } from "styled-components";
+import PatientTheme from "../../themes/PatientTheme"; 
+import StyledWrapper from "../../pages/patient/WatchingExercise"; 
+import Button from "../common/Button";
 
 const WatchExercise = () => {
   const search = window.location.search; // returns the URL query String
@@ -29,19 +33,23 @@ const WatchExercise = () => {
   };
 
   return (
-    <div>
-      <div className="titleInput">
-        <iframe src={vid} width="420" height="315" allowFullScreen></iframe>
-      </div>
-      {watchedVideo ? (
-        <p>Bra jobbat!</p>
-      ) : (
-        <button onClick={handleEvent}>
-          Jag har tittat på övningen och gjort den
-        </button>
-      )}
-    </div>
+    <ThemeProvider theme={PatientTheme}>
+      
+      <StyledWrapper>
+          <div className="titleInput" style ={{margin: "1em"}}>
+            <iframe src={vid} width="500" height="350" allowFullScreen></iframe>
+          </div>
+          {watchedVideo ? (
+            <p>Bra jobbat!</p>
+          ) : (
+            <div className="btn-Watched-Video">
+              <Button onClick={handleEvent}>
+                Jag har tittat på övningen och gjort den
+              </Button>
+            </div>
+          )}
+      </StyledWrapper>
+     </ThemeProvider>
   );
 };
-
 export default WatchExercise;

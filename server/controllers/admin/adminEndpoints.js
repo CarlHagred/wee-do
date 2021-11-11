@@ -59,3 +59,7 @@ export const getVideos = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getVideoTitle = async (req, res) => {
+  const vidId = req.body.videoId; 
+  console.log("Video id recieved in server: " +vidId); 
+}
