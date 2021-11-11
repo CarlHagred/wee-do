@@ -3,13 +3,11 @@ import styled, { css } from "styled-components";
 import Icon from "./Icons";
 
 const ButtonContainer = styled.div`
-width: 300px;
+max-width: 300px;
 align-items: center;
 justify-content: center;
 display: flex;
-margin: auto;
-
-  
+margin: auto;  
 `;
 
 const StyledButton = styled.button`
@@ -27,8 +25,8 @@ const StyledButton = styled.button`
     margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
     margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
 
-  width: 300px;
-  align-items: middle;
+  width: 100%;
+  /*align-items: middle;*/
   padding: 0.3em 1em;
 
 
@@ -77,6 +75,7 @@ const Button = (props) => (
     {props.children}
   </StyledButton>
   </ButtonContainer>
+
 );
 
 export default Button;
