@@ -5,23 +5,25 @@ import PatientTheme from "../../themes/PatientTheme";
 import Footer from "../common/Footer";
 import PatientNavbar from "./PatientNavbar";
 
-const PageContainer = styled.div`
-    position: relative;
+const PageWrapper = styled.body`
+    display: flex;
     min-height: 100vh;
-    margin: 0 auto;
-    padding: 1rem 1rem 15rem 1rem;
-    text-align: center;
+    flex-direction: column;
+`;
+
+const PageContainer = styled.div`
+    flex: 1;
 `;
 
 const Layout = ({ children }) => {
     return (
-        <ThemeProvider theme={PatientTheme}>
-            <PatientNavbar />
-            <PageContainer>
-                {children}
+        <PageWrapper>
+            <ThemeProvider theme={PatientTheme}>
+                <PatientNavbar />
+                <PageContainer>{children}</PageContainer>
                 <Footer />
-            </PageContainer>
-        </ThemeProvider>
+            </ThemeProvider>
+        </PageWrapper>
     );
 };
 export default Layout;

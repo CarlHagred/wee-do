@@ -5,16 +5,7 @@ import PatientLayout from "../../components/patient/PatientLayout";
 import PanelButton from "../../components/common/PanelButton";
 import hero from "../../components/images/patient_hero.png";
 
-const StyledWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 3rem;
-    flex-direction: column;
-`;
-
 const StyledHero = styled.div`
-    margin: -1rem -1rem 2rem -1rem;
     width: 100vw;
     height: 40vh;
     background-image: url(${hero});
@@ -37,9 +28,10 @@ const StyledHeroHeader = styled.h1`
 const PanelMenu = styled.nav`
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 2em;
     list-style-type: none;
-    margin-top: 20px;
+    margin-top: 4em;
+    margin-bottom: 4em;
     justify-content: center;
 `;
 
@@ -51,10 +43,10 @@ const PatientActivityPanel = () => {
             </StyledHero>
 
             <PanelMenu>
-                <PanelButton to="/QrScanner" icon="qrcode">
+                <PanelButton to="/QrScanner" icon="qrcode" size="44">
                     Scanna övning
                 </PanelButton>
-                <PanelButton to="/statistics" icon="statistics">
+                <PanelButton to="/statistics" icon="statistics" size="44">
                     Se statistik
                 </PanelButton>
             </PanelMenu>

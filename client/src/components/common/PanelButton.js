@@ -30,14 +30,20 @@ const StyledPanelIcon = styled(Icon)`
 `;
 
 const PanelButton = (props) => (
-    <StyledPanelButton to={props.children} {...props}>
+    <StyledPanelButton
+        to={props.children}
+        size={props.size}
+        width={props.width}
+        height={props.height}
+        {...props}
+    >
         {props.icon && (
             <StyledPanelIcon
                 name={props.icon}
                 fill="white"
-                width="64"
-                height="64"
-                size="64"
+                width={props.width}
+                height={props.height}
+                size={props.size}
             />
         )}
         <StyledPanelText>{props.children}</StyledPanelText>
