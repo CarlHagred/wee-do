@@ -4,12 +4,12 @@ import styled from "styled-components";
 import PatientLayout from "../../components/patient/PatientLayout";
 import ScanCamera from "../../components/patient/ScanCamera";
 
-const StyledWrapper = styled.div`
+const CameraContainer = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 3rem;
+    justify-content: top;
     flex-direction: column;
+    align-items: center;
+    min-height: 500px;
 `;
 
 const StyledHeader = styled.h1`
@@ -21,10 +21,10 @@ const StyledHeader = styled.h1`
 const QrScanner = () => {
     return (
         <PatientLayout>
-            <StyledWrapper>
+            <CameraContainer>
                 <StyledHeader>Scanna QR-kod</StyledHeader>
                 <ScanCamera />
-            </StyledWrapper>
+            </CameraContainer>
         </PatientLayout>
     );
 };
