@@ -73,10 +73,8 @@ const Video = () => {
                 <Button icon="qrcode">Generera QR-kod</Button>
             </Link>
             <br></br>
-            <Link to={`/admin/search/exercis`}>
-            <Button onClick={handleEvent} icon="trash">
-                Radera
-            </Button>
+            <Link to={`/admin/search/exercise`}>
+                <Button onClick={handleEvent} icon="trash">Radera</Button>
             </Link>
         </AdminLayout>
     );
