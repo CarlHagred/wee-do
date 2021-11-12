@@ -25,13 +25,18 @@ const StyledHeroHeader = styled.h1`
     font-size: 3rem;
 `;
 
+const PanelMenuWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
 const PanelMenu = styled.nav`
     display: flex;
     flex-wrap: wrap;
     gap: 2em;
-    list-style-type: none;
-    margin-top: 4em;
-    margin-bottom: 4em;
+    align-items: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
     justify-content: center;
 `;
 
@@ -41,15 +46,16 @@ const PatientActivityPanel = () => {
             <StyledHero>
                 <StyledHeroHeader>Välkommen till WeeDo</StyledHeroHeader>
             </StyledHero>
-
-            <PanelMenu>
-                <PanelButton to="/QrScanner" icon="qrcode" size="44">
-                    Scanna övning
-                </PanelButton>
-                <PanelButton to="/statistics" icon="statistics" size="44">
-                    Se statistik
-                </PanelButton>
-            </PanelMenu>
+            <PanelMenuWrapper>
+                <PanelMenu>
+                    <PanelButton to="/QrScanner" icon="qrcode" size="44">
+                        Scanna övning
+                    </PanelButton>
+                    <PanelButton to="/statistics" icon="statistics" size="44">
+                        Se statistik
+                    </PanelButton>
+                </PanelMenu>
+            </PanelMenuWrapper>
         </PatientLayout>
     );
 };

@@ -7,11 +7,29 @@ import MauLogo from "../images/MauLogo";
 
 const StyledFooter = styled.footer`
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background: ${(props) => props.theme.palette.brand};
+    color: white;
+
+    padding: 20px;
+
+    @media (min-width: 768px) {
+        padding: 20px 80px 30px 80px;
+    }
+`;
+
+const TopContainer = styled.div`
+    flex: 1;
+`;
+
+const BotttomContainer = styled.div`
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background: ${(props) => props.theme.palette.brand};
-    padding: 20px;
-    color: white;
+    gap: 40px;
+    @media (min-width: 400px) {
+    }
 `;
 
 const AboutContainer = styled.div`
@@ -25,17 +43,13 @@ const StyledParagraph = styled.p`
     padding: 5px 0 10px 5px;
 `;
 
-const LogoContainer = styled.div`
-    margin: 10px;
-`;
+const LogoContainer = styled.div``;
 
 const NavMenu = styled.div`
     display: flex;
     flex-direction: row;
     gap: 3em;
-    margin-top: 45px;
-    margin-right: 20px;
-    @media (min-width: 768px) {
+    @media (min-width: 550px) {
         ${(p) => p.last && `margin-left: auto`};
     }
 `;
@@ -58,44 +72,44 @@ const NavItem = styled.p`
 const Footer = () => {
     return (
         <StyledFooter>
-            <AboutContainer>
+            <TopContainer>
                 <WdLogo
                     width="128px"
                     height="45px"
                     fill="white"
                     alt="WeeDo logotyp"
                 />
-                <StyledParagraph>
-                    WeeDo är ett samarbete mellan sjukgymnaster på Region Skåne
-                    och studenter på Malmö Universitet.
-                </StyledParagraph>
-                <LogoContainer>
-                    <RsLogoSolid
-                        width="52px"
-                        height="45px"
-                        fill="white"
-                        alt="Region Skåne logotyp"
-                    />
-                    <MauLogo
-                        width="52px"
-                        height="45px"
-                        fill="white"
-                        alt="Malmö Universitets logotyp"
-                    />
-                </LogoContainer>
-            </AboutContainer>
-            <NavMenu last="true">
-                <NavContainer>
-                    <NavHeader>Övning</NavHeader>
-                    <NavItem>Scanna Qr-kod</NavItem>
-                    <NavItem>Se statistik</NavItem>
-                </NavContainer>
-                <NavContainer>
-                    <NavHeader>Information</NavHeader>
-                    <NavItem>Hjälp</NavItem>
-                    <NavItem>Om WeeDo</NavItem>
-                </NavContainer>
-            </NavMenu>
+            </TopContainer>
+
+            <BotttomContainer>
+                <AboutContainer>
+                    <StyledParagraph>
+                        WeeDo är ett samarbete mellan sjukgymnaster på Region
+                        Skåne och studenter på Malmö Universitet.
+                    </StyledParagraph>
+                    <LogoContainer>
+                        <RsLogoSolid
+                            width="52px"
+                            height="45px"
+                            fill="white"
+                            alt="Region Skåne logotyp"
+                        />
+                        <MauLogo
+                            width="52px"
+                            height="45px"
+                            fill="white"
+                            alt="Malmö Universitets logotyp"
+                        />
+                    </LogoContainer>
+                </AboutContainer>
+                <NavMenu last="true">
+                    <NavContainer>
+                        <NavHeader>Information</NavHeader>
+                        <NavItem>Hjälp</NavItem>
+                        <NavItem>Om WeeDo</NavItem>
+                    </NavContainer>
+                </NavMenu>
+            </BotttomContainer>
         </StyledFooter>
     );
 };

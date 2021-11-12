@@ -8,9 +8,9 @@ const StyledWrapper = styled.div`
     justify-content: center;
     padding-top: 3rem;
     flex-direction: column;
+    text-align: center;
 `;
 const StyledHeader = styled.h1`
-    text-align: center;
     font-size: 3em;
 `;
 

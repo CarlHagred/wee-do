@@ -31,15 +31,6 @@ const NavbarMenu = styled.nav`
     background: ${(props) => props.theme.palette.brand};
 `;
 
-const LeftContainer = styled.div`
-    display: flex;
-`;
-
-const RightContainer = styled.div`
-    display: flex;
-    ${(p) => p.last && `margin-left: auto`};
-`;
-
 const NavbarItem = styled(NavLink)`
     display: flex;
     align-items: center;
@@ -63,6 +54,7 @@ const NavbarItemLogout = styled.div`
     color: white;
     height: 100%;
     font-size: 1em;
+    ${(p) => p.last && `margin-left: auto`};
     &:hover,
     &.active {
         background-color: ${(props) => props.theme.palette.hover};
@@ -161,20 +153,15 @@ const Navbar = () => {
                             alt="WeeDo Logo"
                         />
                     </NavbarLogo>
-                    <LeftContainer>
-                        <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
-                        <NavbarItem to="/statistics">Se statistik</NavbarItem>
-                        <NavbarItem to="/about">Om WeeDo</NavbarItem>
-                    </LeftContainer>
-                    <RightContainer last="true">
-                        <NavbarItem to="/help">Hjälp</NavbarItem>
-                        <NavbarItemLogout
-                            isActive={() => false}
-                            onClick={customDialogPatient}
-                        >
-                            Logga ut
-                        </NavbarItemLogout>
-                    </RightContainer>
+                    <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
+                    <NavbarItem to="/statistics">Se statistik</NavbarItem>
+                    <NavbarItemLogout
+                        isActive={() => false}
+                        onClick={customDialogPatient}
+                        last="true"
+                    >
+                        Logga ut
+                    </NavbarItemLogout>
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
@@ -229,17 +216,14 @@ const Navbar = () => {
                             alt="WeeDo Logo"
                         />
                     </NavbarLogo>
-                    <LeftContainer />
 
-                    <RightContainer last="true">
-                        <NavbarItem to="/help">Hjälp</NavbarItem>
-                        <NavbarItemLogout
-                            isActive={() => false}
-                            onClick={customDialogPatient}
-                        >
-                            Logga ut
-                        </NavbarItemLogout>
-                    </RightContainer>
+                    <NavbarItemLogout
+                        isActive={() => false}
+                        onClick={customDialogPatient}
+                        last="true"
+                    >
+                        Logga ut
+                    </NavbarItemLogout>
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
