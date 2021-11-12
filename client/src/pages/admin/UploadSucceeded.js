@@ -2,20 +2,23 @@ import React from "react";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import UpdateDb from "../../components/admin/UpdateDb";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const UploadSucceeded = () => {
     return (
         <AdminLayout>
-            <div>
-                <br />
-                <br />
-                <h1>Övningen har laddats upp</h1>
-                <br />
-                <ul>
+            <ContentContainer>
+                <div>
                     <br />
-                    <UpdateDb />
-                </ul>
-            </div>
+                    <br />
+                    <h1>Övningen har laddats upp</h1>
+                    <br />
+                    <ul>
+                        <br />
+                        <UpdateDb />
+                    </ul>
+                </div>
+            </ContentContainer>
         </AdminLayout>
     );
 };

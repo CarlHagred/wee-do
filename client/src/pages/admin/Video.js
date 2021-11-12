@@ -7,18 +7,19 @@ import { getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledTitle = styled.p`
     font-weight: bold;
 `;
 
 const VideoContainer = styled.div`
-/*max-width: 1000px;
+    /*max-width: 1000px;
 max-height: 750px;*/
-align-items: center;
-justify-content: center;
-display: flex;
-margin: auto;  
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
 `;
 
 const Video = () => {
@@ -42,39 +43,41 @@ const Video = () => {
 
     return (
         <AdminLayout>
-            <br></br>
-            <p>
-                {videos
-                    .filter((videos) => {
-                        return videos.videoId.includes(videoId) ? videos : null;
-                    })
-                    .map((videos) => (
-                        <StyledTitle>
-                            <p align="center">{videos.videoTitle}</p>
-                        </StyledTitle>
-                    ))}
-                <br/>
-            </p>
-        <VideoContainer>
-            
-                <iframe
-                    title={videoUrl}
-                    width="540"
-                    height="315"
-                    src={videoUrl}
-                    frameborder="0"
-                    allowfullscreen
-                ></iframe>  
-        
-        </VideoContainer>
-            <br></br>
-            <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-                <Button icon="qrcode">Generera QR-kod</Button>
-            </Link>
-            <br></br>
-            <Button onClick={deleteVideo} icon="trash">
-                Radera
-            </Button>
+            <ContentContainer>
+                <br></br>
+                <p>
+                    {videos
+                        .filter((videos) => {
+                            return videos.videoId.includes(videoId)
+                                ? videos
+                                : null;
+                        })
+                        .map((videos) => (
+                            <StyledTitle>
+                                <p align="center">{videos.videoTitle}</p>
+                            </StyledTitle>
+                        ))}
+                    <br />
+                </p>
+                <VideoContainer>
+                    <iframe
+                        title={videoUrl}
+                        width="540"
+                        height="315"
+                        src={videoUrl}
+                        frameborder="0"
+                        allowfullscreen
+                    ></iframe>
+                </VideoContainer>
+                <br></br>
+                <Link to={`/admin/exercise/qrpreview/${videoId}`}>
+                    <Button icon="qrcode">Generera QR-kod</Button>
+                </Link>
+                <br></br>
+                <Button onClick={deleteVideo} icon="trash">
+                    Radera
+                </Button>
+            </ContentContainer>
         </AdminLayout>
     );
 };

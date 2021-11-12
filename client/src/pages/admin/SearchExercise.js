@@ -7,6 +7,7 @@ import { getAllVideos } from "../../api";
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import { Flexbox, VideoItem } from "../../components/common/Flexbox";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledH1 = styled.h1`
     padding: 5px 10px;
@@ -45,44 +46,48 @@ const SearchExercise = () => {
     }, []);
     return (
         <AdminLayout>
-            <SearchBar
-                placeholder="Sök efter en övning... "
-                onChange={(e) => {
-                    setSearchedName(e.target.value);
-                }}
-            />
-            <StyledH1>Övningar</StyledH1>
-            <Flexbox>
-                {videos
-                    .filter((videos) => {
-                        return videos.videoTitle.includes(searchedName)
-                            ? videos
-                            : null;
-                    })
-                    .map((videos) => (
-                        <VideoItem key={videos._id}>
-                            <Link
-                                to={`/admin/exercise/${videos.videoId}`}
-                                key={videos._id}
-                            >
-                                <StyledTitle>{videos.videoTitle}</StyledTitle>
-                                <br></br>
-                                <img
-                                    src={videos.thumbnail}
-                                    alt="profile pic"
-                                    width="250px"
-                                    height="200px"
-                                />
-                                <br></br>
-                                <br></br>
-                                Antal visningar: {videos.__v}
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                            </Link>
-                        </VideoItem>
-                    ))}
-            </Flexbox>
+            <ContentContainer>
+                <SearchBar
+                    placeholder="Sök efter en övning... "
+                    onChange={(e) => {
+                        setSearchedName(e.target.value);
+                    }}
+                />
+                <StyledH1>Övningar</StyledH1>
+                <Flexbox>
+                    {videos
+                        .filter((videos) => {
+                            return videos.videoTitle.includes(searchedName)
+                                ? videos
+                                : null;
+                        })
+                        .map((videos) => (
+                            <VideoItem key={videos._id}>
+                                <Link
+                                    to={`/admin/exercise/${videos.videoId}`}
+                                    key={videos._id}
+                                >
+                                    <StyledTitle>
+                                        {videos.videoTitle}
+                                    </StyledTitle>
+                                    <br></br>
+                                    <img
+                                        src={videos.thumbnail}
+                                        alt="profile pic"
+                                        width="250px"
+                                        height="200px"
+                                    />
+                                    <br></br>
+                                    <br></br>
+                                    Antal visningar: {videos.__v}
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                </Link>
+                            </VideoItem>
+                        ))}
+                </Flexbox>
+            </ContentContainer>
         </AdminLayout>
     );
 };
