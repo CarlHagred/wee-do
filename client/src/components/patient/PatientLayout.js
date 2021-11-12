@@ -5,7 +5,7 @@ import PatientTheme from "../../themes/PatientTheme";
 import Footer from "../common/Footer";
 import PatientNavbar from "./PatientNavbar";
 
-const PageWrapper = styled.body`
+const PageWrapper = styled.div`
     display: flex;
     min-height: 100vh;
     flex-direction: column;

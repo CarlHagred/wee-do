@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import WdLogo from "../images/WdLogo";
@@ -64,9 +65,11 @@ const NavHeader = styled.h1`
     font-size: 1.1em;
 `;
 
-const NavItem = styled.p`
+const NavItem = styled(NavLink)`
     margin-top: 5px;
-    padding: 3px 0;
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const Footer = () => {
@@ -105,8 +108,9 @@ const Footer = () => {
                 <NavMenu last="true">
                     <NavContainer>
                         <NavHeader>Information</NavHeader>
-                        <NavItem>Hjälp</NavItem>
-                        <NavItem>Om WeeDo</NavItem>
+
+                        <NavItem to="/help">Hjälp</NavItem>
+                        <NavItem to="/about">Om WeeDo</NavItem>
                     </NavContainer>
                 </NavMenu>
             </BotttomContainer>
