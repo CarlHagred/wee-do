@@ -2,25 +2,29 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 
 import AdminTheme from "../../themes/AdminTheme";
-
+import Footer from "../common/Footer";
 import Navbar from "./Navbar";
 
-const PageContainer = styled.div`
-    position: relative;
-
+const PageWrapper = styled.div`
+    display: flex;
     min-height: 100vh;
+    flex-direction: column;
+`;
 
-    margin: 0 auto;
-    padding: 1rem 1rem 15rem 1rem;
+const PageContainer = styled.div`
+    flex: 1;
 `;
 
 const Layout = ({ children }) => {
     let url = "http://localhost:3000/admin";
     return (
-        <ThemeProvider theme={AdminTheme}>
-            {window.location.href === url ? null : <Navbar />}
-            <PageContainer>{children}</PageContainer>
-        </ThemeProvider>
+        <PageWrapper>
+            <ThemeProvider theme={AdminTheme}>
+                {window.location.href === url ? null : <Navbar />}
+                <PageContainer>{children}</PageContainer>
+                {window.location.href === url ? null : <Footer />}
+            </ThemeProvider>
+        </PageWrapper>
     );
 };
 
