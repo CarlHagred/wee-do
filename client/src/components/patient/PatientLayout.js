@@ -2,25 +2,28 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 
 import PatientTheme from "../../themes/PatientTheme";
-
 import Footer from "../common/Footer";
+import PatientNavbar from "./PatientNavbar";
+
+const PageWrapper = styled.div`
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+`;
 
 const PageContainer = styled.div`
-    position: relative;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 1rem 1rem 15rem 1rem;
-    text-align: center;
+    flex: 1;
 `;
 
 const Layout = ({ children }) => {
     return (
-        <ThemeProvider theme={PatientTheme}>
-            <PageContainer>
-                {children}
+        <PageWrapper>
+            <ThemeProvider theme={PatientTheme}>
+                <PatientNavbar />
+                <PageContainer>{children}</PageContainer>
                 <Footer />
-            </PageContainer>
-        </ThemeProvider>
+            </ThemeProvider>
+        </PageWrapper>
     );
 };
 export default Layout;

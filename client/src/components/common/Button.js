@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 import Icon from "./Icons";
 
 const ButtonContainer = styled.div`
-max-width: 300px;
-align-items: center;
-justify-content: center;
-display: flex;
-margin: auto;  
+    max-width: 300px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
 `;
 
 const StyledButton = styled.button`
@@ -25,12 +25,10 @@ const StyledButton = styled.button`
     margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
     margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
 
-  width: 100%;
-  /*align-items: middle;*/
-  padding: 0.3em 1em;
+    width: 100%;
+    padding: 0.3em 1em;
 
-
-  border-radius: 2em;
+    border-radius: 2em;
 
     cursor: pointer;
 
@@ -63,19 +61,18 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => (
-  <ButtonContainer>
-  <StyledButton size={props.size} {...props}>
-    {props.icon && (
-      <Icon
-        height={props.size === "lg" ? 24 : 16}
-        width={props.size === "lg" ? 24 : 16}
-        name={props.icon}
-      />
-    )}
-    {props.children}
-  </StyledButton>
-  </ButtonContainer>
-
+    <ButtonContainer>
+        <StyledButton size={props.size} {...props}>
+            {props.icon && (
+                <Icon
+                    height={props.size === "lg" ? 24 : 16}
+                    width={props.size === "lg" ? 24 : 16}
+                    name={props.icon}
+                />
+            )}
+            {props.children}
+        </StyledButton>
+    </ButtonContainer>
 );
 
 export default Button;

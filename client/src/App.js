@@ -11,6 +11,7 @@ import Help from "./pages/common/Help";
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
 import QrScanner from "./pages/patient/QrScanner";
+import Statistics from "./pages/patient/Statistics";
 
 /* ===== Admin Pages ===== */
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -46,6 +47,11 @@ function App() {
                     exact
                     path="/QrScanner"
                     component={QrScanner}
+                />
+                <ProtectedRoutePatient
+                    exact
+                    path="/statistics"
+                    component={Statistics}
                 />
                 <Route exact path="/admin" component={AdminLogin} />
                 <ProtectedRouteAdmin
