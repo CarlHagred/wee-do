@@ -35,8 +35,8 @@ const PanelMenu = styled.nav`
     flex-wrap: wrap;
     gap: 2em;
     align-items: center;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     justify-content: center;
 `;
 

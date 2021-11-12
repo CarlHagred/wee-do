@@ -10,6 +10,7 @@ const StyledPanelButton = styled(NavLink)`
     min-width: 238px;
     background: ${(props) => props.theme.palette.brand};
     border-radius: 2em;
+    position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     &:hover {
         background-color: ${(props) => props.theme.palette.hover};
@@ -20,13 +21,18 @@ const StyledPanelText = styled.p`
     align-self: flex-start;
     color: white;
     font-size: 1.3em;
-    margin-left: 20px;
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    transform: translate(-10%, -10%);
 `;
 
 const StyledPanelIcon = styled(Icon)`
-    align-self: flex-end;
     color: white;
-    margin: 20px 20px 10px 0;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    transform: translate(-10%, -10%);
 `;
 
 const PanelButton = (props) => (

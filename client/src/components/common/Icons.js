@@ -3,6 +3,7 @@ import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload, MdAdminPanelSettings } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
+import { BsGraphUp } from "react-icons/bs";
 
 import SearchPatient from "../images/IconSearchPatient";
 import SearchExercise from "../images/IconSearchExercise";
@@ -19,10 +20,11 @@ const variants = {
     search: IoMdSearch,
     error: BiError,
     exit: BiLogOut,
-    statistics: BiNotepad,
+    notepad: BiNotepad,
     admin_panel: MdAdminPanelSettings,
     search_patient: SearchPatient,
     search_exercise: SearchExercise,
+    statistics: BsGraphUp,
 };
 
 const Icon = ({ name, ...props }) => {
