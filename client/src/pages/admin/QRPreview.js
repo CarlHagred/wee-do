@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAllVideos } from "../../api";
 
 import QRCreator from "../../components/admin/QRCreator";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const QRPreview = () => {
     const { id } = useParams();
@@ -19,13 +20,13 @@ const QRPreview = () => {
     }, [videos, id]);
 
     return (
-        <>
+        <ContentContainer>
             <QRCreator
                 text={videos.videoTitle}
                 id={id}
                 image={videos.thumbnail}
             />
-        </>
+        </ContentContainer>
     );
 };
 
