@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
-import AdminTheme from "../../themes/AdminTheme";
-import styled, { ThemeProvider } from "styled-components";
+//import AdminTheme from "../../themes/AdminTheme";
+import styled from "styled-components";
 import Button from "../../components/common/Button";
 import { deleteVideoIndex, getAllVideos } from "../../api";
 import React, { useState, useEffect } from "react";
@@ -24,7 +24,6 @@ margin: auto;
 
 const Video = () => {
     const { videoId } = useParams();
-    const [vidID, setVidID] = useState(null); 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {

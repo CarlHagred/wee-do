@@ -5,7 +5,13 @@ import PatientTheme from "../../themes/PatientTheme";
 import Button from "../common/Button";
 import styled from "styled-components";
 import Header from "../common/Header"; 
-import Footer from "../common/Footer"; 
+
+const StyledH2 = styled.h2`
+    font-size: 1.5em;
+    text-align: auto;
+    margin: 0.5rem 0em
+`;
+
 const WatchExercise = () => {
   
   const search = window.location.search; // returns the URL query String
@@ -17,7 +23,7 @@ const WatchExercise = () => {
   const videoId = videoUrl.split("/").pop();
 
   const [patientName, setPatientName] = useState("");
-  const [watchedVideo, setWatchedVideo] = useState(false);
+ // const [watchedVideo, setWatchedVideo] = useState(false);
 
   const [title, setTitle] = useState(null);
   const [titleFetched, setTitleFetched] = useState(false);  
@@ -41,28 +47,22 @@ const WatchExercise = () => {
       setTitleFetched(true); 
     }; 
     getTitle(videoId); 
-  }, [title]); 
+  }); 
 
   const handleEvent = async () => {
-    const handleClick = await postWatchedVideo(patientName, videoId);
-    handleClick.data == "Success"
-      ? setWatchedVideo(true)
-      : setWatchedVideo(false); 
+    await postWatchedVideo(patientName, videoId);
+    //handleClick.data == "Success"
+    //  ? setWatchedVideo(true)
+    //  : setWatchedVideo(false); 
 
       setButtonBackground('green'); 
       setButtonInnerText('Bra jobbat...!'); 
   };
-
-  const StyledH2 = styled.h2`
-    font-size: 1.5em;
-    text-align: auto;
-    margin: 0.5rem 0em
-  `
   
   return (
     <ThemeProvider theme={PatientTheme}>
       <Header/>
-      <div className="content-media" style ={{margin: "1em",padding: '6rem 10em' }}> 
+      <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
         <iframe src={vid} title="videoSpelare" width='600' height= '420' allowFullScreen></iframe>
         <div className="videoTitle">
           { titleFetched && <StyledH2>{title}</StyledH2> }
@@ -73,7 +73,6 @@ const WatchExercise = () => {
             </Button>
           </div>
       </div>
-      <Footer/>
     </ThemeProvider>
   );
 };
