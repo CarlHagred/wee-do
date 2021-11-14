@@ -6,7 +6,6 @@ import Button from "../common/Button";
 import styled from "styled-components";
 import Header from "../common/Header"; 
 import Footer from "../common/Footer"; 
-
 const WatchExercise = () => {
   
   const search = window.location.search; // returns the URL query String
@@ -22,6 +21,9 @@ const WatchExercise = () => {
 
   const [title, setTitle] = useState(null);
   const [titleFetched, setTitleFetched] = useState(false);  
+
+  const [buttonInnerText, setButtonInnerText] = useState("Jag har tittat på övning och gjort den"); 
+  const [buttonBackground, setButtonBackground] = useState('red'); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,8 +47,12 @@ const WatchExercise = () => {
     const handleClick = await postWatchedVideo(patientName, videoId);
     handleClick.data == "Success"
       ? setWatchedVideo(true)
-      : setWatchedVideo(false);
+      : setWatchedVideo(false); 
+
+      setButtonBackground('green'); 
+      setButtonInnerText('Bra jobbat...!'); 
   };
+
   const StyledH2 = styled.h2`
     font-size: 1.5em;
     text-align: auto;
@@ -61,16 +67,11 @@ const WatchExercise = () => {
         <div className="videoTitle">
           { titleFetched && <StyledH2>{title}</StyledH2> }
         </div> 
-        {watchedVideo ? (
-          <p>Bra jobbat!</p>
-        ):(
           <div className="btn-Watched-Video">
-            <Button onClick={handleEvent} style={{margin: '1em 0em'}}>
-              Jag har tittat på övningen och gjort den
+            <Button onClick={handleEvent} style={{margin: '1em 0em', background: `${buttonBackground}`}}>
+              {buttonInnerText}
             </Button>
           </div>
-          )
-        }
       </div>
       <Footer/>
     </ThemeProvider>
