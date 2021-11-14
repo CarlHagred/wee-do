@@ -15,7 +15,7 @@ const StyledTitle = styled.p`
 
 const VideoContainer = styled.div`
     /*max-width: 1000px;
-max-height: 750px;*/
+    max-height: 750px;*/
     align-items: center;
     justify-content: center;
     display: flex;

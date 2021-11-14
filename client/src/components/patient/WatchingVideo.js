@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme"; 
 import Button from "../common/Button";
 import styled from "styled-components";
-import Header from "../common/Header"; 
+//import Header from "../common/Header"; 
 
 const StyledH2 = styled.h2`
     font-size: 1.5em;
@@ -61,7 +61,6 @@ const WatchExercise = () => {
   
   return (
     <ThemeProvider theme={PatientTheme}>
-      <Header/>
       <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
         <iframe src={vid} title="videoSpelare" width='600' height= '420' allowFullScreen></iframe>
         <div className="videoTitle">
