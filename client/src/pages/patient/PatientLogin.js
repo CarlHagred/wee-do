@@ -5,8 +5,8 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/patient/LoginPatient";
 import WdLogo from "../../components/images/WdLogo";
-import RsLogo from "../../components/images/RsLogo";
 import hero from "../../components/images/patient_hero.png";
+import HelpLink from "../../components/common/HelpLink"
 
 const StyledBody = createGlobalStyle`
     @media (min-width: 740px) {
@@ -25,7 +25,10 @@ const PageWrapper = styled.div`
 const StyledContainerItem = styled.div`
     font-size: 20px;
     flex: 1;
+    padding-bottom: 20px
+    height: 100%;
 `;
+
 
 const StyledWrapper = styled(StyledContainerItem)`
     display: flex;
@@ -56,9 +59,14 @@ const StyledLogo = styled(WdLogo)`
     left: 16px;
 `;
 
+const StyledLink = styled(HelpLink)`
+    
+`;
+
 const StyledHero = styled.img`
     object-fit: cover;
     width: 100%;
+    min-height: 100%;  
     @media (max-width: 650px) {
         width: 100%;
     }
@@ -69,18 +77,16 @@ const StyledContentContainer = styled(StyledContainerItem)`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 20px;
+    margin: 0 15px;
+    margin-bottom: 50px;
 `;
 
 const StyledLoginHeader = styled(StyledContainerItem)`
     font-size: 2rem;
     margin: 40px 0;
+    height: 80%;
 `;
 
-const StyledLoginFooter = styled(StyledContainerItem)`
-    margin-top: 40px;
-    margin-bottom: 20px;
-`;
 
 const PatientLogin = () => {
     return (
@@ -99,14 +105,9 @@ const PatientLogin = () => {
                         <StyledContainerItem>
                             <LoginPatient />
                         </StyledContainerItem>
-
-                        <StyledLoginFooter>
-                            <RsLogo
-                                width="92px"
-                                height="85px"
-                                alt="Region Skånes logotyp"
-                            />
-                        </StyledLoginFooter>
+                        
+                        <StyledLink />
+        
                     </StyledContentContainer>
                 </StyledWrapper>
             </ThemeProvider>

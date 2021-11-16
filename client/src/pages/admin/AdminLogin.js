@@ -9,7 +9,6 @@ import { loginAdmin } from "../../api";
 import Button from "../../components/common/Button";
 import UserInput from "../../components/common/UserInput";
 import WdLogo from "../../components/images/WdLogo";
-import RsLogo from "../../components/images/RsLogo";
 import Icon from "../../components/common/Icons";
 
 const StyledBody = createGlobalStyle`
@@ -71,6 +70,7 @@ const StyledContentContainer = styled(StyledContainerItem)`
     flex-direction: column;
     justify-content: center;
     margin: 0 20px;
+    margin-bottom: 8%;
 `;
 
 const StyledLoginHeader = styled(StyledContainerItem)`
@@ -153,13 +153,6 @@ const AdminLogin = () => {
                             <Button onClick={handleSubmit}>Logga in</Button>
                         </StyledContainerItem>
 
-                        <StyledLoginFooter>
-                            <RsLogo
-                                width="92px"
-                                height="85px"
-                                alt="Region Skånes logotyp"
-                            />
-                        </StyledLoginFooter>
                     </StyledContentContainer>
                 </StyledWrapper>
             </ThemeProvider>
