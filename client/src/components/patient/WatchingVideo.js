@@ -4,6 +4,8 @@ import { ThemeProvider } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme"; 
 import Button from "../common/Button";
 import styled from "styled-components";
+import ReactPlayer from "react-player/youtube"; 
+
 //import Header from "../common/Header"; 
 
 const StyledH2 = styled.h2`
@@ -13,13 +15,13 @@ const StyledH2 = styled.h2`
 `;
 
 const WatchExercise = () => {
-  
+
   const search = window.location.search; // returns the URL query String
   const params = new URLSearchParams(search);
   const videoUrl = params.get("title");
 
-  const ytParams = "?rel=0&modestbranding=1";
-  const vid = videoUrl + ytParams;
+  const vid = videoUrl;
+
   const videoId = videoUrl.split("/").pop();
 
   const [patientName, setPatientName] = useState("");
@@ -30,6 +32,26 @@ const WatchExercise = () => {
 
   const [buttonInnerText, setButtonInnerText] = useState("Jag har tittat på övning och gjort den"); 
   const [buttonBackground, setButtonBackground] = useState('red'); 
+  const [watchedButtonDisabled, SetWatchedButtonDisabled] = useState(true); 
+  
+  const ref = React.createRef(); 
+
+  const [playerControls, setPlayerControls] = useState({
+    playing: true,
+    controls: false, 
+    volume: 0.9
+  }); 
+ 
+ 
+  const handleVolumeChange = event => {
+    setPlayerControls({volume: parseFloat(event.target.value) });
+  }
+  const playerVars = {
+    youtube: {
+      playerVars: { controls: 0, modestbranding: 1, rel: 0 }
+    }
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,16 +80,41 @@ const WatchExercise = () => {
       setButtonBackground('green'); 
       setButtonInnerText('Bra jobbat...!'); 
   };
-  
+  const {playing, controls, volume} = playerControls; 
   return (
     <ThemeProvider theme={PatientTheme}>
       <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
-        <iframe src={vid} title="videoSpelare" width='600' height= '420' allowFullScreen></iframe>
-        <div className="videoTitle">
+      <div className="videoTitle">
           { titleFetched && <StyledH2>{title}</StyledH2> }
-        </div> 
+      </div>
+        <ReactPlayer url={vid} ref={ref}  width = "640px" height="360px" playing={playing} 
+        controls={controls} volume={volume} 
+        config={playerVars}  
+        onEnded={() => {
+          
+        //  const duration = parseFloat( ref.current.getDuration()).toFixed(); 
+        //  const playedSec = ref.current.getCurrentTime(); 
+          
+         // if(duration === playedSeconds) console.log("Video is completely watched"); 
+
+          //console.log("video length : "+duration);
+          //console.log("video played in seconds : "+playedSec);
+          SetWatchedButtonDisabled(false);  
+
+        }}></ReactPlayer>
+        <table>
+            <tbody>
+              <tr>
+                <th>Volym: </th>
+                <td>
+                  <input type='range' min={0} max={1} step='any' value={volume} onChange={ (e) => { handleVolumeChange(e) }} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+         
           <div className="btn-Watched-Video">
-            <Button onClick={handleEvent} style={{margin: '1em 0em', background: `${buttonBackground}`}}>
+            <Button disabled={watchedButtonDisabled} onClick={handleEvent} style={{margin: '1em 0em', background: `${buttonBackground}`}}>
               {buttonInnerText}
             </Button>
           </div>
