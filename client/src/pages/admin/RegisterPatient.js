@@ -5,6 +5,7 @@ import { getNewPatient } from "../../api/index";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledNewPatient = styled.p`
     padding: 20px;
@@ -24,8 +25,10 @@ const RegisterPatient = () => {
 
     return (
         <AdminLayout>
-            <Button onClick={handleEvent}>Registrera ny patient</Button>
-            <StyledNewPatient>{newPatient}</StyledNewPatient>
+            <ContentContainer>
+                <Button onClick={handleEvent}>Registrera ny patient</Button>
+                <StyledNewPatient>{newPatient}</StyledNewPatient>
+            </ContentContainer>
         </AdminLayout>
     );
 };

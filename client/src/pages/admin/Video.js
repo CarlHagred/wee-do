@@ -7,6 +7,7 @@ import { deleteVideoIndex, getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
+import ContentContainer from "../../components/common/ContentContainer";
 
 
 
@@ -15,12 +16,12 @@ const StyledTitle = styled.p`
 `;
 
 const VideoContainer = styled.div`
-/*max-width: 1000px;
+    /*max-width: 1000px;
 max-height: 750px;*/
-align-items: center;
-justify-content: center;
-display: flex;
-margin: auto;  
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
 `;
 
 const Video = () => {

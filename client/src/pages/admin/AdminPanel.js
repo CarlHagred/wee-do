@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 import AdminTheme from "../../themes/AdminTheme";
 
@@ -12,7 +12,6 @@ import hero from "../../components/images/AdminHeroBanner.png";
 import Icon from "../../components/common/Icons";
 
 const StyledHero = styled.div`
-    margin: -1rem -1rem 2rem -1rem;
     width: 100vw;
     height: 40vh;
     background-image: url(${hero});
