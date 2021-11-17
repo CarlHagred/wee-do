@@ -20,6 +20,7 @@ export const postPatient = async (req, res) => {
       const newPatient = new Patient({
         name: name,
         statistics: [],
+        videos: [],
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
