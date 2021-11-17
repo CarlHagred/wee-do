@@ -122,3 +122,6 @@ export const deleteVideoIndex = async (params) => {
     }).then(response => { 
     })
 }
+/*
+export const deleteVideoFromYoutubeIndex = (videoId) =>
+    axios.delete(`${serverUrl}/deletevideofromyoutube/`, videoId);*/

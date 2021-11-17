@@ -1,5 +1,6 @@
 import Patient from "../../models/patient.js";
 import Videos from "../../models/videos.js";
+import { execute } from "../../routes/deletevideoRoutes.js";
 
 export const postPatient = async (req, res) => {
   const createRandomName = () => Math.random().toString(20).substr(2, 6);
@@ -62,7 +63,8 @@ export const getVideos = async (req, res) => {
 
 
 export const deleteVideos = async (req, res) => {
-const id = req.body.videoId; 
+const id = req.body.videoId;
+execute(id);
     await Videos.deleteOne({"videoId": id})
     .then(videos => {
       if(!videos){

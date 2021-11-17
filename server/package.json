@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "fs": "^0.0.1-security",
+    "gapi": "0.0.3",
     "global": "^4.4.0",
     "googleapis": "^89.0.0",
     "mocha": "^9.1.3",

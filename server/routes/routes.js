@@ -24,7 +24,8 @@ import {
   getAdminSession,
   deleteAdminSession,
 } from "../controllers/admin/adminLogin.js";
-import Videos from "../models/videos.js";
+
+
 
 const router = express.Router();
 
@@ -43,5 +44,7 @@ router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
+/*
+router.delete("/deletevideofromyoutube/:videoId", deleteVideoFromYoutube);*/
 
 export default router;
