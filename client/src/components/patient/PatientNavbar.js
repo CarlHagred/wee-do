@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
@@ -8,6 +8,8 @@ import WdLogo from "../images/WdLogo";
 
 import Icon from "../common/Icons";
 import { customDialogPatient } from "../common/Confirmation";
+
+import { getSession } from "../../api";
 
 const StyledIcon = styled(Icon)`
     margin-right: 10px;
@@ -46,6 +48,7 @@ const NavbarItem = styled(NavLink)`
         display: none;
     }
 `;
+
 
 const NavbarItemLogout = styled.div`
     display: flex;
@@ -128,6 +131,17 @@ const StyledDivider = styled.hr`
 `;
 
 const Navbar = () => {
+    /* === PATIENT SESSION === */
+    const [patient, setPatient] = useState("");
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedPatientSession = await getSession();
+            setPatient(fetchedPatientSession.data);
+        };
+        fetchData();
+    }, []);
+
+    /* === NAVBAR ===*/
     const closeMenu = () => setOpen(false);
     const [open, setOpen] = useState(false);
     const url = "http://localhost:3000/activitypanel";
@@ -155,12 +169,13 @@ const Navbar = () => {
                     </NavbarLogo>
                     <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
                     <NavbarItem to="/statistics">Se statistik</NavbarItem>
+
                     <NavbarItemLogout
                         isActive={() => false}
                         onClick={customDialogPatient}
                         last="true"
                     >
-                        Logga ut
+                        {patient.name} Logga ut
                     </NavbarItemLogout>
                 </NavbarMenu>
 
@@ -189,7 +204,7 @@ const Navbar = () => {
                         isActive={() => false}
                         onClick={customDialogPatient}
                     >
-                        Logga ut
+                        {patient.name} Logga ut
                     </LogOut>
                 </StyledMobileNav>
             </>
@@ -222,8 +237,9 @@ const Navbar = () => {
                         onClick={customDialogPatient}
                         last="true"
                     >
-                        Logga ut
+                        {patient.name} Logga ut
                     </NavbarItemLogout>
+                    
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
@@ -236,7 +252,7 @@ const Navbar = () => {
                         isActive={() => false}
                         onClick={customDialogPatient}
                     >
-                        Logga ut
+                    {patient.name} Logga ut
                     </LogOut>
                 </StyledMobileNav>
             </>
