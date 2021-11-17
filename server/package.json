@@ -32,10 +32,6 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "redux": "^4.1.2",
-    "redux-logger": "^3.0.6",
     "session": "^0.1.0",
     "uuid": "^8.3.2",
     "youtube-api": "^3.0.1"
