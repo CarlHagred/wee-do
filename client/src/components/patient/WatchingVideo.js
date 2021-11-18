@@ -48,7 +48,7 @@ const WatchExercise = () => {
   }
   const playerVars = {
     youtube: {
-      playerVars: { controls: 0, modestbranding: 1, rel: 0 }
+      playerVars: { controls: 1, modestbranding: 1, rel: 0 }
     }
   }
   
@@ -84,10 +84,8 @@ const WatchExercise = () => {
   return (
     <ThemeProvider theme={PatientTheme}>
       <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
-      <div className="videoTitle">
-          { titleFetched && <StyledH2>{title}</StyledH2> }
-      </div>
-        <ReactPlayer url={vid} ref={ref}  width = "640px" height="360px" playing={playing} 
+     
+        <ReactPlayer url={vid} ref={ref}  width="640px" height="360px" playing={playing} 
         controls={controls} volume={volume} 
         config={playerVars}  
         onEnded={() => {
@@ -102,16 +100,9 @@ const WatchExercise = () => {
           SetWatchedButtonDisabled(false);  
 
         }}></ReactPlayer>
-        <table>
-            <tbody>
-              <tr>
-                <th>Volym: </th>
-                <td>
-                  <input type='range' min={0} max={1} step='any' value={volume} onChange={ (e) => { handleVolumeChange(e) }} />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+         <div className="videoTitle">
+          { titleFetched && <StyledH2>{title}</StyledH2> }
+        </div>
          
           <div className="btn-Watched-Video">
             <Button disabled={watchedButtonDisabled} onClick={handleEvent} style={{margin: '1em 0em', background: `${buttonBackground}`}}>
