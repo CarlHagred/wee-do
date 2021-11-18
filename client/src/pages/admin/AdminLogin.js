@@ -99,8 +99,8 @@ const AdminLogin = () => {
     const handleSubmit = () => {
         console.log(`försöker logga in med ${loginName}`);
         const postData = {
-            username: loginName,
-            password: loginPassword,
+            username: loginName.trim(),
+            password: loginPassword.trim(),
         };
 
         loginAdmin(postData);
