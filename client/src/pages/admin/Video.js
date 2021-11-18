@@ -70,7 +70,10 @@ const Video = () => {
                     ></iframe>
                 </VideoContainer>
                 <br></br>
-                <Link to={`/admin/exercise/qrpreview/${videoId}`}>
+                <Link
+                    to={`/admin/exercise/qrpreview/${videoId}`}
+                    target="_blank"
+                >
                     <Button icon="qrcode">Generera QR-kod</Button>
                 </Link>
                 <br></br>

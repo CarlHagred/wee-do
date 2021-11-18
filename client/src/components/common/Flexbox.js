@@ -10,10 +10,21 @@ const StyledFlexbox = styled.div`
 `;
 
 const StyledQrFlexbox = styled(StyledFlexbox)`
-    margin-left: 20em;
-    margin-right: 20em;
     align-items: center;
     justify-content: space-evenly;
+`;
+
+const QrFlexContainer = styled(StyledFlexbox)`
+    width: 210mm;
+    height: 258mm;
+`;
+
+const QrHalfContainer = styled(StyledQrFlexbox)`
+    height: 50%;
+`;
+
+const QrItem = styled.div`
+    margin: 2em;
 `;
 
 const FlexItem = styled.div`
@@ -28,6 +39,31 @@ const FlexItem = styled.div`
         background-color: ${(props) => props.theme.palette.hover};
     }
 `;
+
+export const StyledQrHalfContainer = (props) => {
+    return (
+        <>
+            <QrHalfContainer {...props} />
+        </>
+    );
+};
+
+export const StyledQrItem = (props) => {
+    return (
+        <>
+            <QrItem {...props} />
+        </>
+    );
+};
+
+export const StyledQrFlexContainer = (props) => {
+    return (
+        <>
+            <QrFlexContainer {...props} />
+        </>
+    );
+};
+
 export const VideoItem = (props) => {
     return (
         <>
@@ -52,4 +88,9 @@ export const Flexbox = (props) => {
     );
 };
 
-export default Flexbox + QrFlexbox + VideoItem;
+export default Flexbox +
+    QrFlexbox +
+    VideoItem +
+    StyledQrFlexContainer +
+    StyledQrItem +
+    StyledQrHalfContainer;
