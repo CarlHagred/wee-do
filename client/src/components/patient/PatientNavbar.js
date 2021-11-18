@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
@@ -8,6 +8,8 @@ import WdLogo from "../images/WdLogo";
 
 import Icon from "../common/Icons";
 import { customDialogPatient } from "../common/Confirmation";
+
+import { getSession } from "../../api";
 
 const StyledIcon = styled(Icon)`
     margin-right: 10px;
@@ -47,6 +49,27 @@ const NavbarItem = styled(NavLink)`
     }
 `;
 
+const PatientName = styled.div`
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 100%;
+    font-size: 1em;
+    margin-left: auto;
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: right;
+        margin-right: 10px;
+        font-size: 1.2em;
+    };
+
+    @media (max-width: 410px) {
+        margin-right: 2%;
+        
+    };
+    
+`
+
 const NavbarItemLogout = styled.div`
     display: flex;
     align-items: center;
@@ -54,7 +77,7 @@ const NavbarItemLogout = styled.div`
     color: white;
     height: 100%;
     font-size: 1em;
-    ${(p) => p.last && `margin-left: auto`};
+    ${(p) => p.last && `margin-left: 10px`};
     &:hover,
     &.active {
         background-color: ${(props) => props.theme.palette.hover};
@@ -116,6 +139,12 @@ const NavbarLogo = styled(Link)`
         flex: 1;
         justify-content: center;
         padding: 0 70px 0 0;
+        margin-left: 70px;
+    }
+    
+    @media (max-width: 410px) {
+        margin: 0;
+        padding: 0;
     }
 `;
 
@@ -128,6 +157,17 @@ const StyledDivider = styled.hr`
 `;
 
 const Navbar = () => {
+    /* === PATIENT SESSION === */
+    const [patient, setPatient] = useState("");
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedPatientSession = await getSession();
+            setPatient(fetchedPatientSession.data);
+        };
+        fetchData();
+    }, []);
+
+    /* === NAVBAR ===*/
     const closeMenu = () => setOpen(false);
     const [open, setOpen] = useState(false);
     const url = "http://localhost:3000/activitypanel";
@@ -153,8 +193,14 @@ const Navbar = () => {
                             alt="WeeDo Logo"
                         />
                     </NavbarLogo>
+    
                     <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
                     <NavbarItem to="/statistics">Se statistik</NavbarItem>
+
+                    <PatientName>
+                        {patient.name}
+                    </PatientName>
+
                     <NavbarItemLogout
                         isActive={() => false}
                         onClick={customDialogPatient}
@@ -189,7 +235,7 @@ const Navbar = () => {
                         isActive={() => false}
                         onClick={customDialogPatient}
                     >
-                        Logga ut
+                         Logga ut
                     </LogOut>
                 </StyledMobileNav>
             </>
@@ -217,6 +263,10 @@ const Navbar = () => {
                         />
                     </NavbarLogo>
 
+                    <PatientName>
+                        {patient.name}
+                    </PatientName>
+
                     <NavbarItemLogout
                         isActive={() => false}
                         onClick={customDialogPatient}
@@ -224,6 +274,7 @@ const Navbar = () => {
                     >
                         Logga ut
                     </NavbarItemLogout>
+                    
                 </NavbarMenu>
 
                 <StyledMobileNav open={open}>
