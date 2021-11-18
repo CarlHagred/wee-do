@@ -60,9 +60,7 @@ const databaseConnection = async () => {
       console.log(
         `Server upp and running, and connected to database on port: ${PORT}`
       );
-      updateDb().then(() => {
-        console.log("Database updated...");
-      });
+      updateDb();
     });
   } catch (error) {
     //denna console-loggen är bra om man får fel vid serverstart

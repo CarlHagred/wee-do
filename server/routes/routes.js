@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 
 import { getTest } from "../controllers/routerLogic.js";
 import {
@@ -8,7 +7,6 @@ import {
   getVideos,
   getOnePatient,
 } from "../controllers/admin/adminEndpoints.js";
-import { getVideoUrl } from "../controllers/client/clientEndpoints.js";
 
 import {
   loginPatient,
@@ -16,6 +14,7 @@ import {
   deleteSession,
   postWatchedVideo,
   postScan,
+  getVideoUrl,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -23,7 +22,6 @@ import {
   getAdminSession,
   deleteAdminSession,
 } from "../controllers/admin/adminLogin.js";
-import Videos from "../models/videos.js";
 
 const router = express.Router();
 
