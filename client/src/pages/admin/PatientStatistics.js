@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-import { getOnePatient } from "../../api";
+import { deletePatientIndex, getOnePatient } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
+import Button from "../../components/common/Button";
 
 const StyledContainer = styled.div`
     h2 {
@@ -59,6 +60,14 @@ const PatientStatistics = () => {
         fetchData();
     }, [name]);
 
+const deletePatient = () => {
+    deletePatientIndex(name);
+};
+
+const setPatientInactive = () => {
+
+};
+
     return (
         <AdminLayout>
             <ContentContainer>
@@ -92,6 +101,8 @@ const PatientStatistics = () => {
                             </StyledStatistics>
                         </React.Fragment>
                     ))}
+                        <Button onClick={deletePatient} icon="trash">Radera patient</Button>
+                        <Button onClick={setPatientInactive} icon="patientInactive">Gör patient inaktiv</Button>
                 </StyledContainer>
             </ContentContainer>
         </AdminLayout>
