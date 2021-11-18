@@ -20,6 +20,7 @@ export const postPatient = async (req, res) => {
       const newPatient = new Patient({
         name: name,
         statistics: [],
+        videos: [],
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
@@ -62,10 +63,7 @@ export const getVideos = async (req, res) => {
 
 
 export const deleteVideos = async (req, res) => {
-// const data = JSON.stringify(req.body.videoId); 
-//res.send(req.body); 
 const id = req.body.videoId; 
-console.log("testar vid id i server : "+id);
     await Videos.deleteOne({"videoId": id})
     .then(videos => {
       if(!videos){
