@@ -20,6 +20,7 @@ import PatientStatistics from "./pages/admin/PatientStatistics";
 import RegisterExercise from "./pages/admin/RegisterExercise";
 import RegisterPatient from "./pages/admin/RegisterPatient";
 import SearchExercise from "./pages/admin/SearchExercise";
+import SelectExercises from "./pages/admin/SelectExercises";
 import SearchPatient from "./pages/admin/SearchPatient";
 import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
@@ -69,7 +70,7 @@ function App() {
         <ProtectedRouteAdmin
           exact
           path="/admin/select/:name"
-          component={RegisterPatient}
+          component={SelectExercises}
         />
         <ProtectedRouteAdmin
           exact
