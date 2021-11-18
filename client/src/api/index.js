@@ -21,6 +21,9 @@ export const getAdminSession = () =>
 
 /* ===== Login calls ===== */
 
+  
+
+//API-call tills servern som hämtar användaren som har blivit autentiserad och skickar vidare användaren till Scanner-sidan
 export const loginPatient = (params) => {
     axios({
         method: "POST",
@@ -109,3 +112,13 @@ export const postWatchedVideo = (name, videoId) =>
 
 export const postVideo = (videoData) =>
     axios.post(`${serverUrl}/upload/`, videoData);
+
+
+export const deleteVideoIndex = async (params) => {
+    await axios.delete(`${serverUrl}/deletevideo`,{
+        data: {
+            videoId : params
+        }
+    }).then(response => { 
+    })
+}

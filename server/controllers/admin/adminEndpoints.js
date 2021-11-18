@@ -60,3 +60,17 @@ export const getVideos = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+
+export const deleteVideos = async (req, res) => {
+const id = req.body.videoId; 
+    await Videos.deleteOne({"videoId": id})
+    .then(videos => {
+      if(!videos){
+        return res.status(404).send({
+          message: "Video not fount with id: " + id
+        })
+      }
+      res.status(200).send({message: "Video deleted successfully!"})
+    })
+};
