@@ -6,6 +6,7 @@ import {
   getPatients,
   getVideos,
   getOnePatient,
+  deleteVideos,
 } from "../controllers/admin/adminEndpoints.js";
 
 import {
@@ -39,5 +40,6 @@ router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
+router.delete("/deletevideo", deleteVideos);
 
 export default router;

@@ -17,6 +17,7 @@ export const postPatient = async (req, res) => {
       const newPatient = new Patient({
         name: name,
         statistics: [],
+        videos: [],
       });
       await newPatient.save();
       //skickar det skapade namnet till klienten så det kan visas för personalen
@@ -54,4 +55,18 @@ export const getVideos = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+
+export const deleteVideos = async (req, res) => {
+const id = req.body.videoId; 
+    await Videos.deleteOne({"videoId": id})
+    .then(videos => {
+      if(!videos){
+        return res.status(404).send({
+          message: "Video not fount with id: " + id
+        })
+      }
+      res.status(200).send({message: "Video deleted successfully!"})
+    })
 };
