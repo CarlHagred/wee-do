@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getTest } from "../controllers/routerLogic.js";
+//import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
   getPatients,
@@ -26,7 +26,7 @@ import {
 
 const router = express.Router();
 
-router.get("/test", getTest);
+//router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
 router.post("/loginpatient", loginPatient);
