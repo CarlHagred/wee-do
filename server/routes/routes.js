@@ -48,7 +48,7 @@ router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
-router.get("/getVideoTitle", getVideoTitleById);
+router.get("/getVideoTitleAndDescription", getVideoTitleById);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });

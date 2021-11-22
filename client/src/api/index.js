@@ -114,13 +114,14 @@ export const postVideo = videoData => {
     axios.post(`${serverUrl}/upload/`, videoData);
 }
 
-export const getTitleById = async (id) => {
-    const title = await axios.get(`${serverUrl}/getVideoTitle`, {
+export const getTitleAndDescById = async (id) => {
+    const response = await axios.get(`${serverUrl}/getVideoTitleAndDescription`, {
         params: {
             videoId: id
         }
     })
-    return title.data; 
+    //console.log(response.data); 
+    return response.data; 
 }
 
 

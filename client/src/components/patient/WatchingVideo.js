@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSession, postWatchedVideo, getTitleById } from "../../api";
+import { getSession, postWatchedVideo, getTitleAndDescById } from "../../api";
 import { ThemeProvider } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme"; 
 import Button from "../common/Button";
@@ -28,7 +28,8 @@ const WatchExercise = () => {
  // const [watchedVideo, setWatchedVideo] = useState(false);
 
   const [title, setTitle] = useState(null);
-  const [titleFetched, setTitleFetched] = useState(false);  
+  const [description, setDescription] = useState(null); 
+  const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);  
 
   const [buttonInnerText, setButtonInnerText] = useState("Jag har tittat på övning och gjort den"); 
   const [buttonBackground, setButtonBackground] = useState('red'); 
@@ -42,17 +43,11 @@ const WatchExercise = () => {
     volume: 0.9
   }); 
  
- 
-  const handleVolumeChange = event => {
-    setPlayerControls({volume: parseFloat(event.target.value) });
-  }
   const playerVars = {
     youtube: {
       playerVars: { controls: 1, modestbranding: 1, rel: 0 }
     }
   }
-  
-
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -63,12 +58,13 @@ const WatchExercise = () => {
 
   //UseEffect to fetch video title down
   useEffect(() => {
-    const getTitle = async (id) => {
-      const titleRecieved =  await getTitleById(id);
-      setTitle(titleRecieved);  
-      setTitleFetched(true); 
+    const titleAndDesc = async (id) => {
+      const response =  await getTitleAndDescById(id);
+      setTitle(response.title); 
+      setDescription(response.description);  
+      setIsTitleAndDescFetched(true); 
     }; 
-    getTitle(videoId); 
+    titleAndDesc(videoId); 
   }); 
 
   const handleEvent = async () => {
@@ -101,7 +97,8 @@ const WatchExercise = () => {
 
         }}></ReactPlayer>
          <div className="videoTitle">
-          { titleFetched && <StyledH2>{title}</StyledH2> }
+          { isTitleAndDescFetched && <StyledH2>{title}</StyledH2> }
+          { isTitleAndDescFetched && <p className="description">{description}</p> }
         </div>
          
           <div className="btn-Watched-Video">
