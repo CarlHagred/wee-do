@@ -120,7 +120,6 @@ export const getTitleAndDescById = async (id) => {
             videoId: id
         }
     })
-    //console.log(response.data); 
     return response.data; 
 }
 
