@@ -40,26 +40,11 @@ const StyledDiv = styled.div`
 const SelectExercises = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
-
   const [amount, setAmount] = useState([]);
-
   const [checkedState, setCheckedState] = useState([]);
-
   const [selected, setSelected] = useState([]);
 
-  const options = [
-    { value: 1 },
-    { value: 1 },
-    { value: 2 },
-    { value: 3 },
-    { value: 4 },
-    { value: 5 },
-    { value: 6 },
-    { value: 7 },
-    { value: 8 },
-    { value: 9 },
-    { value: 10 },
-  ];
+  const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,12 +64,6 @@ const SelectExercises = () => {
     fetchData();
   }, []);
 
-  const handleOnChange = (position, id) => {
-    let arr = [...checkedState];
-    arr[position] = !arr[position];
-    setCheckedState(arr);
-  };
-
   useEffect(() => {
     let newArr = [];
     checkedState.forEach((value, index) => {
@@ -97,24 +76,22 @@ const SelectExercises = () => {
       }
     });
     setSelected(newArr);
-    console.log(selected);
   }, [checkedState, amount]);
 
-  const handleChange = (value, index, id) => {
+  const handleCheckBoxChange = (position, id) => {
+    let arr = [...checkedState];
+    arr[position] = !arr[position];
+    setCheckedState(arr);
+  };
+
+  const handleAmountChange = (value, index, id) => {
     let newArr = [...amount];
     newArr[index] = parseInt(value);
     setAmount(newArr);
   };
 
   const handleSubmit = () => {
-    let newArr;
-    let arr = [...selected];
-    arr.forEach(function (value, i) {
-      value.amount = amount[i];
-      newArr[i] = value;
-    });
-    setAmount(newArr);
-    console.log(amount);
+    console.log(selected);
   };
 
   return (
@@ -147,12 +124,16 @@ const SelectExercises = () => {
                     <select
                       value={amount[index]}
                       onChange={(e) => {
-                        handleChange(e.target.value, index, videos.videoId);
+                        handleAmountChange(
+                          e.target.value,
+                          index,
+                          videos.videoId
+                        );
                       }}
                     >
-                      {options.map((option) => (
-                        <option value={option.value}>
-                          Antal gånger per dag: {option.value}
+                      {amountOptions.map((option) => (
+                        <option value={option}>
+                          Antal gånger per dag: {option}
                         </option>
                       ))}
                     </select>
@@ -160,7 +141,9 @@ const SelectExercises = () => {
                       type="checkbox"
                       id={`custom-checkbox-${index}`}
                       checked={checkedState[index]}
-                      onChange={() => handleOnChange(index, videos.videoId)}
+                      onChange={() =>
+                        handleCheckBoxChange(index, videos.videoId)
+                      }
                     />
                     <label for="checked"></label>
                   </StyledDiv>
