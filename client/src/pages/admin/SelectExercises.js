@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { getAllVideos } from "../../api";
@@ -8,6 +7,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import { Flexbox, VideoItem } from "../../components/common/Flexbox";
 import ContentContainer from "../../components/common/ContentContainer";
+import Button from "../../components/common/Button";
 
 const StyledH1 = styled.h1`
   padding: 5px 10px;
@@ -41,17 +41,11 @@ const SelectExercises = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const allVideos = await getAllVideos();
-      setVideos(allVideos.data);
-      let nerArr = Array(allVideos.data.length).fill(false);
-      setCheckedState(nerArr);
-      let amountArr = Array(allVideos.data.length).fill(1);
-      setAmount(amountArr);
-    };
-    fetchData();
-  }, []);
+  const [amount, setAmount] = useState([]);
+
+  const [checkedState, setCheckedState] = useState([]);
+
+  const [selected, setSelected] = useState([]);
 
   const options = [
     { value: 1 },
@@ -67,57 +61,66 @@ const SelectExercises = () => {
     { value: 10 },
   ];
 
-  const [amount, setAmount] = useState(0);
+  useEffect(() => {
+    const fetchData = async () => {
+      const allVideos = await getAllVideos();
 
-  const [checkedState, setCheckedState] = useState([]);
+      setVideos(allVideos.data);
 
-  const [selected, setSelected] = useState([]);
+      let nerArr = Array(allVideos.data.length).fill(false);
+
+      setCheckedState(nerArr);
+
+      let amountArr = Array(allVideos.data.length).fill(1);
+
+      setAmount(amountArr);
+    };
+
+    fetchData();
+  }, []);
 
   const handleOnChange = (position, id) => {
     let arr = [...checkedState];
     arr[position] = !arr[position];
     setCheckedState(arr);
-
-    if (!checkedState[position]) {
-      modifySelectedValues(position, id);
-    } else {
-      let newArr = [...selected];
-      let pos = newArr.find((element) => element.id === id);
-      newArr.splice(pos, 1);
-      setSelected(newArr);
-      console.log(newArr);
-    }
   };
 
-  const modifySelectedValues = (position, id) => {
-    let newArr = [...selected];
-    let pos = newArr.find((element) => element.id === id);
-    let newSelection = {
-      id: id,
-      amount: parseInt(amount[position]),
-    };
-
-    if (newArr.find((element) => element.id === id) === undefined) {
-      pos = newArr.length;
-    }
-    newArr[pos] = newSelection;
+  useEffect(() => {
+    let newArr = [];
+    checkedState.forEach((value, index) => {
+      if (value) {
+        let newSelection = {
+          id: videos[index].videoId,
+          amount: parseInt(amount[index]),
+        };
+        newArr.push(newSelection);
+      }
+    });
     setSelected(newArr);
-
-    console.log(newArr);
-  };
+    console.log(selected);
+  }, [checkedState, amount]);
 
   const handleChange = (value, index, id) => {
     let newArr = [...amount];
-    newArr[index] = value;
+    newArr[index] = parseInt(value);
     setAmount(newArr);
-    if (checkedState[index]) {
-      modifySelectedValues(index, id);
-    }
+  };
+
+  const handleSubmit = () => {
+    let newArr;
+    let arr = [...selected];
+    arr.forEach(function (value, i) {
+      value.amount = amount[i];
+      newArr[i] = value;
+    });
+    setAmount(newArr);
+    console.log(amount);
   };
 
   return (
     <AdminLayout>
       <ContentContainer>
+        <Button onClick={handleSubmit}>spara övningar</Button>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
@@ -144,7 +147,7 @@ const SelectExercises = () => {
                     <select
                       value={amount[index]}
                       onChange={(e) => {
-                        handleChange(e.target.value, index, videos._id);
+                        handleChange(e.target.value, index, videos.videoId);
                       }}
                     >
                       {options.map((option) => (
@@ -157,7 +160,7 @@ const SelectExercises = () => {
                       type="checkbox"
                       id={`custom-checkbox-${index}`}
                       checked={checkedState[index]}
-                      onChange={() => handleOnChange(index, videos._id)}
+                      onChange={() => handleOnChange(index, videos.videoId)}
                     />
                     <label for="checked"></label>
                   </StyledDiv>
