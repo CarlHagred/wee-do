@@ -5,13 +5,21 @@ import PatientTheme from "../../themes/PatientTheme";
 import Button from "../common/Button";
 import styled from "styled-components";
 import ReactPlayer from "react-player/youtube"; 
-
+import Footer from "../common/Footer";
+import Navbar from "./PatientNavbar";
 //import Header from "../common/Header"; 
 
 const StyledH2 = styled.h2`
     font-size: 1.5em;
     text-align: auto;
-    margin: 0.5rem 0em
+    padding: 10px;
+    font-weight: 600;
+`;
+
+const StyledParagraph = styled.p`
+    color: gray;
+    text-align: auto;
+    padding: 10px;
 `;
 
 const WatchExercise = () => {
@@ -79,6 +87,7 @@ const WatchExercise = () => {
   const {playing, controls, volume} = playerControls; 
   return (
     <ThemeProvider theme={PatientTheme}>
+      <Navbar/>
       <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
      
         <ReactPlayer url={vid} ref={ref}  width="640px" height="360px" playing={playing} 
@@ -98,7 +107,7 @@ const WatchExercise = () => {
         }}></ReactPlayer>
          <div className="videoTitle">
           { isTitleAndDescFetched && <StyledH2>{title}</StyledH2> }
-          { isTitleAndDescFetched && <p className="description">{description}</p> }
+          { isTitleAndDescFetched && <StyledParagraph className="description">{description}</StyledParagraph> }
         </div>
          
           <div className="btn-Watched-Video">
@@ -107,6 +116,7 @@ const WatchExercise = () => {
             </Button>
           </div>
       </div>
+      <Footer/>
     </ThemeProvider>
   );
 };
