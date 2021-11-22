@@ -94,6 +94,19 @@ const AdminLogin = () => {
         window.location.reload();
     }
 
+    const once = {
+        once: true
+    }
+
+    window.addEventListener("keyup", (event) => {
+        let key = event.key
+        if(key === "Enter") {
+            event.preventDefault()
+            handleSubmit();
+            console.log("Enter är klickat");
+        }
+    })
+
     const [loginName, setLoginName] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const handleSubmit = () => {
