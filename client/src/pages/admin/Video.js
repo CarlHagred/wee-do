@@ -1,88 +1,83 @@
-import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { useParams } from "react-router-dom";
 
-import { getAllVideos } from "../../api";
+import { deleteVideoIndex, getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledTitle = styled.p`
-    font-weight: bold;
+  font-weight: bold;
 `;
 
 const VideoContainer = styled.div`
-    /*max-width: 1000px;
+  /*max-width: 1000px;
 max-height: 750px;*/
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: auto;
 `;
 
 const Video = () => {
-    const { videoId } = useParams();
+  const { videoId } = useParams();
+  const [vidID, setVidID] = useState(null);
+  const [videos, setVideos] = useState([]);
 
-    const [videos, setVideos] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const allVideos = await getAllVideos();
-            setVideos(allVideos.data);
-        };
-        fetchData();
-    }, [videos]);
-
-    const deleteVideo = () => {
-        console.log("Hej");
+  useEffect(() => {
+    const fetchData = async () => {
+      const allVideos = await getAllVideos();
+      setVideos(allVideos.data);
     };
+    fetchData();
+  }, [videos]);
 
-    const videoUrl = "https://www.youtube.com/embed/" + videoId;
+  const handleEvent = () => {
+    deleteVideoIndex(videoId);
+  };
 
-    return (
-        <AdminLayout>
-            <ContentContainer>
-                <br></br>
-                <p>
-                    {videos
-                        .filter((videos) => {
-                            return videos.videoId.includes(videoId)
-                                ? videos
-                                : null;
-                        })
-                        .map((videos) => (
-                            <StyledTitle>
-                                <p align="center">{videos.videoTitle}</p>
-                            </StyledTitle>
-                        ))}
-                    <br />
-                </p>
-                <VideoContainer>
-                    <iframe
-                        title={videoUrl}
-                        width="540"
-                        height="315"
-                        src={videoUrl}
-                        frameborder="0"
-                        allowfullscreen
-                    ></iframe>
-                </VideoContainer>
-                <br></br>
-                <Link
-                    to={`/admin/exercise/qrpreview/${videoId}`}
-                    target="_blank"
-                >
-                    <Button icon="qrcode">Generera QR-kod</Button>
-                </Link>
-                <br></br>
-                <Button onClick={deleteVideo} icon="trash">
-                    Radera
-                </Button>
-            </ContentContainer>
-        </AdminLayout>
-    );
+  const videoUrl = "https://www.youtube.com/embed/" + videoId;
+
+  return (
+    <AdminLayout>
+      <br></br>
+      <p>
+        {videos
+          .filter((videos) => {
+            return videos.videoId.includes(videoId) ? videos : null;
+          })
+          .map((videos) => (
+            <StyledTitle>
+              <p align="center">{videos.videoTitle}</p>
+            </StyledTitle>
+          ))}
+        <br />
+      </p>
+      <VideoContainer>
+        <iframe
+          title={videoUrl}
+          width="540"
+          height="315"
+          src={videoUrl}
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </VideoContainer>
+      <br></br>
+      <Link to={`/admin/exercise/qrpreview/${videoId}`}>
+        <Button icon="qrcode">Generera QR-kod</Button>
+      </Link>
+      <br></br>
+      <Link to={`/admin/search/exercise`}>
+        <Button onClick={handleEvent} icon="trash">
+          Radera
+        </Button>
+      </Link>
+    </AdminLayout>
+  );
 };
 
 export default Video;
