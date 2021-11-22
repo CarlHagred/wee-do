@@ -40,12 +40,16 @@ export const postWatchedVideo = async (req, res) => {
       name: req.params.name,
       "statistics.vidId": req.params.videoId,
     },
-    { $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 } },
+    {
+      $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 },
+      $push: { "statistics.$.watchedTime": new Date() },
+    },
     {
       new: true,
     },
     (err, doc) => {
       if (doc) {
+        console.log(doc);
         res.status(200).send("Success");
       }
 
@@ -58,11 +62,14 @@ export const postWatchedVideo = async (req, res) => {
                 vidId: req.params.videoId,
                 scans: 0,
                 timesWatched: 1,
+                scanTime: [],
+                watchedTime: [new Date()],
               },
             },
           },
           { safe: true, new: true },
           (err, doc) => {
+            console.log(doc);
             res.status(200).send("Success");
           }
         );
