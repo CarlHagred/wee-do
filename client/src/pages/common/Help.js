@@ -18,7 +18,12 @@ const StyledH2 = styled.h2`
 `;
 
 const Help = () => {
-    let history = useHistory();
+
+    const goBack = () => {
+        window.history.back()
+    }
+
+    let cookie = localStorage.getItem("isAuthenticatedPatient")
 
     return (
         <StyledContainer>
@@ -72,7 +77,8 @@ const Help = () => {
             </li>
             <br />
             <ThemeProvider theme={AdminTheme}>
-                <Button neutral onClick={history.goBack}>Tillbaka</Button>
+                { cookie === null ? 
+                    <Button neutral onClick={goBack}>Tillbaka</Button> : null }
             </ThemeProvider>
         </StyledContainer>
     );
