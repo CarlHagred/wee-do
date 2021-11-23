@@ -1,9 +1,57 @@
 import React from "react";
+import WeeDoLogo from "../../components/images/"
+import styled from "styled-components";
+import PatientTheme from "../../themes/PatientTheme";
+import Button from "../../components/common/Button";
+
+const PageNotFoundDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15%;
+  background-image: url(${WeeDoLogo});
+  @media (max-width: 715px){
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+`
+
+const NotFoundButton = styled(Button)`
+  background-color: darkgrey;
+  :hover{
+    background-color: grey;
+  }
+`
+
+const StyledH1 = styled.h1`
+  margin: 0;
+  padding: 10px;
+  font-size: 40px;
+  @media (max-width: 497px){
+    text-align: center;
+  }
+`
+
+const StyledP = styled.p`
+  font-size: 30px;
+  padding-bottom: 10px;
+  @media (max-width: 497px){
+    text-align: center;
+  }
+`
 
 const NotFound = () => {
+    const goToPreviousPath = () => {
+      window.history.back();
+    }
+
   return (
     <>
-      <h2>404 Not Found</h2>
+      <PageNotFoundDiv>
+      <StyledH1>WeeDo hittade inte sidan</StyledH1>
+      <StyledP>Det verkar som du har hittat en sida som inte finns...</StyledP>
+      <NotFoundButton theme={PatientTheme} onClick={goToPreviousPath}>Tillbaka till förra sidan</NotFoundButton>
+      </PageNotFoundDiv>
     </>
   );
 };
