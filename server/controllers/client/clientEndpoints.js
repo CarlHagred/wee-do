@@ -1,4 +1,4 @@
-import Videos from "../../models/videos.js";
+/* import Videos from "../../models/videos.js";
 
 export const getVideoUrl = async (req, res) => {
     try {
@@ -16,3 +16,4 @@ export const getVideoUrl = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+ */
