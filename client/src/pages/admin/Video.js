@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 import { deleteVideoIndex, getAllVideos } from "../../api";
 
-import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
 
@@ -45,7 +44,7 @@ const Video = () => {
     const videoUrl = "https://www.youtube.com/embed/" + videoId;
 
     return (
-        <AdminLayout>
+        <ContentContainer>
             <br></br>
             <p>
                 {videos
@@ -77,7 +76,7 @@ const Video = () => {
             <Link to={`/admin/search/exercise`}>
                 <Button onClick={handleEvent} icon="trash">Radera</Button>
             </Link>
-        </AdminLayout>
+        </ContentContainer>
     );
 };
 

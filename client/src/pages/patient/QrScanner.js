@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import PatientLayout from "../../components/patient/PatientLayout";
+import ContentContainer from "../../components/common/ContentContainer";
 import ScanCamera from "../../components/patient/ScanCamera";
 
 const CameraContainer = styled.div`
@@ -20,12 +20,12 @@ const StyledHeader = styled.h1`
 
 const QrScanner = () => {
     return (
-        <PatientLayout>
+        <ContentContainer>
             <CameraContainer>
                 <StyledHeader>Scanna QR-kod</StyledHeader>
                 <ScanCamera />
             </CameraContainer>
-        </PatientLayout>
+        </ContentContainer>
     );
 };
 

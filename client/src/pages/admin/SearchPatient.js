@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import { getAllPatients } from "../../api";
 
-import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
@@ -57,46 +56,44 @@ const SearchPatient = () => {
         fetchData();
     }, []);
     return (
-        <AdminLayout>
-            <ContentContainer>
-                <SearchBar
-                    placeholder="Sök efter en patient... "
-                    onChange={(e) => {
-                        setSearchedName(e.target.value);
-                    }}
-                />
-                <StyledTable>
-                    <colgroup>
-                        <col />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <td>Patient-id:</td>
-                        </tr>
-                    </thead>
-                    {patients
-                        .filter((patient) => {
-                            return patient.name.includes(searchedName)
-                                ? patient
-                                : null;
-                        })
-                        .map((patient) => (
-                            <tbody>
-                                <tr key={patient._id}>
-                                    <td>
-                                        <Link
-                                            to={`/admin/statistics/${patient.name}`}
-                                            key={patient._id}
-                                        >
-                                            {patient.name}
-                                        </Link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        ))}
-                </StyledTable>
-            </ContentContainer>
-        </AdminLayout>
+        <ContentContainer>
+            <SearchBar
+                placeholder="Sök efter en patient... "
+                onChange={(e) => {
+                    setSearchedName(e.target.value);
+                }}
+            />
+            <StyledTable>
+                <colgroup>
+                    <col />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td>Patient-id:</td>
+                    </tr>
+                </thead>
+                {patients
+                    .filter((patient) => {
+                        return patient.name.includes(searchedName)
+                            ? patient
+                            : null;
+                    })
+                    .map((patient) => (
+                        <tbody>
+                            <tr key={patient._id}>
+                                <td>
+                                    <Link
+                                        to={`/admin/statistics/${patient.name}`}
+                                        key={patient._id}
+                                    >
+                                        {patient.name}
+                                    </Link>
+                                </td>
+                            </tr>
+                        </tbody>
+                    ))}
+            </StyledTable>
+        </ContentContainer>
     );
 };
 

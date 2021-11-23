@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import PatientLayout from "../../components/patient/PatientLayout";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -22,12 +22,12 @@ const StyledParagraph = styled.p`
 
 const Statistics = () => {
     return (
-        <PatientLayout>
+        <ContentContainer>
             <StyledWrapper>
                 <StyledHeader>Statistik</StyledHeader>
                 <StyledParagraph>under konstruktion</StyledParagraph>
             </StyledWrapper>
-        </PatientLayout>
+        </ContentContainer>
     );
 };
 

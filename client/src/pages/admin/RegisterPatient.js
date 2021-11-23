@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { getNewPatient } from "../../api/index";
 
-import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
 
@@ -24,12 +23,10 @@ const RegisterPatient = () => {
   };
 
   return (
-    <AdminLayout>
-      <ContentContainer>
-        <Button onClick={handleEvent}>Registrera ny patient</Button>
-        <StyledNewPatient>{newPatient}</StyledNewPatient>
-      </ContentContainer>
-    </AdminLayout>
+    <ContentContainer>
+      <Button onClick={handleEvent}>Registrera ny patient</Button>
+      <StyledNewPatient>{newPatient}</StyledNewPatient>
+    </ContentContainer>
   );
 };
 

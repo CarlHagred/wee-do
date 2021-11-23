@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 
 import { getOnePatient } from "../../api";
 
-import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledContainer = styled.div`
@@ -60,41 +59,39 @@ const PatientStatistics = () => {
     }, [name]);
 
     return (
-        <AdminLayout>
-            <ContentContainer>
-                <StyledContainer>
-                    <h2>Statistik</h2>
-                    <StyledPatient>
-                        <strong>Användarnamn: </strong>
-                        {patient.name}
-                    </StyledPatient>
-                    {patientStatistics.map((stat) => (
-                        <React.Fragment key={stat.vidId}>
-                            <StyledStatistics>
-                                <br />
-                                <p>
-                                    <strong>Video: </strong>{" "}
-                                    <StyledLink
-                                        to={`../exercise/${stat.vidId}`}
-                                    >
-                                        {stat.vidId}
-                                    </StyledLink>{" "}
-                                </p>
-                                <p>
-                                    <strong>Scans: </strong>
-                                    {stat.scans}
-                                </p>
-                                <p>
-                                    <strong>Antal visningar: </strong>
-                                    {stat.timesWatched}
-                                </p>
-                                <br />
-                            </StyledStatistics>
-                        </React.Fragment>
-                    ))}
-                </StyledContainer>
-            </ContentContainer>
-        </AdminLayout>
+        <ContentContainer>
+            <StyledContainer>
+                <h2>Statistik</h2>
+                <StyledPatient>
+                    <strong>Användarnamn: </strong>
+                    {patient.name}
+                </StyledPatient>
+                {patientStatistics.map((stat) => (
+                    <React.Fragment key={stat.vidId}>
+                        <StyledStatistics>
+                            <br />
+                            <p>
+                                <strong>Video: </strong>{" "}
+                                <StyledLink
+                                    to={`../exercise/${stat.vidId}`}
+                                >
+                                    {stat.vidId}
+                                </StyledLink>{" "}
+                            </p>
+                            <p>
+                                <strong>Scans: </strong>
+                                {stat.scans}
+                            </p>
+                            <p>
+                                <strong>Antal visningar: </strong>
+                                {stat.timesWatched}
+                            </p>
+                            <br />
+                        </StyledStatistics>
+                    </React.Fragment>
+                ))}
+            </StyledContainer>
+        </ContentContainer>
     );
 };
 export default PatientStatistics;

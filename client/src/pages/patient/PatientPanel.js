@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import PatientLayout from "../../components/patient/PatientLayout";
 import PanelButton from "../../components/common/PanelButton";
 import hero from "../../components/images/patient_hero.png";
+import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledHero = styled.div`
   width: 100vw;
@@ -42,7 +42,7 @@ const PanelMenu = styled.nav`
 
 const PatientActivityPanel = () => {
   return (
-    <PatientLayout>
+    <ContentContainer>
       <StyledHero>
         <StyledHeroHeader>Välkommen till WeeDo</StyledHeroHeader>
       </StyledHero>
@@ -56,7 +56,7 @@ const PatientActivityPanel = () => {
           </PanelButton>
         </PanelMenu>
       </PanelMenuWrapper>
-    </PatientLayout>
+    </ContentContainer>
   );
 };
 export default PatientActivityPanel;

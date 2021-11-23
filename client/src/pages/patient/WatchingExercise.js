@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import PatientLayout from "../../components/patient/PatientLayout";
+import ContentContainer from "../../components/common/ContentContainer";
 import WatchingVideo from "../../components/patient/WatchingVideo";
 
 const StyledWrapper = styled.div`
@@ -12,11 +12,11 @@ const StyledWrapper = styled.div`
 
 const WatchingExercise = () => {
     return (
-        <PatientLayout>
+        <ContentContainer>
             <StyledWrapper>
                 <WatchingVideo />
             </StyledWrapper>
-        </PatientLayout>
+        </ContentContainer>
     );
 };
 
