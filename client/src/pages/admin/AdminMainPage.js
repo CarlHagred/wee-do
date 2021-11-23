@@ -15,25 +15,13 @@ import RegisterPatient from "./RegisterPatient";
 import SearchExercise from "./SearchExercise";
 import SearchPatient from "./SearchPatient";
 import { ProtectedRouteAdmin } from "../../components/protectedRoutes/ProtectedRoutesAdmin";
-import styled from "styled-components";
-
-const TestHeader = styled.h1`
-  text-align: center;
-  font-size: 2em;
-  margin-top: 50px;
-`;
 
 function AdminMainPage() {
   return (
     <Router>
       <AdminLayout>
-        <TestHeader>Här läggs innehållet från de olika sidorna!</TestHeader>
         <Switch>
-          <ProtectedRouteAdmin
-            exact
-            path="/adminpanel"
-            component={AdminPanel}
-          />
+          <ProtectedRouteAdmin path="/admin/mainpage" component={AdminPanel} />
 
           <ProtectedRouteAdmin
             exact
