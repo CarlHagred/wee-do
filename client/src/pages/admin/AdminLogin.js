@@ -156,7 +156,7 @@ const AdminLogin = () => {
                                 placeholder="Lösenord"
                                 secureTextEntry={true}
                             />
-                            <Button onClick={listener}>Logga in</Button>
+                            <Button onClick={handleSubmit}>Logga in</Button>
                         </StyledContainerItem>
 
                     </StyledContentContainer>
