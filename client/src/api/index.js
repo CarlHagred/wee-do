@@ -30,7 +30,7 @@ export const loginPatient = (params) => {
     url: `${serverUrl}/loginpatient`,
   }).then((res) => {
     if (res.data === "auth") {
-      window.location = "/activitypanel";
+      window.location = "/mainpage";
       localStorage.setItem("isAuthenticatedPatient", "true");
       const error = document.getElementById("patientError");
       error.innerHTML = "<span></span>";

@@ -3,10 +3,14 @@ import GlobalStyle from "./globalStyle";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /* ===== Common Pages ===== */
+import Help from "./pages/common/Help";
+import About from "./pages/common/About";
 import NotFoundPage from "./pages/common/404";
 
 /* ===== Patient Pages ===== */
 import PatientLogin from "./pages/patient/PatientLogin.js";
+import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
+import PatientMainPage from "./pages/patient/PatientMainPage";
 
 /* ===== Admin Pages ===== */
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -22,8 +26,13 @@ function App() {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
-        <Route exact path="/admin" component={AdminLogin} />
+        <ProtectedRoutePatient
+          exact
+          path="/mainpage"
+          component={PatientMainPage}
+        />
 
+        <Route exact path="/admin" component={AdminLogin} />
         <ProtectedRouteAdmin
           exact
           path="/admin/mainpage"
@@ -32,6 +41,8 @@ function App() {
 
         <Route exact path="/showcase" component={Showcase} />
 
+        <Route exact path="/help" component={Help} />
+        <Route exact path="/about" component={About} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>

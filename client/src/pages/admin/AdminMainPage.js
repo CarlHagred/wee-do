@@ -23,56 +23,54 @@ const TestHeader = styled.h1`
   margin-top: 50px;
 `;
 
-function App() {
+function AdminMainPage() {
   return (
-    <>
-      <Router>
-        <AdminLayout>
-          <TestHeader>Här läggs innehållet från de olika sidorna!</TestHeader>
-          <Switch>
-            <ProtectedRouteAdmin
-              exact
-              path="/adminpanel"
-              component={AdminPanel}
-            />
+    <Router>
+      <AdminLayout>
+        <TestHeader>Här läggs innehållet från de olika sidorna!</TestHeader>
+        <Switch>
+          <ProtectedRouteAdmin
+            exact
+            path="/adminpanel"
+            component={AdminPanel}
+          />
 
-            <ProtectedRouteAdmin
-              exact
-              path="/admin/register/exercise"
-              component={RegisterExercise}
-            />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/register/exercise"
+            component={RegisterExercise}
+          />
 
-            <ProtectedRouteAdmin
-              exact
-              path="/admin/register/patient"
-              component={RegisterPatient}
-            />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/register/patient"
+            component={RegisterPatient}
+          />
 
-            <ProtectedRouteAdmin
-              exact
-              path="/admin/statistics/:name"
-              component={PatientStatistics}
-            />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/statistics/:name"
+            component={PatientStatistics}
+          />
 
-            <ProtectedRouteAdmin
-              exact
-              path="/admin/search/exercise"
-              component={SearchExercise}
-            />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/search/exercise"
+            component={SearchExercise}
+          />
 
-            <ProtectedRouteAdmin
-              exact
-              path="/admin/search/patient"
-              component={SearchPatient}
-            />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/search/patient"
+            component={SearchPatient}
+          />
 
-            <Route exact path="/help" component={Help} />
-            <Route exact path="/about" component={About} />
-          </Switch>
-        </AdminLayout>
-      </Router>
-    </>
+          <Route exact path="/help" component={Help} />
+          <Route exact path="/about" component={About} />
+        </Switch>
+      </AdminLayout>
+    </Router>
   );
 }
 
-export default App;
+export default AdminMainPage;
