@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
-import { getAllVideos } from "../../api";
+import { getAllVideos, postSelectedExercises } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
@@ -38,6 +39,7 @@ const StyledDiv = styled.div`
 `;
 
 const SelectExercises = () => {
+  const { name } = useParams();
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
   const [amount, setAmount] = useState([]);
@@ -91,7 +93,9 @@ const SelectExercises = () => {
   };
 
   const handleSubmit = () => {
-    console.log(selected);
+    if (selected.length === 0) return;
+
+    postSelectedExercises(name, selected);
   };
 
   return (
