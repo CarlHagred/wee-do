@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import AdminTheme from "../../themes/AdminTheme";
 
 import Button from "../../components/common/Button";
 
@@ -70,7 +71,9 @@ const Help = () => {
                 5 (övrigt).
             </li>
             <br />
-            <Button onClick={history.goBack}>Tillbaka</Button>
+            <ThemeProvider theme={AdminTheme}>
+                <Button neutral onClick={history.goBack}>Tillbaka</Button>
+            </ThemeProvider>
         </StyledContainer>
     );
 };
