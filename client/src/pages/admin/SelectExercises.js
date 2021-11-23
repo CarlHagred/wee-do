@@ -51,18 +51,12 @@ const SelectExercises = () => {
   useEffect(() => {
     const fetchData = async () => {
       const allVideos = await getAllVideos();
-
       setVideos(allVideos.data);
-
       let nerArr = Array(allVideos.data.length).fill(false);
-
       setCheckedState(nerArr);
-
       let amountArr = Array(allVideos.data.length).fill(1);
-
       setAmount(amountArr);
     };
-
     fetchData();
   }, []);
 
@@ -94,7 +88,6 @@ const SelectExercises = () => {
 
   const handleSubmit = () => {
     if (selected.length === 0) return;
-
     postSelectedExercises(name, selected);
   };
 
