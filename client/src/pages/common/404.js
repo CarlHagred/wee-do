@@ -6,17 +6,15 @@ import Button from "../../components/common/Button";
 
 const StyledWdLogo = styled(WdLogo)`
   opacity: 0.2;
-  width: 45%;
+  width: 36%;
   display: flex;
-  margin: auto;
 `
 
 const PageNotFoundDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15%;
-  margin: auto;
+  margin-top: 5%;
   @media (max-width: 715px){
     margin-left: 30px;
     margin-right: 30px;
@@ -33,14 +31,14 @@ const NotFoundButton = styled(Button)`
 const StyledH1 = styled.h1`
   margin: 0;
   padding: 10px;
-  font-size: 40px;
+  font-size: 37px;
   @media (max-width: 497px){
     text-align: center;
   }
 `
 
 const StyledP = styled.p`
-  font-size: 30px;
+  font-size: 27px;
   padding-bottom: 10px;
   @media (max-width: 497px){
     text-align: center;
@@ -54,8 +52,8 @@ const NotFound = () => {
 
   return (
     <>
-      <StyledWdLogo></StyledWdLogo>
       <PageNotFoundDiv>
+        <StyledWdLogo></StyledWdLogo>
         <StyledH1>WeeDo hittade inte sidan</StyledH1>
         <StyledP>Det verkar som du har hittat en sida som inte finns...</StyledP>
         <NotFoundButton theme={PatientTheme} onClick={goToPreviousPath}>Tillbaka till förra sidan</NotFoundButton>
