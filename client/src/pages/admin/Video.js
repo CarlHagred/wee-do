@@ -7,7 +7,6 @@ import { deleteVideoIndex, getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
-//import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledTitle = styled.p`
   font-weight: bold;
@@ -20,6 +19,11 @@ max-height: 750px;*/
   justify-content: center;
   display: flex;
   margin: auto;
+  padding-bottom: 0.2em;
+`;
+
+const VideoItem = styled.div`
+  padding: 0.2em;
 `;
 
 const Video = () => {
@@ -42,8 +46,7 @@ const Video = () => {
 
   return (
     <AdminLayout>
-      <br></br>
-      <p>
+      <p padding-top={"0.4em"} padding-bottom={"0.2em"}>
         {videos
           .filter((videos) => {
             return videos.videoId.includes(videoId) ? videos : null;
@@ -53,7 +56,6 @@ const Video = () => {
               <p align="center">{videos.videoTitle}</p>
             </StyledTitle>
           ))}
-        <br />
       </p>
       <VideoContainer>
         <iframe
@@ -65,16 +67,22 @@ const Video = () => {
           allowfullscreen
         ></iframe>
       </VideoContainer>
-      <br></br>
-      <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-        <Button icon="qrcode">Generera QR-kod</Button>
-      </Link>
-      <br></br>
-      <Link to={`/admin/search/exercise`}>
-        <Button onClick={handleEvent} icon="trash">
-          Radera
-        </Button>
-      </Link>
+      <VideoItem>
+        <Link
+          to={`/admin/exercise/qrpreview/${videoId}`}
+          padding-bottom={"0.5em"}
+          target="_blank"
+        >
+          <Button icon="qrcode">Generera QR-kod</Button>
+        </Link>
+      </VideoItem>
+      <VideoItem>
+        <Link to={`/admin/search/exercise`}>
+          <Button onClick={handleEvent} icon="trash">
+            Radera
+          </Button>
+        </Link>
+      </VideoItem>
     </AdminLayout>
   );
 };
