@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 
@@ -14,21 +13,14 @@ import QrScanner from "./QrScanner";
 import Statistics from "./Statistics";
 import { ProtectedRoutePatient } from "../../components/protectedRoutes/ProtectedRoutesPatient";
 
-const TestHeader = styled.h1`
-  text-align: center;
-  font-size: 2em;
-  margin-top: 50px;
-`;
-
 function PatientMainPage() {
   return (
     <Router>
       <PatientLayout>
-        <TestHeader>Här läggs innehållet från de olika sidorna!</TestHeader>
         <Switch>
           <ProtectedRoutePatient
             exact
-            path="/patientpanel"
+            path="/mainpage"
             component={PatientPanel}
           />
           <ProtectedRoutePatient
