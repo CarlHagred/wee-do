@@ -21,7 +21,11 @@ function AdminMainPage() {
     <Router>
       <AdminLayout>
         <Switch>
-          <ProtectedRouteAdmin path="/admin/mainpage" component={AdminPanel} />
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/mainpage"
+            component={AdminPanel}
+          />
 
           <ProtectedRouteAdmin
             exact
