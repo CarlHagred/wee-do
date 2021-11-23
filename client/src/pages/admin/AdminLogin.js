@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
@@ -94,29 +94,22 @@ const AdminLogin = () => {
         window.location.reload();
     }
 
-    const once = {
-        once: true
-    }
-
-    window.addEventListener("keyup", (event) => {
-        let key = event.key
-        if(key === "Enter") {
-            event.preventDefault()
-            handleSubmit();
-            console.log("Enter är klickat");
-        }
-    })
-
     const [loginName, setLoginName] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    
     const handleSubmit = () => {
-        console.log(`försöker logga in med ${loginName}`);
         const postData = {
             username: loginName.trim(),
             password: loginPassword.trim(),
         };
-
         loginAdmin(postData);
+    };
+
+    const listener = (event) => {
+        let key = 13
+        if(event.keyCode === key){
+            handleSubmit();
+        }
     };
 
     return (
@@ -142,7 +135,7 @@ const AdminLogin = () => {
                     <StyledContentContainer>
                         <StyledLoginHeader>Admin Login</StyledLoginHeader>
 
-                        <StyledContainerItem>
+                        <StyledContainerItem onKeyDown={listener}>
                             <span id="adminError"></span>
                             <StyledUserInput
                                 theme={AdminTheme}
@@ -163,7 +156,7 @@ const AdminLogin = () => {
                                 placeholder="Lösenord"
                                 secureTextEntry={true}
                             />
-                            <Button onClick={handleSubmit}>Logga in</Button>
+                            <Button onClick={listener}>Logga in</Button>
                         </StyledContainerItem>
 
                     </StyledContentContainer>
