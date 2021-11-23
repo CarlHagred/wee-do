@@ -23,7 +23,8 @@ const Help = () => {
         window.history.back()
     }
 
-    let cookie = localStorage.getItem("isAuthenticatedPatient")
+    let cookieAdmin = localStorage.getItem("isAuthenticatedAdmin")
+    let cookiePatient = localStorage.getItem("isAuthenticatedPatient")
 
     return (
         <StyledContainer>
@@ -77,7 +78,7 @@ const Help = () => {
             </li>
             <br />
             <ThemeProvider theme={AdminTheme}>
-                { cookie === null ? 
+                { cookieAdmin === null && cookiePatient === null ? 
                     <Button neutral onClick={goBack}>Tillbaka</Button> : null }
             </ThemeProvider>
         </StyledContainer>
