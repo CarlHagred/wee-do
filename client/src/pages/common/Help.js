@@ -69,7 +69,7 @@ const Help = () => {
             <strong>Det fungerar inte att logga in:</strong>
             <p>Om det inte fungerar att logga in, kontrollera följande:</p>
 
-            <li>Kontrollera att ditt användarnamn stämmer, 6 tecken.</li>
+            <li>Kontrollera att dina användaruppgifter stämmer och att du har matat in dem korrekt</li>
             <li>Kontrollera din nätverksanslutning</li>
             <li>
                 Om det fortfarande inte fungerar, kontakta Region Skånes
