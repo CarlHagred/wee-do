@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 
-import { deletePatientIndex, getOnePatient } from "../../api";
+import { deletePatientIndex, getOnePatient, setPatientInactiveIndex } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
@@ -75,12 +75,29 @@ const customDeletePatient = async () => {
   }
 };
 
+const customPatientInactive = async () => {
+  const conf = await Confirm(
+    "Är du säker på att du vill göra " + name + " inaktiv?",
+    "Inaktiv",
+    "OK",
+    "Avbryt"
+  );
+  if (conf) {
+    setPatientInactive();
+    window.location = "/admin/search/patient";
+  }
+};
+
 const deletePatient = () => {
   deletePatientIndex(name);
 };
 
 const setPatientInactive = () => {
+//anrop till db för att kolla om inaktiv är true eller false
+//om false, så sätt till true
+setPatientInactiveIndex(name);
 };
+
 
 return (
   <AdminLayout>
@@ -116,7 +133,7 @@ return (
             <br/>
             <Button onClick={customDeletePatient} icon="trash">Radera patient</Button>
             <br/>
-            <Button onClick={setPatientInactive} icon="patientInactive">Gör patient inaktiv</Button>
+            <Button onClick={customPatientInactive} icon="patientInactive">Gör patient inaktiv</Button>
       </StyledContainer>
     </ContentContainer>
   </AdminLayout>

@@ -19,6 +19,15 @@ export const deletePatientIndex = async (params) => {
     });
 }
 
+export const setPatientInactiveIndex = async (params) => {
+    await axios.post(`${serverUrl}/setpatientinactive`,{
+        data: {
+            name: params
+        }
+    });
+} 
+
+
 /* ===== Session calls ===== */
 
 export const getSession = () =>

@@ -101,3 +101,12 @@ export const getVideoUrl = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const setPatientInactive = async (req, res) => {
+  const name = req.body.name;
+  const falseBoolean = "false";
+  Patient.findOneAndUpdate({"name": name}, {$set:{"active": falseBoolean}}, {new: true})
+  console.log("TestHanna")
+  res.status(200).send({message: "Patient deleted successfully!"})
+  
+};
