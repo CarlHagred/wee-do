@@ -18,7 +18,7 @@ export const postPatient = async (req, res) => {
         name: name,
         statistics: [],
         videos: [],
-        active: "true"
+        active: true
       });
       await newPatient.save();
       //skickar det skapade namnet till klienten så det kan visas för personalen

@@ -51,7 +51,7 @@ router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.delete("/deletepatient", deletePatient);
-router.post("/setpatientinactive", setPatientInactive);
+router.delete("/setpatientinactive", setPatientInactive);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });

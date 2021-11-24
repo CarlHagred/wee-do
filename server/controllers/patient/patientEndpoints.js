@@ -83,6 +83,18 @@ export const deletePatient = async (req, res) => {
     res.status(200).send({message: "Patient deleted successfully!"})
   })
 };
+
+export const setPatientInactive = async (req, res) => {
+  const name = req.body.name;
+  //const falseBoolean = "false";
+  Patient.findOneAndUpdate({"name": name}, {$set:{"active": false}}, {new: true}, 
+  (err, doc) => {
+    if (doc) {
+      res.status(200).send("Success");
+    }})
+};
+
+
 import Videos from "../../models/videos.js";
 
 export const getVideoUrl = async (req, res) => {
@@ -102,11 +114,4 @@ export const getVideoUrl = async (req, res) => {
   }
 };
 
-export const setPatientInactive = async (req, res) => {
-  const name = req.body.name;
-  const falseBoolean = "false";
-  Patient.findOneAndUpdate({"name": name}, {$set:{"active": falseBoolean}}, {new: true})
-  console.log("TestHanna")
-  res.status(200).send({message: "Patient deleted successfully!"})
-  
-};
+

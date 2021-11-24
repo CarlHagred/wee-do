@@ -90,6 +90,7 @@ const customPatientInactive = async () => {
 
 const deletePatient = () => {
   deletePatientIndex(name);
+  console.log(name);
 };
 
 const setPatientInactive = () => {

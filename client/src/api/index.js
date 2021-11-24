@@ -20,7 +20,7 @@ export const deletePatientIndex = async (params) => {
 }
 
 export const setPatientInactiveIndex = async (params) => {
-    await axios.post(`${serverUrl}/setpatientinactive`,{
+    await axios.delete(`${serverUrl}/setpatientinactive`,{
         data: {
             name: params
         }
