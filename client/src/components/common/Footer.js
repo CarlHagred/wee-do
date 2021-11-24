@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import WdLogo from "../images/WdLogo";
-import RsLogoSolid from "../images/RsLogoSolid";
 import MauLogo from "../images/MauLogo";
 
 const StyledFooter = styled.footer`
@@ -87,16 +86,9 @@ const Footer = () => {
             <BotttomContainer>
                 <AboutContainer>
                     <StyledParagraph>
-                        WeeDo är ett samarbete mellan sjukgymnaster på Region
-                        Skåne och studenter på Malmö Universitet.
+                        WeeDo är ett samarbete mellan sjukgymnaster på Mobilt Sjukhus Team  och studenter på Malmö Universitet.
                     </StyledParagraph>
                     <LogoContainer>
-                        <RsLogoSolid
-                            width="52px"
-                            height="45px"
-                            fill="white"
-                            alt="Region Skåne logotyp"
-                        />
                         <MauLogo
                             width="52px"
                             height="45px"
