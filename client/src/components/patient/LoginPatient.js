@@ -26,6 +26,13 @@ const LoginPatient = () => {
         localStorage.clear();
     };
 
+    const listener = (event) => {
+        let key = 13
+        if(event.keyCode === key){
+            handleSubmit();
+        }
+    };
+
     return (
         <>
             <span id="patientError" />
@@ -34,6 +41,7 @@ const LoginPatient = () => {
                 type="text"
                 name="name"
                 id="loginPatient"
+                onKeyDown={listener}
                 onChange={(e) => setLoginName(e.target.value)}
                 placeholder="Skriv användarnamn här..."
             ></UserInput>
