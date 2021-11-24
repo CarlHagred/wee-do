@@ -14,9 +14,7 @@ import Videos from "../../models/videos.js";
 
 import dotenv from "dotenv";
 
-import axios from "axios";
-
-
+import axios from "axios"; 
 
 const service = google.youtube('v3');
 
@@ -151,6 +149,7 @@ export const UpdateDatabase = async (req, res) => {
 
     try 
     {
+
         const data = await axios.get(url);
 
         for (let i in data.data.items) 
@@ -176,3 +175,42 @@ export const UpdateDatabase = async (req, res) => {
         res.send('Error occured while updating the db due to: ' + error.message);
     }
 };
+
+const authenticateToDelete = videoId => {
+
+    return gapi.auth2.getAuthInstance()
+    .signIn({
+        scope: "https://www.googleapis.com/auth/youtube.force-ssl"
+    }).then(() =>
+    {
+        console.log("Sign-in successfull"); 
+        loadClientAndDeleteVideo(videoId); 
+
+    }, error => {
+        console.log("Error signing in due to: ", error);
+    })
+}
+const loadClientAndDeleteVideo = videoId => {
+    const api_key = process.env.API_KEY; 
+    gapi.client.setApiKey(api_key); 
+
+    const clientId = credentials.web.client_id;
+    gapi.load("client:auth2", () => {
+        gapi.auth2.init({
+            client_id: {clientId} 
+        })
+    }); 
+    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+    .then( () => {
+        console.log("Gapi client loaded"); 
+        return gapi.client.youtube.videos.delete({
+            "id": {videoId}
+        }).then( response => {
+            console.log("Video deleting response ", response.result); 
+        }, then( error => {
+            console.error("Executing the video deleting method error ", error); 
+        }))
+    }, error => {
+        console.log("Error loading GAPI client for API: ", error); 
+    })
+}

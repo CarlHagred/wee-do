@@ -67,6 +67,7 @@ const id = req.body.videoId;
           message: "Video not fount with id: " + id
         })
       }
+      //Once deleted from db, code here to delete it from yt-channel. 
       res.status(200).send({message: "Video deleted successfully!"})
     })
 };
