@@ -1,29 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { getSession, postWatchedVideo, getTitleAndDescById } from "../../api";
-import { ThemeProvider } from "styled-components";
-import PatientTheme from "../../themes/PatientTheme"; 
 import Button from "../common/Button";
 import styled from "styled-components";
-import ReactPlayer from "react-player/youtube"; 
-import Footer from "../common/Footer";
-import Navbar from "./PatientNavbar";
-//import Header from "../common/Header"; 
+import ReactPlayer from "react-player/youtube";
+import PatientLayout from "./PatientLayout";
+
+const ContentContainer = styled.div`
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 650px) {
+    margin: 3em auto 0 auto;
+  }
+`;
+
+const StyledReactPlayer = styled(ReactPlayer)`
+  div {
+    aspect-ratio: 16/9;
+  }
+`;
+
+//import Header from "../common/Header";
 
 const StyledH2 = styled.h2`
-    font-size: 1.5em;
-    text-align: auto;
-    padding: 10px;
-    font-weight: 600;
+  font-size: 1.5em;
+  padding: 10px;
+  font-weight: 600;
 `;
 
 const StyledParagraph = styled.p`
-    color: gray;
-    text-align: auto;
-    padding: 10px;
+  color: gray;
+  padding: 10px;
 `;
 
 const WatchExercise = () => {
-
   const search = window.location.search; // returns the URL query String
   const params = new URLSearchParams(search);
   const videoUrl = params.get("title");
@@ -33,29 +44,31 @@ const WatchExercise = () => {
   const videoId = videoUrl.split("/").pop();
 
   const [patientName, setPatientName] = useState("");
- // const [watchedVideo, setWatchedVideo] = useState(false);
+  // const [watchedVideo, setWatchedVideo] = useState(false);
 
   const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null); 
-  const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);  
+  const [description, setDescription] = useState(null);
+  const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [buttonInnerText, setButtonInnerText] = useState("Jag har tittat på övning och gjort den"); 
-  const [buttonBackground, setButtonBackground] = useState('red'); 
-  const [watchedButtonDisabled, SetWatchedButtonDisabled] = useState(true); 
-  
-  const ref = React.createRef(); 
+  const [buttonInnerText, setButtonInnerText] = useState(
+    "Jag har tittat på övning och gjort den"
+  );
+  const [buttonBackground, setButtonBackground] = useState("red");
+  const [watchedButtonDisabled, SetWatchedButtonDisabled] = useState(true);
+
+  const ref = React.createRef();
 
   const [playerControls, setPlayerControls] = useState({
     playing: true,
-    controls: false, 
-    volume: 0.9
-  }); 
- 
+    controls: false,
+    volume: 0.9,
+  });
+
   const playerVars = {
     youtube: {
-      playerVars: { controls: 1, modestbranding: 1, rel: 0 }
-    }
-  }
+      playerVars: { controls: 1, modestbranding: 1, rel: 0 },
+    },
+  };
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -67,57 +80,65 @@ const WatchExercise = () => {
   //UseEffect to fetch video title down
   useEffect(() => {
     const titleAndDesc = async (id) => {
-      const response =  await getTitleAndDescById(id);
-      setTitle(response.title); 
-      setDescription(response.description);  
-      setIsTitleAndDescFetched(true); 
-    }; 
-    titleAndDesc(videoId); 
-  }); 
+      const response = await getTitleAndDescById(id);
+      setTitle(response.title);
+      setDescription(response.description);
+      setIsTitleAndDescFetched(true);
+    };
+    titleAndDesc(videoId);
+  });
 
   const handleEvent = async () => {
     await postWatchedVideo(patientName, videoId);
     //handleClick.data == "Success"
     //  ? setWatchedVideo(true)
-    //  : setWatchedVideo(false); 
+    //  : setWatchedVideo(false);
 
-      setButtonBackground('green'); 
-      setButtonInnerText('Bra jobbat...!'); 
+    setButtonBackground("green");
+    setButtonInnerText("Bra jobbat...!");
   };
-  const {playing, controls, volume} = playerControls; 
+  const { playing, controls, volume } = playerControls;
   return (
-    <ThemeProvider theme={PatientTheme}>
-      <Navbar/>
-      <div className="content-media" style ={{margin: "1em",padding: '6rem 20em' }}> 
-     
-        <ReactPlayer url={vid} ref={ref}  width="640px" height="360px" playing={playing} 
-        controls={controls} volume={volume} 
-        config={playerVars}  
-        onEnded={() => {
-          
-        //  const duration = parseFloat( ref.current.getDuration()).toFixed(); 
-        //  const playedSec = ref.current.getCurrentTime(); 
-          
-         // if(duration === playedSeconds) console.log("Video is completely watched"); 
+    <PatientLayout>
+      <ContentContainer>
+        <StyledReactPlayer
+          url={vid}
+          ref={ref}
+          width="100%"
+          height="100%"
+          playing={playing}
+          controls={controls}
+          volume={volume}
+          config={playerVars}
+          onEnded={() => {
+            //  const duration = parseFloat( ref.current.getDuration()).toFixed();
+            //  const playedSec = ref.current.getCurrentTime();
 
-          //console.log("video length : "+duration);
-          //console.log("video played in seconds : "+playedSec);
-          SetWatchedButtonDisabled(false);  
+            // if(duration === playedSeconds) console.log("Video is completely watched");
 
-        }}></ReactPlayer>
-         <div className="videoTitle">
-          { isTitleAndDescFetched && <StyledH2>{title}</StyledH2> }
-          { isTitleAndDescFetched && <StyledParagraph className="description">{description}</StyledParagraph> }
+            //console.log("video length : "+duration);
+            //console.log("video played in seconds : "+playedSec);
+            SetWatchedButtonDisabled(false);
+          }}
+        />
+        {isTitleAndDescFetched && <StyledH2>{title}</StyledH2>}
+        {isTitleAndDescFetched && (
+          <StyledParagraph className="description">
+            {description}
+          </StyledParagraph>
+        )}
+
+        <div className="btn-Watched-Video">
+          <Button
+            disabled={watchedButtonDisabled}
+            onClick={handleEvent}
+            style={{ margin: "1em 0em", background: `${buttonBackground}` }}
+          >
+            {buttonInnerText}
+          </Button>
         </div>
-         
-          <div className="btn-Watched-Video">
-            <Button disabled={watchedButtonDisabled} onClick={handleEvent} style={{margin: '1em 0em', background: `${buttonBackground}`}}>
-              {buttonInnerText}
-            </Button>
-          </div>
-      </div>
-      <Footer/>
-    </ThemeProvider>
+      </ContentContainer>
+    </PatientLayout>
   );
 };
 export default WatchExercise;
