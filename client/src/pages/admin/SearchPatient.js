@@ -8,6 +8,11 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
+const styledDiv = styled.div`
+border: 50 px;
+text-align: center
+`;
+
 const StyledTable = styled.table`
     caption-side: top;
     border-collapse: separate;
@@ -65,6 +70,7 @@ const SearchPatient = () => {
                         setSearchedName(e.target.value);
                     }}
                 />
+                <styledDiv>
                 <StyledTable>
                     <colgroup>
                         <col />
@@ -95,6 +101,7 @@ const SearchPatient = () => {
                             </tbody>
                         ))}
                 </StyledTable>
+                </styledDiv>
             </ContentContainer>
         </AdminLayout>
     );
