@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/weedo/static/js/main.9052977e.chunk.js",
+    "main.js.map": "/weedo/static/js/main.9052977e.chunk.js.map",
+    "runtime-main.js": "/weedo/static/js/runtime-main.002b9878.js",
+    "runtime-main.js.map": "/weedo/static/js/runtime-main.002b9878.js.map",
+    "static/css/2.9010d035.chunk.css": "/weedo/static/css/2.9010d035.chunk.css",
+    "static/js/2.cd3aa848.chunk.js": "/weedo/static/js/2.cd3aa848.chunk.js",
+    "static/js/2.cd3aa848.chunk.js.map": "/weedo/static/js/2.cd3aa848.chunk.js.map",
+    "index.html": "/weedo/index.html",
+    "static/css/2.9010d035.chunk.css.map": "/weedo/static/css/2.9010d035.chunk.css.map",
+    "static/js/2.cd3aa848.chunk.js.LICENSE.txt": "/weedo/static/js/2.cd3aa848.chunk.js.LICENSE.txt",
+    "static/media/AdminHeroBanner.dd61ad4f.png": "/weedo/static/media/AdminHeroBanner.dd61ad4f.png",
+    "static/media/patient_hero.a5c51341.png": "/weedo/static/media/patient_hero.a5c51341.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.002b9878.js",
+    "static/css/2.9010d035.chunk.css",
+    "static/js/2.cd3aa848.chunk.js",
+    "static/js/main.9052977e.chunk.js"
+  ]
+}

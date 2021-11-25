@@ -21,13 +21,35 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
+//const app = express();
+
+const express = require("express");
+const path = require("path");
 const app = express();
+
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.listen(8000);
+
+const root = require("path").join(__dirname, "build");
+app.use(express.static(root));
+
+app.path = {
+  auth: "/api/auth",
+  homepage: "/api/homepage",
+};
+
+app.use(cors());
 
 //middleware with passport
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://vardspel.se/weedo",
     credentials: true,
   })
 );
