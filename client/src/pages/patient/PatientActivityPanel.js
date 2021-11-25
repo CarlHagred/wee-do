@@ -44,7 +44,7 @@ const PatientActivityPanel = () => {
     return (
         <PatientLayout>
             <StyledHero>
-                <StyledHeroHeader>Välkommen till WeeDo</StyledHeroHeader>
+                <StyledHeroHeader></StyledHeroHeader>
             </StyledHero>
             <PanelMenuWrapper>
                 <PanelMenu>
