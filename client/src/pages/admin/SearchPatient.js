@@ -10,151 +10,141 @@ import ContentContainer from "../../components/common/ContentContainer";
 
 
 const ListPanelWrapper = styled.div`
-    //display: flex;
-    justify-content: center;
+  justify-content: center;
 `;
 
 const ListPanel = styled.nav`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-    align-items: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
 `;
 
-
-
 const StyledTable = styled.table`
-    caption-side: top;
-    border-collapse: separate;
-    border-spacing: 5px;
-    width: 46%;
-    margin: 1em 0;
-    justify-content: left;
-    border-radius: 4px;
+  caption-side: top;
+  border-collapse: separate;
+  border-spacing: 5px;
+  width: 46%;
+  margin: 1em 0;
+  justify-content: left;
+  border-radius: 4px;
 
-    td,
-    th {
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-family: "Roboto", sans-serif;
-        font-size: 1em;
-        text-align: left;
+  td,
+  th {
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-family: "Roboto", sans-serif;
+      font-size: 1em;
+      text-align: left;
     }
 
     tbody tr {
-        :nth-of-type(odd) {
-            background-color: rgb(247, 247, 248, 100%);
-        }
-        :nth-of-type(even) {
-            background-color: rgb(247, 247, 248, 100%);
-        }
-        :hover {
-            filter: brightness(130%);
-            background-color: ${(props) => props.theme.palette.hover};
-        }
+      :nth-of-type(odd) {
+      background-color: rgb(247, 247, 248, 100%);
+      }
+      :nth-of-type(even) {
+        background-color: rgb(247, 247, 248, 100%);
+      }
+      :hover {
+        filter: brightness(130%);
+        background-color: ${(props) => props.theme.palette.hover};
+      }
     }
+
     thead td {
-        background-color: #c2c2c2;
-        border-radius: 4px;
-        font-size: 1.2em;
+      background-color: #c2c2c2;
+      border-radius: 4px;
+      font-size: 1.2em;
     }
 `;
 
 const SearchPatient = () => {
-    const [patients, setPatients] = useState([]);
-    const [searchedName, setSearchedName] = useState("");
+  const [patients, setPatients] = useState([]);
+  const [searchedName, setSearchedName] = useState("");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const allPatients = await getAllPatients();
-            setPatients(allPatients.data);
-        };
-        fetchData();
-    }, []);
-    return (
-        <AdminLayout>
-            <ContentContainer>
-            <ListPanelWrapper>
-                <ListPanel> 
-                <SearchBar
-                    placeholder="Sök efter en patient... "
-                    onChange={(e) => {
-                        setSearchedName(e.target.value);
-                    }}
-                />          
-                <StyledTable>
-                    <colgroup>
-                        <col />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <td>Aktiva patient-id:</td>
-                        </tr>
-                    </thead>
-                    {patients
-                        .filter((patient) => {
-                            return patient.name.includes(searchedName)
-                                ? patient
-                                : null;
-                        })
-                        .map((patient) => (
-                            <tbody>
-                                <tr key={patient._id}>
-                                    <td>
-                                        <Link
-                                            to={`/admin/statistics/${patient.name}`}
-                                            key={patient._id}
-                                        >
-                                            {patient.name}
-                                        </Link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        ))}
-                </StyledTable>
-
-                
-                            
-                <StyledTable>
-                    <colgroup>
-                        <col />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <td>Inaktiva patient-id:</td>
-                        </tr>
-                    </thead>
-                    {patients
-                        .filter((patient) => {
-                            return patient.name.includes(searchedName)
-                                ? patient
-                                : null;
-                        })
-                        .map((patient) => (
-                            <tbody>
-                                <tr key={patient._id}>
-                                    <td>
-                                        <Link
-                                            to={`/admin/statistics/${patient.name}`}
-                                            key={patient._id}
-                                        >
-                                            {patient.name}
-                                        </Link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        ))}
-                </StyledTable>
-
-
-                </ListPanel>
-                </ListPanelWrapper>
-            </ContentContainer>
-        </AdminLayout>
-    );
+  useEffect(() => {
+    const fetchData = async () => {
+    const allPatients = await getAllPatients();
+    setPatients(allPatients.data);
+    };
+    fetchData();
+  }, []);
+  return (
+  <AdminLayout>
+    <ContentContainer>
+      <ListPanelWrapper>
+        <ListPanel> 
+          <SearchBar
+            placeholder="Sök efter en patient... "
+            onChange={(e) => {
+            setSearchedName(e.target.value);
+            }}/>          
+            <StyledTable>
+              <colgroup>
+                <col/>
+              </colgroup>
+              <thead>
+                <tr >
+                  <td>Aktiva patient-id:</td>
+                </tr>
+              </thead>
+              {patients
+                .filter((patient) => {
+                  return patient.name.includes(searchedName)
+                  ? patient
+                  : null;
+                })
+                .map((patient) => (
+                <tbody>
+                  <tr key={patient._id}>
+                     <td>
+                      <Link
+                        to={`/admin/statistics/${patient.name}`}
+                        key={patient._id}>
+                        {patient.name}
+                      </Link>    
+                      </td>
+                  </tr>
+                </tbody>
+                ))}
+            </StyledTable>             
+            <StyledTable>
+              <colgroup>
+                <col/>
+              </colgroup>
+              <thead>
+                <tr >
+                  <td>Aktiva patient-id:</td>
+                </tr>
+              </thead>
+              {patients
+                .filter((patient) => {
+                  return patient.name.includes(searchedName)
+                  ? patient
+                  : null;
+                })
+                .map((patient) => (
+                <tbody>
+                  <tr key={patient._id}>
+                     <td>
+                      <Link
+                        to={`/admin/statistics/${patient.name}`}
+                        key={patient._id}>
+                        {patient.name}
+                      </Link>    
+                      </td>
+                  </tr>
+                </tbody>
+                ))}
+            </StyledTable>
+          </ListPanel>
+        </ListPanelWrapper>
+      </ContentContainer>
+    </AdminLayout>
+);
 };
 
 export default SearchPatient;
