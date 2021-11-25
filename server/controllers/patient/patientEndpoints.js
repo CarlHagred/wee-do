@@ -35,6 +35,9 @@ export const deleteSession = (req, res) => {
 export const postScan = async (req, res) => {};
 
 export const postWatchedVideo = async (req, res) => {
+  console.log(typeof req.params.active);
+  console.log(req.params.active);
+  if(req.params.active == "true"){
   Patient.findOneAndUpdate(
     {
       name: req.params.name,
@@ -47,6 +50,7 @@ export const postWatchedVideo = async (req, res) => {
     (err, doc) => {
       if (doc) {
         res.status(200).send("Success");
+        console.log(doc);
       }
 
       if (!doc) {
@@ -64,11 +68,15 @@ export const postWatchedVideo = async (req, res) => {
           { safe: true, new: true },
           (err, doc) => {
             res.status(200).send("Success");
+            console.log(doc);
           }
         );
       }
     }
-  );
+  )};
+  if(req.params.active == "false"){
+    res.status(200).send("Inactive");
+  }
 };
 
 export const deletePatient = async (req, res) => {
@@ -85,8 +93,7 @@ export const deletePatient = async (req, res) => {
 };
 
 export const setPatientInactive = async (req, res) => {
-  const name = req.body.name;
-  //const falseBoolean = "false";
+  const name = req.params.name;
   Patient.findOneAndUpdate({"name": name}, {$set:{"active": false}}, {new: true}, 
   (err, doc) => {
     if (doc) {

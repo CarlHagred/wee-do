@@ -48,10 +48,10 @@ router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
-router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
+router.post("/postwatchedvideo/:name/:videoId/:active", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.delete("/deletepatient", deletePatient);
-router.delete("/setpatientinactive", setPatientInactive);
+router.put("/setpatientinactive/:name", setPatientInactive);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });
