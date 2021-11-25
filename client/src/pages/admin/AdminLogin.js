@@ -78,11 +78,6 @@ const StyledLoginHeader = styled(StyledContainerItem)`
     margin: 40px 0;
 `;
 
-const StyledLoginFooter = styled(StyledContainerItem)`
-    margin-top: 40px;
-    margin-bottom: 20px;
-`;
-
 const StyledUserInput = styled(UserInput)`
     text-align: left;
 `;

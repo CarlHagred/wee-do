@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router";
 import styled, { ThemeProvider } from "styled-components";
 import AdminTheme from "../../themes/AdminTheme";
 
