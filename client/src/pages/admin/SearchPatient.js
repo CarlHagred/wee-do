@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Flexbox } from "../../components/common/Flexbox";
 
 import { getAllPatients } from "../../api";
 
@@ -8,10 +9,12 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
-const styledDiv = styled.div`
-border: 50 px;
-text-align: center
+
+const StyledDiv = styled.div`
+width: 50%;
 `;
+
+
 
 const StyledTable = styled.table`
     caption-side: top;
@@ -69,8 +72,7 @@ const SearchPatient = () => {
                     onChange={(e) => {
                         setSearchedName(e.target.value);
                     }}
-                />
-                <styledDiv>
+                />               
                 <StyledTable>
                     <colgroup>
                         <col />
@@ -80,6 +82,7 @@ const SearchPatient = () => {
                             <td>Patient-id:</td>
                         </tr>
                     </thead>
+                    <Flexbox>
                     {patients
                         .filter((patient) => {
                             return patient.name.includes(searchedName)
@@ -100,8 +103,8 @@ const SearchPatient = () => {
                                 </tr>
                             </tbody>
                         ))}
+                        </Flexbox>
                 </StyledTable>
-                </styledDiv>
             </ContentContainer>
         </AdminLayout>
     );
