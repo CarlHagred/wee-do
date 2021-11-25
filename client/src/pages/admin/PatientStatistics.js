@@ -6,6 +6,7 @@ import { getOnePatient } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
+import StatisticsChart from "../../components/admin/StatisticsChart";
 
 const StyledContainer = styled.div`
   h2 {
@@ -40,9 +41,15 @@ const StyledStatistics = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
-  :hover {
-    background: rgb(108, 153, 255, 33%);
-  }
+`;
+const StyledChart = styled.div`
+  background-color: rgb(247, 247, 248, 100%);
+  border: solid;
+  border-color: rgba(218, 223, 225, 0.3);
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 800px;
 `;
 
 const PatientStatistics = () => {
@@ -59,7 +66,6 @@ const PatientStatistics = () => {
     };
     fetchData();
   }, [name]);
-
   return (
     <AdminLayout>
       <ContentContainer>
@@ -69,40 +75,39 @@ const PatientStatistics = () => {
             <strong>Användarnamn: </strong>
             {patient.name}
           </StyledPatient>
-          {patientStatistics.map((stat, index) => (
+          {patientStatistics.map((stat) => (
             <React.Fragment key={stat.vidId}>
               <StyledStatistics>
                 <br />
-                <p>
-                  <strong>Video: </strong>{" "}
-                  <StyledLink to={`../exercise/${stat.vidId}`}>
-                    {stat.vidId}
-                  </StyledLink>{" "}
-                </p>
-                <p>
-                  <strong>Scans: </strong>
-                  {stat.scans}
-                </p>
-                <p>
-                  <strong>Antal visningar: </strong>
-                  {stat.timesWatched}
-                </p>
-                <p>
-                  <strong>Tid för visning:</strong>
-                  {patientStatistics[index].watchedTime.map((time) => (
-                    <p>{time.replace("T", ", ").slice(0, -5)}</p>
-                  ))}
-                </p>
-                <p>
-                  <strong>Tid för scan:</strong>
-                  {patientStatistics[index].scanTime.map((time) => (
-                    <p>{time.replace("T", ", ")}</p>
-                  ))}
-                </p>
+
+                <strong>Video: </strong>
+                <StyledLink to={`../exercise/${stat.vidId}`}>
+                  {stat.vidId}
+                </StyledLink>
+                <br />
+                <strong>Scans: </strong>
+                {stat.scans}
+                <br />
+                <strong>Antal visningar: </strong>
+                {stat.timesWatched}
+                <br />
+                <strong>Tid för visning:</strong>
+                {stat.watchedTime.map((time, index) => (
+                  <p key={index}>{time.replace("T", ", ").slice(0, -5)}</p>
+                ))}
+
+                <strong>Tid för scan:</strong>
+                {stat.scanTime.map((time, index) => (
+                  <p key={index}>{time.replace("T", ", ")}</p>
+                ))}
+
                 <br />
               </StyledStatistics>
             </React.Fragment>
           ))}
+          <StyledChart>
+            <StatisticsChart patientStatistics={patientStatistics} />
+          </StyledChart>
         </StyledContainer>
       </ContentContainer>
     </AdminLayout>
