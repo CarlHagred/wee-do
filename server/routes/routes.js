@@ -15,6 +15,7 @@ import {
   deleteSession,
   postWatchedVideo,
   postScan,
+  deletePatient,
   getVideoUrl,
 } from "../controllers/patient/patientEndpoints.js";
 
@@ -29,6 +30,7 @@ import {
   uploadAndCallback, 
   UpdateDatabase
 } from "../controllers/admin/videoHandler.js"; 
+
 
 const router = express.Router();
 
@@ -47,6 +49,7 @@ router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
+router.delete("/deletepatient", deletePatient);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });

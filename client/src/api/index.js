@@ -11,6 +11,14 @@ export const getOnePatient = (name) =>
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
+export const deletePatientIndex = async (params) => {
+    await axios.delete(`${serverUrl}/deletepatient`,{
+        data: {
+            name: params
+        }
+    });
+}
+
 /* ===== Session calls ===== */
 
 export const getSession = () =>

@@ -71,6 +71,18 @@ export const postWatchedVideo = async (req, res) => {
   );
 };
 
+export const deletePatient = async (req, res) => {
+  const name = req.body.name;
+  await Patient.deleteOne({"name": name})
+  .then(patient => {
+    if(!patient){
+      return res.status(404).send({
+        message: "Patient not found with name: " + name
+      })
+    }
+    res.status(200).send({message: "Patient deleted successfully!"})
+  })
+};
 import Videos from "../../models/videos.js";
 
 export const getVideoUrl = async (req, res) => {
