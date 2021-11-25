@@ -4,10 +4,11 @@ import styled from "styled-components";
 import PatientLayout from "../../components/patient/PatientLayout";
 import PanelButton from "../../components/common/PanelButton";
 import hero from "../../components/images/patient_hero.png";
+import WdLogo from "../../components/images/WdLogo";
 
 const StyledHero = styled.div`
   width: 100vw;
-  height: 40vh;
+  height: 50vh;
   background-image: url(${hero});
   background-position: left;
   background-repeat: no-repeat;
@@ -15,13 +16,15 @@ const StyledHero = styled.div`
   position: relative;
 `;
 
-const StyledHeroHeader = styled.h1`
+const HeroText = styled.div`
   text-align: center;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 70%;
   transform: translate(-50%, -50%);
-  color: white;
+`;
+
+const StyledHeroHeader = styled.h1`
   font-size: 3rem;
 `;
 
@@ -44,7 +47,10 @@ const PatientActivityPanel = () => {
   return (
     <PatientLayout>
       <StyledHero>
-        <StyledHeroHeader>Välkommen till WeeDo</StyledHeroHeader>
+        <HeroText>
+          <StyledHeroHeader>Välkommen till</StyledHeroHeader>
+          <WdLogo />
+        </HeroText>
       </StyledHero>
       <PanelMenuWrapper>
         <PanelMenu>
