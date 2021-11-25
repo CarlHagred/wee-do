@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Flexbox } from "../../components/common/Flexbox";
 
 import { getAllPatients } from "../../api";
 
@@ -10,8 +9,19 @@ import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
 
-const StyledDiv = styled.div`
-width: 50%;
+const ListPanelWrapper = styled.div`
+    //display: flex;
+    justify-content: center;
+`;
+
+const ListPanel = styled.nav`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    justify-content: center;
 `;
 
 
@@ -20,7 +30,7 @@ const StyledTable = styled.table`
     caption-side: top;
     border-collapse: separate;
     border-spacing: 5px;
-    width: 100%;
+    width: 46%;
     margin: 1em 0;
     justify-content: left;
     border-radius: 4px;
@@ -67,22 +77,23 @@ const SearchPatient = () => {
     return (
         <AdminLayout>
             <ContentContainer>
+            <ListPanelWrapper>
+                <ListPanel> 
                 <SearchBar
                     placeholder="Sök efter en patient... "
                     onChange={(e) => {
                         setSearchedName(e.target.value);
                     }}
-                />               
+                />          
                 <StyledTable>
                     <colgroup>
                         <col />
                     </colgroup>
                     <thead>
                         <tr>
-                            <td>Patient-id:</td>
+                            <td>Aktiva patient-id:</td>
                         </tr>
                     </thead>
-                    <Flexbox>
                     {patients
                         .filter((patient) => {
                             return patient.name.includes(searchedName)
@@ -103,8 +114,44 @@ const SearchPatient = () => {
                                 </tr>
                             </tbody>
                         ))}
-                        </Flexbox>
                 </StyledTable>
+
+                
+                            
+                <StyledTable>
+                    <colgroup>
+                        <col />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <td>Inaktiva patient-id:</td>
+                        </tr>
+                    </thead>
+                    {patients
+                        .filter((patient) => {
+                            return patient.name.includes(searchedName)
+                                ? patient
+                                : null;
+                        })
+                        .map((patient) => (
+                            <tbody>
+                                <tr key={patient._id}>
+                                    <td>
+                                        <Link
+                                            to={`/admin/statistics/${patient.name}`}
+                                            key={patient._id}
+                                        >
+                                            {patient.name}
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        ))}
+                </StyledTable>
+
+
+                </ListPanel>
+                </ListPanelWrapper>
             </ContentContainer>
         </AdminLayout>
     );
