@@ -22,13 +22,16 @@ const HeroText = styled.div`
   top: 50%;
   left: 70%;
   transform: translate(-50%, -50%);
-  @media (max-width: 768px) {
+  @media (max-width: 884px) {
     display: none;
   }
 `;
 
 const StyledHeroHeader = styled.h1`
   font-size: 3rem;
+  @media (max-width: 1055px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const PanelMenuWrapper = styled.div`
