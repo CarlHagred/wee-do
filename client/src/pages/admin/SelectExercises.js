@@ -49,27 +49,28 @@ const SelectExercises = () => {
   const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allVideos = await getAllVideos();
-      setVideos(allVideos.data);
-      let nerArr = Array(allVideos.data.length).fill(false);
-      setCheckedState(nerArr);
-      let amountArr = Array(allVideos.data.length).fill(1);
-      setAmount(amountArr);
-    };
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    const allVideos = await getAllVideos();
+    setVideos(allVideos.data);
+    let nerArr = Array(allVideos.data.length).fill(false);
+    setCheckedState(nerArr);
+    let amountArr = Array(allVideos.data.length).fill(1);
+    setAmount(amountArr);
+  };
 
   useEffect(() => {
     let newArr = [];
     checkedState.forEach((value, index) => {
-      if (value) {
-        let newSelection = {
-          id: videos[index].videoId,
-          amount: parseInt(amount[index]),
-        };
-        newArr.push(newSelection);
-      }
+      if (!value) return;
+
+      let newSelection = {
+        id: videos[index].videoId,
+        amount: parseInt(amount[index]),
+      };
+      newArr.push(newSelection);
     });
     setSelected(newArr);
   }, [checkedState, amount]);

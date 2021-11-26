@@ -16,6 +16,7 @@ import {
   deleteSession,
   postWatchedVideo,
   postScan,
+  postSelectedVideos,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -41,5 +42,9 @@ router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
+router.post(
+  "/postselectedexercises/:name/:selectedexercises",
+  postSelectedVideos
+);
 
 export default router;
