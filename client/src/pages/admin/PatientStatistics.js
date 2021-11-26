@@ -93,20 +93,19 @@ const PatientStatistics = () => {
                 <br />
                 <strong>Tid för visning:</strong>
                 {stat.watchedTime.map((time, index) => (
-                  <p key={index}>{time.replace("T", ", ").slice(0, -5)}</p>
+                  <p style={{ marginTop: 5 }} key={index}>
+                    {time.replace("T", ", ").slice(0, -8)}
+                  </p>
                 ))}
-
-                <strong>Tid för scan:</strong>
-                {stat.scanTime.map((time, index) => (
-                  <p key={index}>{time.replace("T", ", ")}</p>
-                ))}
-
                 <br />
               </StyledStatistics>
             </React.Fragment>
           ))}
           <StyledChart>
-            <StatisticsChart patientStatistics={patientStatistics} />
+            <StatisticsChart
+              patientStatistics={patientStatistics}
+              created={patient.created}
+            />
           </StyledChart>
         </StyledContainer>
       </ContentContainer>

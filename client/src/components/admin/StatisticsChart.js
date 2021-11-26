@@ -1,9 +1,11 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { BsArrowCounterclockwise } from "react-icons/bs";
 
 const StatisticsChart = (props) => {
   const datasets = [];
   const labels = [];
+  console.log(props.created);
 
   props.patientStatistics.map((entry) => {
     console.log(entry.watchedTime[0]);

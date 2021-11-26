@@ -21,6 +21,7 @@ export const postPatient = async (req, res) => {
         name: name,
         statistics: [],
         videos: [],
+        created: new Date(),
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
@@ -61,16 +62,14 @@ export const getVideos = async (req, res) => {
   }
 };
 
-
 export const deleteVideos = async (req, res) => {
-const id = req.body.videoId; 
-    await Videos.deleteOne({"videoId": id})
-    .then(videos => {
-      if(!videos){
-        return res.status(404).send({
-          message: "Video not fount with id: " + id
-        })
-      }
-      res.status(200).send({message: "Video deleted successfully!"})
-    })
+  const id = req.body.videoId;
+  await Videos.deleteOne({ videoId: id }).then((videos) => {
+    if (!videos) {
+      return res.status(404).send({
+        message: "Video not fount with id: " + id,
+      });
+    }
+    res.status(200).send({ message: "Video deleted successfully!" });
+  });
 };
