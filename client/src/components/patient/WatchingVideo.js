@@ -6,14 +6,14 @@ import ReactPlayer from "../common/ReactPlayer";
 import styled from "styled-components";
 
 
-const StyledH2 = styled.h2`
+const H2 = styled.h2`
   font-size: 1.5em;
   padding: 10px;
   font-weight: 600;
   text-align: center
 `;
 
-const StyledParagraph = styled.p`
+const P = styled.p`
   color: gray;
   padding: 10px;
   text-align: center
@@ -82,8 +82,8 @@ const WatchExercise = () => {
       <ReactPlayer {...playerProps} />
       { isTitleAndDescFetched && 
         <div>
-          <StyledH2>{title}</StyledH2>}
-          <StyledParagraph>{description}</StyledParagraph>
+          <H2>{title}</H2>}
+          <P>{description}</P>
         </div>
       }
       <div className="btn-Watched-Video">
