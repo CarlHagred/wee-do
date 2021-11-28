@@ -3,8 +3,21 @@ import { getSession, postWatchedVideo, getTitleAndDescById } from "../../api";
 import Button from "../common/Button";
 import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
+import styled from "styled-components";
 
-//import Header from "../common/Header";
+
+const StyledH2 = styled.h2`
+  font-size: 1.5em;
+  padding: 10px;
+  font-weight: 600;
+  text-align: center
+`;
+
+const StyledParagraph = styled.p`
+  color: gray;
+  padding: 10px;
+  text-align: center
+`;
 
 const WatchExercise = () => {
   const search = window.location.search; // returns the URL query String
@@ -28,19 +41,6 @@ const WatchExercise = () => {
   const [buttonBackground, setButtonBackground] = useState("red");
   const [watchedButtonDisabled, SetWatchedButtonDisabled] = useState(true);
 
-  const ref = React.createRef();
-
-  const [playerControls, setPlayerControls] = useState({
-    playing: true,
-    controls: false,
-    volume: 0.9,
-  });
-
-  const playerVars = {
-    youtube: {
-      playerVars: { controls: 1, modestbranding: 1, rel: 0 },
-    },
-  };
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -49,7 +49,6 @@ const WatchExercise = () => {
     fetchData();
   }, []);
 
-  //UseEffect to fetch video title down
   useEffect(() => {
     const titleAndDesc = async (id) => {
       const response = await getTitleAndDescById(id);
@@ -65,21 +64,33 @@ const WatchExercise = () => {
     //handleClick.data == "Success"
     //  ? setWatchedVideo(true)
     //  : setWatchedVideo(false);
-
     setButtonBackground("green");
     setButtonInnerText("Bra jobbat...!");
   };
-  const { playing, controls, volume } = playerControls;
+  
+ ;
+  const playerProps = {
+    url: vid, 
+    playing: true,
+    onEnded: () =>{
+      SetWatchedButtonDisabled(false); 
+    }
+  }
+
   return (
     <PatientLayout>
-      <ReactPlayer />
-
+      <ReactPlayer {...playerProps} />
+      { isTitleAndDescFetched && 
+        <div>
+          <StyledH2>{title}</StyledH2>}
+          <StyledParagraph>{description}</StyledParagraph>
+        </div>
+      }
       <div className="btn-Watched-Video">
         <Button
           disabled={watchedButtonDisabled}
           onClick={handleEvent}
-          style={{ margin: "1em 0em", background: `${buttonBackground}` }}
-        >
+          style={{ margin: "1em 0em", background: `${buttonBackground}` }}>
           {buttonInnerText}
         </Button>
       </div>
