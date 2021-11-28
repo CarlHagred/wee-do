@@ -118,8 +118,21 @@ export const postScan = (name, videoId) =>
 export const postWatchedVideo = (name, videoId) =>
     axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
 
-export const postVideo = (videoData) =>
-    axios.post(`${serverUrl}/upload/`, videoData);
+export const postVideo = (videoData) => {
+    axios({
+        method: "POST",
+        url: `${serverUrl}/upload/`, videoData,
+    }).then((res) => {
+        if(res === "LYCKAT"){
+            console.log("YEah man");
+        } // om de funkar
+        else {
+            let error;
+            // SKRIV UT ATT NÅGOT GICK FEL
+        }
+    })
+    //axios.post(`${serverUrl}/upload/`, videoData),
+}
 
 
 export const deleteVideoIndex = async (params) => {
