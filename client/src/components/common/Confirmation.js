@@ -29,4 +29,5 @@ export const customDialogAdmin = async () => {
     }
 };
 
+
 export default customDialogPatient + customDialogAdmin;
