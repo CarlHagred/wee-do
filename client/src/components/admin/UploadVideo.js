@@ -1,10 +1,19 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import { postVideo } from "../../api/index.js";
 
 import UserInput from "../common/UserInput";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
+
+const ErrorMessage = styled.span`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 20px;
+`
 
 const UploadVideo = () => {
     const [form, setForm] = useState({
@@ -65,6 +74,7 @@ const UploadVideo = () => {
                     />
                     <br></br>
                     <br></br>
+                    <span id="uploadVideoErrorMessage"></span>
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
             </form>

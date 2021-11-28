@@ -118,25 +118,30 @@ export const verifyUser = async (request) => {
 
 export const uploadAndCallback = async (request, response) => {
 
+    try {
+        const { code, state } = request.query;
+
+        const { filename, title, description } = JSON.parse(state); 
+
+        const oauth = authorize();
+
+        const { tokens } = await oauth.getToken(code);
+
+        oauth.setCredentials(tokens);
+
+        await uploadVideo(oauth, {
+            title,
+            description,
+            file: fs.createReadStream(`videos/${filename}`)
+        })
+
+        response.redirect("http://localhost:3000/success");  
+
+    } catch (error) {
+        res.send('UploadError')
+    }
+
     
-
-    const { code, state } = request.query;
-
-    const { filename, title, description } = JSON.parse(state); 
-
-    const oauth = authorize();
-
-    const { tokens } = await oauth.getToken(code);
-
-    oauth.setCredentials(tokens);
-
-    await uploadVideo(oauth, {
-        title,
-        description,
-        file: fs.createReadStream(`videos/${filename}`)
-    })
-
-    response.redirect("http://localhost:3000/success");
 }
 
 

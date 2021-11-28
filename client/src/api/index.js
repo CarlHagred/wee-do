@@ -123,13 +123,10 @@ export const postVideo = (videoData) => {
         method: "POST",
         url: `${serverUrl}/upload/`, videoData,
     }).then((res) => {
-        if(res === "LYCKAT"){
-            console.log("YEah man");
-        } // om de funkar
-        else {
-            let error;
-            // SKRIV UT ATT NÅGOT GICK FEL
-        }
+        if(res.data === "UploadError"){
+            let error = document.getElementById("uploadVideoErrorMessage");
+            error.innerHTML = `<ErrorMessage>Något gick fel med att ladda upp övningen!</ErrorMessage>`;
+        } 
     })
     //axios.post(`${serverUrl}/upload/`, videoData),
 }
