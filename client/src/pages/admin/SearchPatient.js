@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { getAllPatients } from "../../api";
+import { getAllActivePatients, getAllInactivePatients} from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
@@ -10,17 +10,17 @@ import ContentContainer from "../../components/common/ContentContainer";
 
 
 const ListPanelWrapper = styled.div`
-  justify-content: center;
+  justify-content: top;
 `;
 
 const ListPanel = styled.nav`
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
-  align-items: center;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  justify-content: center;
+  align-items: top;
+  //margin-top: 5%;
+  //margin-bottom: 5%;
+  //justify-content: center;
 `;
 
 const StyledTable = styled.table`
@@ -62,21 +62,26 @@ const StyledTable = styled.table`
 `;
 
 const SearchPatient = () => {
-  const [patients, setPatients] = useState([]);
   const [searchedName, setSearchedName] = useState("");
+  const [patientsActive, setPatientsActive] = useState([]);
+  const [patientsInactive, setPatientsInactive] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-    const allPatients = await getAllPatients();
-    setPatients(allPatients.data);
+    const allActivePatients = await getAllActivePatients();
+    const allInactivePatients = await getAllInactivePatients();
+    setPatientsActive(allActivePatients.data);
+    setPatientsInactive(allInactivePatients.data);
     };
     fetchData();
   }, []);
+
+
   return (
   <AdminLayout>
     <ContentContainer>
       <ListPanelWrapper>
-        <ListPanel> 
+        <ListPanel>
           <SearchBar
             placeholder="Sök efter en patient... "
             onChange={(e) => {
@@ -91,7 +96,7 @@ const SearchPatient = () => {
                   <td>Aktiva patient-id:</td>
                 </tr>
               </thead>
-              {patients
+              {patientsActive
                 .filter((patient) => {
                   return patient.name.includes(searchedName)
                   ? patient
@@ -110,17 +115,17 @@ const SearchPatient = () => {
                   </tr>
                 </tbody>
                 ))}
-            </StyledTable>             
+            </StyledTable>           
             <StyledTable>
               <colgroup>
                 <col/>
               </colgroup>
               <thead>
                 <tr >
-                  <td>Aktiva patient-id:</td>
+                  <td>Inaktiva patient-id:</td>
                 </tr>
               </thead>
-              {patients
+              {patientsInactive
                 .filter((patient) => {
                   return patient.name.includes(searchedName)
                   ? patient

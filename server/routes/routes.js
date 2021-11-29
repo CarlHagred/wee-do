@@ -7,6 +7,8 @@ import {
   getVideos,
   getOnePatient,
   deleteVideos,
+  getActivePatients,
+  getInactivePatients,
 } from "../controllers/admin/adminEndpoints.js";
 
 import {
@@ -52,6 +54,9 @@ router.post("/postwatchedvideo/:name/:videoId/:active", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.delete("/deletepatient", deletePatient);
 router.put("/setpatientinactive/:name", setPatientInactive);
+router.get("/getactivepatients", getActivePatients);
+router.get("/getinactivepatients", getInactivePatients);
+
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });

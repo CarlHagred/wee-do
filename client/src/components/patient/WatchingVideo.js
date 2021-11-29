@@ -22,7 +22,6 @@ const WatchExercise = () => {
       setPatientName(fetchedSession.data.name);
       const fetchPatient = await getOnePatient(fetchedSession.data.name);
       setActive(fetchPatient.data.active);
-      console.log(fetchPatient.data.active);
     };
     fetchData();
   }, []);

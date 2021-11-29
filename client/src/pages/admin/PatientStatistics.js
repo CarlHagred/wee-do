@@ -94,8 +94,6 @@ const deletePatient = () => {
 };
 
 const setPatientInactive = () => {
-//anrop till db för att kolla om inaktiv är true eller false
-//om false, så sätt till true
 setPatientInactiveIndex(name);
 };
 
