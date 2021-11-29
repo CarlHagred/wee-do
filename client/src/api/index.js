@@ -121,7 +121,6 @@ export const postWatchedVideo = (name, videoId) =>
 export const postVideo = (videoData) =>
     axios.post(`${serverUrl}/upload/`, videoData);
 
-
 export const deleteVideoIndex = async (params) => {
     await axios.delete(`${serverUrl}/deletevideo`,{
         data: {
