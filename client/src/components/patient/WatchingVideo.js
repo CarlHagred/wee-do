@@ -38,10 +38,11 @@ const WatchExercise = () => {
   const [buttonInnerText, setButtonInnerText] = useState("Jag har utfört övningen");
   const [btnInfo, setBtnInfo] = useState({
     innerText: "", 
-    display: "none"
+    display: "none", 
+    background: "red", 
+    clicked: true
   });
-  const [buttonBackground, setButtonBackground] = useState("red");
-  const [buttonClicked, setButtonClicked] = useState(true);
+  
   const [btnDisabilityAndClickCount, setBtnDisabilityAndClickCount] = useState({disable: false, count:0}); 
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const WatchExercise = () => {
     //  ? setWatchedVideo(true)
     //  : setWatchedVideo(false); 
     setBtnDisabilityAndClickCount({count: 1});
-    setButtonBackground("green");
+    setBtnInfo({background: "green"});
     setButtonInnerText("Bra jobbat...!");
     setBtnInfo({display: "none"});
     if(btnDisabilityAndClickCount.count > 0) {
@@ -96,7 +97,7 @@ const WatchExercise = () => {
     url: vid, 
     playing: true,
     onEnded: () =>{
-      setButtonClicked(false); 
+      setBtnInfo({clicked: false}); 
       setBtnInfo({innerText: "Nu går det bra att trycka på knappen", display: ""});
     }
   }
@@ -113,8 +114,8 @@ const WatchExercise = () => {
       <div className="btn-Watched-Video">
         <Button
           disabled={btnDisabilityAndClickCount.disable}
-          onClick={buttonClicked ? handleClickWhileNotEnded : handleClickWhileEnded}
-          style={{ margin: "1em 0em", background: `${buttonBackground}` }}>
+          onClick={btnInfo.clicked ? handleClickWhileNotEnded : handleClickWhileEnded}
+          style={{ margin: "1em 0em", background: `${btnInfo.background}` }}>
           {buttonInnerText}
         </Button>
         <P style={{display: btnInfo.display}}>{btnInfo.innerText}</P>
