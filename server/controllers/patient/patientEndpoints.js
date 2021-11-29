@@ -101,6 +101,15 @@ export const setPatientInactive = async (req, res) => {
     }})
 };
 
+export const setPatientActive = async (req, res) => {
+  const name = req.params.name;
+  Patient.findOneAndUpdate({"name": name}, {$set:{"active": true}}, {new: true}, 
+  (err, doc) => {
+    if (doc) {
+      res.status(200).send("Success");
+    }})
+};
+
 
 import Videos from "../../models/videos.js";
 

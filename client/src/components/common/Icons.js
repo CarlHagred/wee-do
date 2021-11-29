@@ -3,8 +3,8 @@ import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload, MdAdminPanelSettings } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
-import { BsGraphUp } from "react-icons/bs";
-import { MdPersonAddDisabled } from "react-icons/md";
+import { BsGraphUp , BsFillPersonFill} from "react-icons/bs";
+import { MdPersonOff } from "react-icons/md";
 
 import SearchPatient from "../images/IconSearchPatient";
 import SearchExercise from "../images/IconSearchExercise";
@@ -26,7 +26,8 @@ const variants = {
     search_patient: SearchPatient,
     search_exercise: SearchExercise,
     statistics: BsGraphUp,
-    patientInactive: MdPersonAddDisabled
+    patientInactive: MdPersonOff,
+    patientActive: BsFillPersonFill,
 };
 
 const Icon = ({ name, ...props }) => {

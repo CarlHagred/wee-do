@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 
-import { deletePatientIndex, getOnePatient, setPatientInactiveIndex } from "../../api";
+import { deletePatientIndex, getOnePatient, setPatientInactiveIndex, setPatientActiveIndex } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
@@ -52,12 +52,14 @@ const PatientStatistics = () => {
   const { name } = useParams();
   const [patient, setPatient] = useState([]);
   const [patientStatistics, setPatientStatistics] = useState([]);
+  const [patientStatus, setPatientStatus] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPatient = await getOnePatient(name);
       setPatient(fetchedPatient.data);
       setPatientStatistics(fetchedPatient.data.statistics);
+      setPatientStatus(fetchedPatient.data.active);
     };
     fetchData();
   }, [name]);
@@ -88,6 +90,19 @@ const customPatientInactive = async () => {
   }
 };
 
+const customPatientActive = async () => {
+  const conf = await Confirm(
+    "Är du säker på att du vill göra " + name + " aktiv?",
+    "Aktiv",
+    "OK",
+    "Avbryt"
+  );
+  if (conf) {
+    setPatientActive();
+    window.location = "/admin/search/patient";
+  }
+};
+
 const deletePatient = () => {
   deletePatientIndex(name);
   console.log(name);
@@ -96,6 +111,10 @@ const deletePatient = () => {
 const setPatientInactive = () => {
 setPatientInactiveIndex(name);
 };
+
+const setPatientActive = () => {
+  setPatientActiveIndex(name);
+  };
 
 
 return (
@@ -132,7 +151,9 @@ return (
             <br/>
             <Button onClick={customDeletePatient} icon="trash">Radera patient</Button>
             <br/>
-            <Button onClick={customPatientInactive} icon="patientInactive">Gör patient inaktiv</Button>
+            <br/>
+            { patientStatus? <Button onClick={customPatientInactive} icon="patientInactive">Gör patient inaktiv</Button> : null}
+            { !patientStatus? <Button onClick={customPatientActive} icon="patientActive">Gör patient aktiv</Button> : null} 
       </StyledContainer>
     </ContentContainer>
   </AdminLayout>

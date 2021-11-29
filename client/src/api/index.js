@@ -22,6 +22,9 @@ export const deletePatientIndex = async (params) => {
 export const setPatientInactiveIndex = async (name) => 
     axios.put(`${serverUrl}/setpatientinactive/${name}`);
 
+export const setPatientActiveIndex = async (name) => 
+    axios.put(`${serverUrl}/setpatientactive/${name}`);
+
 export const getAllActivePatients = () => axios.get(`${serverUrl}/getactivepatients`);
 
 export const getAllInactivePatients = () => axios.get(`${serverUrl}/getinactivepatients`);
