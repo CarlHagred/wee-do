@@ -16,6 +16,8 @@ const ErrorMessage = styled.span`
 `
 
 const UploadVideo = () => {
+    const [failedUpload, setFailedUpload] = useState(false);
+
     const [form, setForm] = useState({
         title: "",
         description: "",
@@ -42,7 +44,13 @@ const UploadVideo = () => {
         videoData.append("videoFile", form.file);
         videoData.append("title", form.title);
         videoData.append("description", form.description);
-        postVideo(videoData);
+        
+        const uploadVideo = postVideo(videoData);
+        setFailedUpload(() => {
+            if(uploadVideo !== "UploadError"){
+                return true;
+            }
+        })
     };
 
     return (
@@ -74,7 +82,10 @@ const UploadVideo = () => {
                     />
                     <br></br>
                     <br></br>
-                    <span id="uploadVideoErrorMessage"></span>
+
+                    {failedUpload ? <ErrorMessage>
+                        <p>Något gick fel med att ladda upp övningen!</p></ErrorMessage> : null}
+                        
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
             </form>

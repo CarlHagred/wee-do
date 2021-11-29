@@ -118,18 +118,8 @@ export const postScan = (name, videoId) =>
 export const postWatchedVideo = (name, videoId) =>
     axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
 
-export const postVideo = (videoData) => {
-    axios({
-        method: "POST",
-        url: `${serverUrl}/upload/`, videoData,
-    }).then((res) => {
-        if(res.data === "UploadError"){
-            let error = document.getElementById("uploadVideoErrorMessage");
-            error.innerHTML = `<ErrorMessage>Något gick fel med att ladda upp övningen!</ErrorMessage>`;
-        } 
-    })
-    //axios.post(`${serverUrl}/upload/`, videoData),
-}
+export const postVideo = (videoData) =>
+    axios.post(`${serverUrl}/upload/`, videoData);
 
 
 export const deleteVideoIndex = async (params) => {
