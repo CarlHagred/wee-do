@@ -20,7 +20,6 @@ const P = styled.p`
 `;
 
 const WatchExercise = () => {
- 
   const search = window.location.search; // returns the URL query String
   const params = new URLSearchParams(search);
   const videoUrl = params.get("title");
@@ -35,16 +34,12 @@ const WatchExercise = () => {
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [buttonInnerText, setButtonInnerText] = useState("Jag har utfört övningen");
-  const [btnInfo, setBtnInfo] = useState({
-    innerText: "", 
-    display: "none", 
-    background: "red", 
-    clicked: true
-  });
-  
-  const [btnDisabilityAndClickCount, setBtnDisabilityAndClickCount] = useState({disable: false, count:0}); 
-
+  const [buttonInnerText, setButtonInnerText] = useState(
+    "Jag har utfört övningen"
+  );
+  const [buttonBackground, setButtonBackground] = useState("red");
+  const [watchedButtonDisabled, setWatchedButtonDisabled] = useState(true);
+  const [textAboutBtn, setTextAboutBtn] = useState("Knappen kan tryckas på först efter när du har sett klart övningen");
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -63,42 +58,25 @@ const WatchExercise = () => {
     titleAndDesc(videoId);
   });
 
-  const handleClickWhileNotEnded = () => {
-    setBtnInfo(
-      {
-        innerText: "Knappen kan först trykas på efter när du har sett klart övningen", 
-        display: ""
-      }
-    )
-    setTimeout(() => {
-      setBtnInfo(
-        {
-          display: "none"
-        }
-      )
-    }, 3000);
-  }
-  const handleClickWhileEnded = async () => {
+  const handleEvent = async () => {
     await postWatchedVideo(patientName, videoId);
     //handleClick.data == "Success"
     //  ? setWatchedVideo(true)
-    //  : setWatchedVideo(false); 
-    setBtnDisabilityAndClickCount({count: 1});
-    setBtnInfo({background: "green"});
+    //  : setWatchedVideo(false);
+    setButtonBackground("green");
     setButtonInnerText("Bra jobbat...!");
-    setBtnInfo({display: "none"});
-    if(btnDisabilityAndClickCount.count > 0) {
-      setBtnDisabilityAndClickCount({disable: true}); 
-      setBtnInfo({innerText: 'Knappen kan tryckas på endast EN gång!'}); 
-    }
-  }
+  };
 
   const playerProps = {
     url: vid, 
     playing: true,
     onEnded: () =>{
-      setBtnInfo({clicked: false}); 
-      setBtnInfo({innerText: "Nu går det bra att trycka på knappen", display: ""});
+      setWatchedButtonDisabled(false); 
+      setTextAboutBtn("Nu går det bra att klicka på knappen"); 
+      setTimeout(() => {
+        setWatchedButtonDisabled(true);
+        setTextAboutBtn("Knappen kan tryckas på endast EN gång");
+      }, 3000) 
     }
   }
 
@@ -113,13 +91,13 @@ const WatchExercise = () => {
       }
       <div className="btn-Watched-Video">
         <Button
-          disabled={btnDisabilityAndClickCount.disable}
-          onClick={btnInfo.clicked ? handleClickWhileNotEnded : handleClickWhileEnded}
-          style={{ margin: "1em 0em", background: `${btnInfo.background}` }}>
+          disabled={watchedButtonDisabled}
+          onClick={handleEvent}
+          style={{ margin: "1em 0em", background: `${buttonBackground}` }}>
           {buttonInnerText}
         </Button>
-        <P style={{display: btnInfo.display}}>{btnInfo.innerText}</P>
       </div>
+      <P>{textAboutBtn}</P>
     </PatientLayout>
   );
 };
