@@ -25,7 +25,7 @@ const WatchExercise = () => {
   const videoUrl = params.get("title");
 
   const vid = videoUrl;
-
+  console.log(vid)
   const videoId = videoUrl.split("/").pop();
 
   const [patientName, setPatientName] = useState("");

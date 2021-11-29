@@ -13,7 +13,7 @@ const StyledReactPlayer = styled(ReactPlayer)`
     }
   }
 `;
-// *** React Player START ***
+
 const ReactPlayerComponent = (playerProps) => {
 
   const playerVars = {
@@ -36,4 +36,3 @@ const ReactPlayerComponent = (playerProps) => {
   );
 };
 export default ReactPlayerComponent;
-// *** React Player END ***
