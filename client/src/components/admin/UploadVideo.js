@@ -90,8 +90,6 @@ const UploadVideo = () => {
                 </div>
             </form>
         </div>
-      </form>
-    </div>
   );
 };
 export default UploadVideo;
