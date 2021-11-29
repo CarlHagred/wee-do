@@ -138,7 +138,8 @@ export const uploadAndCallback = async (request, response) => {
         response.redirect("http://localhost:3000/success");  
 
     } catch (error) {
-        res.send('UploadError')
+        res.send('UploadError', error)
+        res.redirect("http://localhost:3000/error");
     }
 
     

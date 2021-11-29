@@ -46,11 +46,10 @@ const UploadVideo = () => {
         videoData.append("description", form.description);
         
         const uploadVideo = postVideo(videoData);
-        setFailedUpload(() => {
-            if(uploadVideo !== "UploadError"){
-                return true;
-            }
-        })
+
+        if(uploadVideo === "UploadError"){
+            setFailedUpload(true);
+        }
     };
 
     return (
@@ -64,12 +63,14 @@ const UploadVideo = () => {
                         type="text"
                         name="title"
                         autoComplete="off"
+                        required
                         placeholder="Övningstitel"
                     />
                     <TextArea
                         onChange={handleChange}
                         type="text"
                         name="description"
+                        required
                         autoComplete="off"
                     />
                     <input
@@ -78,13 +79,14 @@ const UploadVideo = () => {
                         type="file"
                         name="file"
                         id="filechoose"
+                        required
                         placeholder="Add Video File"
                     />
                     <br></br>
                     <br></br>
 
                     {failedUpload ? <ErrorMessage>
-                        Något gick fel med att ladda upp övningen!</ErrorMessage> : null}
+                        Något gick fel med att ladda upp övningen!</ErrorMessage> : false}
                         
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
