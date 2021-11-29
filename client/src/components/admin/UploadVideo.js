@@ -7,7 +7,7 @@ import UserInput from "../common/UserInput";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
 
-const ErrorMessage = styled.span`
+const ErrorMessage = styled.p`
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -84,7 +84,7 @@ const UploadVideo = () => {
                     <br></br>
 
                     {failedUpload ? <ErrorMessage>
-                        <p>Något gick fel med att ladda upp övningen!</p></ErrorMessage> : null}
+                        Något gick fel med att ladda upp övningen!</ErrorMessage> : null}
                         
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
