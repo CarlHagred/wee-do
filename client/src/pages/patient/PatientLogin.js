@@ -5,7 +5,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/patient/LoginPatient";
 import WdLogo from "../../components/images/WdLogo";
-import hero from "../../components/images/patient_login.png";
+import hero from "../../components/images/patient_hero.png";
 import HelpLink from "../../components/common/HelpLink"
 
 const StyledBody = createGlobalStyle`
@@ -96,6 +96,7 @@ const PatientLogin = () => {
                 <StyledWrapper>
                     <StyledHeroContainer>
                         <StyledHero src={hero} />
+                        <StyledLogo fill="black" />
                     </StyledHeroContainer>
 
                     <StyledContentContainer>
