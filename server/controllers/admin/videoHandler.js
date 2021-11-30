@@ -184,9 +184,9 @@ export const deleteFromYoutubePlaylist = async (req, res, videoId) => {
     //check code from the req.query 
     console.log('code printed: '+ code); // Can not find code from the req.query bcuz it is empty object
 
-    const { tokens } = await auth.getToken(code);
+    //const { tokens } = await auth.getToken(code);
 
-    auth.setCredentials(tokens);
+    //auth.setCredentials();
 
     // vars from .env will be used once the code succeeds 
     const PId = "PL8BorJT0TyU0-QbsIexh4INUkdcZ3r4QL";
