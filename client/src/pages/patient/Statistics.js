@@ -26,12 +26,12 @@ const StyledWrapper = styled.div`
 const StyledHeader = styled.h1`
     font-size: 3em;
 `;
-
+/*
 const StyledParagraph = styled.p`
     margin: 20px;
     color: red;
     font-size: 1.5em;
-`;
+`;*/
 
 const Statistics = () => {
     const [patientStatistics, setPatientStatistics] = useState([]);
@@ -41,6 +41,7 @@ const Statistics = () => {
             const fetchedUsername = await getSession();
             const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
             setPatientStatistics(fetchedPatient.data.statistics);
+            console.log(fetchedPatient.data.statistics);
         }
         fetchData();
     }, []);
@@ -65,6 +66,10 @@ const Statistics = () => {
                             <p>
                                 <strong>Antal visningar: </strong>
                                 {stat.timesWatched}
+                            </p>
+                            <p>
+                                <strong>Antal gånger kvar: </strong>
+                                1
                             </p>
                             <br/>
                         </StyledStatistics>
