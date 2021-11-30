@@ -9,8 +9,9 @@ import Button from "../common/Button";
 import UserInput from "../common/UserInput";
 
 const LoginWrapper = styled.div`
-  width: 300px;
-  margin: 0 3em 0 3em;
+  max-width: 300px;
+  margin: 0 0.8em;
+  background-color: yellow;
 `;
 
 const LoginPatient = () => {

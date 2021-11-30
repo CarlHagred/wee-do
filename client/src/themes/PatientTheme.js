@@ -1,9 +1,11 @@
 const PatientTheme = {
-    palette: {
-        brand: "#E83544",
-        hover: "#B40A21",
-        hamburger: "#F57082",
-    },
+  palette: {
+    brand: "#427687",
+    button: "#335e6b",
+    button_hover: "#FFF",
+    hover: "#335e6b",
+    hamburger: "#335e6b",
+  },
 };
 
 export default PatientTheme;

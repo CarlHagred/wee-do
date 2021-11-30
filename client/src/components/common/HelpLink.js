@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 const StyledHelp = styled(NavLink)`
-  margin: 30px 0;
+  margin: 60px 0;
   font-size: 0.9em;
 `;
 

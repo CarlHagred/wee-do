@@ -8,7 +8,7 @@ import hero from "../../components/images/patient_login.png";
 import HelpLink from "../../components/common/HelpLink";
 
 const StyledBody = createGlobalStyle`
-    @media (min-width: 740px) {
+    @media (min-width: 300px) {
       body {
       background-color: #EFEFEF;
     }
@@ -21,38 +21,53 @@ const PageWrapper = styled.div`
   text-align: center;
 `;
 
-const ContentWrapper = styled.div`
+const StyledContainerItem = styled.div`
+  font-size: 20px;
+  flex: 1;
+`;
+
+const StyledWrapper = styled(StyledContainerItem)`
   display: flex;
+  max-width: 802px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
   background-color: white;
-  font-size: 20px;
-  align-items: center;
-  @media (max-width: 740px) {
+  @media (max-width: 799px) {
     flex-direction: column;
+    max-width: 402px;
+    margin-top: 10vh;
+  }
+  @media (max-width: 400px) {
     margin-top: 0;
     border: 0;
   }
 `;
 
-const HeroContainer = styled.div`
-  width: 535px;
-  height: 400px;
-  background-color: red;
-  @media (max-width: 740px) {
-    width: 100vw;
+const StyledHeroContainer = styled(StyledContainerItem)`
+  display: flex;
+  position: relative;
+  text-align: center;
+  background-color: orange;
+  @media (max-width: 540px) {
+    margin-top: 0;
   }
 `;
 
-const LoginContainer = styled.div`
+const StyledHero = styled.img`
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+`;
+
+const StyledContentContainer = styled(StyledContainerItem)`
   background: white;
   display: flex;
   flex-direction: column;
+  background-color: red;
   align-items: center;
-  width: 400px;
 `;
 
-const StyledLoginHeader = styled.div`
+const StyledLoginHeader = styled(StyledContainerItem)`
   font-size: 2rem;
   margin: 40px 0;
   height: 80%;
@@ -62,19 +77,20 @@ const PatientLogin = () => {
   return (
     <PageWrapper>
       <StyledBody />
-
       <ThemeProvider theme={PatientTheme}>
-        <ContentWrapper>
-          <HeroContainer />
+        <StyledWrapper>
+          <StyledHeroContainer>
+            <StyledHero src={hero} alt="WeeDo Logotyp" />
+          </StyledHeroContainer>
 
-          <LoginContainer>
+          <StyledContentContainer>
             <StyledLoginHeader>Logga in</StyledLoginHeader>
 
             <LoginPatient />
 
             <HelpLink />
-          </LoginContainer>
-        </ContentWrapper>
+          </StyledContentContainer>
+        </StyledWrapper>
       </ThemeProvider>
     </PageWrapper>
   );
