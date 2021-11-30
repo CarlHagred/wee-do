@@ -48,12 +48,14 @@ const UploadVideo = () => {
                         name="title"
                         autoComplete="off"
                         placeholder="Övningstitel"
+                        required
                     />
                     <TextArea
                         onChange={handleChange}
                         type="text"
                         name="description"
                         autoComplete="off"
+                        required
                     />
                     <input
                         onChange={handleChange}
@@ -62,6 +64,7 @@ const UploadVideo = () => {
                         name="file"
                         id="filechoose"
                         placeholder="Add Video File"
+                        required
                     />
                     <br></br>
                     <br></br>
@@ -71,4 +74,4 @@ const UploadVideo = () => {
         </div>
     );
 };
-export default UploadVideo;
+export default UploadVideo; 

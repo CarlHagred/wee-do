@@ -1,14 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-
-import AdminTheme from "../../themes/AdminTheme";
 
 import { getAdminSession } from "../../api";
 
 import hero from "../../components/images/AdminHeroBanner.png";
-import Icon from "../../components/common/Icons";
 
 const StyledHero = styled.div`
   width: 100vw;

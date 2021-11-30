@@ -54,13 +54,13 @@ export const loginPatient = (params) => {
 
 //Hämtar användare som är inloggad och förstör cookien som är skapad i backend
 export const logoutPatient = () => {
-  axios({
-    method: "DELETE",
-    withCredentials: true,
-    url: `${serverUrl}/logoutpatient`,
-  }).then((res) => {
-    window.location.reload();
-  });
+    axios({
+        method: "DELETE",
+        withCredentials: true,
+        url: `${serverUrl}/logoutpatient`,
+    }).then((res) => {
+        window.location = "/";
+    });
 };
 
 //Exercise based requests
@@ -89,13 +89,13 @@ export const loginAdmin = (params) => {
 };
 
 export const logoutAdmin = () => {
-  axios({
-    method: "DELETE",
-    withCredentials: true,
-    url: `${serverUrl}/logoutadmin`, // Ska fixas
-  }).then((res) => {
-    window.location.reload();
-  });
+    axios({
+        method: "DELETE",
+        withCredentials: true,
+        url: `${serverUrl}/logoutadmin`, // Ska fixas
+    }).then((res) => {
+        window.location = "/admin";
+    });
 };
 
 /* ===== Video calls ===== */
@@ -111,8 +111,19 @@ export const postScan = (name, videoId) =>
 export const postWatchedVideo = (name, videoId) =>
   axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
 
-export const postVideo = (videoData) =>
-  axios.post(`${serverUrl}/upload/`, videoData);
+export const postVideo = videoData => {
+    axios.post(`${serverUrl}/upload/`, videoData);
+}
+
+export const getTitleAndDescById = async (id) => {
+    const response = await axios.get(`${serverUrl}/getVideoTitleAndDescription`, {
+        params: {
+            videoId: id
+        }
+    })
+    return response.data; 
+}
+
 
 export const deleteVideoIndex = async (params) => {
   await axios
@@ -121,5 +132,4 @@ export const deleteVideoIndex = async (params) => {
         videoId: params,
       },
     })
-    .then((response) => {});
-};
+}
