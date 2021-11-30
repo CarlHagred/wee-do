@@ -175,96 +175,94 @@ const Navbar = () => {
   let location = useLocation();
 
   React.useEffect(() => {
+  
+  }, [location]);
 
-  }, [location])
-
-  if (location.pathname !== url) {
-    return (
+  return (
       <>
-        <NavbarMenu theme={PatientTheme}>
-          <NavbarBurger>
-            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
-          </NavbarBurger>
+        { location.pathname !== url ?
+          <>
+            <NavbarMenu theme={PatientTheme}>
+              <NavbarBurger>
+                <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+              </NavbarBurger>
 
-          <NavbarLogo to="/mainpage">
-            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
-          </NavbarLogo>
+              <NavbarLogo to="/mainpage">
+                <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+              </NavbarLogo>
 
-          <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
-          <NavbarItem to="/statistics">Se statistik</NavbarItem>
+              <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
+              <NavbarItem to="/statistics">Se statistik</NavbarItem>
 
-          <PatientName>{patient.name}</PatientName>
+              <PatientName>{patient.name}</PatientName>
 
-          <NavbarItemLogout
-            isActive={() => false}
-            onClick={customDialogPatient}
-            last="true"
-          >
-            Logga ut
-          </NavbarItemLogout>
-        </NavbarMenu>
+              <NavbarItemLogout
+                isActive={() => false}
+                onClick={customDialogPatient}
+                last="true"
+              >
+                Logga ut
+              </NavbarItemLogout>
+            </NavbarMenu>
 
-        <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/QrScanner" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="qrcode" /> Scanna övning
-          </NavbarItemBurger>
-          <StyledDivider />
+            <StyledMobileNav open={open}>
+              <NavbarItemBurger to="/QrScanner" onClick={closeMenu}>
+                <StyledIcon size="1.5em" name="qrcode" /> Scanna övning
+              </NavbarItemBurger>
+              <StyledDivider />
 
-          <NavbarItemBurger to="/statistics" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="statistics" /> Se statistik
-          </NavbarItemBurger>
-          <StyledDivider />
-          <NavbarItemBurger to="/help" onClick={closeMenu}>
-            Hjälp
-          </NavbarItemBurger>
-          <StyledDivider />
+              <NavbarItemBurger to="/statistics" onClick={closeMenu}>
+                <StyledIcon size="1.5em" name="statistics" /> Se statistik
+              </NavbarItemBurger>
+              <StyledDivider />
+              <NavbarItemBurger to="/help" onClick={closeMenu}>
+                Hjälp
+              </NavbarItemBurger>
+              <StyledDivider />
 
-          <NavbarItemBurger to="/about" onClick={closeMenu}>
-            Om WeeDo
-          </NavbarItemBurger>
+              <NavbarItemBurger to="/about" onClick={closeMenu}>
+                Om WeeDo
+              </NavbarItemBurger>
 
-          <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
-            Logga ut
-          </LogOut>
-        </StyledMobileNav>
-      </>
-    );
-  }
-  if (location.pathname === url) {
-    return (
-      <>
-        <NavbarMenu theme={PatientTheme}>
-          <NavbarBurger>
-            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
-          </NavbarBurger>
+              <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
+                Logga ut
+              </LogOut>
+            </StyledMobileNav>
+          </>
+          :
+          <>
+            <NavbarMenu theme={PatientTheme}>
+              <NavbarBurger>
+                <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+              </NavbarBurger>
 
-          <NavbarLogo to="/activitypanel">
-            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
-          </NavbarLogo>
+              <NavbarLogo to="/mainpage">
+                <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+              </NavbarLogo>
 
-          <PatientName>{patient.name}</PatientName>
+              <PatientName>{patient.name}</PatientName>
 
-          <NavbarItemLogout
-            isActive={() => false}
-            onClick={customDialogPatient}
-            last="true"
-          >
-            Logga ut
-          </NavbarItemLogout>
-        </NavbarMenu>
+              <NavbarItemLogout
+                isActive={() => false}
+                onClick={customDialogPatient}
+                last="true"
+              >
+                Logga ut
+              </NavbarItemLogout>
+            </NavbarMenu>
 
-        <StyledMobileNav open={open}>
-          <StyledDivider />
-          <NavbarItemBurger to="/help" onClick={closeMenu}>
-            Hjälp
-          </NavbarItemBurger>
-          <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
-            Logga ut
-          </LogOut>
-        </StyledMobileNav>
-      </>
-    );
-  }
+            <StyledMobileNav open={open}>
+              <StyledDivider />
+              <NavbarItemBurger to="/help" onClick={closeMenu}>
+                Hjälp
+              </NavbarItemBurger>
+              <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
+                Logga ut
+              </LogOut>
+            </StyledMobileNav>
+          </>
+        }
+    </>
+  )
 };
-
 export default Navbar;
