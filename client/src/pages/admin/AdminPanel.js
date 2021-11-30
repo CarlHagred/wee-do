@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { getAdminSession } from "../../api";
 
 import hero from "../../components/images/AdminHeroBanner.png";
+import { NavLink } from "react-router-dom";
+import Icon from "../../components/common/Icons";
+import AdminTheme from "../../themes/AdminTheme";
 
 const StyledHero = styled.div`
   width: 100vw;

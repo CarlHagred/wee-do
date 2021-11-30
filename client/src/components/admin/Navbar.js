@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
@@ -134,9 +135,15 @@ const StyledDivider = styled.hr`
 const Navbar = () => {
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
-  const url = "http://localhost:3000/admin/mainpage";
+  const url = "/admin/mainpage";
 
-  if (window.location.href !== url) {
+  const location = useLocation();
+
+  React.useEffect(() => {
+
+  }, [location])
+
+  if (location.pathname !== url) {
     return (
       <>
         <NavbarMenu theme={AdminTheme}>
@@ -190,7 +197,7 @@ const Navbar = () => {
       </>
     );
   }
-  if (window.location.href === url) {
+  if (location.pathname === url) {
     return (
       <>
         <NavbarMenu theme={AdminTheme}>
