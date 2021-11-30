@@ -142,91 +142,91 @@ const Navbar = () => {
   React.useEffect(() => {
 
   }, [location])
+ 
+  return (
+    <>
+      { location.pathname !== url ?
+        <>
+          <NavbarMenu theme={AdminTheme}>
+            <NavbarBurger>
+              <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+            </NavbarBurger>
 
-  if (location.pathname !== url) {
-    return (
-      <>
-        <NavbarMenu theme={AdminTheme}>
-          <NavbarBurger>
-            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
-          </NavbarBurger>
+            <NavbarLogo to="/admin/mainpage">
+              <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+            </NavbarLogo>
+            <NavbarItem to="/admin/register/patient">
+              Registrera Patient
+            </NavbarItem>
+            <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
+            <NavbarItem to="/admin/register/exercise">
+              Ladda upp övning
+            </NavbarItem>
+            <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
+            <NavbarItemLogout
+              isActive={() => false}
+              onClick={customDialogAdmin}
+              last="true"
+            >
+              Logga ut
+            </NavbarItemLogout>
+          </NavbarMenu>
 
-          <NavbarLogo to="/admin/mainpage">
-            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
-          </NavbarLogo>
-          <NavbarItem to="/admin/register/patient">
-            Registrera Patient
-          </NavbarItem>
-          <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
-          <NavbarItem to="/admin/register/exercise">
-            Ladda upp övning
-          </NavbarItem>
-          <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
-          <NavbarItemLogout
-            isActive={() => false}
-            onClick={customDialogAdmin}
-            last="true"
-          >
-            Logga ut
-          </NavbarItemLogout>
-        </NavbarMenu>
+          <StyledMobileNav open={open}>
+            <NavbarItemBurger to="/admin/register/patient" onClick={closeMenu}>
+              <StyledIcon size="1.5em" name="add_user" /> Registrera Patient
+            </NavbarItemBurger>
+            <StyledDivider />
 
-        <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/admin/register/patient" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="add_user" /> Registrera Patient
-          </NavbarItemBurger>
-          <StyledDivider />
+            <NavbarItemBurger to="/admin/search/patient" onClick={closeMenu}>
+              <StyledIcon size="1.5em" name="search" /> Sök Patient
+            </NavbarItemBurger>
+            <StyledDivider />
+            <NavbarItemBurger to="/admin/register/exercise" onClick={closeMenu}>
+              <StyledIcon size="1.5em" name="upload" /> Ladda upp övning
+            </NavbarItemBurger>
+            <StyledDivider />
 
-          <NavbarItemBurger to="/admin/search/patient" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="search" /> Sök Patient
-          </NavbarItemBurger>
-          <StyledDivider />
-          <NavbarItemBurger to="/admin/register/exercise" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="upload" /> Ladda upp övning
-          </NavbarItemBurger>
-          <StyledDivider />
+            <NavbarItemBurger to="/admin/search/exercise" onClick={closeMenu}>
+              <StyledIcon size="1.5em" name="search" /> Sök övning
+            </NavbarItemBurger>
 
-          <NavbarItemBurger to="/admin/search/exercise" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="search" /> Sök övning
-          </NavbarItemBurger>
+            <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
+              Logga ut
+            </LogOut>
+          </StyledMobileNav>
+        </>
+        
+      :
 
-          <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
-            Logga ut
-          </LogOut>
-        </StyledMobileNav>
-      </>
-    );
-  }
-  if (location.pathname === url) {
-    return (
-      <>
-        <NavbarMenu theme={AdminTheme}>
-          <NavbarBurger>
-            <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
-          </NavbarBurger>
+        <>
+          <NavbarMenu theme={AdminTheme}>
+            <NavbarBurger>
+              <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
+            </NavbarBurger>
 
-          <NavbarLogo to="/admin/mainpage">
-            <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
-          </NavbarLogo>
-          <NavbarItemLogout
-            isActive={() => false}
-            onClick={customDialogAdmin}
-            last="true"
-          >
-            Logga ut
-          </NavbarItemLogout>
-        </NavbarMenu>
+            <NavbarLogo to="/admin/mainpage">
+              <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
+            </NavbarLogo>
+            <NavbarItemLogout
+              isActive={() => false}
+              onClick={customDialogAdmin}
+              last="true"
+            >
+              Logga ut
+            </NavbarItemLogout>
+          </NavbarMenu>
 
-        <StyledMobileNav open={open}>
-          <StyledDivider />
+          <StyledMobileNav open={open}>
+            <StyledDivider />
 
-          <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
-            Logga ut
-          </LogOut>
-        </StyledMobileNav>
-      </>
-    );
-  }
-};
+            <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
+              Logga ut
+            </LogOut>
+          </StyledMobileNav>
+        </>
+      }  
+    </>
+  )};
 
 export default Navbar;
