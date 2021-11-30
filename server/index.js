@@ -19,7 +19,7 @@ import localStrategy from "./controllers/config/passportConfig.js";
 //configuration of env file
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
