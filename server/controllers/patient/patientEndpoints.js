@@ -73,44 +73,43 @@ export const postWatchedVideo = async (req, res) => {
 };
 
 export const postSelectedVideos = async (req, res) => {
-  console.log(req.params.name);
-  console.log(req.params.selectedexercises);
+  const amountOfTimesArray = JSON.parse(req.params.selectedexercises);
+  const name = req.params.name;
 
-  req.params.selectedexercises.forEach((value) => {
-    Patient.findOneAndUpdate(
-      {
-        name: req.params.name,
-        "statistics.vidId": value.id,
-      },
-      { $push: { "statistics.$.amountOfTimes": value.amount } },
-      {
-        new: true,
-      },
-      (err, doc) => {
-        if (doc) {
-          res.status(200).send("Success");
-        }
-
-        if (!doc) {
-          Patient.findOneAndUpdate(
-            { name: req.params.name },
-            {
-              $push: {
-                statistics: {
-                  vidId: alue.id,
-                  scans: 0,
-                  timesWatched: 0,
-                  amountOfTimes: req.params.value.amount,
+  try {
+    amountOfTimesArray.forEach((value) => {
+      Patient.findOneAndUpdate(
+        {
+          name: name,
+          "statistics.vidId": value.id,
+        },
+        { $set: { "statistics.$.amountOfTimes": value.amount } },
+        {
+          new: true,
+        },
+        (err, doc) => {
+          if (!doc) {
+            Patient.findOneAndUpdate(
+              { name: name },
+              {
+                $push: {
+                  statistics: {
+                    vidId: alue.id,
+                    scans: 0,
+                    timesWatched: 0,
+                    amountOfTimes: req.params.value.amount,
+                  },
                 },
               },
-            },
-            { safe: true, new: true },
-            (err, doc) => {
-              res.status(200).send("Success");
-            }
-          );
+              { safe: true, new: true }
+            );
+          }
         }
-      }
-    );
-  });
+      );
+    });
+
+    res.status(200).send("Success");
+  } catch (e) {
+    console.log(e);
+  }
 };

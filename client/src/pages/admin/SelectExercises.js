@@ -89,7 +89,8 @@ const SelectExercises = () => {
 
   const handleSubmit = () => {
     if (selected.length === 0) return;
-    postSelectedExercises(name, selected);
+
+    postSelectedExercises(name, JSON.stringify(selected));
   };
 
   return (
