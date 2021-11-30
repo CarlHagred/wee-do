@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
+
 
 import PatientTheme from "../../themes/PatientTheme";
 import WdLogo from "../images/WdLogo";
@@ -168,9 +170,15 @@ const Navbar = () => {
   /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
-  const url = "http://localhost:3000/activitypanel";
+  let url = "/mainpage"
 
-  if (window.location.href !== url) {
+  let location = useLocation();
+
+  React.useEffect(() => {
+
+  }, [location])
+
+  if (location.pathname !== url) {
     return (
       <>
         <NavbarMenu theme={PatientTheme}>
@@ -222,7 +230,7 @@ const Navbar = () => {
       </>
     );
   }
-  if (window.location.href === url) {
+  if (location.pathname === url) {
     return (
       <>
         <NavbarMenu theme={PatientTheme}>
