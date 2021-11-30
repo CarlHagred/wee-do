@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 
-const StyledContainter = styled.div`
+const StyledContainer = styled.div`
     text-align: left;
     margin: 2.3em;
 `;
@@ -15,10 +15,11 @@ const StyledH2 = styled.h2`
     font-weight: 600;
 `;
 
+
 const Help = () => {
     return (
         <PatientLayout>
-            <StyledContainter>
+            <StyledContainer>
                 <StyledH2>Hjälp</StyledH2>
                 <p>
                     <strong>
@@ -68,7 +69,7 @@ const Help = () => {
                     5 (övrigt).
                 </li>
                 <br />
-            </StyledContainter>
+            </StyledContainer>
         </PatientLayout>
     );
 };

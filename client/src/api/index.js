@@ -11,6 +11,14 @@ export const getOnePatient = (name) =>
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
+export const deletePatientIndex = async (params) => {
+  await axios.delete(`${serverUrl}/deletepatient`, {
+    data: {
+      name: params,
+    },
+  });
+};
+
 /* ===== Session calls ===== */
 
 export const getSession = () =>
@@ -21,6 +29,7 @@ export const getAdminSession = () =>
 
 /* ===== Login calls ===== */
 
+//API-call tills servern som hämtar användaren som har blivit autentiserad och skickar vidare användaren till Scanner-sidan
 export const loginPatient = (params) => {
   axios({
     method: "POST",
@@ -107,3 +116,22 @@ export const postVideo = (videoData) =>
 
 export const postSelectedExercises = (name, selectedExercises) =>
   axios.post(`${serverUrl}/postselectedexercises/${name}/${selectedExercises}`);
+
+export const getTitleAndDescById = async (id) => {
+  const response = await axios.get(`${serverUrl}/getVideoTitleAndDescription`, {
+    params: {
+      videoId: id,
+    },
+  });
+  return response.data;
+};
+
+export const deleteVideoIndex = async (params) => {
+  await axios
+    .delete(`${serverUrl}/deletevideo`, {
+      data: {
+        videoId: params,
+      },
+    })
+    .then((response) => {});
+};

@@ -19,11 +19,18 @@ const LoginPatient = () => {
     const handleSubmit = () => {
         console.log(`försöker logga in med ${loginName}`);
         const postData = {
-            name: loginName,
+            name: loginName.trim(),
         };
 
         loginPatient(postData);
         localStorage.clear();
+    };
+
+    const listener = (event) => {
+        let key = 13
+        if(event.keyCode === key){
+            handleSubmit();
+        }
     };
 
     return (
@@ -34,6 +41,7 @@ const LoginPatient = () => {
                 type="text"
                 name="name"
                 id="loginPatient"
+                onKeyDown={listener}
                 onChange={(e) => setLoginName(e.target.value)}
                 placeholder="Skriv användarnamn här..."
             ></UserInput>

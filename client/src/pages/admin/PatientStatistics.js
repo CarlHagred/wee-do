@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
+import { Confirm } from "react-st-modal";
 
-import { getOnePatient } from "../../api";
+import { deletePatientIndex, getOnePatient } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
@@ -18,11 +19,13 @@ const StyledContainer = styled.div`
     font-size: 1.2em;
   }
 `;
+
 const StyledPatient = styled.p`
   background-color: #ccc;
   padding: 4px;
   border-radius: 3px;
 `;
+
 const StyledLink = styled(Link)`
   color: #0000ff;
   :hover {
@@ -60,18 +63,34 @@ const PatientStatistics = () => {
     fetchData();
   }, [name]);
 
+  const customDeletePatient = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill radera " + name + "?",
+      "Radera",
+      "OK",
+      "Avbryt"
+    );
+    if (conf) {
+      deletePatient();
+      window.location = "/admin/search/patient";
+    }
+  };
+
+  const deletePatient = () => {
+    deletePatientIndex(name);
+  };
+
+  const setPatientInactive = () => {};
+
   return (
     <AdminLayout>
       <ContentContainer>
         <StyledContainer>
+          <h2>Statistik</h2>
           <StyledPatient>
             <strong>Användarnamn: </strong>
             {patient.name}
           </StyledPatient>
-          <Link to={`/admin/select/${patient.name}`} key={patient.name}>
-            <Button>Välj övningar</Button>
-          </Link>
-          <h2>Statistik</h2>
           {patientStatistics.map((stat) => (
             <React.Fragment key={stat.vidId}>
               <StyledStatistics>
@@ -94,9 +113,22 @@ const PatientStatistics = () => {
               </StyledStatistics>
             </React.Fragment>
           ))}
+          <br />
+          <Button onClick={customDeletePatient} icon="trash">
+            Radera patient
+          </Button>
+          <br />
+          <Button onClick={setPatientInactive} icon="patientInactive">
+            Gör patient inaktiv
+          </Button>
+          <br />
+          <Link to={`/admin/select/${patient.name}`} key={patient.name}>
+            <Button>Välj övningar</Button>
+          </Link>
         </StyledContainer>
       </ContentContainer>
     </AdminLayout>
   );
 };
+
 export default PatientStatistics;

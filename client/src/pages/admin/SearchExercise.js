@@ -72,6 +72,7 @@ const SearchExercise = () => {
                   />
                   <br></br>
                   <br></br>
+                  Antal visningar: {videos.__v}
                   <br></br>
                   <br></br>
                   <br></br>

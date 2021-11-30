@@ -9,7 +9,7 @@ import Help from "./pages/common/Help";
 
 /* ===== Patient Pages ===== */
 import PatientLogin from "./pages/patient/PatientLogin.js";
-import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
+import PatientPanel from "./pages/patient/PatientPanel";
 import QrScanner from "./pages/patient/QrScanner";
 import Statistics from "./pages/patient/Statistics";
 
@@ -42,7 +42,7 @@ function App() {
         <ProtectedRoutePatient
           exact
           path="/activitypanel"
-          component={PatientActivityPanel}
+          component={PatientPanel}
         />
         <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <ProtectedRoutePatient
