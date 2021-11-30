@@ -6,7 +6,7 @@ import {
   getPatients,
   getVideos,
   getOnePatient,
-  deleteVideos,
+  deleteVideo,
   getVideoTitleById
 } from "../controllers/admin/adminEndpoints.js";
 
@@ -49,7 +49,7 @@ router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
-router.delete("/deletevideo", deleteVideos);
+router.delete("/deletevideo", deleteVideo);
 router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });

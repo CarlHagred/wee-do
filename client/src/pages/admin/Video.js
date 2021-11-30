@@ -17,7 +17,7 @@ const StyledTitle = styled.p`
 
 const VideoContainer = styled.div`
     /*max-width: 1000px;
-max-height: 750px;*/
+    max-height: 750px;*/
     align-items: center;
     justify-content: center;
     display: flex;
@@ -37,8 +37,9 @@ const Video = () => {
     }, [videos]);
 
    
-    const handleEvent = () => {
-      deleteVideoIndex(videoId); 
+    const handleEvent = (e) => {
+        e.preventDefault(); 
+        deleteVideoIndex(videoId); 
     };
 
     const videoUrl = "https://www.youtube.com/embed/" + videoId;
@@ -73,10 +74,9 @@ const Video = () => {
             </Link>
             <br></br>
             <Link to={`/admin/search/exercise`}>
-                <Button onClick={handleEvent} icon="trash">Radera</Button>
+                <Button onClick={(e) => { handleEvent(e) }} icon="trash">Radera</Button>
             </Link>
         </AdminLayout>
     );
 };
-
 export default Video;

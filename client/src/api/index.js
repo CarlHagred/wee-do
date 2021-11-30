@@ -130,7 +130,9 @@ export const getTitleAndDescById = async (id) => {
     })
     return response.data; 
 }
-
+export const updateDatabase = async () => {
+    await axios.post(`${serverUrl}/updateDatabase`); 
+}
 
 export const deleteVideoIndex = async (params) => {
     await axios.delete(`${serverUrl}/deletevideo`,{

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import { postVideo } from "../../api/index.js";
-
 import UserInput from "../common/UserInput";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";

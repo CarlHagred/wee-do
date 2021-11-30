@@ -1,6 +1,6 @@
 import Patient from "../../models/patient.js";
 import Videos from "../../models/videos.js";
-
+import {deleteFromYoutubePlaylist} from "./videoHandler.js"; 
 export const postPatient = async (req, res) => {
   const createRandomName = () => Math.random().toString(20).substr(2, 6);
   const name = createRandomName();
@@ -58,18 +58,22 @@ export const getVideos = async (req, res) => {
 };
 
 
-export const deleteVideos = async (req, res) => {
-const id = req.body.videoId; 
-    await Videos.deleteOne({"videoId": id})
-    .then(videos => {
-      if(!videos){
-        return res.status(404).send({
-          message: "Video not fount with id: " + id
-        })
-      }
-      //Once deleted from db, code here to delete it from yt-channel. 
-      res.status(200).send({message: "Video deleted successfully!"})
-    })
+export const deleteVideo = async (req, res) => {
+  const id = req.body.videoId; 
+  deleteFromYoutubePlaylist(req, res, id); 
+
+  // Below code deletes the video from the db, it's commented out to testing the YT-implementation part
+
+    // await Videos.deleteOne({"videoId": id})
+    // .then(videos => {
+    //   if(!videos){
+    //     return res.status(404).send({
+    //       message: "Video not fount with id: " + id
+    //     })
+    //   }
+    //   //Once deleted from db, code here to delete it from yt-channel. 
+    //   res.status(200).send({message: "Video deleted successfully!"})
+    // })
 };
 
 export const getVideoTitleById = async (req, res) => {

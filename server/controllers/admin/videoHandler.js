@@ -15,6 +15,7 @@ import Videos from "../../models/videos.js";
 import dotenv from "dotenv";
 
 import axios from "axios"; 
+import { response } from "express";
 
 const service = google.youtube('v3');
 
@@ -80,7 +81,6 @@ export const uploadVideo = async (auth, { title, description, file }) => {
     //UpdateDatabase(req, res); 
 }
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './videos')
@@ -98,7 +98,6 @@ export const fileToServer = () => {
 
 } 
 
-
 export const verifyUser = async (request) => {
     const { file } = request;    
 
@@ -115,8 +114,6 @@ export const verifyUser = async (request) => {
 }
 
 export const uploadAndCallback = async (request, response) => {
-
-    
 
     const { code, state } = request.query;
 
@@ -137,10 +134,6 @@ export const uploadAndCallback = async (request, response) => {
     response.redirect("http://localhost:3000/success");
 }
 
-
-
-
-
 dotenv.config();
 
 const url = process.env.FetchVidUrl;
@@ -149,7 +142,6 @@ export const UpdateDatabase = async (req, res) => {
 
     try 
     {
-
         const data = await axios.get(url);
 
         for (let i in data.data.items) 
@@ -176,41 +168,80 @@ export const UpdateDatabase = async (req, res) => {
     }
 };
 
-const authenticateToDelete = videoId => {
+export const deleteFromYoutubePlaylist = async (req, res, videoId) => {
+    const auth = authorize();
 
-    return gapi.auth2.getAuthInstance()
-    .signIn({
-        scope: "https://www.googleapis.com/auth/youtube.force-ssl"
-    }).then(() =>
-    {
-        console.log("Sign-in successfull"); 
-        loadClientAndDeleteVideo(videoId); 
+    const authUrl = auth.generateAuthUrl({
+        scope: 'https://www.googleapis.com/auth/youtube.force-ssl'
+    });
+    open(authUrl);
 
-    }, error => {
-        console.log("Error signing in due to: ", error);
-    })
-}
-const loadClientAndDeleteVideo = videoId => {
-    const api_key = process.env.API_KEY; 
-    gapi.client.setApiKey(api_key); 
+    //check req.query
+    console.log('query printed: ' + req.query); 
 
-    const clientId = credentials.web.client_id;
-    gapi.load("client:auth2", () => {
-        gapi.auth2.init({
-            client_id: {clientId} 
-        })
-    }); 
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-    .then( () => {
-        console.log("Gapi client loaded"); 
-        return gapi.client.youtube.videos.delete({
-            "id": {videoId}
-        }).then( response => {
-            console.log("Video deleting response ", response.result); 
-        }, then( error => {
-            console.error("Executing the video deleting method error ", error); 
-        }))
-    }, error => {
-        console.log("Error loading GAPI client for API: ", error); 
-    })
+    const { code } = req.query;
+    
+    //check code from the req.query 
+    console.log('code printed: '+ code); // Can not find code from the req.query bcuz it is empty object
+
+    const { tokens } = await auth.getToken(code);
+
+    auth.setCredentials(tokens);
+
+    // vars from .env will be used once the code succeeds 
+    const PId = "PL8BorJT0TyU0-QbsIexh4INUkdcZ3r4QL";
+    const part = "snippet"; 
+    const key = "AIzaSyCCp8P3NT_n7Vmi99R8bH3MzsIjymKiSjc";
+
+    const response = await service.playlistItems.list({part: part, playlistId: PId, key: key});
+    
+    //console.log(response.data.items); 
+    let item;
+
+    for(let i = 0; i < response.data.items.length; i++) {
+
+        if(videoId == response.data.items[i].snippet.resourceId.videoId) {
+                item = response.data.items[i]
+        }
+        }
+        //console.log(item); 
+        (item !== null) ? service.playlistItems.delete(auth, {id: item.snippet.resourceId.videoId }) : console.log('Not deleted'); 
+
+
+//  Gapi google client browser side library for signing in and authentication 
+//     return gapi.auth2.getAuthInstance()
+//     .signIn({
+//         scope: "https://www.googleapis.com/auth/youtube.force-ssl"
+//     }).then(() =>
+//     {
+//         console.log("Sign-in successfull"); 
+//         loadClientAndDeleteVideo(videoId); 
+
+//     }, error => {
+//         console.log("Error signing in due to: ", error);
+//     })
+// }
+// const loadClientAndDeleteVideo = videoId => {
+//     const api_key = process.env.API_KEY; 
+//     gapi.client.setApiKey(api_key); 
+
+//     const clientId = credentials.web.client_id;
+//     gapi.load("client:auth2", () => {
+//         gapi.auth2.init({
+//             client_id: {clientId} 
+//         })
+//     }); 
+//     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+//     .then( () => {
+//         console.log("Gapi client loaded"); 
+//         return gapi.client.youtube.videos.delete({
+//             "id": {videoId}
+//         }).then( response => {
+//             console.log("Video deleting response ", response.result); 
+//         }, then( error => {
+//             console.error("Executing the video deleting method error ", error); 
+//         }))
+//     }, error => {
+//         console.log("Error loading GAPI client for API: ", error); 
+//     })
 }
