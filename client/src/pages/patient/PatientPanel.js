@@ -49,7 +49,7 @@ const PanelMenu = styled.nav`
   justify-content: center;
 `;
 
-const PatientActivityPanel = () => {
+const PatientPanel = () => {
   return (
     <PatientLayout>
       <StyledHero>
@@ -58,6 +58,7 @@ const PatientActivityPanel = () => {
           <WdLogo />
         </HeroText>
       </StyledHero>
+
       <PanelMenuWrapper>
         <PanelMenu>
           <PanelButton to="/QrScanner" icon="qrcode" size="44">
@@ -71,4 +72,4 @@ const PatientActivityPanel = () => {
     </PatientLayout>
   );
 };
-export default PatientActivityPanel;
+export default PatientPanel;
