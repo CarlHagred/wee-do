@@ -62,7 +62,7 @@ export const logoutPatient = () => {
         withCredentials: true,
         url: `${serverUrl}/logoutpatient`,
     }).then((res) => {
-        window.location.reload();
+        window.location = "/";
     });
 };
 
@@ -101,7 +101,7 @@ export const logoutAdmin = () => {
         withCredentials: true,
         url: `${serverUrl}/logoutadmin`, // Ska fixas
     }).then((res) => {
-        window.location.reload();
+        window.location = "/admin";
     });
 };
 
