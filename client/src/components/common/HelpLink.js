@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
+const StyledHelp = styled(NavLink)`
+  margin: 30px 0;
+  font-size: 0.9em;
+`;
 
-const StyledHelp = styled.a`
-    margin-top: 30px;
-    margin-bottom: 0px;
-`; 
-
-const HelpLink = (props) => {
-    return (
-        <StyledHelp>
-            <a href="/help">Hjälp</a>
-        </StyledHelp>
-    );
+const HelpLink = () => {
+  return <StyledHelp to="/help">Hjälp</StyledHelp>;
 };
 
 export default HelpLink;

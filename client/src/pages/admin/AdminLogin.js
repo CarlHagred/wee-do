@@ -14,7 +14,7 @@ import Icon from "../../components/common/Icons";
 const StyledBody = createGlobalStyle`
   @media (min-width: 740px) {
     body {
-    background-color: #F9F9F9;
+    background-color: #EFEFEF;
   }
   }
 `;
