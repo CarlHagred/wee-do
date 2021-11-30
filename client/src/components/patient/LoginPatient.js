@@ -8,10 +8,8 @@ import PatientTheme from "../../themes/PatientTheme";
 import Button from "../common/Button";
 import UserInput from "../common/UserInput";
 
-const LoginWrapper = styled.div`
-  max-width: 300px;
-  margin: 0 0.8em;
-  background-color: yellow;
+const LoginContainer = styled.div`
+  width: 100%;
 `;
 
 const LoginPatient = () => {
@@ -41,7 +39,7 @@ const LoginPatient = () => {
   };
 
   return (
-    <LoginWrapper>
+    <LoginContainer>
       <span id="patientError" />
       <UserInput
         theme={PatientTheme}
@@ -53,7 +51,7 @@ const LoginPatient = () => {
         placeholder="Skriv användarnamn här..."
       />
       <Button onClick={handleSubmit}>Logga in</Button>
-    </LoginWrapper>
+    </LoginContainer>
   );
 };
 

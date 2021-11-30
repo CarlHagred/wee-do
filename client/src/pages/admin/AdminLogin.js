@@ -30,8 +30,9 @@ const StyledContainerItem = styled.div`
   flex: 1;
 `;
 
-const StyledWrapper = styled(StyledContainerItem)`
+const StyledWrapper = styled.div`
   display: flex;
+  flex: 1;
   max-width: 800px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
@@ -43,9 +44,10 @@ const StyledWrapper = styled(StyledContainerItem)`
   }
 `;
 
-const StyledHeroContainer = styled(StyledContainerItem)`
+const StyledHeroContainer = styled.div`
   background: ${(props) => props.theme.palette.brand};
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-content: center;
   @media (max-width: 740px) {
@@ -64,22 +66,19 @@ const StyledIcon = styled(Icon)`
   }
 `;
 
-const StyledContentContainer = styled(StyledContainerItem)`
+const StyledContentContainer = styled.div`
   background: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   margin: 0 20px;
   margin-bottom: 8%;
 `;
 
-const StyledLoginHeader = styled(StyledContainerItem)`
+const StyledLoginHeader = styled.div`
   font-size: 2rem;
   margin: 40px 0;
-`;
-
-const StyledUserInput = styled(UserInput)`
-  text-align: left;
 `;
 
 const AdminLogin = () => {
@@ -128,7 +127,7 @@ const AdminLogin = () => {
 
             <StyledContainerItem onKeyDown={listener}>
               <span id="adminError"></span>
-              <StyledUserInput
+              <UserInput
                 theme={AdminTheme}
                 type="text"
                 name="name"
@@ -136,7 +135,7 @@ const AdminLogin = () => {
                 onChange={(e) => setLoginName(e.target.value)}
                 placeholder="Användarnamn"
               />
-              <StyledUserInput
+              <UserInput
                 theme={AdminTheme}
                 type="password"
                 name="name"

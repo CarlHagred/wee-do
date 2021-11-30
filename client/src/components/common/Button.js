@@ -2,36 +2,20 @@ import styled, { css } from "styled-components";
 
 import Icon from "./Icons";
 
-const ButtonContainer = styled.div`
-  max-width: 300px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin: auto;
-`;
-
 const StyledButton = styled.button`
   display: flex;
   gap: 8px;
   justify-content: center;
-
   background: ${(props) => props.theme.palette.brand};
-
   color: white;
-
   font-size: ${(props) => (props.size === "lg" ? "2" : "1.2")}em;
   font-weight: bold;
-
   margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
   margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
-
   width: 100%;
   padding: 0.3em 1em;
-
   border-radius: 2em;
-
   cursor: pointer;
-
   ${(props) =>
     props.disabled
       ? css`
@@ -61,18 +45,16 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => (
-  <ButtonContainer>
-    <StyledButton size={props.size} {...props}>
-      {props.icon && (
-        <Icon
-          height={props.size === "lg" ? 24 : 16}
-          width={props.size === "lg" ? 24 : 16}
-          name={props.icon}
-        />
-      )}
-      {props.children}
-    </StyledButton>
-  </ButtonContainer>
+  <StyledButton size={props.size} {...props}>
+    {props.icon && (
+      <Icon
+        height={props.size === "lg" ? 24 : 16}
+        width={props.size === "lg" ? 24 : 16}
+        name={props.icon}
+      />
+    )}
+    {props.children}
+  </StyledButton>
 );
 
 export default Button;

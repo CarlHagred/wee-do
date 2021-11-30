@@ -5,10 +5,10 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/patient/LoginPatient";
 import hero from "../../components/images/patient_login.png";
-import HelpLink from "../../components/common/HelpLink";
+import { NavLink } from "react-router-dom";
 
 const StyledBody = createGlobalStyle`
-    @media (min-width: 300px) {
+    @media (min-width: 740px) {
       body {
       background-color: #EFEFEF;
     }
@@ -21,34 +21,26 @@ const PageWrapper = styled.div`
   text-align: center;
 `;
 
-const StyledContainerItem = styled.div`
-  font-size: 20px;
-  flex: 1;
-`;
-
-const StyledWrapper = styled(StyledContainerItem)`
+const StyledWrapper = styled.div`
   display: flex;
-  max-width: 802px;
+  flex: 1;
+  max-width: 800px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
   background-color: white;
-  @media (max-width: 799px) {
-    flex-direction: column;
-    max-width: 402px;
-    margin-top: 10vh;
-  }
-  @media (max-width: 400px) {
+  @media (max-width: 740px) {
     margin-top: 0;
+    flex-direction: column;
     border: 0;
   }
 `;
 
-const StyledHeroContainer = styled(StyledContainerItem)`
+const StyledHeroContainer = styled.div`
   display: flex;
-  position: relative;
-  text-align: center;
-  background-color: orange;
-  @media (max-width: 540px) {
+  flex: 1;
+  flex-direction: column;
+  align-content: center;
+  @media (max-width: 740px) {
     margin-top: 0;
   }
 `;
@@ -59,18 +51,23 @@ const StyledHero = styled.img`
   min-height: 100%;
 `;
 
-const StyledContentContainer = styled(StyledContainerItem)`
+const StyledContentContainer = styled.div`
   background: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  background-color: red;
-  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+  margin-bottom: 8%;
 `;
 
-const StyledLoginHeader = styled(StyledContainerItem)`
+const StyledLoginHeader = styled.div`
   font-size: 2rem;
   margin: 40px 0;
-  height: 80%;
+`;
+
+const StyledHelp = styled(NavLink)`
+  margin-top: 3em;
 `;
 
 const PatientLogin = () => {
@@ -85,10 +82,8 @@ const PatientLogin = () => {
 
           <StyledContentContainer>
             <StyledLoginHeader>Logga in</StyledLoginHeader>
-
             <LoginPatient />
-
-            <HelpLink />
+            <StyledHelp to="/help">Hjälp</StyledHelp>
           </StyledContentContainer>
         </StyledWrapper>
       </ThemeProvider>
