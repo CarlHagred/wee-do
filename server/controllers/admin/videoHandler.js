@@ -186,7 +186,7 @@ export const deleteFromYoutubePlaylist = async (req, res, videoId) => {
 
     //const { tokens } = await auth.getToken(code);
 
-    //auth.setCredentials();
+    //auth.setCredentials(tokens);
 
     // vars from .env will be used once the code succeeds 
     const PId = "PL8BorJT0TyU0-QbsIexh4INUkdcZ3r4QL";
