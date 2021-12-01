@@ -8,17 +8,18 @@ import About from "../common/About";
 import Help from "../common/Help";
 
 /* ===== Admin Pages ===== */
+import { ProtectedRouteAdmin } from "../../components/protectedRoutes/ProtectedRoutesAdmin";
 import AdminPanel from "./AdminPanel";
 import PatientStatistics from "./PatientStatistics";
 import RegisterExercise from "./RegisterExercise";
 import RegisterPatient from "./RegisterPatient";
 import SearchExercise from "./SearchExercise";
 import SearchPatient from "./SearchPatient";
-import { ProtectedRouteAdmin } from "../../components/protectedRoutes/ProtectedRoutesAdmin";
 
 import UploadSucceeded from "./UploadSucceeded";
 import QRPreview from "./QRPreview";
 import Video from "./Video";
+
 import WatchExercise from "../../components/patient/WatchingVideo";
 
 function AdminMainPage() {
@@ -76,7 +77,14 @@ function AdminMainPage() {
             component={SearchPatient}
           />
 
+          <ProtectedRouteAdmin
+            exact
+            path="/admin/exercise/qrpreview/:id"
+            component={QRPreview}
+          />
+
           <Route exact path="/test" component={QRPreview} />
+
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
         </Switch>
