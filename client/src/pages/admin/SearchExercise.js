@@ -61,7 +61,10 @@ const SearchExercise = () => {
             })
             .map((videos) => (
               <VideoItem key={videos._id}>
-                <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+                <Link
+                  to={`/#/admin/exercise/${videos.videoId}`}
+                  key={videos._id}
+                >
                   <StyledTitle>{videos.videoTitle}</StyledTitle>
                   <br></br>
                   <img

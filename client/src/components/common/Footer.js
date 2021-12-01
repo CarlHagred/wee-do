@@ -86,8 +86,8 @@ const Footer = () => {
           <NavContainer>
             <NavHeader>Information</NavHeader>
 
-            <NavItem to="/help">Hjälp</NavItem>
-            <NavItem to="/about">Om WeeDo</NavItem>
+            <NavItem to="/#/help">Hjälp</NavItem>
+            <NavItem to="/#/about">Om WeeDo</NavItem>
           </NavContainer>
         </NavMenu>
       </BotttomContainer>
