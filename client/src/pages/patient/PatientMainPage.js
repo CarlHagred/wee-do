@@ -12,6 +12,7 @@ import PatientPanel from "./PatientPanel";
 import QrScanner from "./QrScanner";
 import Statistics from "./Statistics";
 import { ProtectedRoutePatient } from "../../components/protectedRoutes/ProtectedRoutesPatient";
+import WatchExercise from "../../components/patient/WatchingVideo";
 
 function PatientMainPage() {
   return (
@@ -32,6 +33,11 @@ function PatientMainPage() {
             exact
             path="/statistics"
             component={Statistics}
+          />
+          <ProtectedRoutePatient
+            exact 
+            path="/watch" 
+            component={WatchExercise} 
           />
 
           <Route exact path="/help" component={Help} />
