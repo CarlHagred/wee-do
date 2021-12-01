@@ -56,7 +56,7 @@ const StyledTable = styled.table`
       }
     }
 
-    thead td { /* denna är där det står aktiva och inaktiva pat */
+    thead td { 
       background-color: #c2c2c2;
       border-radius: 4px;
       font-size: 1.2em;
@@ -106,13 +106,9 @@ const SearchPatient = () => {
                 })
                 .map((patient) => (
                 <tbody>
-                  <tr key={patient._id}>
-                     <td>
-                      <Link
-                        to={`/admin/statistics/${patient.name}`}
-                        key={patient._id}>
-                        {patient.name}
-                      </Link>    
+                  <tr key={patient._id} onClick={()=>{goToStatisticsPage(patient)}}>
+                     <td>                  
+                        {patient.name}   
                       </td>
                   </tr>
                 </tbody>
@@ -135,13 +131,9 @@ const SearchPatient = () => {
                 })
                 .map((patient) => (
                 <tbody>
-                  <tr key={patient._id}>
+                  <tr key={patient._id} onClick={()=>{goToStatisticsPage(patient)}}>
                      <td>
-                      <Link
-                        to={`/admin/statistics/${patient.name}`}
-                        key={patient._id}>
-                        {patient.name}
-                      </Link>    
+                        {patient.name}                  
                       </td>
                   </tr>
                 </tbody>
@@ -153,5 +145,10 @@ const SearchPatient = () => {
     </AdminLayout>
 );
 };
+
+const goToStatisticsPage = async (patient) => {
+  var thisPatient = (patient.name);
+  window.location = "/admin/statistics/"+thisPatient;
+}
 
 export default SearchPatient;
