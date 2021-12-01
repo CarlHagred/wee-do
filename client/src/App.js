@@ -97,10 +97,10 @@ function App() {
           component={UploadSucceeded}
         />
         <ProtectedRouteAdmin
-                    exact
-                    path="/error"
-                    component={UploadError}
-                />
+          exact
+          path="/error"
+          component={UploadError}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>
