@@ -35,7 +35,7 @@ export const loginPatient = (params) => {
     url: `/loginpatient`,
   }).then((res) => {
     if (res.data === "auth") {
-      window.location = "/activitypanel";
+      window.location = "/#/activitypanel";
       localStorage.setItem("isAuthenticatedPatient", "true");
       const error = document.getElementById("patientError");
       error.innerHTML = "<span></span>";
@@ -70,7 +70,7 @@ export const loginAdmin = (params) => {
   }).then((res) => {
     if (res.data === "auth") {
       //Ändra namn?
-      window.location = "/adminpanel"; // Namn ska fixas
+      window.location = "/#/adminpanel"; // Namn ska fixas
       localStorage.setItem("isAuthenticatedAdmin", "true");
       let error = document.getElementById("adminError");
       error.innerHTML = `<span></span>`;
