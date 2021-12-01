@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyle from "./globalStyle";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 /* ===== Common Pages ===== */
 import NotFoundPage from "./pages/common/404";
@@ -86,7 +86,7 @@ function App() {
           path="/admin/exercise/qrpreview/:id"
           component={QRPreview}
         />
-        <Route exact path="/help" component={Help} />
+        <Route exact path="/:help" component={Help} />
         <Route exact path="/test" component={QRPreview} />
         <Route exact path="/about" component={About} />
         <Route exact path="/showcase" component={Showcase} />
