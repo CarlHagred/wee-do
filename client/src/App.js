@@ -31,6 +31,7 @@ import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRou
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
 
+//this is a comment
 function App() {
   return (
     <Router>
