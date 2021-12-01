@@ -27,6 +27,9 @@ const app = express();
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 
 //middleware with passport
 app.use(express.json());
@@ -58,10 +61,6 @@ localStrategy(passport);
 app.use(routes);
 //app.use(videoRoutes);
 app.use(morgan("dev"));
-//Handle wildcards for deployment
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
 
 //Database connection
 const CONNECTION_URI = process.env.CONNECTION_DB_URI;

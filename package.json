@@ -16,12 +16,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install"
   },
-  "rewrites": [
-    {
-      "source": "**",
-      "destination": "/index.html"
-    }
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
