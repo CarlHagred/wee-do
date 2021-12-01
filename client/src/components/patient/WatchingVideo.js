@@ -85,7 +85,7 @@ const WatchExercise = () => {
       <ReactPlayer {...playerProps} />
       { isTitleAndDescFetched && 
         <div>
-          <H2>{title}</H2>}
+          <H2>{title}</H2>
           <P>{description}</P>
         </div>
       }
