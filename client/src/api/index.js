@@ -35,7 +35,7 @@ export const loginPatient = (params) => {
     method: "POST",
     data: params,
     withCredentials: true,
-    url: `${serverUrl}/loginpatient`,
+    url: `/loginpatient`,
   }).then((res) => {
     if (res.data === "auth") {
       window.location = "/activitypanel";
