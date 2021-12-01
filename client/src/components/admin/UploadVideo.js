@@ -44,12 +44,12 @@ const UploadVideo = () => {
         videoData.append("videoFile", form.file);
         videoData.append("title", form.title);
         videoData.append("description", form.description);
-        
-        const uploadVideo = postVideo(videoData);
-
-        if(uploadVideo === "UploadError"){
+        postVideo(videoData);
+        //const uploadVideo = postVideo(videoData);
+        /*
+        if(uploadVideo === 403){
             setFailedUpload(true);
-        }
+        }*/
     };
 
     return (

@@ -60,8 +60,7 @@ export const redirectToLogin = async (oauth2Client, { filename, title, descripti
     open(authUrl);
 };
 
-export const uploadVideo = async (auth, { title, description, file }) => {
-
+export const uploadVideo = async (auth, { title, description, file }, response) => {
     await service.videos.insert({
         auth: auth,
         part: 'snippet,contentDetails,status',
@@ -78,8 +77,8 @@ export const uploadVideo = async (auth, { title, description, file }) => {
             body: file
         }
     });
-    // Update the mongo after each upload.
-    //UpdateDatabase(req, res); 
+        // Update the mongo after each upload.
+        //UpdateDatabase(req, res);    
 }
 
 
@@ -111,36 +110,30 @@ export const verifyUser = async (request) => {
         const { title, description } = request.body; 
         
         const oauth = authorize();
-
+        
         await redirectToLogin(oauth, { filename, title, description });
     }
 }
 
 export const uploadAndCallback = async (request, response) => {
+    
+    const { code, state } = request.query;
 
-    try {
-        const { code, state } = request.query;
+    const { filename, title, description } = JSON.parse(state); 
 
-        const { filename, title, description } = JSON.parse(state); 
+    const oauth = authorize();
 
-        const oauth = authorize();
+    const { tokens } = await oauth.getToken(code);
 
-        const { tokens } = await oauth.getToken(code);
+    oauth.setCredentials(tokens);
 
-        oauth.setCredentials(tokens);
+    await uploadVideo(oauth, {
+        title,
+        description,
+        file: fs.createReadStream(`videos/${filename}`)
+    })
 
-        await uploadVideo(oauth, {
-            title,
-            description,
-            file: fs.createReadStream(`videos/${filename}`)
-        })
-
-        response.redirect("http://localhost:3000/success");  
-
-    } catch (error) {
-        res.send('UploadError', error)
-        res.redirect("http://localhost:3000/error");
-    }
+    response.redirect("http://localhost:3000/success");  
 
     
 }
