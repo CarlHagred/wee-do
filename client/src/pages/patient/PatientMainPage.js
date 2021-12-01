@@ -13,6 +13,7 @@ import QrScanner from "./QrScanner";
 import Statistics from "./Statistics";
 import WatchingExercise from "./WatchingExercise"; 
 import { ProtectedRoutePatient } from "../../components/protectedRoutes/ProtectedRoutesPatient";
+import WatchExercise from "../../components/patient/WatchingVideo";
 
 function PatientMainPage() {
   return (
@@ -39,6 +40,7 @@ function PatientMainPage() {
             path="/statistics"
             component={Statistics}
           />
+
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
         </Switch>
