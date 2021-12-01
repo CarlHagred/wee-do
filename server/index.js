@@ -16,6 +16,8 @@ import localStrategy from "./controllers/config/passportConfig.js";
     3. se i terminalen så det står: "Server upp and running, and connected to database on port: 8000"
 */
 
+app.use("/", express.static(path.join(__dirname, "/client/build")));
+
 //configuration of env file
 dotenv.config();
 
@@ -37,12 +39,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-/*
-app.use(express.static(path.join(__dirname, "client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
-*/
 app.use(
   session({
     secret: "cats",
@@ -58,6 +54,11 @@ localStrategy(passport);
 app.use(routes);
 //app.use(videoRoutes);
 app.use(morgan("dev"));
+//Handle wildcards for deployment
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
+
 //Database connection
 const CONNECTION_URI = process.env.CONNECTION_DB_URI;
 const databaseConnection = async () => {
