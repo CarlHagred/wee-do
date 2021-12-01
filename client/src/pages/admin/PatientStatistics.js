@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 
 import { deletePatientIndex, getOnePatient } from "../../api";
@@ -51,6 +51,7 @@ const PatientStatistics = () => {
   const { name } = useParams();
   const [patient, setPatient] = useState([]);
   const [patientStatistics, setPatientStatistics] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +71,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deletePatient();
-      window.location = "/admin/search/patient";
+      history.push("/admin/search/patient");
     }
   };
 
