@@ -1,9 +1,9 @@
 const PatientTheme = {
   palette: {
-    brand: "#427687",
+    brand: "#008389",
     button: "#335e6b",
     button_hover: "#FFF",
-    hover: "#335e6b",
+    hover: "#006d72",
     hamburger: "#335e6b",
   },
 };
