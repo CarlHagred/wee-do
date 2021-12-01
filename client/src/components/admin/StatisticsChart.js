@@ -4,14 +4,38 @@ import { BsArrowCounterclockwise } from "react-icons/bs";
 
 const StatisticsChart = (props) => {
   const datasets = [];
-  const labels = [];
-  console.log(props.created);
+  const allDates = [];
 
   props.patientStatistics.map((entry) => {
-    console.log(entry.watchedTime[0]);
-    const date = new Date(entry.watchedTime[0]);
-    console.log(date);
+    entry.watchedTime.map((time) => {
+      if (!allDates.includes(time.substring(0, 10))) {
+        allDates.push(time.substring(0, 10));
+      }
+    });
+    allDates.sort();
+  });
 
+  const startDate = allDates[0];
+  const endDate = allDates.pop();
+
+  function getDates(startDate, endDate) {
+    const dates = [];
+    let currentDate = startDate;
+    const addDays = function (days) {
+      const date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    };
+    while (currentDate <= endDate) {
+      dates.push(currentDate.toISOString().substring(0, 10));
+      currentDate = addDays.call(currentDate, 1);
+    }
+    return dates;
+  }
+
+  const allDatesComplete = getDates(new Date(startDate), new Date(endDate));
+
+  props.patientStatistics.map((entry) => {
     const dataset = {};
     dataset.label = entry.vidId;
     dataset.fill = false;
@@ -21,19 +45,11 @@ const StatisticsChart = (props) => {
     dataset.data = [];
     datasets.push(dataset);
 
-    //skapar x-axelns labels
-    entry.watchedTime.map((time) => {
-      if (!labels.includes(time.substring(0, 10))) {
-        labels.push(time.substring(0, 10));
-      }
-    });
-    console.log(labels);
-
-    //skapar datan
-    for (let i = 0; i < labels.length; i++) {
+    //skapar datan baserat på alla datum
+    for (let i = 0; i < allDatesComplete.length; i++) {
       let count = 0;
       entry.watchedTime.forEach(
-        (v) => v.substring(0, 10) === labels[i] && count++
+        (v) => v.substring(0, 10) === allDatesComplete[i] && count++
       );
       dataset.data.push(count);
     }
@@ -56,7 +72,7 @@ const StatisticsChart = (props) => {
       <Line
         height={300}
         data={{
-          labels: labels,
+          labels: allDatesComplete,
           datasets: datasets,
         }}
         options={options}

@@ -49,7 +49,6 @@ const StyledChart = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
-  max-width: 800px;
 `;
 
 const PatientStatistics = () => {
@@ -102,10 +101,7 @@ const PatientStatistics = () => {
             </React.Fragment>
           ))}
           <StyledChart>
-            <StatisticsChart
-              patientStatistics={patientStatistics}
-              created={patient.created}
-            />
+            <StatisticsChart patientStatistics={patientStatistics} />
           </StyledChart>
         </StyledContainer>
       </ContentContainer>

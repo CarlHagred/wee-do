@@ -21,7 +21,6 @@ export const postPatient = async (req, res) => {
         name: name,
         statistics: [],
         videos: [],
-        created: new Date(),
       });
       await newPatient.save();
       console.log(`Success, new patient with name: ${name}`);
