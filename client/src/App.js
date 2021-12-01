@@ -9,7 +9,7 @@ import Help from "./pages/common/Help";
 
 /* ===== Patient Pages ===== */
 import PatientLogin from "./pages/patient/PatientLogin.js";
-import PatientActivityPanel from "./pages/patient/PatientActivityPanel";
+import PatientPanel from "./pages/patient/PatientPanel";
 import QrScanner from "./pages/patient/QrScanner";
 import Statistics from "./pages/patient/Statistics";
 
@@ -33,86 +33,78 @@ import Showcase from "./pages/Showcase";
 import UploadError from "./pages/admin/UploadError";
 
 function App() {
-    return (
-        <Router>
-            <GlobalStyle />
-            <Switch>
-                <Route exact path="/" component={PatientLogin} />
-                <Route exact path="/watch" component={WatchExercise} />
-                <ProtectedRoutePatient
-                    exact
-                    path="/activitypanel"
-                    component={PatientActivityPanel}
-                />
-                <ProtectedRoutePatient
-                    exact
-                    path="/QrScanner"
-                    component={QrScanner}
-                />
-                <ProtectedRoutePatient
-                    exact
-                    path="/statistics"
-                    component={Statistics}
-                />
-                <Route exact path="/admin" component={AdminLogin} />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/adminpanel"
-                    component={AdminPanel}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/register/exercise"
-                    component={RegisterExercise}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/register/patient"
-                    component={RegisterPatient}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/statistics/:name"
-                    component={PatientStatistics}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/search/exercise"
-                    component={SearchExercise}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/exercise/:videoId"
-                    component={Video}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/search/patient"
-                    component={SearchPatient}
-                />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/admin/exercise/qrpreview/:id"
-                    component={QRPreview}
-                />
-                <Route exact path="/help" component={Help} />
-                <Route exact path="/test" component={QRPreview} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/showcase" component={Showcase} />
-                <ProtectedRouteAdmin
-                    exact
-                    path="/success"
-                    component={UploadSucceeded}
-                />
-                <ProtectedRouteAdmin
+  return (
+    <Router>
+      <GlobalStyle />
+      <Switch>
+        <Route exact path="/" component={PatientLogin} />
+        <Route exact path="/watch" component={WatchExercise} />
+        <ProtectedRoutePatient
+          exact
+          path="/activitypanel"
+          component={PatientPanel}
+        />
+        <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
+        <ProtectedRoutePatient
+          exact
+          path="/statistics"
+          component={Statistics}
+        />
+        <Route exact path="/admin" component={AdminLogin} />
+        <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/register/exercise"
+          component={RegisterExercise}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/register/patient"
+          component={RegisterPatient}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/statistics/:name"
+          component={PatientStatistics}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/search/exercise"
+          component={SearchExercise}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/exercise/:videoId"
+          component={Video}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/search/patient"
+          component={SearchPatient}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/admin/exercise/qrpreview/:id"
+          component={QRPreview}
+        />
+        <Route exact path="/help" component={Help} />
+        <Route exact path="/test" component={QRPreview} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/showcase" component={Showcase} />
+        <ProtectedRouteAdmin
+          exact
+          path="/success"
+          component={UploadSucceeded}
+        />
+        <ProtectedRouteAdmin
                     exact
                     path="/error"
                     component={UploadError}
                 />
-                <Route component={NotFoundPage} />
-            </Switch>
-        </Router>
-    );
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;

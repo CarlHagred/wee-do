@@ -34,7 +34,7 @@ const BotttomContainer = styled.div`
 const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 350px;
+  max-width: 280px;
 `;
 
 const StyledParagraph = styled.p`
@@ -42,7 +42,7 @@ const StyledParagraph = styled.p`
   padding: 5px 0 10px 5px;
 `;
 
-const NavContainer = styled.div`
+const NavMenu = styled.div`
   display: flex;
   flex-direction: row;
   gap: 3em;
@@ -51,7 +51,7 @@ const NavContainer = styled.div`
   }
 `;
 
-const NavMenu = styled.div`
+const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -82,14 +82,14 @@ const Footer = () => {
             och studenter på Malmö Universitet.
           </StyledParagraph>
         </AboutContainer>
-        <NavContainer last="true">
-          <NavMenu>
+        <NavMenu last="true">
+          <NavContainer>
             <NavHeader>Information</NavHeader>
 
             <NavItem to="/help">Hjälp</NavItem>
             <NavItem to="/about">Om WeeDo</NavItem>
-          </NavMenu>
-        </NavContainer>
+          </NavContainer>
+        </NavMenu>
       </BotttomContainer>
     </StyledFooter>
   );

@@ -24,20 +24,22 @@ const UploadVideo = () => {
         file: null,
     });
 
-  const handleChange = (event) => {
-    const inputValue =
-      event.target.name === "file" ? event.target.files[0] : event.target.value;
-    setForm({
-      ...form,
-      [event.target.name]: inputValue,
-    });
-  };
+    const handleChange = (event) => {
+        const inputValue =
+            event.target.name === "file"
+                ? event.target.files[0]
+                : event.target.value;
+        setForm({
+            ...form,
+            [event.target.name]: inputValue,
+        });
+    };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const videoData = new FormData();
-    videoData.enctype = "multipart/form-data";
+        const videoData = new FormData();
+        videoData.enctype = "multipart/form-data";
 
         videoData.append("videoFile", form.file);
         videoData.append("title", form.title);
@@ -92,4 +94,4 @@ const UploadVideo = () => {
         </div>
   );
 };
-export default UploadVideo;
+export default UploadVideo; 
