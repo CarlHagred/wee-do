@@ -4,14 +4,13 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import PatientTheme from "../../themes/PatientTheme";
 import LoginPatient from "../../components/patient/LoginPatient";
-import WdLogo from "../../components/images/WdLogo";
 import hero from "../../components/images/patient_login.png";
-import HelpLink from "../../components/common/HelpLink";
+import { NavLink } from "react-router-dom";
 
 const StyledBody = createGlobalStyle`
     @media (min-width: 740px) {
       body {
-      background-color: #F9F9F9;
+      background-color: #EFEFEF;
     }
     }
 `;
@@ -22,15 +21,9 @@ const PageWrapper = styled.div`
   text-align: center;
 `;
 
-const StyledContainerItem = styled.div`
-    font-size: 20px;
-    flex: 1;
-    padding-bottom: 20px
-    height: 100%;
-`;
-
-const StyledWrapper = styled(StyledContainerItem)`
+const StyledWrapper = styled.div`
   display: flex;
+  flex: 1;
   max-width: 800px;
   border: 1px solid #bfc1bf;
   margin-top: 20vh;
@@ -42,46 +35,39 @@ const StyledWrapper = styled(StyledContainerItem)`
   }
 `;
 
-const StyledHeroContainer = styled(StyledContainerItem)`
+const StyledHeroContainer = styled.div`
   display: flex;
-  position: relative;
-  text-align: center;
+  flex: 1;
+  flex-direction: column;
+  align-content: center;
   @media (max-width: 740px) {
     margin-top: 0;
   }
 `;
 
-const StyledLogo = styled(WdLogo)`
-  width: 60%;
-  position: absolute;
-  top: 10px;
-  left: 16px;
-`;
-
-const StyledLink = styled(HelpLink)``;
-
 const StyledHero = styled.img`
   object-fit: cover;
   width: 100%;
   min-height: 100%;
-  @media (max-width: 650px) {
-    width: 100%;
-  }
 `;
 
-const StyledContentContainer = styled(StyledContainerItem)`
+const StyledContentContainer = styled.div`
   background: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
-  margin: 0 15px;
-  margin-bottom: 50px;
+  margin: 0 20px;
+  margin-bottom: 8%;
 `;
 
-const StyledLoginHeader = styled(StyledContainerItem)`
+const StyledLoginHeader = styled.div`
   font-size: 2rem;
   margin: 40px 0;
-  height: 80%;
+`;
+
+const StyledHelp = styled(NavLink)`
+  margin-top: 3em;
 `;
 
 const PatientLogin = () => {
@@ -91,17 +77,13 @@ const PatientLogin = () => {
       <ThemeProvider theme={PatientTheme}>
         <StyledWrapper>
           <StyledHeroContainer>
-            <StyledHero src={hero} />
+            <StyledHero src={hero} alt="WeeDo Logotyp" />
           </StyledHeroContainer>
 
           <StyledContentContainer>
             <StyledLoginHeader>Logga in</StyledLoginHeader>
-
-            <StyledContainerItem>
-              <LoginPatient />
-            </StyledContainerItem>
-
-            <StyledLink />
+            <LoginPatient />
+            <StyledHelp to="/help">Hjälp</StyledHelp>
           </StyledContentContainer>
         </StyledWrapper>
       </ThemeProvider>
