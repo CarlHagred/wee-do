@@ -23,6 +23,8 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
+const path = require("path");
+
 app.use("/", express.static(path.join(__dirname, "/client/build")));
 
 //middleware with passport
