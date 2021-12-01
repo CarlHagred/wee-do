@@ -11,9 +11,7 @@ import Help from "../common/Help";
 import PatientPanel from "./PatientPanel";
 import QrScanner from "./QrScanner";
 import Statistics from "./Statistics";
-import WatchingExercise from "./WatchingExercise"; 
 import { ProtectedRoutePatient } from "../../components/protectedRoutes/ProtectedRoutesPatient";
-import WatchExercise from "../../components/patient/WatchingVideo";
 
 function PatientMainPage() {
   return (
@@ -29,11 +27,6 @@ function PatientMainPage() {
             exact
             path="/QrScanner"
             component={QrScanner}
-          />
-          <ProtectedRoutePatient
-            exact
-            path="/watch"
-            component={WatchingExercise}
           />
           <ProtectedRoutePatient
             exact
