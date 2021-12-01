@@ -16,14 +16,14 @@ import localStrategy from "./controllers/config/passportConfig.js";
     3. se i terminalen så det står: "Server upp and running, and connected to database on port: 8000"
 */
 
-app.use("/", express.static(path.join(__dirname, "/client/build")));
-
 //configuration of env file
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+
+app.use("/", express.static(path.join(__dirname, "/client/build")));
 
 //middleware with passport
 app.use(express.json());
