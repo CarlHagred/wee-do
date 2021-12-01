@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
+import path from "path";
 
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
@@ -23,24 +24,25 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-const path = require("path");
+const __dirname = path.resolve();
 
-app.use("/", express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 //middleware with passport
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV || "http://localhost:3000",
     credentials: true,
   })
 );
 
+/*
 //For deployment
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
+*/
 app.use(
   session({
     secret: "cats",
