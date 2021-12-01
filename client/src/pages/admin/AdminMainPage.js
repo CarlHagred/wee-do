@@ -16,6 +16,11 @@ import SearchExercise from "./SearchExercise";
 import SearchPatient from "./SearchPatient";
 import { ProtectedRouteAdmin } from "../../components/protectedRoutes/ProtectedRoutesAdmin";
 
+import UploadSucceeded from "./UploadSucceeded";
+import QRPreview from "./QRPreview";
+import Video from "./Video";
+import WatchExercise from "../../components/patient/WatchingVideo";
+
 function AdminMainPage() {
   return (
     <Router>
@@ -31,6 +36,12 @@ function AdminMainPage() {
             exact
             path="/admin/register/exercise"
             component={RegisterExercise}
+          />
+
+          <ProtectedRouteAdmin
+            exact
+            path="/success"
+            component={UploadSucceeded}
           />
 
           <ProtectedRouteAdmin
@@ -53,10 +64,18 @@ function AdminMainPage() {
 
           <ProtectedRouteAdmin
             exact
+            path="/admin/exercise/:videoId"
+            component={Video}
+          />
+
+          <ProtectedRouteAdmin
+            exact
             path="/admin/search/patient"
             component={SearchPatient}
           />
 
+          <Route exact path="/watch" component={WatchExercise} />
+          <Route exact path="/test" component={QRPreview} />
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
         </Switch>

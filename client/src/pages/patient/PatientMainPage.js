@@ -10,6 +10,7 @@ import Help from "../common/Help";
 /* ===== Patient Pages ===== */
 import PatientPanel from "./PatientPanel";
 import QrScanner from "./QrScanner";
+import WatchingExercise from "./WatchingExercise";
 import Statistics from "./Statistics";
 import { ProtectedRoutePatient } from "../../components/protectedRoutes/ProtectedRoutesPatient";
 
@@ -28,6 +29,13 @@ function PatientMainPage() {
             path="/QrScanner"
             component={QrScanner}
           />
+
+          <ProtectedRoutePatient
+            exact
+            path="/watch"
+            component={WatchingExercise}
+          />
+
           <ProtectedRoutePatient
             exact
             path="/statistics"
