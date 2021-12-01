@@ -6,6 +6,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 /* ===== Common Pages ===== */
 import About from "../common/About";
 import Help from "../common/Help";
+import NotFoundPage from "../common/404";
 
 /* ===== Admin Pages ===== */
 import { ProtectedRouteAdmin } from "../../components/protectedRoutes/ProtectedRoutesAdmin";
@@ -87,6 +88,7 @@ function AdminMainPage() {
 
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
+          <Route component={NotFoundPage} />
         </Switch>
       </AdminLayout>
     </Router>

@@ -32,11 +32,6 @@ function App() {
           path="/mainpage"
           component={PatientMainPage}
         />
-        <ProtectedRoutePatient
-            exact
-            path="/watch"
-            component={WatchingExercise}
-        />
 
         <Route exact path="/admin" component={AdminLogin} />
         <ProtectedRouteAdmin
