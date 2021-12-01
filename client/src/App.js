@@ -11,6 +11,7 @@ import NotFoundPage from "./pages/common/404";
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
 import PatientMainPage from "./pages/patient/PatientMainPage";
+import WatchingExercise from "../src/pages/patient/WatchingExercise";
 
 /* ===== Admin Pages ===== */
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -30,6 +31,11 @@ function App() {
           exact
           path="/mainpage"
           component={PatientMainPage}
+        />
+        <ProtectedRoutePatient
+            exact
+            path="/watch"
+            component={WatchingExercise}
         />
 
         <Route exact path="/admin" component={AdminLogin} />
