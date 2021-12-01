@@ -5,16 +5,15 @@ import { Confirm } from "react-st-modal";
 
 import { deletePatientIndex, getOnePatient } from "../../api";
 
-import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 
 const StyledContainer = styled.div`
-  h2{
+  h2 {
     text-align: center;
     font-size: 2.5em;
   }
-  p{
+  p {
     font-size: 1.2em;
   }
 `;
@@ -62,64 +61,66 @@ const PatientStatistics = () => {
     fetchData();
   }, [name]);
 
-const customDeletePatient = async () => {
-  const conf = await Confirm(
-    "Är du säker på att du vill radera " + name + "?",
-    "Radera",
-    "OK",
-    "Avbryt"
-  );
-  if (conf) {
-    deletePatient();
-    window.location = "/admin/search/patient";
-  }
-};
+  const customDeletePatient = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill radera " + name + "?",
+      "Radera",
+      "OK",
+      "Avbryt"
+    );
+    if (conf) {
+      deletePatient();
+      window.location = "/admin/search/patient";
+    }
+  };
 
-const deletePatient = () => {
-  deletePatientIndex(name);
-};
+  const deletePatient = () => {
+    deletePatientIndex(name);
+  };
 
-const setPatientInactive = () => {
-};
+  const setPatientInactive = () => {};
 
-return (
-  <AdminLayout>
+  return (
     <ContentContainer>
       <StyledContainer>
         <h2>Statistik</h2>
-          <StyledPatient>
-            <strong>Användarnamn: </strong>
-            {patient.name}
-          </StyledPatient>
-            {patientStatistics.map((stat) => (
-              <React.Fragment key={stat.vidId}>
-                <StyledStatistics>
-                  <br/>
-                  <p>
-                    <strong>Video: </strong>{" "}
-                    <StyledLink to={`../exercise/${stat.vidId}`}>
-                    {stat.vidId}
-                    </StyledLink>{" "}
-                  </p>
-                  <p>
-                    <strong>Scans: </strong>
-                    {stat.scans}
-                  </p>
-                  <p>
-                    <strong>Antal visningar: </strong>
-                    {stat.timesWatched}
-                  </p>
-                    <br/>
-                </StyledStatistics>
-              </React.Fragment>
-            ))}
-            <br/>
-            <Button onClick={customDeletePatient} icon="trash">Radera patient</Button>
-            <br/>
-            <Button onClick={setPatientInactive} icon="patientInactive">Gör patient inaktiv</Button>
+        <StyledPatient>
+          <strong>Användarnamn: </strong>
+          {patient.name}
+        </StyledPatient>
+        {patientStatistics.map((stat) => (
+          <React.Fragment key={stat.vidId}>
+            <StyledStatistics>
+              <br />
+              <p>
+                <strong>Video: </strong>{" "}
+                <StyledLink to={`../exercise/${stat.vidId}`}>
+                  {stat.vidId}
+                </StyledLink>{" "}
+              </p>
+              <p>
+                <strong>Scans: </strong>
+                {stat.scans}
+              </p>
+              <p>
+                <strong>Antal visningar: </strong>
+                {stat.timesWatched}
+              </p>
+              <br />
+            </StyledStatistics>
+          </React.Fragment>
+        ))}
+        <br />
+        <Button onClick={customDeletePatient} icon="trash">
+          Radera patient
+        </Button>
+        <br />
+        <Button onClick={setPatientInactive} icon="patientInactive">
+          Gör patient inaktiv
+        </Button>
       </StyledContainer>
     </ContentContainer>
-  </AdminLayout>
-);};
+  );
+};
 
 export default PatientStatistics;

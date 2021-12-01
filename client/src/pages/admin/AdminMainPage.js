@@ -68,13 +68,14 @@ function AdminMainPage() {
             component={Video}
           />
 
+          <Route exact path="/watch" component={WatchExercise} />
+
           <ProtectedRouteAdmin
             exact
             path="/admin/search/patient"
             component={SearchPatient}
           />
 
-          <Route exact path="/watch" component={WatchExercise} />
           <Route exact path="/test" component={QRPreview} />
           <Route exact path="/help" component={Help} />
           <Route exact path="/about" component={About} />
