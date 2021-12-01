@@ -60,22 +60,22 @@ const AdminPanel = () => {
 
       <PanelMenuWrapper>
         <PanelMenu>
-          <PanelButton to="/#/admin/register/patient" icon="add_user" size="44">
+          <PanelButton to="/admin/register/patient" icon="add_user" size="44">
             Registrera patient
           </PanelButton>
           <PanelButton
-            to="/#/admin/search/patient"
+            to="/admin/search/patient"
             icon="search_patient"
             width="44"
             height="44"
           >
             Sök patient
           </PanelButton>
-          <PanelButton to="/#/admin/register/exercise" icon="upload" size="44">
+          <PanelButton to="/admin/register/exercise" icon="upload" size="44">
             Ladda upp övning
           </PanelButton>
           <PanelButton
-            to="/#/admin/search/exercise"
+            to="/admin/search/exercise"
             icon="search_exercise"
             width="44"
             height="44"

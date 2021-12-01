@@ -144,17 +144,17 @@ const Navbar = () => {
             <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
           </NavbarBurger>
 
-          <NavbarLogo to="/#/adminpanel">
+          <NavbarLogo to="/adminpanel">
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
-          <NavbarItem to="/#/admin/register/patient">
+          <NavbarItem to="/admin/register/patient">
             Registrera Patient
           </NavbarItem>
-          <NavbarItem to="/#/admin/search/patient">Sök Patient</NavbarItem>
-          <NavbarItem to="/#/admin/register/exercise">
+          <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
+          <NavbarItem to="/admin/register/exercise">
             Ladda upp övning
           </NavbarItem>
-          <NavbarItem to="/#/admin/search/exercise">Sök övning</NavbarItem>
+          <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
           <NavbarItemLogout
             isActive={() => false}
             onClick={customDialogAdmin}
@@ -165,26 +165,26 @@ const Navbar = () => {
         </NavbarMenu>
 
         <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/#/admin/register/patient" onClick={closeMenu}>
+          <NavbarItemBurger to="/admin/register/patient" onClick={closeMenu}>
             <StyledIcon size="1.5em" name="add_user" /> Registrera Patient
           </NavbarItemBurger>
           <StyledDivider />
 
-          <NavbarItemBurger to="/#/admin/search/patient" onClick={closeMenu}>
+          <NavbarItemBurger to="/admin/search/patient" onClick={closeMenu}>
             <StyledIcon size="1.5em" name="search" /> Sök Patient
           </NavbarItemBurger>
           <StyledDivider />
-          <NavbarItemBurger to="/#/admin/register/exercise" onClick={closeMenu}>
+          <NavbarItemBurger to="/admin/register/exercise" onClick={closeMenu}>
             <StyledIcon size="1.5em" name="upload" /> Ladda upp övning
           </NavbarItemBurger>
           <StyledDivider />
 
-          <NavbarItemBurger to="/#/admin/search/exercise" onClick={closeMenu}>
+          <NavbarItemBurger to="/admin/search/exercise" onClick={closeMenu}>
             <StyledIcon size="1.5em" name="search" /> Sök övning
           </NavbarItemBurger>
 
           <LogOut
-            to="/#/admin"
+            to="/admin"
             isActive={() => false}
             onClick={customDialogAdmin}
           >
@@ -202,7 +202,7 @@ const Navbar = () => {
             <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
           </NavbarBurger>
 
-          <NavbarLogo to="/#/adminpanel">
+          <NavbarLogo to="/adminpanel">
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
           <NavbarItemLogout
@@ -218,7 +218,7 @@ const Navbar = () => {
           <StyledDivider />
 
           <LogOut
-            to="/#/admin"
+            to="/admin"
             isActive={() => false}
             onClick={customDialogAdmin}
           >

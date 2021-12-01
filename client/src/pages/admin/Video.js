@@ -66,11 +66,11 @@ const Video = () => {
         ></iframe>
       </VideoContainer>
       <br></br>
-      <Link to={`/#/admin/exercise/qrpreview/${videoId}`}>
+      <Link to={`/admin/exercise/qrpreview/${videoId}`}>
         <Button icon="qrcode">Generera QR-kod</Button>
       </Link>
       <br></br>
-      <Link to={`/#/admin/search/exercise`}>
+      <Link to={`/admin/search/exercise`}>
         <Button onClick={handleEvent} icon="trash">
           Radera
         </Button>

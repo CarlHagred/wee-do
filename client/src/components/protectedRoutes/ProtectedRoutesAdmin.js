@@ -8,14 +8,14 @@ export const ProtectedRouteAdmin = ({
   const isAuthenticated = localStorage.getItem("isAuthenticatedAdmin");
 
   if (isAuthenticated !== "true") {
-    window.location = "/#/admin";
+    window.location = "/admin";
   }
 
   return (
     <Route
       {...restOfProps}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/#/admin" />
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/admin" />
       }
     />
   );

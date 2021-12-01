@@ -8,14 +8,14 @@ export const ProtectedRoutePatient = ({
   const isAuthenticated = localStorage.getItem("isAuthenticatedPatient");
 
   if (isAuthenticated !== "true") {
-    window.location = "/#/";
+    window.location = "/";
   }
 
   return (
     <Route
       {...restOfProps}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/#/" />
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

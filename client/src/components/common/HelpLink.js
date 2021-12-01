@@ -9,7 +9,7 @@ const StyledHelp = styled.a`
 const HelpLink = (props) => {
   return (
     <StyledHelp>
-      <a href="/#/help">Hjälp</a>
+      <a href="/help">Hjälp</a>
     </StyledHelp>
   );
 };

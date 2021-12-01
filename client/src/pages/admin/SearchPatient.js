@@ -83,7 +83,7 @@ const SearchPatient = () => {
                 <tr key={patient._id}>
                   <td>
                     <Link
-                      to={`/#/admin/statistics/${patient.name}`}
+                      to={`/admin/statistics/${patient.name}`}
                       key={patient._id}
                     >
                       {patient.name}

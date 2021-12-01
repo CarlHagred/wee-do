@@ -38,70 +38,62 @@ function App() {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={PatientLogin} />
-        <Route exact path="/#/watch" component={WatchExercise} />
+        <Route exact path="/watch" component={WatchExercise} />
         <ProtectedRoutePatient
           exact
-          path="/#/activitypanel"
+          path="/activitypanel"
           component={PatientPanel}
         />
+        <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <ProtectedRoutePatient
           exact
-          path="/#/QrScanner"
-          component={QrScanner}
-        />
-        <ProtectedRoutePatient
-          exact
-          path="/#/statistics"
+          path="/statistics"
           component={Statistics}
         />
-        <Route exact path="/#/admin" component={AdminLogin} />
+        <Route exact path="/admin" component={AdminLogin} />
+        <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
         <ProtectedRouteAdmin
           exact
-          path="/#/adminpanel"
-          component={AdminPanel}
-        />
-        <ProtectedRouteAdmin
-          exact
-          path="/#/admin/register/exercise"
+          path="/admin/register/exercise"
           component={RegisterExercise}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/register/patient"
+          path="/admin/register/patient"
           component={RegisterPatient}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/statistics/:name"
+          path="/admin/statistics/:name"
           component={PatientStatistics}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/search/exercise"
+          path="/admin/search/exercise"
           component={SearchExercise}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/exercise/:videoId"
+          path="/admin/exercise/:videoId"
           component={Video}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/search/patient"
+          path="/admin/search/patient"
           component={SearchPatient}
         />
         <ProtectedRouteAdmin
           exact
-          path="/#/admin/exercise/qrpreview/:id"
+          path="/admin/exercise/qrpreview/:id"
           component={QRPreview}
         />
-        <Route exact path="/#/help" component={Help} />
-        <Route exact path="/#/test" component={QRPreview} />
-        <Route exact path="/#/about" component={About} />
-        <Route exact path="/#/showcase" component={Showcase} />
+        <Route exact path="/help" component={Help} />
+        <Route exact path="/test" component={QRPreview} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/showcase" component={Showcase} />
         <ProtectedRouteAdmin
           exact
-          path="/#/success"
+          path="/success"
           component={UploadSucceeded}
         />
         <Route component={NotFoundPage} />

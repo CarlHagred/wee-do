@@ -61,10 +61,10 @@ const PatientPanel = () => {
 
       <PanelMenuWrapper>
         <PanelMenu>
-          <PanelButton to="/#/QrScanner" icon="qrcode" size="44">
+          <PanelButton to="/QrScanner" icon="qrcode" size="44">
             Scanna övning
           </PanelButton>
-          <PanelButton to="/#/statistics" icon="statistics" size="44">
+          <PanelButton to="/statistics" icon="statistics" size="44">
             Se statistik
           </PanelButton>
         </PanelMenu>

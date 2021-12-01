@@ -71,7 +71,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deletePatient();
-      window.location = "/#/admin/search/patient";
+      window.location = "/admin/search/patient";
     }
   };
 
@@ -96,7 +96,7 @@ const PatientStatistics = () => {
                 <br />
                 <p>
                   <strong>Video: </strong>{" "}
-                  <StyledLink to={`/#/../exercise/${stat.vidId}`}>
+                  <StyledLink to={`/../exercise/${stat.vidId}`}>
                     {stat.vidId}
                   </StyledLink>{" "}
                 </p>
