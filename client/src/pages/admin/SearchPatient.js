@@ -10,17 +10,18 @@ import ContentContainer from "../../components/common/ContentContainer";
 
 
 const ListPanelWrapper = styled.div`
-  justify-content: top;
+ justify-content: top;
 `;
 
 const ListPanel = styled.nav`
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 2em;
   align-items: top;
-  //margin-top: 5%;
-  //margin-bottom: 5%;
-  //justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
 `;
 
 const StyledTable = styled.table`
@@ -31,15 +32,16 @@ const StyledTable = styled.table`
   margin: 1em 0;
   justify-content: left;
   border-radius: 4px;
-
+  
   td,
+
   th {
       padding: 5px 10px;
       border-radius: 4px;
       font-family: "Roboto", sans-serif;
       font-size: 1em;
       text-align: left;
-    }
+      }
 
     tbody tr {
       :nth-of-type(odd) {
@@ -54,7 +56,7 @@ const StyledTable = styled.table`
       }
     }
 
-    thead td {
+    thead td { /* denna är där det står aktiva och inaktiva pat */
       background-color: #c2c2c2;
       border-radius: 4px;
       font-size: 1.2em;
