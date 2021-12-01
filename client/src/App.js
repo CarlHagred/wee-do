@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyle from "./globalStyle";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /* ===== Common Pages ===== */
 import NotFoundPage from "./pages/common/404";
