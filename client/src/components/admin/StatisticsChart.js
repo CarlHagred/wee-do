@@ -18,10 +18,10 @@ const StatisticsChart = (props) => {
   const startDate = allDates[0];
   const endDate = allDates.pop();
 
-  function getDates(startDate, endDate) {
+  const getDates = (startDate, endDate) => {
     const dates = [];
     let currentDate = startDate;
-    const addDays = function (days) {
+    const addDays = (days) => {
       const date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
       return date;
@@ -31,7 +31,7 @@ const StatisticsChart = (props) => {
       currentDate = addDays.call(currentDate, 1);
     }
     return dates;
-  }
+  };
 
   const allDatesComplete = getDates(new Date(startDate), new Date(endDate));
 
