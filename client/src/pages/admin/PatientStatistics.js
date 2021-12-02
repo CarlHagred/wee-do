@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 
-import { deletePatientIndex, getOnePatient } from "../../api";
+import {
+  deletePatientIndex,
+  getOnePatient,
+  setPatientInactiveIndex,
+  setPatientActiveIndex,
+} from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
@@ -53,22 +58,20 @@ const StyledChart = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
-  :hover {
-    background: rgb(108, 153, 255, 33%);
-  }
 `;
 
 const PatientStatistics = () => {
   const { name } = useParams();
   const [patient, setPatient] = useState([]);
   const [patientStatistics, setPatientStatistics] = useState([]);
+  const [patientStatus, setPatientStatus] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPatient = await getOnePatient(name);
       setPatient(fetchedPatient.data);
       setPatientStatistics(fetchedPatient.data.statistics);
-      console.log(fetchedPatient.data.statistics);
+      setPatientStatus(fetchedPatient.data.active);
     };
     fetchData();
   }, [name]);
@@ -86,11 +89,43 @@ const PatientStatistics = () => {
     }
   };
 
+  const customPatientInactive = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill göra " + name + " inaktiv?",
+      "Inaktiv",
+      "OK",
+      "Avbryt"
+    );
+    if (conf) {
+      setPatientInactive();
+      window.location = "/admin/search/patient";
+    }
+  };
+
+  const customPatientActive = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill göra " + name + " aktiv?",
+      "Aktiv",
+      "OK",
+      "Avbryt"
+    );
+    if (conf) {
+      setPatientActive();
+      window.location = "/admin/search/patient";
+    }
+  };
+
   const deletePatient = () => {
     deletePatientIndex(name);
   };
 
-  const setPatientInactive = () => {};
+  const setPatientInactive = () => {
+    setPatientInactiveIndex(name);
+  };
+  const setPatientActive = () => {
+    setPatientActiveIndex(name);
+  };
+
   return (
     <AdminLayout>
       <ContentContainer>
@@ -104,14 +139,19 @@ const PatientStatistics = () => {
             Radera patient
           </Button>
           <br />
-          <Button onClick={setPatientInactive} icon="patientInactive">
-            Gör patient inaktiv
-          </Button>
+          {patientStatus ? (
+            <Button onClick={customPatientInactive} icon="patientInactive">
+              Gör patient inaktiv
+            </Button>
+          ) : (
+            <Button onClick={customPatientActive} icon="patientActive">
+              Gör patient aktiv
+            </Button>
+          )}
           {patientStatistics.map((stat) => (
             <React.Fragment key={stat.vidId}>
               <StyledStatistics>
                 <br />
-
                 <strong>Video: </strong>
                 <StyledLink to={`../exercise/${stat.vidId}`}>
                   {stat.vidId}
@@ -129,15 +169,13 @@ const PatientStatistics = () => {
                     {time.replace("T", ", ").slice(0, -8)}
                   </p>
                 ))}
-                <br />
               </StyledStatistics>
             </React.Fragment>
           ))}
-
-          <StyledChart>
-            <StatisticsChart patientStatistics={patientStatistics} />
-          </StyledChart>
         </StyledContainer>
+        <StyledChart>
+          <StatisticsChart patientStatistics={patientStatistics} />
+        </StyledChart>
       </ContentContainer>
     </AdminLayout>
   );

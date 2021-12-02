@@ -4,7 +4,7 @@ const patientSchema = mongoose.Schema({
   name: String,
   statistics: Array,
   videos: Array,
-  created: Date,
+  active: Boolean,
 });
 
 const Patient = mongoose.model("Patient", patientSchema);
