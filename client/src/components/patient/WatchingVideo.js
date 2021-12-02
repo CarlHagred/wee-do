@@ -14,6 +14,12 @@ import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
 import { bounce } from "react-animations";
 
+const StyledInactiveHint = styled.p`
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 20px;
+`;
+
 const StyledReward = styled.p`
   animation: 3s ${keyframes`${bounce}`};
   background-color: #41bbc7;
@@ -67,9 +73,7 @@ const WatchExercise = () => {
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [textAboutBtn, setTextAboutBtn] = useState(
-    "Du måste se klart videon innan du kan trycka på knappen!"
-  );
+  const [textAboutBtn, setTextAboutBtn] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,6 +105,9 @@ const WatchExercise = () => {
     }
     if (handleClick.data === "Inactive") {
       setShowActive(true);
+      setExerciseDone(true);
+      setTimeout(() => setIsExploding(true), 300);
+      setTimeout(() => setIsExploding(false), 4000);
     }
   };
 
@@ -140,18 +147,25 @@ const WatchExercise = () => {
           <Button onClick={handleEvent}>Jag har gjort övningen</Button>
         ) : null}
         {exerciseDone && (
-          <StyledReward>
-            <FaThumbsUp />
-          </StyledReward>
+          <>
+            <StyledReward>
+              <FaThumbsUp />
+            </StyledReward>
+            <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
+          </>
         )}
         {!videoEnded && (
           <>
             <Button disabled>Jag har gjort övningen</Button>
-            <P>{textAboutBtn}</P>
+            <P>Du måste se klart videon innan du kan trycka på knappen!</P>
           </>
         )}
         {showActive ? (
-          <p>Jättebra jobbat, du är inaktiv så din statistik sparas inte. </p>
+          <>
+            <StyledInactiveHint>
+              Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
+            </StyledInactiveHint>
+          </>
         ) : null}
       </ButtonContainer>
     </PatientLayout>
