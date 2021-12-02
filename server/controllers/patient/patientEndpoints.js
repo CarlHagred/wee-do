@@ -35,54 +35,92 @@ export const deleteSession = (req, res) => {
 export const postScan = async (req, res) => {};
 
 export const postWatchedVideo = async (req, res) => {
+  if (req.params.active == "true") {
+    Patient.findOneAndUpdate(
+      {
+        name: req.params.name,
+        "statistics.vidId": req.params.videoId,
+      },
+      {
+        $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 },
+        $push: { "statistics.$.watchedTime": new Date() },
+      },
+      {
+        new: true,
+      },
+      (err, doc) => {
+        if (doc) {
+          res.status(200).send("Success");
+        }
+
+        if (!doc) {
+          Patient.findOneAndUpdate(
+            { name: req.params.name },
+            {
+              $push: {
+                statistics: {
+                  vidId: req.params.videoId,
+                  scans: 0,
+                  timesWatched: 1,
+                  scanTime: [],
+                  watchedTime: [new Date()],
+                },
+              },
+            },
+            { safe: true, new: true },
+            (err, doc) => {
+              res.status(200).send("Success");
+            }
+          );
+        }
+      }
+    );
+  }
+  if (req.params.active == "false") {
+    res.status(200).send("Inactive");
+  }
+};
+
+export const deletePatient = async (req, res) => {
+  const name = req.body.name;
+  await Patient.deleteOne({ name: name }).then((patient) => {
+    if (!patient) {
+      return res.status(404).send({
+        message: "Patient not found with name: " + name,
+      });
+    }
+    res.status(200).send({ message: "Patient deleted successfully!" });
+  });
+};
+
+export const setPatientInactive = async (req, res) => {
+  const name = req.params.name;
   Patient.findOneAndUpdate(
-    {
-      name: req.params.name,
-      "statistics.vidId": req.params.videoId,
-    },
-    { $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 } },
-    {
-      new: true,
-    },
+    { name: name },
+    { $set: { active: false } },
+    { new: true },
     (err, doc) => {
       if (doc) {
         res.status(200).send("Success");
-      }
-
-      if (!doc) {
-        Patient.findOneAndUpdate(
-          { name: req.params.name },
-          {
-            $push: {
-              statistics: {
-                vidId: req.params.videoId,
-                scans: 0,
-                timesWatched: 1,
-              },
-            },
-          },
-          { safe: true, new: true },
-          (err, doc) => {
-            res.status(200).send("Success");
-          }
-        );
       }
     }
   );
 };
 
-export const deletePatient = async (req, res) => {
-  const name = req.body.name;
-  await Patient.deleteOne({"name": name})
-  .then(patient => {
-    if(!patient){
-      return res.status(404).send({
-        message: "Patient not found with name: " + name
-      })
+export const setPatientActive = async (req, res) => {
+  const name = req.params.name;
+  Patient.findOneAndUpdate(
+    { name: name },
+    { $set: { active: true } },
+    { new: true },
+    (err, doc) => {
+      if (doc) {
+        res.status(200).send("Success");
+      }
     }
-    res.status(200).send({message: "Patient deleted successfully!"})
-  })
+  );
 };
+
 import Videos from "../../models/videos.js";
 
 export const getVideoUrl = async (req, res) => {
