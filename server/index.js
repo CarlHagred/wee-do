@@ -31,11 +31,16 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 //middleware with passport
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.NODE_ENV || "http://localhost:3000",
+    origin: process.env.PUBLIC_URL || "http://localhost:3000",
     credentials: true,
   })
 );
