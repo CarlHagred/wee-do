@@ -7,7 +7,6 @@ import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
-
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"

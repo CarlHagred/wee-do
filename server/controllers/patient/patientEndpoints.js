@@ -35,81 +35,91 @@ export const deleteSession = (req, res) => {
 export const postScan = async (req, res) => {};
 
 export const postWatchedVideo = async (req, res) => {
-  console.log(typeof req.params.active);
-  console.log(req.params.active);
-  if(req.params.active == "true"){
-  Patient.findOneAndUpdate(
-    {
-      name: req.params.name,
-      "statistics.vidId": req.params.videoId,
-    },
-    { $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 } },
-    {
-      new: true,
-    },
-    (err, doc) => {
-      if (doc) {
-        res.status(200).send("Success");
-        console.log(doc);
-      }
+  if (req.params.active == "true") {
+    Patient.findOneAndUpdate(
+      {
+        name: req.params.name,
+        "statistics.vidId": req.params.videoId,
+      },
+      {
+        $inc: { "statistics.$.timesWatched": 1, "statistics.$.scans": 0 },
+        $push: { "statistics.$.watchedTime": new Date() },
+      },
+      {
+        new: true,
+      },
+      (err, doc) => {
+        if (doc) {
+          res.status(200).send("Success");
+        }
 
-      if (!doc) {
-        Patient.findOneAndUpdate(
-          { name: req.params.name },
-          {
-            $push: {
-              statistics: {
-                vidId: req.params.videoId,
-                scans: 0,
-                timesWatched: 1,
+        if (!doc) {
+          Patient.findOneAndUpdate(
+            { name: req.params.name },
+            {
+              $push: {
+                statistics: {
+                  vidId: req.params.videoId,
+                  scans: 0,
+                  timesWatched: 1,
+                  scanTime: [],
+                  watchedTime: [new Date()],
+                },
               },
             },
-          },
-          { safe: true, new: true },
-          (err, doc) => {
-            res.status(200).send("Success");
-            console.log(doc);
-          }
-        );
+            { safe: true, new: true },
+            (err, doc) => {
+              res.status(200).send("Success");
+            }
+          );
+        }
       }
-    }
-  )};
-  if(req.params.active == "false"){
+    );
+  }
+  if (req.params.active == "false") {
     res.status(200).send("Inactive");
   }
 };
 
 export const deletePatient = async (req, res) => {
   const name = req.body.name;
-  await Patient.deleteOne({"name": name})
-  .then(patient => {
-    if(!patient){
+  await Patient.deleteOne({ name: name }).then((patient) => {
+    if (!patient) {
       return res.status(404).send({
-        message: "Patient not found with name: " + name
-      })
+        message: "Patient not found with name: " + name,
+      });
     }
-    res.status(200).send({message: "Patient deleted successfully!"})
-  })
+    res.status(200).send({ message: "Patient deleted successfully!" });
+  });
 };
 
 export const setPatientInactive = async (req, res) => {
   const name = req.params.name;
-  Patient.findOneAndUpdate({"name": name}, {$set:{"active": false}}, {new: true}, 
-  (err, doc) => {
-    if (doc) {
-      res.status(200).send("Success");
-    }})
+  Patient.findOneAndUpdate(
+    { name: name },
+    { $set: { active: false } },
+    { new: true },
+    (err, doc) => {
+      if (doc) {
+        res.status(200).send("Success");
+      }
+    }
+  );
 };
 
 export const setPatientActive = async (req, res) => {
   const name = req.params.name;
-  Patient.findOneAndUpdate({"name": name}, {$set:{"active": true}}, {new: true}, 
-  (err, doc) => {
-    if (doc) {
-      res.status(200).send("Success");
-    }})
+  Patient.findOneAndUpdate(
+    { name: name },
+    { $set: { active: true } },
+    { new: true },
+    (err, doc) => {
+      if (doc) {
+        res.status(200).send("Success");
+      }
+    }
+  );
 };
-
 
 import Videos from "../../models/videos.js";
 
@@ -129,5 +139,3 @@ export const getVideoUrl = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
-
