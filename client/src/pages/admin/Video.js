@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { /*ThemeProvider*/ } from "styled-components";
 import { useParams } from "react-router-dom";
 
 import { deleteVideoIndex, getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
-import ContentContainer from "../../components/common/ContentContainer";
+//import ContentContainer from "../../components/common/ContentContainer";
 
 
 
@@ -26,7 +26,6 @@ max-height: 750px;*/
 
 const Video = () => {
     const { videoId } = useParams();
-    const [vidID, setVidID] = useState(null); 
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {

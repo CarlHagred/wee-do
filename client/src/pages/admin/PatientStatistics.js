@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
+import { Confirm } from "react-st-modal";
 
-import { getOnePatient } from "../../api";
+import { deletePatientIndex, getOnePatient } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
+import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
 const StyledContainer = styled.div`
@@ -13,16 +15,17 @@ const StyledContainer = styled.div`
     text-align: center;
     font-size: 2.5em;
   }
-
   p {
     font-size: 1.2em;
   }
 `;
+
 const StyledPatient = styled.p`
   background-color: #ccc;
   padding: 4px;
   border-radius: 3px;
 `;
+
 const StyledLink = styled(Link)`
   color: #0000ff;
   :hover {
@@ -42,6 +45,7 @@ const StyledStatistics = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
 `;
+
 const StyledChart = styled.div`
   background-color: rgb(247, 247, 248, 100%);
   border: solid;
@@ -49,6 +53,9 @@ const StyledChart = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
+  :hover {
+    background: rgb(108, 153, 255, 33%);
+  }
 `;
 
 const PatientStatistics = () => {
@@ -65,6 +72,25 @@ const PatientStatistics = () => {
     };
     fetchData();
   }, [name]);
+
+  const customDeletePatient = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill radera " + name + "?",
+      "Radera",
+      "OK",
+      "Avbryt"
+    );
+    if (conf) {
+      deletePatient();
+      window.location = "/admin/search/patient";
+    }
+  };
+
+  const deletePatient = () => {
+    deletePatientIndex(name);
+  };
+
+  const setPatientInactive = () => {};
   return (
     <AdminLayout>
       <ContentContainer>
@@ -74,6 +100,13 @@ const PatientStatistics = () => {
             <strong>Användarnamn: </strong>
             {patient.name}
           </StyledPatient>
+          <Button onClick={customDeletePatient} icon="trash">
+            Radera patient
+          </Button>
+          <br />
+          <Button onClick={setPatientInactive} icon="patientInactive">
+            Gör patient inaktiv
+          </Button>
           {patientStatistics.map((stat) => (
             <React.Fragment key={stat.vidId}>
               <StyledStatistics>
@@ -100,6 +133,7 @@ const PatientStatistics = () => {
               </StyledStatistics>
             </React.Fragment>
           ))}
+
           <StyledChart>
             <StatisticsChart patientStatistics={patientStatistics} />
           </StyledChart>
@@ -108,4 +142,5 @@ const PatientStatistics = () => {
     </AdminLayout>
   );
 };
+
 export default PatientStatistics;

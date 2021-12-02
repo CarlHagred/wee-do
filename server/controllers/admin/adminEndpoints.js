@@ -10,9 +10,6 @@ export const postPatient = async (req, res) => {
 
     //om mot förmodan namnet redan finns så körs hela funktionen om
     if (doc) {
-      console.log(
-        `Conflict, name: ${name} already exists, re-running function`
-      );
       postPatient(req, res);
     }
     //om det inte finns en patient med samma namn så skapas patienten
@@ -23,7 +20,6 @@ export const postPatient = async (req, res) => {
         videos: [],
       });
       await newPatient.save();
-      console.log(`Success, new patient with name: ${name}`);
       //skickar det skapade namnet till klienten så det kan visas för personalen
       res.status(201).json(name);
     }
@@ -71,4 +67,19 @@ export const deleteVideos = async (req, res) => {
     }
     res.status(200).send({ message: "Video deleted successfully!" });
   });
+};
+
+export const getVideoTitleById = async (req, res) => {
+  try {
+    const vidId = req.query.videoId;
+    const video = await Videos.find({ videoId: vidId });
+    const title = video[0].videoTitle;
+    const description = video[0].description;
+    res.json({
+      title: title,
+      description: description,
+    });
+  } catch (error) {
+    res.json("Could not fetch the title of the video due to: " + error);
+  }
 };
