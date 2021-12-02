@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { getAllActivePatients, getAllInactivePatients } from "../../api";
@@ -102,9 +101,8 @@ const SearchPatient = () => {
                   return patient.name.includes(searchedName) ? patient : null;
                 })
                 .map((patient) => (
-                  <tbody>
+                  <tbody key={patient._id}>
                     <tr
-                      key={patient._id}
                       onClick={() => {
                         goToStatisticsPage(patient);
                       }}
@@ -128,9 +126,8 @@ const SearchPatient = () => {
                   return patient.name.includes(searchedName) ? patient : null;
                 })
                 .map((patient) => (
-                  <tbody>
+                  <tbody key={patient._id}>
                     <tr
-                      key={patient._id}
                       onClick={() => {
                         goToStatisticsPage(patient);
                       }}
