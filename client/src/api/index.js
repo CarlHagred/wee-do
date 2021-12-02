@@ -1,15 +1,18 @@
 import axios from "axios";
 
+const baseUrl = process.env.baseUrl;
+
 /* ===== Patient calls ===== */
 
-export const getNewPatient = () => axios.get(`/newpatient`);
+export const getNewPatient = () => axios.get(`${baseUrl}/newpatient`);
 
-export const getOnePatient = (name) => axios.get(`/getonepatient/${name}`);
+export const getOnePatient = (name) =>
+  axios.get(`${baseUrl}/getonepatient/${name}`);
 
-export const getAllPatients = () => axios.get(`/getpatients`);
+export const getAllPatients = () => axios.get(`${baseUrl}/getpatients`);
 
 export const deletePatientIndex = async (params) => {
-  await axios.delete(`/deletepatient`, {
+  await axios.delete(`${baseUrl}/deletepatient`, {
     data: {
       name: params,
     },
@@ -19,10 +22,10 @@ export const deletePatientIndex = async (params) => {
 /* ===== Session calls ===== */
 
 export const getSession = () =>
-  axios.get(`/getsession`, { withCredentials: true });
+  axios.get(`${baseUrl}/getsession`, { withCredentials: true });
 
 export const getAdminSession = () =>
-  axios.get(`/getadminsession`, { withCredentials: true });
+  axios.get(`${baseUrl}/getadminsession`, { withCredentials: true });
 
 /* ===== Login calls ===== */
 
@@ -32,7 +35,7 @@ export const loginPatient = (params) => {
     method: "POST",
     data: params,
     withCredentials: true,
-    url: `/loginpatient`,
+    url: `${baseUrl}/loginpatient`,
   }).then((res) => {
     if (res.data === "auth") {
       window.location = "/#/activitypanel";
@@ -54,7 +57,7 @@ export const logoutPatient = () => {
   axios({
     method: "DELETE",
     withCredentials: true,
-    url: `/logoutpatient`,
+    url: `${baseUrl}/logoutpatient`,
   }).then((res) => {
     window.location.reload();
   });
@@ -66,7 +69,7 @@ export const loginAdmin = (params) => {
     method: "POST",
     data: params,
     withCredentials: true,
-    url: `/adminlogin`, //ska fixas
+    url: `${baseUrl}/adminlogin`, //ska fixas
   }).then((res) => {
     if (res.data === "auth") {
       //Ändra namn?
@@ -89,7 +92,7 @@ export const logoutAdmin = () => {
   axios({
     method: "DELETE",
     withCredentials: true,
-    url: `/logoutadmin`, // Ska fixas
+    url: `${baseUrl}/logoutadmin`, // Ska fixas
   }).then((res) => {
     window.location.reload();
   });
@@ -97,22 +100,23 @@ export const logoutAdmin = () => {
 
 /* ===== Video calls ===== */
 
-export const getAllVideos = () => axios.get(`/getvideos`);
+export const getAllVideos = () => axios.get(`${baseUrl}/getvideos`);
 
-export const getVideoUrl = (params) => axios.get(`/getvideourl`, { params });
+export const getVideoUrl = (params) =>
+  axios.get(`${baseUrl}/getvideourl`, { params });
 
 export const postScan = (name, videoId) =>
-  axios.post(`/postscan/${name}/${videoId}`);
+  axios.post(`${baseUrl}/postscan/${name}/${videoId}`);
 
 export const postWatchedVideo = (name, videoId) =>
-  axios.post(`/postwatchedvideo/${name}/${videoId}`);
+  axios.post(`${baseUrl}/postwatchedvideo/${name}/${videoId}`);
 
 export const postVideo = (videoData) => {
-  axios.post(`/upload/`, videoData);
+  axios.post(`${baseUrl}/upload/`, videoData);
 };
 
 export const getTitleAndDescById = async (id) => {
-  const response = await axios.get(`/getVideoTitleAndDescription`, {
+  const response = await axios.get(`${baseUrl}/getVideoTitleAndDescription`, {
     params: {
       videoId: id,
     },
@@ -122,7 +126,7 @@ export const getTitleAndDescById = async (id) => {
 
 export const deleteVideoIndex = async (params) => {
   await axios
-    .delete(`/deletevideo`, {
+    .delete(`${baseUrl}/deletevideo`, {
       data: {
         videoId: params,
       },
