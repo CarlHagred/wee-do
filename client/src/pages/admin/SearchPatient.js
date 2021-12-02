@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { getAllActivePatients, getAllInactivePatients} from "../../api";
+import { getAllActivePatients, getAllInactivePatients } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
-
 const ListPanelWrapper = styled.div`
- justify-content: top;
+  justify-content: top;
 `;
 
 const ListPanel = styled.nav`
@@ -32,35 +30,35 @@ const StyledTable = styled.table`
   margin: 1em 0;
   justify-content: left;
   border-radius: 4px;
-  
+
   td,
-
   th {
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-family: "Roboto", sans-serif;
-      font-size: 1em;
-      text-align: left;
-      }
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: "Roboto", sans-serif;
+    font-size: 1em;
+    text-align: left;
+  }
 
-    tbody tr {
-      :nth-of-type(odd) {
+  tbody tr {
+    :nth-of-type(odd) {
       background-color: rgb(247, 247, 248, 100%);
-      }
-      :nth-of-type(even) {
-        background-color: rgb(247, 247, 248, 100%);
-      }
-      :hover {
-        filter: brightness(130%);
-        background-color: ${(props) => props.theme.palette.hover};
-      }
     }
+    :nth-of-type(even) {
+      background-color: rgb(247, 247, 248, 100%);
+    }
+    :hover {
+      cursor: pointer;
+      filter: brightness(130%);
+      background-color: ${(props) => props.theme.palette.hover};
+    }
+  }
 
-    thead td { 
-      background-color: #c2c2c2;
-      border-radius: 4px;
-      font-size: 1.2em;
-    }
+  thead td {
+    background-color: #c2c2c2;
+    border-radius: 4px;
+    font-size: 1.2em;
+  }
 `;
 
 const SearchPatient = () => {
@@ -70,85 +68,85 @@ const SearchPatient = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-    const allActivePatients = await getAllActivePatients();
-    const allInactivePatients = await getAllInactivePatients();
-    setPatientsActive(allActivePatients.data);
-    setPatientsInactive(allInactivePatients.data);
+      const allActivePatients = await getAllActivePatients();
+      const allInactivePatients = await getAllInactivePatients();
+      setPatientsActive(allActivePatients.data);
+      setPatientsInactive(allInactivePatients.data);
     };
     fetchData();
   }, []);
 
-
   return (
-  <AdminLayout>
-    <ContentContainer>
-      <ListPanelWrapper>
-        <ListPanel>
-          <SearchBar
-            placeholder="Sök efter en patient... "
-            onChange={(e) => {
-            setSearchedName(e.target.value);
-            }}/>          
+    <AdminLayout>
+      <ContentContainer>
+        <ListPanelWrapper>
+          <ListPanel>
+            <SearchBar
+              placeholder="Sök efter en patient... "
+              onChange={(e) => {
+                setSearchedName(e.target.value);
+              }}
+            />
             <StyledTable>
               <colgroup>
-                <col/>
+                <col />
               </colgroup>
               <thead>
-                <tr >
+                <tr>
                   <td>Aktiva patient-id:</td>
                 </tr>
               </thead>
               {patientsActive
                 .filter((patient) => {
-                  return patient.name.includes(searchedName)
-                  ? patient
-                  : null;
+                  return patient.name.includes(searchedName) ? patient : null;
                 })
                 .map((patient) => (
-                <tbody>
-                  <tr key={patient._id} onClick={()=>{goToStatisticsPage(patient)}}>
-                     <td>                  
-                        {patient.name}   
-                      </td>
-                  </tr>
-                </tbody>
+                  <tbody key={patient._id}>
+                    <tr
+                      onClick={() => {
+                        goToStatisticsPage(patient);
+                      }}
+                    >
+                      <td>{patient.name}</td>
+                    </tr>
+                  </tbody>
                 ))}
-            </StyledTable>           
+            </StyledTable>
             <StyledTable>
               <colgroup>
-                <col/>
+                <col />
               </colgroup>
               <thead>
-                <tr >
+                <tr>
                   <td>Inaktiva patient-id:</td>
                 </tr>
               </thead>
               {patientsInactive
                 .filter((patient) => {
-                  return patient.name.includes(searchedName)
-                  ? patient
-                  : null;
+                  return patient.name.includes(searchedName) ? patient : null;
                 })
                 .map((patient) => (
-                <tbody>
-                  <tr key={patient._id} onClick={()=>{goToStatisticsPage(patient)}}>
-                     <td>
-                        {patient.name}                  
-                      </td>
-                  </tr>
-                </tbody>
+                  <tbody key={patient._id}>
+                    <tr
+                      onClick={() => {
+                        goToStatisticsPage(patient);
+                      }}
+                    >
+                      <td>{patient.name}</td>
+                    </tr>
+                  </tbody>
                 ))}
             </StyledTable>
           </ListPanel>
         </ListPanelWrapper>
       </ContentContainer>
     </AdminLayout>
-);
+  );
 };
 
 const goToStatisticsPage = async (patient) => {
-  var thisPatient = (patient.name);
-  window.location = "/admin/statistics/"+thisPatient;
-}
+  var thisPatient = patient.name;
+  window.location = "/admin/statistics/" + thisPatient;
+};
 
 export default SearchPatient;

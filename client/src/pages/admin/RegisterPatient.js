@@ -6,7 +6,6 @@ import { getNewPatient } from "../../api/index";
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
-import Icon from "../../components/common/Icons";
 
 const RegisterContainer = styled.div`
   display: flex;

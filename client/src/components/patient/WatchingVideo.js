@@ -74,7 +74,7 @@ const WatchExercise = () => {
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
-  });
+  }, []);
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active);
@@ -85,9 +85,6 @@ const WatchExercise = () => {
       ? setShowActive(true)
       : setShowActive(false);
     await postWatchedVideo(patientName, videoId);
-    //handleClick.data == "Success"
-    //  ? setWatchedVideo(true)
-    //  : setWatchedVideo(false);
     setButtonBackground("green");
     setButtonInnerText("Bra jobbat...!");
   };
