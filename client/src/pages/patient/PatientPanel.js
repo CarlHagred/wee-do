@@ -10,68 +10,58 @@ const StyledHero = styled.div`
   width: 100vw;
   height: 80vh;
   background-image: url(${hero});
+  background-color: #e7ddce;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  @media (max-width: 768px) {
+    background-image: none;
+  }
 `;
 
-const HeroText = styled.div`
+const HeaderContainer = styled.div`
   text-align: center;
-  position: absolute;
-  top: 30%;
-  right: 55%;
-  transform: translate(-50%, -50%);
-  @media (max-width: 884px) {
-    display: none;
-  }
+  padding-top: 10%;
+  padding-bottom: 20%;
 `;
 
-const StyledHeroHeader = styled.h1`
+const StyledHeroHeader = styled.div`
   font-size: 3rem;
-  @media (max-width: 1055px) {
-    font-size: 2.5rem;
+  @media (max-width: 768px) {
   }
 `;
 
-const PanelMenuWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+const StyledWdLogo = styled(WdLogo)`
+  @media (max-width: 768px) {
+  }
 `;
 
-const PanelMenu = styled.nav`
+const PanelButtonContainer = styled.nav`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 2em;
-  align-items: center;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  position: absolute;
-  top: 50%;
-  right: 40%;
-  transform: translate(-50%, -50%);
 `;
 
 const PatientPanel = () => {
   return (
     <PatientLayout>
       <StyledHero>
-        <HeroText>
+        <HeaderContainer>
           <StyledHeroHeader>Välkommen till</StyledHeroHeader>
-          <WdLogo />
-        </HeroText>
-      </StyledHero>
+          <StyledWdLogo width="400px" />
+        </HeaderContainer>
 
-      <PanelMenuWrapper>
-        <PanelMenu>
+        <PanelButtonContainer>
           <PanelButton to="/QrScanner" icon="qrcode" size="44">
             Scanna övning
           </PanelButton>
           <PanelButton to="/statistics" icon="statistics" size="44">
             Se statistik
           </PanelButton>
-        </PanelMenu>
-      </PanelMenuWrapper>
+        </PanelButtonContainer>
+      </StyledHero>
     </PatientLayout>
   );
 };
