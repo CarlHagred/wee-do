@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getSession, postWatchedVideo, getTitleAndDescById } from "../../api";
+import {
+  getSession,
+  postWatchedVideo,
+  getTitleAndDescById,
+  getOnePatient,
+} from "../../api";
 import Button from "../common/Button";
 import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
 import styled from "styled-components";
 
-import { getOnePatient, getSession, postWatchedVideo } from "../../api";
 
 const H2 = styled.h2`
   font-size: 1.5em;
