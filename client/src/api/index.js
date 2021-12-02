@@ -17,10 +17,17 @@ export const deletePatientIndex = async (params) => {
 };
 
 /* ===== Session calls ===== */
-
+/*
 export const getSession = () =>
   axios.get(`/getsession`, { withCredentials: true });
-
+*/
+export const getSession = () => {
+  axios({
+    method: "GET",
+    url: `/getsession`,
+    withCredentials: true,
+  });
+};
 export const getAdminSession = () =>
   axios.get(`/getadminsession`, { withCredentials: true });
 
