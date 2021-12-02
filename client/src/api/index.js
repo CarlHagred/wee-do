@@ -35,7 +35,7 @@ export const loginPatient = (params) => {
     method: "POST",
     data: params,
     withCredentials: true,
-    url: `${baseUrl}/loginpatient`,
+    url: `/loginpatient`,
   }).then((res) => {
     if (res.data === "auth") {
       window.location = "/#/activitypanel";
@@ -69,7 +69,7 @@ export const loginAdmin = (params) => {
     method: "POST",
     data: params,
     withCredentials: true,
-    url: `${baseUrl}/adminlogin`, //ska fixas
+    url: `/adminlogin`, //ska fixas
   }).then((res) => {
     if (res.data === "auth") {
       //Ändra namn?
