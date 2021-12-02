@@ -1,18 +1,15 @@
 import axios from "axios";
 
-const baseUrl = process.env.baseUrl;
-
 /* ===== Patient calls ===== */
 
-export const getNewPatient = () => axios.get(`${baseUrl}/newpatient`);
+export const getNewPatient = () => axios.get(`/newpatient`);
 
-export const getOnePatient = (name) =>
-  axios.get(`${baseUrl}/getonepatient/${name}`);
+export const getOnePatient = (name) => axios.get(`/getonepatient/${name}`);
 
-export const getAllPatients = () => axios.get(`${baseUrl}/getpatients`);
+export const getAllPatients = () => axios.get(`/getpatients`);
 
 export const deletePatientIndex = async (params) => {
-  await axios.delete(`${baseUrl}/deletepatient`, {
+  await axios.delete(`/deletepatient`, {
     data: {
       name: params,
     },
@@ -22,10 +19,10 @@ export const deletePatientIndex = async (params) => {
 /* ===== Session calls ===== */
 
 export const getSession = () =>
-  axios.get(`${baseUrl}/getsession`, { withCredentials: true });
+  axios.get(`/getsession`, { withCredentials: true });
 
 export const getAdminSession = () =>
-  axios.get(`${baseUrl}/getadminsession`, { withCredentials: true });
+  axios.get(`/getadminsession`, { withCredentials: true });
 
 /* ===== Login calls ===== */
 
@@ -57,7 +54,7 @@ export const logoutPatient = () => {
   axios({
     method: "DELETE",
     withCredentials: true,
-    url: `${baseUrl}/logoutpatient`,
+    url: `/logoutpatient`,
   }).then((res) => {
     window.location.reload();
   });
@@ -92,7 +89,7 @@ export const logoutAdmin = () => {
   axios({
     method: "DELETE",
     withCredentials: true,
-    url: `${baseUrl}/logoutadmin`, // Ska fixas
+    url: `/logoutadmin`, // Ska fixas
   }).then((res) => {
     window.location.reload();
   });
@@ -100,23 +97,22 @@ export const logoutAdmin = () => {
 
 /* ===== Video calls ===== */
 
-export const getAllVideos = () => axios.get(`${baseUrl}/getvideos`);
+export const getAllVideos = () => axios.get(`/getvideos`);
 
-export const getVideoUrl = (params) =>
-  axios.get(`${baseUrl}/getvideourl`, { params });
+export const getVideoUrl = (params) => axios.get(`/getvideourl`, { params });
 
 export const postScan = (name, videoId) =>
-  axios.post(`${baseUrl}/postscan/${name}/${videoId}`);
+  axios.post(`/postscan/${name}/${videoId}`);
 
 export const postWatchedVideo = (name, videoId) =>
-  axios.post(`${baseUrl}/postwatchedvideo/${name}/${videoId}`);
+  axios.post(`/postwatchedvideo/${name}/${videoId}`);
 
 export const postVideo = (videoData) => {
-  axios.post(`${baseUrl}/upload/`, videoData);
+  axios.post(`/upload/`, videoData);
 };
 
 export const getTitleAndDescById = async (id) => {
-  const response = await axios.get(`${baseUrl}/getVideoTitleAndDescription`, {
+  const response = await axios.get(`/getVideoTitleAndDescription`, {
     params: {
       videoId: id,
     },
@@ -126,7 +122,7 @@ export const getTitleAndDescById = async (id) => {
 
 export const deleteVideoIndex = async (params) => {
   await axios
-    .delete(`${baseUrl}/deletevideo`, {
+    .delete(`/deletevideo`, {
       data: {
         videoId: params,
       },
