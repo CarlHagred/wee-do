@@ -94,10 +94,10 @@ export const postSelectedVideos = async (req, res) => {
               {
                 $push: {
                   statistics: {
-                    vidId: alue.id,
+                    vidId: value.id,
                     scans: 0,
                     timesWatched: 0,
-                    amountOfTimes: req.params.value.amount,
+                    amountOfTimes: value.amount,
                   },
                 },
               },

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { getAllVideos, postSelectedExercises } from "../../api";
 
@@ -45,6 +46,7 @@ const SelectExercises = () => {
   const [amount, setAmount] = useState([]);
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
+  const history = useHistory();
 
   const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
@@ -89,8 +91,8 @@ const SelectExercises = () => {
 
   const handleSubmit = () => {
     if (selected.length === 0) return;
-
     postSelectedExercises(name, JSON.stringify(selected));
+    history.goBack();
   };
 
   return (
