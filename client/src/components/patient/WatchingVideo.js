@@ -5,6 +5,7 @@ import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
 import styled from "styled-components";
 
+import { getOnePatient, getSession, postWatchedVideo } from "../../api";
 
 const H2 = styled.h2`
   font-size: 1.5em;
@@ -28,6 +29,9 @@ const WatchExercise = () => {
   const videoId = videoUrl.split("/").pop();
 
   const [patientName, setPatientName] = useState("");
+  const [watchedVideo, setWatchedVideo] = useState(false);
+  const [active, setActive] = useState(true);
+  const [showActive, setShowActive] = useState(false);
   // const [watchedVideo, setWatchedVideo] = useState(false);
 
   const [title, setTitle] = useState(null);
@@ -44,6 +48,8 @@ const WatchExercise = () => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
       setPatientName(fetchedSession.data.name);
+      const fetchPatient = await getOnePatient(fetchedSession.data.name);
+      setActive(fetchPatient.data.active);
     };
     fetchData();
   }, []);
@@ -59,6 +65,13 @@ const WatchExercise = () => {
   });
 
   const handleEvent = async () => {
+    const handleClick = await postWatchedVideo(patientName, videoId, active);
+    handleClick.data === "Success"
+      ? setWatchedVideo(true)
+      : setWatchedVideo(false);
+    handleClick.data === "Inactive"
+      ? setShowActive(true)
+      : setShowActive(false);
     await postWatchedVideo(patientName, videoId);
     //handleClick.data == "Success"
     //  ? setWatchedVideo(true)
@@ -85,7 +98,7 @@ const WatchExercise = () => {
       <ReactPlayer {...playerProps} />
       { isTitleAndDescFetched && 
         <div>
-          <H2>{title}</H2>}
+          <H2>{title}</H2>
           <P>{description}</P>
         </div>
       }
@@ -97,6 +110,15 @@ const WatchExercise = () => {
           {buttonInnerText}
         </Button>
       </div>
+      {watchedVideo ? (
+        <p>Bra jobbat!</p>
+      ) : (
+        <button onClick={handleEvent}>
+          Jag har tittat på övningen och gjort den
+        </button>       
+      )}
+      { showActive? <p>Jättebra jobbat, du är inaktiv så din statistik sparas inte. </p> : null}
+    
       <P>{textAboutBtn}</P>
     </PatientLayout>
   );
