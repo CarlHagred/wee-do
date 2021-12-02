@@ -7,16 +7,15 @@ import hero from "../../components/images/FT.png";
 import WdLogo from "../../components/images/WdLogo";
 
 const StyledHero = styled.div`
-  width: 100vw;
-  height: 80vh;
-  background-image: url(${hero});
+  width: 100%;
   background-color: #e7ddce;
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  @media (max-width: 768px) {
-    background-image: none;
+  @media (min-width: 768px) {
+    background-image: url(${hero});
+    height: 80vh;
   }
 `;
 
@@ -24,16 +23,24 @@ const HeaderContainer = styled.div`
   text-align: center;
   padding-top: 10%;
   padding-bottom: 20%;
-`;
-
-const StyledHeroHeader = styled.div`
-  font-size: 3rem;
-  @media (max-width: 768px) {
+  margin: 0 3em;
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 45%;
+    left: 14%;
+    transform: translate(-20%, -50%);
   }
 `;
 
+const StyledHeroHeader = styled.h1`
+  font-size: 3rem;
+  @media (min-width: 768px) {
+  }
+`;
+const StyledHeroText = styled.p``;
+
 const StyledWdLogo = styled(WdLogo)`
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
   }
 `;
 
@@ -42,6 +49,15 @@ const PanelButtonContainer = styled.nav`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
+  align-items: center;
+  padding-bottom: 10%;
+  justify-content: center;
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 85%;
+    left: 12%;
+    transform: translate(-20%, -50%);
+  }
 `;
 
 const PatientPanel = () => {
@@ -49,8 +65,8 @@ const PatientPanel = () => {
     <PatientLayout>
       <StyledHero>
         <HeaderContainer>
-          <StyledHeroHeader>Välkommen till</StyledHeroHeader>
-          <StyledWdLogo width="400px" />
+          <StyledHeroHeader>Välkommen!</StyledHeroHeader>
+          <StyledHeroText>Vad vill du göra?</StyledHeroText>
         </HeaderContainer>
 
         <PanelButtonContainer>
