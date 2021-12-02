@@ -19,6 +19,18 @@ export const deletePatientIndex = async (params) => {
     });
 }
 
+export const setPatientInactiveIndex = async (name) => 
+    axios.put(`${serverUrl}/setpatientinactive/${name}`);
+
+export const setPatientActiveIndex = async (name) => 
+    axios.put(`${serverUrl}/setpatientactive/${name}`);
+
+export const getAllActivePatients = () => axios.get(`${serverUrl}/getactivepatients`);
+
+export const getAllInactivePatients = () => axios.get(`${serverUrl}/getinactivepatients`);
+
+
+
 /* ===== Session calls ===== */
 
 export const getSession = () =>
@@ -115,8 +127,8 @@ export const getVideoUrl = (params) =>
 export const postScan = (name, videoId) =>
     axios.post(`${serverUrl}/postscan/${name}/${videoId}`);
 
-export const postWatchedVideo = (name, videoId) =>
-    axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
+export const postWatchedVideo = (name, videoId, active) =>
+    axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}/${active}`);
 
 export const postVideo = videoData => {
     axios.post(`${serverUrl}/upload/`, videoData);
