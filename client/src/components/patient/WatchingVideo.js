@@ -73,8 +73,6 @@ const WatchExercise = () => {
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [textAboutBtn, setTextAboutBtn] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -115,7 +113,6 @@ const WatchExercise = () => {
     url: vid,
     playing: true,
     onEnded: () => {
-      console.log("ended");
       setVideoEnded(true);
     },
   };
