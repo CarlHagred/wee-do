@@ -1,13 +1,12 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { BsArrowCounterclockwise } from "react-icons/bs";
 
 const StatisticsChart = (props) => {
   const datasets = [];
   const allDates = [];
 
-  props.patientStatistics.map((entry) => {
-    entry.watchedTime.map((time) => {
+  props.patientStatistics.forEach((entry) => {
+    entry.watchedTime.forEach((time) => {
       if (!allDates.includes(time.substring(0, 10))) {
         allDates.push(time.substring(0, 10));
       }
@@ -21,7 +20,7 @@ const StatisticsChart = (props) => {
   const getDates = (startDate, endDate) => {
     const dates = [];
     let currentDate = startDate;
-    const addDays = (days) => {
+    const addDays = function (days) {
       const date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
       return date;
@@ -35,7 +34,7 @@ const StatisticsChart = (props) => {
 
   const allDatesComplete = getDates(new Date(startDate), new Date(endDate));
 
-  props.patientStatistics.map((entry) => {
+  props.patientStatistics.forEach((entry) => {
     const dataset = {};
     dataset.label = entry.vidId;
     dataset.fill = false;
@@ -53,7 +52,6 @@ const StatisticsChart = (props) => {
       );
       dataset.data.push(count);
     }
-    console.log(dataset);
   });
 
   const options = {
