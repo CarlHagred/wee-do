@@ -10,6 +10,10 @@ import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
 import styled from "styled-components";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 const H2 = styled.h2`
   font-size: 1.5em;
   padding: 10px;
