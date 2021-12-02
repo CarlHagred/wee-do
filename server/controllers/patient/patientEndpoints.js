@@ -88,6 +88,10 @@ export const postSelectedVideos = async (req, res) => {
           new: true,
         },
         (err, doc) => {
+          if (doc) {
+            res.status(200).send("Success");
+          }
+
           if (!doc) {
             Patient.findOneAndUpdate(
               { name: name },
@@ -103,12 +107,13 @@ export const postSelectedVideos = async (req, res) => {
               },
               { safe: true, new: true }
             );
+            (err, doc) => {
+              res.status(200).send("Success");
+            };
           }
         }
       );
     });
-
-    res.status(200).send("Success");
   } catch (e) {
     console.log(e);
   }
