@@ -3,14 +3,14 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import PanelButton from "../../components/common/PanelButton";
-import hero from "../../components/images/patient_hero.png";
+import hero from "../../components/images/FT.png";
 import WdLogo from "../../components/images/WdLogo";
 
 const StyledHero = styled.div`
   width: 100vw;
-  height: 50vh;
+  height: 80vh;
   background-image: url(${hero});
-  background-position: left;
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -19,8 +19,8 @@ const StyledHero = styled.div`
 const HeroText = styled.div`
   text-align: center;
   position: absolute;
-  top: 50%;
-  left: 70%;
+  top: 30%;
+  right: 55%;
   transform: translate(-50%, -50%);
   @media (max-width: 884px) {
     display: none;
@@ -46,10 +46,13 @@ const PanelMenu = styled.nav`
   align-items: center;
   margin-top: 5%;
   margin-bottom: 5%;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  right: 40%;
+  transform: translate(-50%, -50%);
 `;
 
-const PatientActivityPanel = () => {
+const PatientPanel = () => {
   return (
     <PatientLayout>
       <StyledHero>
@@ -58,6 +61,7 @@ const PatientActivityPanel = () => {
           <WdLogo />
         </HeroText>
       </StyledHero>
+
       <PanelMenuWrapper>
         <PanelMenu>
           <PanelButton to="/QrScanner" icon="qrcode" size="44">
@@ -71,4 +75,4 @@ const PatientActivityPanel = () => {
     </PatientLayout>
   );
 };
-export default PatientActivityPanel;
+export default PatientPanel;

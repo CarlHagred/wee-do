@@ -74,7 +74,7 @@ export const logoutPatient = () => {
         withCredentials: true,
         url: `${serverUrl}/logoutpatient`,
     }).then((res) => {
-        window.location.reload();
+        window.location = "/";
     });
 };
 
@@ -113,7 +113,7 @@ export const logoutAdmin = () => {
         withCredentials: true,
         url: `${serverUrl}/logoutadmin`, // Ska fixas
     }).then((res) => {
-        window.location.reload();
+        window.location = "/admin";
     });
 };
 
@@ -130,8 +130,18 @@ export const postScan = (name, videoId) =>
 export const postWatchedVideo = (name, videoId, active) =>
     axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}/${active}`);
 
-export const postVideo = (videoData) =>
+export const postVideo = videoData => {
     axios.post(`${serverUrl}/upload/`, videoData);
+}
+
+export const getTitleAndDescById = async (id) => {
+    const response = await axios.get(`${serverUrl}/getVideoTitleAndDescription`, {
+        params: {
+            videoId: id
+        }
+    })
+    return response.data; 
+}
 
 
 export const deleteVideoIndex = async (params) => {

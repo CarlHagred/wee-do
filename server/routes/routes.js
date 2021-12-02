@@ -9,6 +9,7 @@ import {
   deleteVideos,
   getActivePatients,
   getInactivePatients,
+  getVideoTitleById
 } from "../controllers/admin/adminEndpoints.js";
 
 import {
@@ -53,6 +54,7 @@ router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
 router.post("/postwatchedvideo/:name/:videoId/:active", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
+router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);
 router.put("/setpatientinactive/:name", setPatientInactive);
 router.put("/setpatientactive/:name", setPatientActive);
