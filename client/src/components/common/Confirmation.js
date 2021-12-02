@@ -25,7 +25,7 @@ export const customDialogAdmin = async () => {
   if (conf) {
     localStorage.clear();
     logoutAdmin();
-    window.location = "/admin";
+    window.location = "/#/admin";
   }
 };
 
