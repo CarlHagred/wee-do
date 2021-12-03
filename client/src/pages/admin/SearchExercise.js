@@ -43,23 +43,24 @@ const Middle = styled.div`
 `;
 
 const Text = styled.p`
-  background-color: #04aa6d;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
+  :hover {
+    background-color: #04aa6d;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+  }
 `;
-
-const StyledView = styled.div``;
 
 const SearchResultList = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1em;
-  justify-content: center;
 `;
 
-const VideoContainer = styled.div``;
+const VideoContainer = styled.div`
+  height: 250px;
+`;
 
 const StyledH1 = styled.h1`
   font-size: 1.2em;
@@ -70,6 +71,13 @@ const StyledH1 = styled.h1`
 const StyledTitle = styled.h1`
   font-weight: bold;
   width: 250px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+`;
+
+const StyledView = styled.div`
+  font-size: 0.9em;
+  color: darkgrey;
 `;
 
 const SearchExercise = () => {
