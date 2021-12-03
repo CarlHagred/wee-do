@@ -8,8 +8,37 @@ import {
 import Button from "../common/Button";
 import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+import ConfettiExplosion from "@reonomy/react-confetti-explosion";
+import { FaThumbsUp } from "react-icons/fa";
+import { bounce } from "react-animations";
+
+const StyledInactiveHint = styled.p`
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 20px;
+`;
+
+const StyledReward = styled.p`
+  animation: 3s ${keyframes`${bounce}`};
+  background-color: #41bbc7;
+  padding: 20px 25px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 30px;
+  margin-top: 20px;
+`;
+
+const StyledConfettiShown = styled.div`
+  position: fixed;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+`;
 
 const H2 = styled.h2`
   font-size: 1.5em;
@@ -24,12 +53,6 @@ const P = styled.p`
   text-align: center;
 `;
 
-const Container = styled.div`
-  display: flex; 
-  justify-content: center; 
-  align-items: center
-`;
-
 const WatchExercise = () => {
   const search = window.location.search; // returns the URL query String
   const params = new URLSearchParams(search);
@@ -38,18 +61,18 @@ const WatchExercise = () => {
   const vid = videoUrl;
   const videoId = videoUrl.split("/").pop();
 
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [isExploding, setIsExploding] = useState(false);
+  const [exerciseDone, setExerciseDone] = useState(false);
+
   const [patientName, setPatientName] = useState("");
-  const [watchedVideo, setWatchedVideo] = useState(false);
   const [active, setActive] = useState(true);
   const [showActive, setShowActive] = useState(false);
- 
 
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [watchedButtonDisabled, setWatchedButtonDisabled] = useState(true);
- 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -68,48 +91,80 @@ const WatchExercise = () => {
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
-  }, [videoId]);
+  }, []);
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active);
-    handleClick.data === "Success"
-      ? setWatchedVideo(true)
-      : setWatchedVideo(false);
-    handleClick.data === "Inactive"
-      ? setShowActive(true)
-      : setShowActive(false);
-    await postWatchedVideo(patientName, videoId);
+    if (handleClick.data === "Success") {
+      setExerciseDone(true);
+
+      setTimeout(() => setIsExploding(true), 300);
+      setTimeout(() => setIsExploding(false), 4000);
+    }
+    if (handleClick.data === "Inactive") {
+      setShowActive(true);
+      setExerciseDone(true);
+      setTimeout(() => setIsExploding(true), 300);
+      setTimeout(() => setIsExploding(false), 4000);
+    }
   };
 
   const playerProps = {
     url: vid,
     playing: true,
     onEnded: () => {
-      setWatchedButtonDisabled(false);
+      setVideoEnded(true);
     },
   };
-
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
+      <ButtonContainer>
+        {isExploding && (
+          <StyledConfettiShown>
+            <ConfettiExplosion
+              force={0.6}
+              duration={4000}
+              particleCount={150}
+              floorHeight={1500}
+              floorWidth={1600}
+            />
+          </StyledConfettiShown>
+        )}
+      </ButtonContainer>
       {isTitleAndDescFetched && (
-        <div>
+        <>
           <H2>{title}</H2>
           <P>{description}</P>
-        </div>
-      )} <Container>
-          {watchedVideo ? (
-            <Button disabled={true} style={{background: "green"}}>Bra jobbat!</Button>
-          ) : (
-            <Button disabled={watchedButtonDisabled} onClick={handleEvent} style={{position: 'relative'}}>
-              "Jag har utfört övningen"
-            </Button>
-          )}
-          {showActive ? (
-            <P>Jättebra jobbat, du är inaktiv så din statistik sparas inte. </P>
-          ) : null
-          }
-        </Container>
+        </>
+      )}
+
+      <ButtonContainer>
+        {videoEnded && !exerciseDone ? (
+          <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+        ) : null}
+        {exerciseDone && (
+          <>
+            <StyledReward>
+              <FaThumbsUp />
+            </StyledReward>
+            <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
+          </>
+        )}
+        {!videoEnded && (
+          <>
+            <Button disabled>Jag har gjort övningen</Button>
+            <P>Du måste se klart videon innan du kan trycka på knappen!</P>
+          </>
+        )}
+        {showActive ? (
+          <>
+            <StyledInactiveHint>
+              Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
+            </StyledInactiveHint>
+          </>
+        ) : null}
+      </ButtonContainer>
     </PatientLayout>
   );
 };
