@@ -151,6 +151,7 @@ export const UpdateDatabase = async (req, res) => {
 
     try 
     {
+        
         const data = await axios.get(url);
 
         for (let i in data.data.items) 
@@ -164,13 +165,15 @@ export const UpdateDatabase = async (req, res) => {
                 }
             );
 
+            console.log(data.data.items[i]);
+
             Videos.findOne({ videoId: video.videoId }, function (err, existingVideo) 
                 {
                     if (existingVideo == null) video.save();
                 }
             );
         }
-        console.log('updated db from client side'); 
+         
     } catch (error) 
     {
         res.send('Error occured while updating the db due to: ' + error.message);
