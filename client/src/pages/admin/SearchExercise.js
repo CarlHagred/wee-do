@@ -6,31 +6,70 @@ import { getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
-import { Flexbox, VideoItem } from "../../components/common/Flexbox";
 import ContentContainer from "../../components/common/ContentContainer";
 
-const StyledH1 = styled.h1`
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  text-align: left;
-
-  caption-side: top;
-  border-collapse: separate;
-  border-spacing: 5px;
-  width: 100%;
-  margin: 1em 0;
-  justify-content: left;
-  border-radius: 4px;
-
-  background-color: #c2c2c2;
-  border-radius: 4px;
-  font-size: 1.2em;
+const Container = styled.div`
+  position: relative;
+  :hover {
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 1;
+  }
 `;
 
-const StyledTitle = styled.p`
+const StyledImg = styled.img`
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+  :hover {
+    opacity: 0.3;
+  }
+`;
+
+const Middle = styled.div`
+  position: absolute;
+  transition: 0.5s ease;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  :hover {
+    opacity: 1;
+  }
+`;
+
+const Text = styled.p`
+  background-color: #04aa6d;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+`;
+
+const StyledView = styled.div``;
+
+const SearchResultList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+`;
+
+const VideoContainer = styled.div``;
+
+const StyledH1 = styled.h1`
+  font-size: 1.2em;
+  padding-bottom: 1em;
+  font-weight: 600;
+`;
+
+const StyledTitle = styled.h1`
   font-weight: bold;
+  width: 250px;
 `;
 
 const SearchExercise = () => {
@@ -54,32 +93,31 @@ const SearchExercise = () => {
           }}
         />
         <StyledH1>Övningar</StyledH1>
-        <Flexbox>
+        <SearchResultList>
           {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
             .map((videos) => (
-              <VideoItem key={videos._id}>
-                <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+              <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+                <VideoContainer key={videos._id}>
+                  <Container>
+                    <StyledImg
+                      src={videos.thumbnail}
+                      alt="Video thumbnail"
+                      width="250"
+                      height="200"
+                    />
+                    <Middle>
+                      <Text>Välj</Text>
+                    </Middle>
+                  </Container>
                   <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <br></br>
-                  <img
-                    src={videos.thumbnail}
-                    alt="profile pic"
-                    width="250px"
-                    height="200px"
-                  />
-                  <br></br>
-                  <br></br>
-                  Antal visningar: {videos.__v}
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                </Link>
-              </VideoItem>
+                  <StyledView>Antal visningar: {videos.__v}</StyledView>
+                </VideoContainer>
+              </Link>
             ))}
-        </Flexbox>
+        </SearchResultList>
       </ContentContainer>
     </AdminLayout>
   );
