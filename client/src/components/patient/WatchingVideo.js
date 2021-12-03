@@ -91,7 +91,7 @@ const WatchExercise = () => {
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
-  }, []);
+  }, [videoId]);
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active);

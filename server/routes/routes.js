@@ -1,6 +1,6 @@
 import express from "express";
 
-//import { getTest } from "../controllers/routerLogic.js";
+
 import {
   postPatient,
   getPatients,
@@ -39,7 +39,6 @@ import {
 
 const router = express.Router();
 
-//router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
 router.post("/loginpatient", loginPatient);
@@ -64,7 +63,6 @@ router.get("/getinactivepatients", getInactivePatients);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });
-router.post('/updateDatabase', async (req, res) => { UpdateDatabase(req, res) });
-
+router.post('/updateDatabase', async (req, res) => { UpdateDatabase(res) });
 
 export default router;
