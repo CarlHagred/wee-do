@@ -8,7 +8,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
-const StyledImg = styled.img`
+const StyledThumbnail = styled.img`
   opacity: 1;
   display: block;
   width: 100%;
@@ -28,10 +28,10 @@ const HoverContainer = styled.div`
   text-align: center;
 `;
 
-const Container = styled.div`
+const ThumbnailContainer = styled.div`
   position: relative;
 
-  :hover ${StyledImg} {
+  :hover ${StyledThumbnail} {
     opacity: 0.3;
   }
 
@@ -40,9 +40,7 @@ const Container = styled.div`
   }
 `;
 const StyledHoverText = styled.div`
-  background-color: red;
-  color: white;
-  font-size: 16px;
+  font-size: 32px;
   padding: 16px 32px;
 `;
 
@@ -104,12 +102,15 @@ const SearchExercise = () => {
             .map((videos) => (
               <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
                 <VideoContainer key={videos._id}>
-                  <Container>
-                    <StyledImg src={videos.thumbnail} alt="Video thumbnail" />
+                  <ThumbnailContainer>
+                    <StyledThumbnail
+                      src={videos.thumbnail}
+                      alt="Video thumbnail"
+                    />
                     <HoverContainer>
-                      <StyledHoverText>VÄLJ</StyledHoverText>
+                      <StyledHoverText>VISA</StyledHoverText>
                     </HoverContainer>
-                  </Container>
+                  </ThumbnailContainer>
 
                   <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
                   <StyledVideoText>
