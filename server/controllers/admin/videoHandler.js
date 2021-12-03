@@ -15,6 +15,7 @@ import Videos from "../../models/videos.js";
 import dotenv from "dotenv";
 
 import axios from "axios";
+import { resolve } from "path";
 
 
 
@@ -61,24 +62,32 @@ export const redirectToLogin = async (oauth2Client, { filename, title, descripti
 };
 
 export const uploadVideo = async (auth, { title, description, file }, response) => {
-    await service.videos.insert({
-        auth: auth,
-        part: 'snippet,contentDetails,status',
-        resource: {
-            snippet: {
-                title,
-                description,
+    try {
+        await service.videos.insert({
+            auth: auth,
+            part: 'snippet,contentDetails,status',
+            resource: {
+                snippet: {
+                    title,
+                    description,
+                },
+                status: {
+                    privacyStatus: 'private'
+                }
             },
-            status: {
-                privacyStatus: 'private'
+            media: {
+                body: file
             }
-        },
-        media: {
-            body: file
-        }
-    });
-        // Update the mongo after each upload.
-        //UpdateDatabase(req, res);    
+        });
+            // Update the mongo after each upload.
+            //UpdateDatabase(req, res);    
+    } catch (error) {
+        process.on('unhandledRejection', (reason, promise) => {
+            // do something
+        });
+        response.redirect("http://localhost:3000/error");
+    }
+    
 }
 
 
@@ -131,16 +140,12 @@ export const uploadAndCallback = async (request, response) => {
         title,
         description,
         file: fs.createReadStream(`videos/${filename}`)
-    })
+    }, response)
 
     response.redirect("http://localhost:3000/success");  
 
     
 }
-
-
-
-
 
 dotenv.config();
 

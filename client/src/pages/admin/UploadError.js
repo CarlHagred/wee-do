@@ -17,6 +17,7 @@ const goToUploadPage = () => {
     window.location = "/adminpanel"
 }
 
+
 const UploadError = () => {
     return (
         <AdminLayout>

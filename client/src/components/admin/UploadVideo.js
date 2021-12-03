@@ -1,23 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-
 import { postVideo } from "../../api/index.js";
 
 import UserInput from "../common/UserInput";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
 
-const ErrorMessage = styled.p`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    color: red;
-    font-size: 20px;
-`
-
 const UploadVideo = () => {
-    const [failedUpload, setFailedUpload] = useState(false);
-
     const [form, setForm] = useState({
         title: "",
         description: "",
@@ -43,11 +31,6 @@ const UploadVideo = () => {
         videoData.append("title", form.title);
         videoData.append("description", form.description);
         postVideo(videoData);
-        //const uploadVideo = postVideo(videoData);
-        /*
-        if(uploadVideo === 403){
-            setFailedUpload(true);
-        }*/
     };
 
     return (
@@ -82,9 +65,6 @@ const UploadVideo = () => {
                     />
                     <br></br>
                     <br></br>
-
-                    {failedUpload ? <ErrorMessage>
-                        Något gick fel med att ladda upp övningen!</ErrorMessage> : false}
                         
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
