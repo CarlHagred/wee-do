@@ -64,7 +64,6 @@ router.get("/getinactivepatients", getInactivePatients);
 
 router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
 router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });
-router.post('/updateDatabase', async (req, res) => { UpdateDatabase(req, res) });
-
+router.post('/updateDatabase', async (req, res) => { UpdateDatabase(res) });
 
 export default router;

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled /*ThemeProvider*/ from "styled-components";
+import styled  from "styled-components";
 import { useParams } from "react-router-dom";
-
 import { deleteVideoIndex, getAllVideos } from "../../api";
-
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
+import ReactPlayer from "../../components/common/ReactPlayer";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -15,15 +14,15 @@ const ButtonContainer = styled.div`
   margin: 2em 0;
 `;
 
-//import ContentContainer from "../../components/common/ContentContainer";
-
 const StyledTitle = styled.p`
   font-weight: bold;
+  justify-content: center; 
+  font-size: 24px
 `;
 
 const VideoContainer = styled.div`
   /*max-width: 1000px;
-max-height: 750px;*/
+  max-height: 750px;*/
   align-items: center;
   justify-content: center;
   display: flex;
@@ -48,32 +47,30 @@ const Video = () => {
 
   const videoUrl = "https://www.youtube.com/embed/" + videoId;
 
+  const playerProps = {
+    url: videoUrl,
+    playing: true
+  };
+
   return (
     <AdminLayout>
-      <br></br>
-      <p>
-        {videos
-          .filter((videos) => {
-            return videos.videoId.includes(videoId) ? videos : null;
-          })
-          .map((videos) => (
-            <StyledTitle>
-              <p align="center">{videos.videoTitle}</p>
-            </StyledTitle>
-          ))}
-        <br />
-      </p>
       <VideoContainer>
-        <iframe
-          title={videoUrl}
-          width="540"
-          height="315"
-          src={videoUrl}
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+        <ReactPlayer {...playerProps} />
       </VideoContainer>
       <ButtonContainer>
+        <div className="videoInfo" style={{ margin: "1em 0em" }}>
+          {
+            videos.filter((videos) => {
+                    return videos.videoId.includes(videoId) ? videos : null;
+              })
+              .map((videos) => (
+                <StyledTitle>
+                  {videos.videoTitle}
+                </StyledTitle>
+              )
+            )
+          }
+        </div>
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
           <Button icon="qrcode">Generera QR-kod</Button>
         </Link>
@@ -87,5 +84,4 @@ const Video = () => {
     </AdminLayout>
   );
 };
-
 export default Video;
