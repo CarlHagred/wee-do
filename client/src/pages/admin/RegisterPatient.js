@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { fadeIn } from "react-animations";
 
 import { getNewPatient } from "../../api/index";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
+
+const StyledNewUsername = styled.p`
+  animation: 2s ${keyframes`${fadeIn}`};
+`;
 
 const RegisterContainer = styled.div`
   display: flex;
@@ -24,6 +29,7 @@ const NewPatientContainer = styled.div`
 `;
 
 const StyledNewPatient = styled.p`
+  animation: 2s ${keyframes`${fadeIn}`};
   font-size: 2em;
   text-align: center;
 `;
@@ -44,8 +50,10 @@ const RegisterPatient = () => {
           <StyledHeader>Registrera patient</StyledHeader>
 
           <NewPatientContainer>
-            {newPatient && "Nytt användarnamn:"}
-            <StyledNewPatient>{newPatient}</StyledNewPatient>
+            {newPatient && (
+              <StyledNewUsername>Nytt användarnamn:</StyledNewUsername>
+            )}
+            {newPatient && <StyledNewPatient>{newPatient}</StyledNewPatient>}
           </NewPatientContainer>
           <Button icon="add_user" onClick={handleEvent}>
             Skapa användarnamn

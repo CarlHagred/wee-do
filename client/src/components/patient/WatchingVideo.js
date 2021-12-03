@@ -8,7 +8,37 @@ import {
 import Button from "../common/Button";
 import PatientLayout from "./PatientLayout";
 import ReactPlayer from "../common/ReactPlayer";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+import ConfettiExplosion from "@reonomy/react-confetti-explosion";
+import { FaThumbsUp } from "react-icons/fa";
+import { bounce } from "react-animations";
+
+const StyledInactiveHint = styled.p`
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 20px;
+`;
+
+const StyledReward = styled.p`
+  animation: 3s ${keyframes`${bounce}`};
+  background-color: #41bbc7;
+  padding: 20px 25px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 30px;
+  margin-top: 20px;
+`;
+
+const StyledConfettiShown = styled.div`
+  position: fixed;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+`;
 
 const H2 = styled.h2`
   font-size: 1.5em;
@@ -31,24 +61,18 @@ const WatchExercise = () => {
   const vid = videoUrl;
   const videoId = videoUrl.split("/").pop();
 
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [isExploding, setIsExploding] = useState(false);
+  const [exerciseDone, setExerciseDone] = useState(false);
+
   const [patientName, setPatientName] = useState("");
-  const [watchedVideo, setWatchedVideo] = useState(false);
   const [active, setActive] = useState(true);
   const [showActive, setShowActive] = useState(false);
-  // const [watchedVideo, setWatchedVideo] = useState(false);
 
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
-  const [buttonInnerText, setButtonInnerText] = useState(
-    "Jag har utfört övningen"
-  );
-  const [buttonBackground, setButtonBackground] = useState("red");
-  const [watchedButtonDisabled, setWatchedButtonDisabled] = useState(true);
-  const [textAboutBtn, setTextAboutBtn] = useState(
-    "Knappen kan tryckas på först efter när du har sett klart övningen"
-  );
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -71,60 +95,76 @@ const WatchExercise = () => {
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active);
-    handleClick.data === "Success"
-      ? setWatchedVideo(true)
-      : setWatchedVideo(false);
-    handleClick.data === "Inactive"
-      ? setShowActive(true)
-      : setShowActive(false);
-    await postWatchedVideo(patientName, videoId);
-    setButtonBackground("green");
-    setButtonInnerText("Bra jobbat...!");
+    if (handleClick.data === "Success") {
+      setExerciseDone(true);
+
+      setTimeout(() => setIsExploding(true), 300);
+      setTimeout(() => setIsExploding(false), 4000);
+    }
+    if (handleClick.data === "Inactive") {
+      setShowActive(true);
+      setExerciseDone(true);
+      setTimeout(() => setIsExploding(true), 300);
+      setTimeout(() => setIsExploding(false), 4000);
+    }
   };
 
   const playerProps = {
     url: vid,
     playing: true,
     onEnded: () => {
-      setWatchedButtonDisabled(false);
-      setTextAboutBtn("Nu går det bra att klicka på knappen");
-      setTimeout(() => {
-        setWatchedButtonDisabled(true);
-        setTextAboutBtn("Knappen kan tryckas på endast EN gång");
-      }, 3000);
+      setVideoEnded(true);
     },
   };
-
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
+      <ButtonContainer>
+        {isExploding && (
+          <StyledConfettiShown>
+            <ConfettiExplosion
+              force={0.6}
+              duration={4000}
+              particleCount={150}
+              floorHeight={1500}
+              floorWidth={1600}
+            />
+          </StyledConfettiShown>
+        )}
+      </ButtonContainer>
       {isTitleAndDescFetched && (
-        <div>
+        <>
           <H2>{title}</H2>
           <P>{description}</P>
-        </div>
+        </>
       )}
-      <div className="btn-Watched-Video">
-        <Button
-          disabled={watchedButtonDisabled}
-          onClick={handleEvent}
-          style={{ margin: "1em 0em", background: `${buttonBackground}` }}
-        >
-          {buttonInnerText}
-        </Button>
-      </div>
-      {watchedVideo ? (
-        <p>Bra jobbat!</p>
-      ) : (
-        <button onClick={handleEvent}>
-          Jag har tittat på övningen och gjort den
-        </button>
-      )}
-      {showActive ? (
-        <p>Jättebra jobbat, du är inaktiv så din statistik sparas inte. </p>
-      ) : null}
 
-      <P>{textAboutBtn}</P>
+      <ButtonContainer>
+        {videoEnded && !exerciseDone ? (
+          <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+        ) : null}
+        {exerciseDone && (
+          <>
+            <StyledReward>
+              <FaThumbsUp />
+            </StyledReward>
+            <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
+          </>
+        )}
+        {!videoEnded && (
+          <>
+            <Button disabled>Jag har gjort övningen</Button>
+            <P>Du måste se klart videon innan du kan trycka på knappen!</P>
+          </>
+        )}
+        {showActive ? (
+          <>
+            <StyledInactiveHint>
+              Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
+            </StyledInactiveHint>
+          </>
+        ) : null}
+      </ButtonContainer>
     </PatientLayout>
   );
 };
