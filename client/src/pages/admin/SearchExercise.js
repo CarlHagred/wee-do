@@ -8,14 +8,6 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
-const Container = styled.div`
-  position: relative;
-  :hover {
-    background: rgba(0, 0, 0, 0.9);
-    opacity: 1;
-  }
-`;
-
 const StyledImg = styled.img`
   opacity: 1;
   display: block;
@@ -23,35 +15,44 @@ const StyledImg = styled.img`
   height: auto;
   transition: 0.5s ease;
   backface-visibility: hidden;
-  :hover {
-    opacity: 0.3;
-  }
 `;
 
-const Middle = styled.div`
-  position: absolute;
+const HoverContainer = styled.div`
   transition: 0.5s ease;
   opacity: 0;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
-  :hover {
+`;
+
+const Container = styled.div`
+  position: relative;
+
+  :hover ${StyledImg} {
+    opacity: 0.3;
+  }
+
+  :hover ${HoverContainer} {
     opacity: 1;
   }
 `;
-
-const Text = styled.p`
-  :hover {
-    background-color: #04aa6d;
-    color: white;
-    font-size: 16px;
-    padding: 16px 32px;
-  }
+const StyledHoverText = styled.div`
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
 `;
 
-const SearchResultList = styled.div`
+const StyledHeader = styled.h1`
+  font-size: 1.2em;
+  padding-bottom: 1em;
+  font-weight: 600;
+`;
+
+const SearchResultContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -62,20 +63,14 @@ const VideoContainer = styled.div`
   height: 250px;
 `;
 
-const StyledH1 = styled.h1`
-  font-size: 1.2em;
-  padding-bottom: 1em;
-  font-weight: 600;
-`;
-
-const StyledTitle = styled.h1`
+const StyledVideoTitle = styled.h1`
   font-weight: bold;
   width: 250px;
   padding-top: 10px;
   padding-bottom: 5px;
 `;
 
-const StyledView = styled.div`
+const StyledVideoText = styled.p`
   font-size: 0.9em;
   color: darkgrey;
 `;
@@ -100,8 +95,8 @@ const SearchExercise = () => {
             setSearchedName(e.target.value);
           }}
         />
-        <StyledH1>Övningar</StyledH1>
-        <SearchResultList>
+        <StyledHeader>Övningar</StyledHeader>
+        <SearchResultContainer>
           {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
@@ -110,22 +105,20 @@ const SearchExercise = () => {
               <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
                 <VideoContainer key={videos._id}>
                   <Container>
-                    <StyledImg
-                      src={videos.thumbnail}
-                      alt="Video thumbnail"
-                      width="250"
-                      height="200"
-                    />
-                    <Middle>
-                      <Text>Välj</Text>
-                    </Middle>
+                    <StyledImg src={videos.thumbnail} alt="Video thumbnail" />
+                    <HoverContainer>
+                      <StyledHoverText>VÄLJ</StyledHoverText>
+                    </HoverContainer>
                   </Container>
-                  <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <StyledView>Antal visningar: {videos.__v}</StyledView>
+
+                  <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
+                  <StyledVideoText>
+                    Antal visningar: {videos.__v}
+                  </StyledVideoText>
                 </VideoContainer>
               </Link>
             ))}
-        </SearchResultList>
+        </SearchResultContainer>
       </ContentContainer>
     </AdminLayout>
   );
