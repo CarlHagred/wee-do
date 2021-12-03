@@ -139,8 +139,8 @@ export const UpdateDatabase = res => {
              
             for(let i in res.data.items) 
             {
-                let vid = res.data.items[i].snippet.resourceId.videoId; 
-                let url = `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`;
+                let vid = res.data.items[i].snippet.resourceId.videoId;
+                let url = `http://img.youtube.com/vi/${vid}/mqdefault.jpg`;
                 const video = new Videos({
                     videoId: vid, 
                     videoTitle: res.data.items[i].snippet.title, 
