@@ -30,6 +30,7 @@ const HoverContainer = styled.div`
 
 const ThumbnailContainer = styled.div`
   position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
 
   :hover ${StyledThumbnail} {
     opacity: 0.3;
@@ -42,6 +43,7 @@ const ThumbnailContainer = styled.div`
 const StyledHoverText = styled.div`
   font-size: 32px;
   padding: 16px 32px;
+  color: white;
 `;
 
 const StyledHeader = styled.h1`
