@@ -99,6 +99,8 @@ export const postSelectedVideos = async (req, res) => {
                   vidId: value.id,
                   scans: 0,
                   timesWatched: 0,
+                  scanTime: [],
+                  watchedTime: [],
                   amountOfTimes: value.amount,
                 },
               },
