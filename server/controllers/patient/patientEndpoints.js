@@ -75,51 +75,43 @@ export const postWatchedVideo = async (req, res) => {
 export const postSelectedVideos = async (req, res) => {
   const amountOfTimesArray = JSON.parse(req.params.selectedexercises);
 
-  try {
-    amountOfTimesArray.forEach((value, index) => {
-      console.log(index);
-      Patient.findOneAndUpdate(
-        {
-          name: req.params.name,
-          "statistics.vidId": value.id,
-        },
-        { $set: { "statistics.$.amountOfTimes": value.amount } },
-        {
-          new: true,
-        },
-        (err, doc) => {
-          if (doc) {
-            console.log(doc);
-            res.status(200).send("Success");
-          }
+  amountOfTimesArray.forEach((value, index) => {
+    Patient.findOneAndUpdate(
+      {
+        name: req.params.name,
+        "statistics.vidId": value.id,
+      },
+      { $set: { "statistics.$.amountOfTimes": value.amount } },
+      {
+        new: true,
+      },
+      (err, doc) => {
+        if (doc) {
+          res.status(200).send("Success");
+        }
 
-          if (!doc) {
-            console.log("no doc");
-            Patient.findOneAndUpdate(
-              { name: req.params.name },
-              {
-                $push: {
-                  statistics: {
-                    vidId: value.id,
-                    scans: 0,
-                    timesWatched: 0,
-                    amountOfTimes: value.amount,
-                  },
+        if (!doc) {
+          Patient.findOneAndUpdate(
+            { name: req.params.name },
+            {
+              $push: {
+                statistics: {
+                  vidId: value.id,
+                  scans: 0,
+                  timesWatched: 0,
+                  amountOfTimes: value.amount,
                 },
               },
-              { safe: true, new: true },
-              (err, doc) => {
-                console.log(doc);
-                res.status(200);
-              }
-            );
-          }
+            },
+            { safe: true, new: true },
+            (err, doc) => {
+              res.status(200);
+            }
+          );
         }
-      );
-    });
-  } catch (e) {
-    console.log(e);
-  }
+      }
+    );
+  });
 };
 
 export const deletePatient = async (req, res) => {
