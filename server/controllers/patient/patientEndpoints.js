@@ -74,13 +74,13 @@ export const postWatchedVideo = async (req, res) => {
 
 export const postSelectedVideos = async (req, res) => {
   const amountOfTimesArray = JSON.parse(req.params.selectedexercises);
-  const name = req.params.name;
 
   try {
-    amountOfTimesArray.forEach((value) => {
+    amountOfTimesArray.forEach((value, index) => {
+      console.log(index);
       Patient.findOneAndUpdate(
         {
-          name: name,
+          name: req.params.name,
           "statistics.vidId": value.id,
         },
         { $set: { "statistics.$.amountOfTimes": value.amount } },
@@ -89,12 +89,14 @@ export const postSelectedVideos = async (req, res) => {
         },
         (err, doc) => {
           if (doc) {
+            console.log(doc);
             res.status(200).send("Success");
           }
 
           if (!doc) {
+            console.log("no doc");
             Patient.findOneAndUpdate(
-              { name: name },
+              { name: req.params.name },
               {
                 $push: {
                   statistics: {
@@ -105,11 +107,12 @@ export const postSelectedVideos = async (req, res) => {
                   },
                 },
               },
-              { safe: true, new: true }
+              { safe: true, new: true },
+              (err, doc) => {
+                console.log(doc);
+                res.status(200);
+              }
             );
-            (err, doc) => {
-              res.status(200).send("Success");
-            };
           }
         }
       );
