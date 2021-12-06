@@ -31,6 +31,7 @@ const StyledH1 = styled.h1`
 
 const StyledTitle = styled.p`
   font-weight: bold;
+  width: 250px;
 `;
 
 const SearchExercise = () => {
@@ -60,24 +61,18 @@ const SearchExercise = () => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
             .map((videos) => (
-              <VideoItem key={videos._id}>
-                <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+              <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+                <VideoItem key={videos._id}>
+                  <img src={videos.thumbnail} alt="profile pic" />
+                  <br></br>
                   <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <br></br>
-                  <img
-                    src={videos.thumbnail}
-                    alt="profile pic"
-                    width="250px"
-                    height="200px"
-                  />
-                  <br></br>
                   <br></br>
                   Antal visningar: {videos.__v}
                   <br></br>
                   <br></br>
                   <br></br>
-                </Link>
-              </VideoItem>
+                </VideoItem>
+              </Link>
             ))}
         </Flexbox>
       </ContentContainer>

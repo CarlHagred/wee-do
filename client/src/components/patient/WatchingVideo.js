@@ -91,7 +91,7 @@ const WatchExercise = () => {
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
-  }, []);
+  }, [videoId]);
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active);
@@ -143,22 +143,28 @@ const WatchExercise = () => {
         {videoEnded && !exerciseDone ? (
           <Button onClick={handleEvent}>Jag har gjort övningen</Button>
         ) : null}
-        {exerciseDone && (
+
+        {exerciseDone && !showActive ? (
           <>
             <StyledReward>
               <FaThumbsUp />
             </StyledReward>
             <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
           </>
-        )}
+        ) : null}
+
         {!videoEnded && (
           <>
             <Button disabled>Jag har gjort övningen</Button>
             <P>Du måste se klart videon innan du kan trycka på knappen!</P>
           </>
         )}
+
         {showActive ? (
           <>
+            <StyledReward>
+              <FaThumbsUp />
+            </StyledReward>
             <StyledInactiveHint>
               Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
             </StyledInactiveHint>
