@@ -14,16 +14,6 @@ const StyledHeader = styled.h1`
   font-weight: 600;
 `;
 
-const StyledThumbnail = styled.img`
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 5px;
-  :hover {
-    box-shadow: 5px 10px 8px #888888;
-  }
-`;
-
 const SearchResultContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,6 +23,15 @@ const SearchResultContainer = styled.div`
 
 const VideoContainer = styled.div`
   height: 250px;
+`;
+
+const StyledThumbnail = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+  :hover {
+    box-shadow: 5px 10px 8px #888888;
+  }
 `;
 
 const StyledVideoTitle = styled.h1`
