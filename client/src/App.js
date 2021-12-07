@@ -30,6 +30,7 @@ import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRou
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
+import UploadError from "./pages/admin/UploadError";
 
 function App() {
   return (
@@ -94,6 +95,11 @@ function App() {
           exact
           path="/success"
           component={UploadSucceeded}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/error"
+          component={UploadError}
         />
         <Route component={NotFoundPage} />
       </Switch>
