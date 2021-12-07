@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import ConfettiExplosion from "@reonomy/react-confetti-explosion";
+import { FaThumbsUp } from "react-icons/fa";
+import { bounce } from "react-animations";
+
 import {
   getSession,
   postWatchedVideo,
   getTitleAndDescById,
   getOnePatient,
 } from "../../api";
-import Button from "../common/Button";
-import PatientLayout from "./PatientLayout";
-import ReactPlayer from "../common/ReactPlayer";
-import styled, { keyframes } from "styled-components";
 
-import ConfettiExplosion from "@reonomy/react-confetti-explosion";
-import { FaThumbsUp } from "react-icons/fa";
-import { bounce } from "react-animations";
+import PatientLayout from "./PatientLayout";
+import Button from "../common/Button";
+import ReactPlayer from "../common/ReactPlayer";
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 0.5em auto 0 auto;
+  padding: 0 5px;
+`;
+
+const StyledVideoTitle = styled.h2`
+  font-size: 1.5em;
+  font-weight: 600;
+`;
+
+const StyledVideoText = styled.p``;
+
+const StyledDivider = styled.hr`
+  align-content: center;
+  width: 100%;
+  margin-top: 0.5em;
+  border: 1px solid;
+  border-color: #d9d9d9;
+`;
 
 const StyledInactiveHint = styled.p`
   font-size: 0.9em;
   font-style: italic;
-  margin-top: 20px;
 `;
 
 const StyledReward = styled.p`
@@ -27,30 +50,37 @@ const StyledReward = styled.p`
   border-radius: 50%;
   color: #ffffff;
   font-size: 30px;
-  margin-top: 20px;
 `;
 
 const StyledConfettiShown = styled.div`
   position: fixed;
 `;
+
+const ActionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  justify-content: center;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2em;
+  height: 70px;
+  margin: 0 auto;
 `;
 
-const H2 = styled.h2`
-  font-size: 1.5em;
-  padding: 10px;
-  font-weight: 600;
-  text-align: center;
+const StyledInstructions = styled.p`
+  font-size: 0.9em;
+  font-style: italic;
 `;
 
-const P = styled.p`
-  color: gray;
-  padding: 10px;
-  text-align: center;
+const ConfettiContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const WatchExercise = () => {
@@ -119,7 +149,14 @@ const WatchExercise = () => {
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
-      <ButtonContainer>
+      {isTitleAndDescFetched && (
+        <TextContainer>
+          <StyledVideoTitle>{title}</StyledVideoTitle>
+          <StyledVideoText>{description}</StyledVideoText>
+          <StyledDivider />
+        </TextContainer>
+      )}
+      <ConfettiContainer>
         {isExploding && (
           <StyledConfettiShown>
             <ConfettiExplosion
@@ -131,17 +168,13 @@ const WatchExercise = () => {
             />
           </StyledConfettiShown>
         )}
-      </ButtonContainer>
-      {isTitleAndDescFetched && (
-        <>
-          <H2>{title}</H2>
-          <P>{description}</P>
-        </>
-      )}
+      </ConfettiContainer>
 
-      <ButtonContainer>
+      <ActionContainer>
         {videoEnded && !exerciseDone ? (
-          <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+          <ButtonContainer>
+            <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+          </ButtonContainer>
         ) : null}
 
         {exerciseDone && !showActive ? (
@@ -154,10 +187,12 @@ const WatchExercise = () => {
         ) : null}
 
         {!videoEnded && (
-          <>
+          <ButtonContainer>
             <Button disabled>Jag har gjort övningen</Button>
-            <P>Du måste se klart videon innan du kan trycka på knappen!</P>
-          </>
+            <StyledInstructions>
+              Du måste se klart videon innan du kan trycka på knappen!
+            </StyledInstructions>
+          </ButtonContainer>
         )}
 
         {showActive ? (
@@ -170,7 +205,7 @@ const WatchExercise = () => {
             </StyledInactiveHint>
           </>
         ) : null}
-      </ButtonContainer>
+      </ActionContainer>
     </PatientLayout>
   );
 };
