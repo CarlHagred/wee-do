@@ -37,12 +37,12 @@ const StyledButton = styled.button`
           background: none;
           color: #707070;
         `
-      : props.neutral
+      : props.disabledTooltip
       ? css`
-          background: #8a8883;
-          &:hover {
-            background: #4a4946;
-          }
+          cursor: not-allowed;
+          border: none;
+          background: #ccc;
+          color: white;
         `
       : css`
           &:hover {

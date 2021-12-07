@@ -148,12 +148,12 @@ const Showcase = () => {
         <Button disabled size="lg">
           Disabled
         </Button>
-        <StyledP>Neutral</StyledP>
-        <Button neutral>Neutral small</Button>
-        <Button neutral size="lg">
+        <StyledP>disabledTooltip</StyledP>
+        <Button disabledTooltip>Neutral small</Button>
+        <Button disabledTooltip size="lg">
           Neutral large
         </Button>
-        <Button neutral size="lg" icon="user">
+        <Button disabledTooltip size="lg" icon="user">
           Neutral icon
         </Button>
         ;

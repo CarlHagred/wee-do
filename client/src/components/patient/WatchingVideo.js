@@ -4,6 +4,8 @@ import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
 import { bounce } from "react-animations";
 
+import ReactTooltip from "react-tooltip";
+
 import {
   getSession,
   postWatchedVideo,
@@ -60,7 +62,7 @@ const ActionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 150px;
+  height: 200px;
   justify-content: center;
 `;
 
@@ -68,13 +70,7 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 70px;
   margin: 0 auto;
-`;
-
-const StyledInstructions = styled.p`
-  font-size: 0.9em;
-  font-style: italic;
 `;
 
 const ConfettiContainer = styled.div`
@@ -188,10 +184,12 @@ const WatchExercise = () => {
 
         {!videoEnded && (
           <ButtonContainer>
-            <Button disabled>Jag har gjort övningen</Button>
-            <StyledInstructions>
+            <Button data-tip data-for="watchVideo" disabledTooltip>
+              Jag har gjort övningen
+            </Button>
+            <ReactTooltip id="watchVideo" place="bottom" effect="solid">
               Du måste se klart videon innan du kan trycka på knappen!
-            </StyledInstructions>
+            </ReactTooltip>
           </ButtonContainer>
         )}
 
