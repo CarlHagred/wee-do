@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
 import { bounce } from "react-animations";
-
 import ReactTooltip from "react-tooltip";
 
 import {
@@ -41,8 +40,9 @@ const StyledDivider = styled.hr`
 `;
 
 const StyledInactiveHint = styled.p`
-  font-size: 0.9em;
+  font-size: 1.3em;
   font-style: italic;
+  margin-top: 10px;
 `;
 
 const StyledReward = styled.p`
@@ -178,7 +178,7 @@ const WatchExercise = () => {
             <StyledReward>
               <FaThumbsUp />
             </StyledReward>
-            <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
+            <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
           </>
         ) : null}
 
