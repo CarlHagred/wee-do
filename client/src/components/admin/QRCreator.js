@@ -1,6 +1,7 @@
 import React from "react";
 import QRCode from "react-qr-code";
 import styled from "styled-components";
+import { getTitleAndDescById } from "../../api";
 
 import {
   StyledQrFlexContainer,
@@ -21,6 +22,14 @@ const StyledParagraph = styled.p`
   font-size: 1em;
 `;
 
+const DescriptionValue = (props) => {
+  const desc = getTitleAndDescById(props.id);
+
+  return desc;
+};
+
+//<DescriptionValue id={props.id} />
+
 const QRCreator = (props) => {
   return (
     <>
@@ -34,18 +43,7 @@ const QRCreator = (props) => {
         </StyledQrHalfContainer>
         <StyledQrHalfContainer justify-content={"center"}>
           <StyledQrItem>
-            <StyledParagraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ullamcorper a lacus vestibulum sed. Ac odio tempor orci dapibus
-              ultrices in iaculis. A erat nam at lectus urna duis convallis
-              convallis. Et magnis dis parturient montes nascetur ridiculus mus.
-              Elementum nibh tellus molestie nunc. Orci eu lobortis elementum
-              nibh tellus molestie nunc. Natoque penatibus et magnis dis
-              parturient montes nascetur ridiculus mus. Pretium lectus quam id
-              leo in vitae turpis massa sed. Tempus iaculis urna id volutpat
-              lacus laoreet non curabitur gravida.
-            </StyledParagraph>
+            <StyledParagraph></StyledParagraph>
           </StyledQrItem>
         </StyledQrHalfContainer>
       </StyledQrFlexContainer>
