@@ -103,7 +103,7 @@ export const getAllVideos = (params) => {
   axios({
     method: "GET",
     data: params,
-    url: `/getvideos`,
+    url: `/#/getvideos`,
   });
 };
 
