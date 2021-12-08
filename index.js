@@ -45,14 +45,13 @@ app.use("/api", routes);
 //app.use(videoRoutes);
 app.use(morgan("dev"));
 //Database connection
-const CONNECTION_URI = process.env.CONNECTION_DB_URI;
 const databaseConnection = async () => {
   try {
-    await mongoose.connect(CONNECTION_URI, {
+    await mongoose.connect(process.env.CONNECTION_DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT || 8000, () => {
       console.log(`Server upp and running, and connected to database`);
     });
   } catch (error) {
