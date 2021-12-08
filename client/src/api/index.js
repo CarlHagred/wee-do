@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const baseUrl = process.env.baseURL;
-
 /* ===== Patient calls ===== */
 
 export const getNewPatient = () => axios.get(`/#/newpatient`);
