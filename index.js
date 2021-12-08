@@ -7,6 +7,10 @@ import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
+import * as path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -19,12 +23,13 @@ import localStrategy from "./controllers/config/passportConfig.js";
 dotenv.config();
 
 const app = express();
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 //middleware with passport
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://weedo-v2.herokuapp.com/",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -42,8 +47,13 @@ app.use(passport.session());
 app.use(express.static("public")); //osäker om nödvändig
 localStrategy(passport);
 app.use("/api", routes);
-//app.use(videoRoutes);
 app.use(morgan("dev"));
+
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 //Database connection
 const databaseConnection = async () => {
   try {
@@ -61,9 +71,4 @@ const databaseConnection = async () => {
 };
 databaseConnection();
 
-app.use(express.static(path.join(__dirname, "/client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
 export default app;
