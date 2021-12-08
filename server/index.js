@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.PUBLIC_URL || "http://localhost:3000",
+    origin: "https://weedoapplication.herokuapp.com/",
     credentials: true,
   })
 );
@@ -55,7 +55,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static("public")); //osäker om nödvändig
+//app.use(express.static("public")); //osäker om nödvändig
 localStrategy(passport);
 app.use(routes);
 //app.use(videoRoutes);
