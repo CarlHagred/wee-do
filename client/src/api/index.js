@@ -104,7 +104,7 @@ export const logoutAdmin = () => {
 export const getAllVideos = () => {
   axios({
     method: "GET",
-    url: `${baseUrl}/getvideos`,
+    url: `/#/getvideos`,
   });
 };
 
