@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
+import { getAllActivePatients, getOnePatient, getSession } from "../../api";
 
 const StyledContainer = styled.div`
     text-align: left;
@@ -9,66 +10,119 @@ const StyledContainer = styled.div`
 `;
 
 const StyledH2 = styled.h2`
-    font-size: 30px;
+    font-size: 5em;
     text-align: center;
-    padding: 10px;
-    font-weight: 600;
+    margin: 2% auto 2% auto;
+    font-weight: 900;
+`;
+
+const StyledTitle = styled.p`
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+`;
+
+const StyledP = styled.p`
+    font-size: 1.5em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+`;
+
+const StyledLi = styled.li`
+    font-size: 1.5em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+`;
+
+const StyledDiv = styled.div`
+    width: 80%;
+    margin: 0% auto 4% auto;
 `;
 
 
 const Help = () => {
+    
+    const [patient, setPatient] = useState("");
+    const [active, setActive] = useState([]); 
+
+    let phoneNr = "077-67 30 000"
+
+    useEffect(() => {
+        const getPatient = async () => {
+            const currentPatient = await getSession();
+            setPatient(currentPatient.data)
+            
+        };
+        getPatient();
+    }, [])
+
+    useEffect(() => {
+        const getActivity = async () => {
+            const currentActivity = await getAllActivePatients()
+            setActive(currentActivity)
+        };
+        getActivity()
+    }, []);
+
+    console.log(patient);
+    console.log(active);    
     return (
         <PatientLayout>
             <StyledContainer>
                 <StyledH2>Hjälp</StyledH2>
-                <p>
-                    <strong>
-                        Jag har tappat bort mitt användarnamn eller QR-kod:
-                    </strong>
-                </p>
-                <p>
-                    Om du har tappat bort ditt användarnamn eller QR-kod måste
-                    du komma i kontakt med sjukhuset du besökte när du fick ditt
-                    användarnamn eller QR-kod och be om ett nytt.
-                </p>
-                <br />
-                <p>
-                    <strong>Jag kan inte skanna in min QR-kod:</strong>
-                </p>
-                <p>
-                    Om det inte fungerar att skanna in QR-koden, kontrollera
-                    följande:
-                </p>
+                <StyledDiv>
+                    <StyledTitle>
+                            Jag har tappat bort mitt användarnamn eller QR-kod:
+                    </StyledTitle>
+                    <StyledP>
+                        Om du har tappat bort ditt användarnamn eller QR-kod måste
+                        du komma i kontakt med sjukhuset du besökte när du fick ditt
+                        användarnamn eller QR-kod och be om ett nytt.
+                    </StyledP>
+                </StyledDiv>
 
-                <li>Kontrollera så att din kamera fungerar.</li>
-                <li>
-                    Har du accepterat (ja/nej) att webbsidan får använda sig av
-                    din kamera?
-                </li>
-                <li>
-                    Om du inte har det, gå till din webbläsare {">"}{" "}
-                    Inställningar {">"} Integritet och säkerhet {">"}{" "}
-                    Webbplatsinställningar {">"} Kamera och godkänn användningen
-                    av din kamera-enhet.
-                </li>
-                <li>
-                    Testa att öka ljusstyrkan på skärmen du skannar din QR-kod
-                    på, eller testa att öka ljusstyrkan i rummet.
-                </li>
-                <li>Stödjer din enhet skanning av QR-koder?</li>
+                <StyledDiv>
+                    <StyledTitle>
+                        Jag kan inte skanna in min QR-kod:
+                    </StyledTitle>
+                    <StyledP>
+                        Om det inte fungerar att skanna in QR-koden, kontrollera
+                        följande:
+                    </StyledP>
 
-                <br />
-                <strong>Det fungerar inte att logga in:</strong>
-                <p>Om det inte fungerar att logga in, kontrollera följande:</p>
+                    <StyledLi>Kontrollera så att din kamera fungerar.</StyledLi>
+                    <StyledLi>
+                        Har du accepterat (ja/nej) att webbsidan får använda sig av
+                        din kamera?
+                    </StyledLi>
+                    <StyledLi>
+                        Om du inte har det, gå till din webbläsare {">"}{" "}
+                        Inställningar {">"} Integritet och säkerhet {">"}{" "}
+                        Webbplatsinställningar {">"} Kamera och godkänn användningen
+                        av din kamera-enhet.
+                    </StyledLi>
+                    <StyledLi>
+                        Testa att öka ljusstyrkan på skärmen du skannar din QR-kod
+                        på, eller testa att öka ljusstyrkan i rummet.
+                    </StyledLi>
+                    <StyledLi>Stödjer din enhet skanning av QR-koder?</StyledLi>
+                </StyledDiv>
 
-                <li>Kontrollera att ditt användarnamn stämmer, 6 tecken.</li>
-                <li>Kontrollera din nätverksanslutning</li>
-                <li>
-                    Om det fortfarande inte fungerar, kontakta Region Skånes
-                    Servicedesk Telefon: 077-67 30 000, knappval 2 (IT) följt av
-                    5 (övrigt).
-                </li>
-                <br />
+                <StyledDiv>
+                    <StyledTitle>Det fungerar inte att logga in:</StyledTitle>
+                    <StyledP>
+                        Om det inte fungerar att logga in, kontrollera följande:
+                    </StyledP>
+
+                    <StyledLi>Kontrollera att ditt användarnamn stämmer, 6 tecken.</StyledLi>
+                    <StyledLi>Kontrollera din nätverksanslutning</StyledLi>
+                    <StyledLi>
+                        Om det fortfarande inte fungerar, kontakta Region Skånes
+                        Servicedesk Telefon: , knappval 2 (IT) följt av
+                        5 (övrigt).
+                    </StyledLi>
+                </StyledDiv>
             </StyledContainer>
         </PatientLayout>
     );
