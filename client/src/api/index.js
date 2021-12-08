@@ -97,11 +97,7 @@ export const logoutAdmin = () => {
 
 /* ===== Video calls ===== */
 
-//export const getAllVideos = () => axios.get(`/#/getvideos`);
-
-export const getAllVideos = () => {
-  return axios.get(`/getvideos`).then((response) => response.data);
-};
+export const getAllVideos = () => axios.get(`/#/getvideos`);
 
 export const getVideoUrl = (params) => axios.get(`/#/getvideourl`, { params });
 
