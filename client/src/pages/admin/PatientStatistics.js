@@ -15,6 +15,14 @@ import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 2em 0;
+`;
+
 const StyledContainer = styled.div`
   h2 {
     text-align: center;
@@ -126,52 +134,62 @@ const PatientStatistics = () => {
     setPatientActiveIndex(name);
   };
 
+  const handleSelectExcersice = () => {
+    window.location = `/admin/select/${patient.name}`;
+  };
+
   return (
     <AdminLayout>
       <ContentContainer>
         <StyledContainer>
-          <h2>Statistik</h2>
-          <StyledPatient>
-            <strong>Användarnamn: </strong>
-            {patient.name}
-          </StyledPatient>
-          <Button onClick={customDeletePatient} icon="trash">
-            Radera patient
-          </Button>
-          <br />
-          {patientStatus ? (
-            <Button onClick={customPatientInactive} icon="patientInactive">
-              Gör patient inaktiv
+          <>
+            <h2>Statistik</h2>
+            <StyledPatient>
+              <strong>Användarnamn: </strong>
+              {patient.name}
+            </StyledPatient>
+          </>
+          <ButtonContainer>
+            <Button onClick={customDeletePatient} icon="trash">
+              Radera patient
             </Button>
-          ) : (
-            <Button onClick={customPatientActive} icon="patientActive">
-              Gör patient aktiv
-            </Button>
-          )}
-          {patientStatistics.map((stat) => (
-            <React.Fragment key={stat.vidId}>
-              <StyledStatistics>
-                <br />
-                <strong>Video: </strong>
-                <StyledLink to={`../exercise/${stat.vidId}`}>
-                  {stat.vidId}
-                </StyledLink>
-                <br />
-                <strong>Scans: </strong>
-                {stat.scans}
-                <br />
-                <strong>Antal visningar: </strong>
-                {stat.timesWatched}
-                <br />
-                <strong>Tid för visning:</strong>
-                {stat.watchedTime.map((time, index) => (
-                  <p style={{ marginTop: 5 }} key={index}>
-                    {time.replace("T", ", ").slice(0, -8)}
-                  </p>
-                ))}
-              </StyledStatistics>
-            </React.Fragment>
-          ))}
+            {patientStatus ? (
+              <Button onClick={customPatientInactive} icon="patientInactive">
+                Gör patient inaktiv
+              </Button>
+            ) : (
+              <Button onClick={customPatientActive} icon="patientActive">
+                Gör patient aktiv
+              </Button>
+            )}
+            <Button onClick={handleSelectExcersice}>Välj övningar</Button>
+          </ButtonContainer>
+          <>
+            {patientStatistics.map((stat) => (
+              <React.Fragment key={stat.vidId}>
+                <StyledStatistics>
+                  <br />
+                  <strong>Video: </strong>
+                  <StyledLink to={`../exercise/${stat.vidId}`}>
+                    {stat.vidId}
+                  </StyledLink>
+                  <br />
+                  <strong>Scans: </strong>
+                  {stat.scans}
+                  <br />
+                  <strong>Antal visningar: </strong>
+                  {stat.timesWatched}
+                  <br />
+                  <strong>Tid för visning:</strong>
+                  {stat.watchedTime.map((time, index) => (
+                    <p style={{ marginTop: 5 }} key={index}>
+                      {time.replace("T", ", ").slice(0, -8)}
+                    </p>
+                  ))}
+                </StyledStatistics>
+              </React.Fragment>
+            ))}
+          </>
         </StyledContainer>
         <StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />

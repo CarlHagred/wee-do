@@ -20,6 +20,7 @@ import PatientStatistics from "./pages/admin/PatientStatistics";
 import RegisterExercise from "./pages/admin/RegisterExercise";
 import RegisterPatient from "./pages/admin/RegisterPatient";
 import SearchExercise from "./pages/admin/SearchExercise";
+import SelectExercises from "./pages/admin/SelectExercises";
 import SearchPatient from "./pages/admin/SearchPatient";
 import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
@@ -30,6 +31,7 @@ import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRou
 
 // Ta bort senare endast för showcase av components
 import Showcase from "./pages/Showcase";
+import UploadError from "./pages/admin/UploadError";
 
 function App() {
   return (
@@ -68,6 +70,11 @@ function App() {
         />
         <ProtectedRouteAdmin
           exact
+          path="/admin/select/:name"
+          component={SelectExercises}
+        />
+        <ProtectedRouteAdmin
+          exact
           path="/admin/search/exercise"
           component={SearchExercise}
         />
@@ -94,6 +101,11 @@ function App() {
           exact
           path="/success"
           component={UploadSucceeded}
+        />
+        <ProtectedRouteAdmin
+          exact
+          path="/error"
+          component={UploadError}
         />
         <Route component={NotFoundPage} />
       </Switch>
