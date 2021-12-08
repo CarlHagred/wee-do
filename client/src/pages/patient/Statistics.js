@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getSession, getOnePatient } from "../../api";
+import { 
+    getSession, 
+    getOnePatient, 
+} from "../../api";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 
@@ -41,7 +44,6 @@ const Statistics = () => {
             const fetchedUsername = await getSession();
             const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
             setPatientStatistics(fetchedPatient.data.statistics);
-            console.log(fetchedPatient.data.statistics);
         }
         fetchData();
     }, []);
@@ -50,7 +52,6 @@ const Statistics = () => {
         <PatientLayout>
             <StyledWrapper>
                 <StyledHeader>Statistik</StyledHeader>
-                
                 {patientStatistics.map((stat) => (
                     <React.Fragment key={stat.vidId}>
                         <StyledStatistics>
@@ -60,16 +61,8 @@ const Statistics = () => {
                                 {stat.vidId}
                             </p>
                             <p>
-                                <strong>Scans: </strong>
-                                {stat.scans}
-                            </p>
-                            <p>
-                                <strong>Antal visningar: </strong>
-                                {stat.timesWatched}
-                            </p>
-                            <p>
                                 <strong>Antal gånger kvar: </strong>
-                                1
+                                {stat.amountOfTimes - stat.timesWatched >= 0 ? stat.amountOfTimes - stat.timesWatched : "Kom tillbaka imorgon, du är klar för idag!"}
                             </p>
                             <br/>
                         </StyledStatistics>

@@ -73,6 +73,8 @@ const WatchExercise = () => {
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
+  const [patientStatistics, setPatientStatistics] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
@@ -82,6 +84,7 @@ const WatchExercise = () => {
     };
     fetchData();
   }, []);
+
 
   useEffect(() => {
     const titleAndDesc = async (id) => {
@@ -100,6 +103,26 @@ const WatchExercise = () => {
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
+      
+      const fetchData = async () => {
+        const fetchedUsername = await getSession();
+        const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
+  
+        const timesLeft = fetchedPatient.data.statistics;
+
+        timesLeft.forEach(stat => {
+          if(stat.vidId === videoId){
+            let test =  stat.amountOfTimes - stat.timesWatched;
+            if(test >= 0){
+              setPatientStatistics(test);
+            }
+            else{
+              setPatientStatistics(0);
+            }
+          }
+        });
+      };
+      fetchData(videoId);
     }
     if (handleClick.data === "Inactive") {
       setShowActive(true);
@@ -150,6 +173,7 @@ const WatchExercise = () => {
               <FaThumbsUp />
             </StyledReward>
             <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
+            <P>Du har {patientStatistics} gånger kvar att göra idag!</P>
           </>
         ) : null}
 
@@ -171,6 +195,8 @@ const WatchExercise = () => {
           </>
         ) : null}
       </ButtonContainer>
+
+      
     </PatientLayout>
   );
 };
