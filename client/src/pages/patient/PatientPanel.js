@@ -3,72 +3,81 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import PanelButton from "../../components/common/PanelButton";
-import hero from "../../components/images/patient_hero.png";
+import hero from "../../components/images/FT.png";
 import WdLogo from "../../components/images/WdLogo";
 
 const StyledHero = styled.div`
-  width: 100vw;
-  height: 50vh;
-  background-image: url(${hero});
-  background-position: left;
+  width: 100%;
+  background-color: #e7ddce;
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  @media (min-width: 768px) {
+    background-image: url(${hero});
+    height: 80vh;
+  }
 `;
 
-const HeroText = styled.div`
+const HeaderContainer = styled.div`
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  @media (max-width: 884px) {
-    display: none;
+  padding-top: 10%;
+  padding-bottom: 20%;
+  margin: 0 3em;
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 45%;
+    left: 14%;
+    transform: translate(-20%, -50%);
   }
 `;
 
 const StyledHeroHeader = styled.h1`
   font-size: 3rem;
-  @media (max-width: 1055px) {
-    font-size: 2.5rem;
+  @media (min-width: 768px) {
+  }
+`;
+const StyledHeroText = styled.p``;
+
+const StyledWdLogo = styled(WdLogo)`
+  @media (min-width: 768px) {
   }
 `;
 
-const PanelMenuWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const PanelMenu = styled.nav`
+const PanelButtonContainer = styled.nav`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 2em;
   align-items: center;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  padding-bottom: 10%;
   justify-content: center;
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 85%;
+    left: 12%;
+    transform: translate(-20%, -50%);
+  }
 `;
 
 const PatientPanel = () => {
   return (
     <PatientLayout>
       <StyledHero>
-        <HeroText>
-          <StyledHeroHeader>Välkommen till</StyledHeroHeader>
-          <WdLogo />
-        </HeroText>
-      </StyledHero>
+        <HeaderContainer>
+          <StyledHeroHeader>Välkommen!</StyledHeroHeader>
+          <StyledHeroText>Vad vill du göra?</StyledHeroText>
+        </HeaderContainer>
 
-      <PanelMenuWrapper>
-        <PanelMenu>
+        <PanelButtonContainer>
           <PanelButton to="/QrScanner" icon="qrcode" size="44">
             Scanna övning
           </PanelButton>
           <PanelButton to="/statistics" icon="statistics" size="44">
             Se statistik
           </PanelButton>
-        </PanelMenu>
-      </PanelMenuWrapper>
+        </PanelButtonContainer>
+      </StyledHero>
     </PatientLayout>
   );
 };

@@ -1,15 +1,9 @@
-/**
- * Den här klassen skickar en post request till server för att
- * uppdatera weedos databas med den senaste inlag övningen på Youtube, 
- * dessutom har den gui komponent. 
- */
-import axios from "axios";
 import Button from '../common/Button';
+import {updateDatabase} from "../../api/index.js"; 
 
 const UpdateDb = () => {
-    const saveVideoToDatabase = (event) => {
-        event.preventDefault(); 
-        axios.post('http://localhost:8000/updateDatabase');
+    const saveVideoToDatabase = () => { 
+        updateDatabase(); 
         console.log('Databasen uppdaterats')
     }
     return (
@@ -18,6 +12,5 @@ const UpdateDb = () => {
             <Button onClick={saveVideoToDatabase}>Uppdatera Databas</Button>
         </div>
     );
-}
- 
+};
 export default UpdateDb;

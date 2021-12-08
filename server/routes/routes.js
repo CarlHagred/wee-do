@@ -1,12 +1,13 @@
 import express from "express";
 
-//import { getTest } from "../controllers/routerLogic.js";
 import {
   postPatient,
   getPatients,
   getVideos,
   getOnePatient,
   deleteVideos,
+  getActivePatients,
+  getInactivePatients,
   getVideoTitleById,
 } from "../controllers/admin/adminEndpoints.js";
 
@@ -19,6 +20,8 @@ import {
   postSelectedVideos,
   deletePatient,
   getVideoUrl,
+  setPatientInactive,
+  setPatientActive,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -35,7 +38,6 @@ import {
 
 const router = express.Router();
 
-//router.get("/test", getTest);
 router.get("/newpatient", postPatient);
 router.get("/getpatients", getPatients);
 router.post("/loginpatient", loginPatient);
@@ -48,7 +50,7 @@ router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
-router.post("/postwatchedvideo/:name/:videoId", postWatchedVideo);
+router.post("/postwatchedvideo/:name/:videoId/:active", postWatchedVideo);
 router.post(
   "/postselectedexercises/:name/:selectedexercises",
   postSelectedVideos
@@ -56,6 +58,11 @@ router.post(
 router.delete("/deletevideo", deleteVideos);
 router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);
+router.put("/setpatientinactive/:name", setPatientInactive);
+router.put("/setpatientactive/:name", setPatientActive);
+router.get("/getactivepatients", getActivePatients);
+router.get("/getinactivepatients", getInactivePatients);
+
 router.post("/upload", fileToServer(), async (req, res) => {
   verifyUser(req);
 });
@@ -63,7 +70,7 @@ router.get("/oauth2callback?", async (req, res) => {
   uploadAndCallback(req, res);
 });
 router.post("/updateDatabase", async (req, res) => {
-  UpdateDatabase(req, res);
+  UpdateDatabase(res);
 });
 
 export default router;

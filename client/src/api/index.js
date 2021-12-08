@@ -19,6 +19,18 @@ export const deletePatientIndex = async (params) => {
   });
 };
 
+export const setPatientInactiveIndex = async (name) =>
+  axios.put(`${serverUrl}/setpatientinactive/${name}`);
+
+export const setPatientActiveIndex = async (name) =>
+  axios.put(`${serverUrl}/setpatientactive/${name}`);
+
+export const getAllActivePatients = () =>
+  axios.get(`${serverUrl}/getactivepatients`);
+
+export const getAllInactivePatients = () =>
+  axios.get(`${serverUrl}/getinactivepatients`);
+
 /* ===== Session calls ===== */
 
 export const getSession = () =>
@@ -59,7 +71,7 @@ export const logoutPatient = () => {
     withCredentials: true,
     url: `${serverUrl}/logoutpatient`,
   }).then((res) => {
-    window.location.reload();
+    window.location = "/";
   });
 };
 
@@ -94,7 +106,7 @@ export const logoutAdmin = () => {
     withCredentials: true,
     url: `${serverUrl}/logoutadmin`, // Ska fixas
   }).then((res) => {
-    window.location.reload();
+    window.location = "/admin";
   });
 };
 
@@ -108,11 +120,12 @@ export const getVideoUrl = (params) =>
 export const postScan = (name, videoId) =>
   axios.post(`${serverUrl}/postscan/${name}/${videoId}`);
 
-export const postWatchedVideo = (name, videoId) =>
-  axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}`);
+export const postWatchedVideo = (name, videoId, active) =>
+  axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}/${active}`);
 
-export const postVideo = (videoData) =>
-  axios.post(`${serverUrl}/upload/`, videoData);
+export const postVideo = async (videoData) => {
+  await axios.post(`${serverUrl}/upload/`, videoData);
+};
 
 export const postSelectedExercises = (name, selectedExercises) =>
   axios.post(`${serverUrl}/postselectedexercises/${name}/${selectedExercises}`);
@@ -135,3 +148,6 @@ export const deleteVideoIndex = async (params) => {
     })
     .then((response) => {});
 };
+
+export const updateDatabase = async () =>
+  await axios.post(`${serverUrl}/updateDatabase`);
