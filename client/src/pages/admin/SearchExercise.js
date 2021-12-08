@@ -56,7 +56,7 @@ const SearchExercise = () => {
         />
         <StyledH1>Övningar</StyledH1>
         <Flexbox>
-          {/*videos
+          {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
@@ -79,7 +79,7 @@ const SearchExercise = () => {
                   <br></br>
                 </Link>
               </VideoItem>
-            ))*/}
+            ))}
         </Flexbox>
       </ContentContainer>
     </AdminLayout>
