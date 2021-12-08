@@ -40,7 +40,6 @@ const SearchExercise = () => {
   useEffect(() => {
     const fetchData = async () => {
       const allVideos = await getAllVideos();
-      console.log(allVideos.value);
       setVideos(allVideos.data);
     };
     fetchData();

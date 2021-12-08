@@ -104,6 +104,7 @@ export const getAllVideos = () => {
     method: "GET",
     url: `/#/getvideos`,
   });
+  return (response) => response.data;
 };
 
 export const getVideoUrl = (params) => axios.get(`/#/getvideourl`, { params });
