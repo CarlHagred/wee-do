@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const baseUrl = process.env.baseURL;
+
 /* ===== Patient calls ===== */
 
 export const getNewPatient = () => axios.get(`/#/newpatient`);
@@ -102,7 +104,7 @@ export const logoutAdmin = () => {
 export const getAllVideos = () => {
   axios({
     method: "GET",
-    url: `/#/getvideos`,
+    url: `${baseUrl}/#/getvideos`,
   });
 };
 
