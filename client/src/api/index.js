@@ -99,10 +99,9 @@ export const logoutAdmin = () => {
 
 //export const getAllVideos = () => axios.get(`/#/getvideos`);
 
-export const getAllVideos = (params) => {
+export const getAllVideos = () => {
   axios({
     method: "GET",
-    data: params,
     url: `/#/getvideos`,
   });
 };
