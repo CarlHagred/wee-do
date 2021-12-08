@@ -35,6 +35,7 @@ export const deleteSession = (req, res) => {
 export const postScan = async (req, res) => {};
 
 export const postWatchedVideo = async (req, res) => {
+  console.log(req.params.title);
   if (req.params.active == "true") {
     Patient.findOneAndUpdate(
       {
@@ -60,6 +61,7 @@ export const postWatchedVideo = async (req, res) => {
               $push: {
                 statistics: {
                   vidId: req.params.videoId,
+                  vidTitle: req.params.title,
                   scans: 0,
                   timesWatched: 1,
                   scanTime: [],

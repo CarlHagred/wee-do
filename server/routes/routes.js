@@ -51,7 +51,7 @@ router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
-router.post("/postwatchedvideo/:name/:videoId/:active", postWatchedVideo);
+router.post("/postwatchedvideo/:name/:videoId/:active/:title", postWatchedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);

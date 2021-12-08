@@ -7,7 +7,7 @@ const serverUrl = "http://localhost:8000";
 export const getNewPatient = () => axios.get(`${serverUrl}/newpatient`);
 
 export const getOnePatient = (name) =>
-    axios.get(`${serverUrl}/getonepatient/${name}`);
+    axios.get(`${serverUrl}/getonepatient/${name}`); 
 
 export const getAllPatients = () => axios.get(`${serverUrl}/getpatients`);
 
@@ -127,8 +127,8 @@ export const getVideoUrl = (params) =>
 export const postScan = (name, videoId) =>
     axios.post(`${serverUrl}/postscan/${name}/${videoId}`);
 
-export const postWatchedVideo = (name, videoId, active) =>
-    axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}/${active}`);
+export const postWatchedVideo = (name, videoId, active, title) =>
+    axios.post(`${serverUrl}/postwatchedvideo/${name}/${videoId}/${active}/${title}`);
 
 export const postVideo = videoData => {
     axios.post(`${serverUrl}/upload/`, videoData);
