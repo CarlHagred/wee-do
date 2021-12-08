@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Icon from "../../components/common/Icons";
+import Icon from "./Icons";
 
 const StyledPanelButton = styled(NavLink)`
   display: flex;

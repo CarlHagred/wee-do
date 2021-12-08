@@ -18,15 +18,13 @@ import localStrategy from "./controllers/config/passportConfig.js";
 //configuration of env file
 dotenv.config();
 
-const PORT = process.env.PORT;
-
 const app = express();
 
 //middleware with passport
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://weedo-v2.herokuapp.com/",
     credentials: true,
   })
 );
@@ -43,7 +41,7 @@ app.use(passport.session());
 
 app.use(express.static("public")); //osäker om nödvändig
 localStrategy(passport);
-app.use(routes);
+app.use("/api", routes);
 //app.use(videoRoutes);
 app.use(morgan("dev"));
 //Database connection
@@ -54,10 +52,8 @@ const databaseConnection = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(PORT, () => {
-      console.log(
-        `Server upp and running, and connected to database on port: ${PORT}`
-      );
+    app.listen(process.env.PORT, () => {
+      console.log(`Server upp and running, and connected to database`);
     });
   } catch (error) {
     //denna console-loggen är bra om man får fel vid serverstart
@@ -65,4 +61,10 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 export default app;
