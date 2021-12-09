@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
-import { bounce } from "react-animations";
 import ReactTooltip from "react-tooltip";
-import { shakeHead, pulse } from "react-animations";
+import { shakeHead, pulse, bounce } from "react-animations";
 
 import {
   getSession,
@@ -27,9 +26,12 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 640px;
-  margin: 0.5em auto 0 auto;
-  padding: 0 5px;
-  gap: 5px;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 15px 10px 0 10px;
+  @media (min-width: 650px) {
+    padding: 15px 0 0 0;
+  }
 `;
 
 const StyledVideoTitle = styled.h2`
