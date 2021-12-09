@@ -1,6 +1,7 @@
 import Patient from "../../models/patient.js";
 
 import passport from "passport";
+import { loginAdmin } from "../admin/adminLogin.js";
 
 //Hanterar själva inloggning av en användare med hjälp av vår lokala strategi
 export const loginPatient = (req, res, next) => {
@@ -81,6 +82,50 @@ export const postWatchedVideo = async (req, res) => {
   if (req.params.active == "false") {
     res.status(200).send("Inactive");
   }
+};
+
+export const postSelectedVideos = async (req, res) => {
+  const amountOfTimesArray = JSON.parse(req.params.selectedexercises);
+
+  amountOfTimesArray.forEach((value, index) => {
+    Patient.findOneAndUpdate(
+      {
+        name: req.params.name,
+        "statistics.vidId": value.id,
+      },
+      { $set: { "statistics.$.amountOfTimes": value.amount } },
+      {
+        new: true,
+      },
+      (err, doc) => {
+        if (doc) {
+          res.status(200).send("Success");
+        }
+
+        if (!doc) {
+          Patient.findOneAndUpdate(
+            { name: req.params.name },
+            {
+              $push: {
+                statistics: {
+                  vidId: value.id,
+                  scans: 0,
+                  timesWatched: 0,
+                  scanTime: [],
+                  watchedTime: [],
+                  amountOfTimes: value.amount,
+                },
+              },
+            },
+            { safe: true, new: true },
+            (err, doc) => {
+              res.status(200);
+            }
+          );
+        }
+      }
+    );
+  });
 };
 
 export const deletePatient = async (req, res) => {

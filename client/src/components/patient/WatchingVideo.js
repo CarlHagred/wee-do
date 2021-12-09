@@ -112,7 +112,7 @@ const WatchExercise = () => {
 
   const playerProps = {
     url: vid,
-    playing: true,
+    playing: false,
     onEnded: () => {
       setVideoEnded(true);
     },

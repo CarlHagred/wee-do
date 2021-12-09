@@ -79,4 +79,5 @@ const SearchExercise = () => {
     </AdminLayout>
   );
 };
+
 export default SearchExercise;

@@ -58,24 +58,33 @@ export const redirectToLogin = async (oauth2Client, { filename, title, descripti
     open(authUrl);
 };
 
-export const uploadVideo = async (auth, { title, description, file }) => {
-
-    await service.videos.insert({
-        auth: auth,
-        part: 'snippet,contentDetails,status',
-        resource: {
-            snippet: {
-                title,
-                description,
+export const uploadVideo = async (auth, { title, description, file }, response) => {
+    try {
+        await service.videos.insert({
+            auth: auth,
+            part: 'snippet,contentDetails,status',
+            resource: {
+                snippet: {
+                    title,
+                    description,
+                },
+                status: {
+                    privacyStatus: 'private'
+                }
             },
-            status: {
-                privacyStatus: 'private'
+            media: {
+                body: file
             }
-        },
-        media: {
-            body: file
-        }
-    });
+        });
+            // Update the mongo after each upload.
+            //UpdateDatabase(req, res);    
+    } catch (error) {
+        process.on('unhandledRejection', (reason, promise) => {
+            // do something
+        });
+        response.redirect("http://localhost:3000/error");
+    }
+    
 }
 
 
@@ -105,13 +114,13 @@ export const verifyUser = async (request) => {
         const { title, description } = request.body; 
         
         const oauth = authorize();
-
+        
         await redirectToLogin(oauth, { filename, title, description });
     }
 }
 
 export const uploadAndCallback = async (request, response) => {
-
+    
     const { code, state } = request.query;
 
     const { filename, title, description } = JSON.parse(state); 
@@ -126,12 +135,15 @@ export const uploadAndCallback = async (request, response) => {
         title,
         description,
         file: fs.createReadStream(`videos/${filename}`)
-    })
+    }, response)
 
-    response.redirect("http://localhost:3000/success");
+    response.redirect("http://localhost:3000/success");  
+
+    
 }
 
-export const UpdateDatabase = res => {
+export const UpdateDatabase = async (req, res) => {
+
     try 
     {
         service.playlistItems.list({part: "snippet", playlistId: process.env.playlistId, key: process.env.API_KEY, maxResults: 50}).then(res => 
