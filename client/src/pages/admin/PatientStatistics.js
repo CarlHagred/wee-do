@@ -134,6 +134,10 @@ const PatientStatistics = () => {
     setPatientActiveIndex(name);
   };
 
+  const handleSelectExcersice = () => {
+    window.location = `/admin/select/${patient.name}`;
+  };
+
   return (
     <AdminLayout>
       <ContentContainer>
@@ -158,7 +162,7 @@ const PatientStatistics = () => {
                 Gör patient aktiv
               </Button>
             )}
-            <Button>Knapp som inte har funktion</Button>
+            <Button onClick={handleSelectExcersice}>Välj övningar</Button>
           </ButtonContainer>
           <>
             {patientStatistics.map((stat) => (

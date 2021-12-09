@@ -49,7 +49,7 @@ const Video = () => {
 
   const playerProps = {
     url: videoUrl,
-    playing: true
+    playing: false
   };
 
   return (
