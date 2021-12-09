@@ -4,6 +4,7 @@ import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
 import { bounce } from "react-animations";
 import ReactTooltip from "react-tooltip";
+import { shakeHead, pulse } from "react-animations";
 
 import {
   getSession,
@@ -16,12 +17,19 @@ import PatientLayout from "./PatientLayout";
 import Button from "../common/Button";
 import ReactPlayer from "../common/ReactPlayer";
 
+const StyledDisabledButton = styled(Button)``;
+
+const StyledActiveButton = styled(Button)`
+  animation: 1s ${keyframes`${pulse}`};
+`;
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 640px;
   margin: 0.5em auto 0 auto;
   padding: 0 5px;
+  gap: 5px;
 `;
 
 const StyledVideoTitle = styled.h2`
@@ -29,7 +37,9 @@ const StyledVideoTitle = styled.h2`
   font-weight: 600;
 `;
 
-const StyledVideoText = styled.p``;
+const StyledVideoText = styled.p`
+  color: #787878;
+`;
 
 const StyledDivider = styled.hr`
   align-content: center;
@@ -142,6 +152,7 @@ const WatchExercise = () => {
       setVideoEnded(true);
     },
   };
+
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
@@ -169,7 +180,9 @@ const WatchExercise = () => {
       <ActionContainer>
         {videoEnded && !exerciseDone ? (
           <ButtonContainer>
-            <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+            <StyledActiveButton onClick={handleEvent}>
+              Jag har gjort övningen
+            </StyledActiveButton>
           </ButtonContainer>
         ) : null}
 
@@ -184,9 +197,13 @@ const WatchExercise = () => {
 
         {!videoEnded && (
           <ButtonContainer>
-            <Button data-tip data-for="watchVideo" disabledTooltip>
+            <StyledDisabledButton
+              data-tip
+              data-for="watchVideo"
+              disabledTooltip
+            >
               Jag har gjort övningen
-            </Button>
+            </StyledDisabledButton>
             <ReactTooltip id="watchVideo" place="bottom" effect="solid">
               Du måste se klart videon innan du kan trycka på knappen!
             </ReactTooltip>
