@@ -74,6 +74,7 @@ const WatchExercise = () => {
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
   const [patientStatistics, setPatientStatistics] = useState([]);
+  const [patient, setPatient] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +82,7 @@ const WatchExercise = () => {
       setPatientName(fetchedSession.data.name);
       const fetchPatient = await getOnePatient(fetchedSession.data.name);
       setActive(fetchPatient.data.active);
+      setPatient(fetchPatient.data.statistics)
     };
     fetchData();
   }, []);
@@ -103,26 +105,31 @@ const WatchExercise = () => {
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
+        
+      const date = new Date();
       
-      const fetchData = async () => {
-        const fetchedUsername = await getSession();
-        const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
-  
-        const timesLeft = fetchedPatient.data.statistics;
 
-        timesLeft.forEach(stat => {
-          if(stat.vidId === videoId){
-            let test =  stat.amountOfTimes - stat.timesWatched;
-            if(test >= 0){
-              setPatientStatistics(test);
-            }
-            else{
-              setPatientStatistics(0);
+      patient.forEach(stat => {
+        let counter = 1; // kommentera varför
+        if(stat.vidId === videoId){
+          for (let i = 0; i < stat.watchedTime.length; i++) {
+            const todayDate = date.toISOString().substring(0, 10);
+            const statDates = stat.watchedTime[i].substring(0,10);
+
+            if(todayDate === statDates){
+              counter++;
             }
           }
-        });
-      };
-      fetchData(videoId);
+          let amountOfTimesLeft =  stat.amountOfTimes - counter;
+          if(amountOfTimesLeft>= 0){
+            setPatientStatistics(amountOfTimesLeft);
+          }
+          else{
+            setPatientStatistics(0);
+          }
+        }
+      });
+      
     }
     if (handleClick.data === "Inactive") {
       setShowActive(true);

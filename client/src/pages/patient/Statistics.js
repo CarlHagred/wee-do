@@ -48,11 +48,36 @@ const Statistics = () => {
         fetchData();
     }, []);
 
+    let stats = [];
+    let date = new Date();
+    patientStatistics.forEach(stat => {
+        let emptyObject = {};
+        let counter = 0;
+        for (let i = 0; i < stat.watchedTime.length; i++) {
+            const todayDate = date.toISOString().substring(0, 10);
+            const statDates = stat.watchedTime[i].substring(0,10);
+
+            if(todayDate === statDates){
+              counter++;
+            }
+          }
+          let amountOfTimesLeft =  stat.amountOfTimes - counter;
+          if(amountOfTimesLeft >= 0){
+            emptyObject.vidId = stat.vidId;
+            emptyObject.timesLeft = amountOfTimesLeft;
+          }
+          else{
+            emptyObject.vidId = stat.vidId;
+            emptyObject.timesLeft = 0;
+          }
+          stats.push(emptyObject);
+    })
+
     return (
         <PatientLayout>
             <StyledWrapper>
                 <StyledHeader>Statistik</StyledHeader>
-                {patientStatistics.map((stat) => (
+                {stats.map((stat) => (
                     <React.Fragment key={stat.vidId}>
                         <StyledStatistics>
                             <br/>
@@ -62,7 +87,7 @@ const Statistics = () => {
                             </p>
                             <p>
                                 <strong>Antal gånger kvar: </strong>
-                                {stat.amountOfTimes - stat.timesWatched >= 0 ? stat.amountOfTimes - stat.timesWatched : "Kom tillbaka imorgon, du är klar för idag!"}
+                                {stat.timesLeft !== 0 ? stat.timesLeft  : "Kom tillbaka imorgon, du är klar för idag!"}
                             </p>
                             <br/>
                         </StyledStatistics>
