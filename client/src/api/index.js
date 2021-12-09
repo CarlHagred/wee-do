@@ -19,6 +19,15 @@ export const deletePatientIndex = async (params) => {
   });
 };
 
+export const deleteSelectedVideo = async (patientName, videoId) => {
+  await axios.delete(`${serverUrl}/deleteSelectedVideo`, {
+    data: {
+      videoId: videoId,
+      patientName: patientName,
+    },
+  });
+};
+
 export const setPatientInactiveIndex = async (name) =>
   axios.put(`${serverUrl}/setpatientinactive/${name}`);
 

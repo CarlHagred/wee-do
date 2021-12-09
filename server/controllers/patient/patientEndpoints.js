@@ -126,6 +126,12 @@ export const postSelectedVideos = async (req, res) => {
   });
 };
 
+export const deleteSelectedVideo = async (req, res) => {
+  const patientName = req.body.patientName;
+  const videoId = req.body.videoId;
+  console.log(patientName + " " + videoId);
+};
+
 export const deletePatient = async (req, res) => {
   const name = req.body.name;
   await Patient.deleteOne({ name: name }).then((patient) => {

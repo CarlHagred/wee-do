@@ -22,6 +22,7 @@ import {
   getVideoUrl,
   setPatientInactive,
   setPatientActive,
+  deleteSelectedVideo,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -55,6 +56,7 @@ router.post(
   "/postselectedexercises/:name/:selectedexercises",
   postSelectedVideos
 );
+router.delete("/deleteSelectedVideo", deleteSelectedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);
