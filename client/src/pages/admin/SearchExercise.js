@@ -8,7 +8,20 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
-const StyledContentContainer = styled(ContentContainer)``;
+const StyledContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  align-content: center;
+  margin: 0 auto;
+  @media (max-width: 1085px) {
+    max-width: 660px;
+  }
+  @media (max-width: 768px) {
+    max-width: 328px;
+    min-width: 250px;
+  }
+`;
 
 const StyledThumbnail = styled.img`
   opacity: 1;
@@ -88,40 +101,42 @@ const SearchExercise = () => {
   }, []);
   return (
     <AdminLayout>
-      <StyledContentContainer>
-        <SearchBar
-          placeholder="Sök efter en övning... "
-          onChange={(e) => {
-            setSearchedName(e.target.value);
-          }}
-        />
-        <StyledHeader>Övningar</StyledHeader>
-        <SearchResultContainer>
-          {videos
-            .filter((videos) => {
-              return videos.videoTitle.includes(searchedName) ? videos : null;
-            })
-            .map((videos) => (
-              <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
-                <VideoContainer key={videos._id}>
-                  <ThumbnailContainer>
-                    <StyledThumbnail
-                      src={videos.thumbnail}
-                      alt="Video thumbnail"
-                    />
-                    <HoverContainer>
-                      <StyledHoverText>VISA</StyledHoverText>
-                    </HoverContainer>
-                  </ThumbnailContainer>
-                  <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
-                  <StyledVideoText>
-                    Antal visningar: {videos.__v}
-                  </StyledVideoText>
-                </VideoContainer>
-              </Link>
-            ))}
-        </SearchResultContainer>
-      </StyledContentContainer>
+      <ContentContainer>
+        <StyledContentContainer>
+          <SearchBar
+            placeholder="Sök efter en övning... "
+            onChange={(e) => {
+              setSearchedName(e.target.value);
+            }}
+          />
+          <StyledHeader>Övningar</StyledHeader>
+          <SearchResultContainer>
+            {videos
+              .filter((videos) => {
+                return videos.videoTitle.includes(searchedName) ? videos : null;
+              })
+              .map((videos) => (
+                <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+                  <VideoContainer key={videos._id}>
+                    <ThumbnailContainer>
+                      <StyledThumbnail
+                        src={videos.thumbnail}
+                        alt="Video thumbnail"
+                      />
+                      <HoverContainer>
+                        <StyledHoverText>VISA</StyledHoverText>
+                      </HoverContainer>
+                    </ThumbnailContainer>
+                    <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
+                    <StyledVideoText>
+                      Antal visningar: {videos.__v}
+                    </StyledVideoText>
+                  </VideoContainer>
+                </Link>
+              ))}
+          </SearchResultContainer>
+        </StyledContentContainer>
+      </ContentContainer>
     </AdminLayout>
   );
 };
