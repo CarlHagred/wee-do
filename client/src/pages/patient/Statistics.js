@@ -29,12 +29,6 @@ const StyledWrapper = styled.div`
 const StyledHeader = styled.h1`
     font-size: 3em;
 `;
-/*
-const StyledParagraph = styled.p`
-    margin: 20px;
-    color: red;
-    font-size: 1.5em;
-`;*/
 
 const Statistics = () => {
     const [patientStatistics, setPatientStatistics] = useState([]);
@@ -50,7 +44,7 @@ const Statistics = () => {
 
     let stats = [];
     let date = new Date();
-    patientStatistics.forEach(stat => {
+    patientStatistics.forEach((stat) => {
         let emptyObject = {};
         let counter = 0;
         for (let i = 0; i < stat.watchedTime.length; i++) {

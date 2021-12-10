@@ -109,8 +109,8 @@ const WatchExercise = () => {
       const date = new Date();
       
 
-      patient.forEach(stat => {
-        let counter = 1; // kommentera varför
+      patient.forEach((stat) => {
+        let counter = 1; 
         if(stat.vidId === videoId){
           for (let i = 0; i < stat.watchedTime.length; i++) {
             const todayDate = date.toISOString().substring(0, 10);
