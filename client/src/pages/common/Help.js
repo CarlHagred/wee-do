@@ -48,25 +48,39 @@ const Help = () => {
 
     let phoneNr = "077-67 30 000"
 
-    useEffect(() => {
-        const getPatient = async () => {
-            const currentPatient = await getSession();
-            setPatient(currentPatient.data)
-            
-        };
-        getPatient();
-    }, [])
-
-    useEffect(() => {
-        const getActivity = async () => {
+    const getActivity = async () => {
+        try {
             const currentActivity = await getAllActivePatients()
-            setActive(currentActivity)
-        };
-        getActivity()
-    }, []);
+            if(!currentActivity.data) {
+                throw new Error(`fucking fel brur ${currentActivity.status}`)
+            }
+            if(currentActivity){
+                setActive(currentActivity.data[0].name);
+            }
+        }
+        catch(e) {
+        
+        }
+    }
 
-    console.log(patient);
-    console.log(active);    
+    const getPatient = async () => {
+        try {
+            const currentPatient = await getSession();
+            if(!currentPatient) {
+                throw new Error(`fucking fel brur ${currentPatient.status}`)
+            }
+            if(currentPatient){
+                setPatient(currentPatient.data.name)
+            }
+        }
+        catch(e) {
+            
+        }
+    }
+
+    getActivity();
+    getPatient();
+    
     return (
         <PatientLayout>
             <StyledContainer>
@@ -117,11 +131,15 @@ const Help = () => {
 
                     <StyledLi>Kontrollera att ditt användarnamn stämmer, 6 tecken.</StyledLi>
                     <StyledLi>Kontrollera din nätverksanslutning</StyledLi>
+                    {patient === active ? 
                     <StyledLi>
                         Om det fortfarande inte fungerar, kontakta Region Skånes
-                        Servicedesk Telefon: , knappval 2 (IT) följt av
+                        Servicedesk Telefon: {phoneNr}, knappval 2 (IT) följt av
                         5 (övrigt).
-                    </StyledLi>
+                    </StyledLi> 
+                    :
+                    null
+                    }
                 </StyledDiv>
             </StyledContainer>
         </PatientLayout>
