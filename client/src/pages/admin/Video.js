@@ -42,7 +42,7 @@ const ActionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 200px;
+  height: 120px;
   justify-content: center;
 `;
 
