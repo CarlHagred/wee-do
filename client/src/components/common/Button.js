@@ -15,7 +15,7 @@ const StyledButton = styled.button`
 
   margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
   margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
-  padding: 0.3em 1em;
+  padding: 0.4em 1em;
 
   width: ${(props) => (props.width === "wide" ? "100%" : "300px")};
 
