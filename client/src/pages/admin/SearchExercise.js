@@ -8,6 +8,45 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
 import ContentContainer from "../../components/common/ContentContainer";
 
+const StyledContentContainer = styled(ContentContainer)``;
+
+const StyledThumbnail = styled.img`
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+`;
+
+const HoverContainer = styled.div`
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+`;
+
+const ThumbnailContainer = styled.div`
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
+  :hover ${StyledThumbnail} {
+    opacity: 0.3;
+  }
+  :hover ${HoverContainer} {
+    opacity: 1;
+  }
+`;
+
+const StyledHoverText = styled.div`
+  font-size: 32px;
+  padding: 16px 32px;
+  color: white;
+`;
+
 const StyledHeader = styled.h1`
   font-size: 1.2em;
   padding-bottom: 1em;
@@ -25,23 +64,11 @@ const VideoContainer = styled.div`
   height: 250px;
 `;
 
-const StyledThumbnail = styled.img`
-  display: block;
-  width: 100%;
-  height: auto;
-  :hover {
-    box-shadow: 5px 10px 8px #888888;
-  }
-`;
-
 const StyledVideoTitle = styled.h1`
   font-weight: bold;
   width: 250px;
   padding-top: 10px;
   padding-bottom: 5px;
-  :hover {
-    text-decoration: underline;
-  }
 `;
 
 const StyledVideoText = styled.p`
@@ -52,7 +79,6 @@ const StyledVideoText = styled.p`
 const SearchExercise = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
       const allVideos = await getAllVideos();
@@ -62,7 +88,7 @@ const SearchExercise = () => {
   }, []);
   return (
     <AdminLayout>
-      <ContentContainer>
+      <StyledContentContainer>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
@@ -78,11 +104,15 @@ const SearchExercise = () => {
             .map((videos) => (
               <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
                 <VideoContainer key={videos._id}>
-                  <StyledThumbnail
-                    src={videos.thumbnail}
-                    alt="Video thumbnail"
-                  />
-
+                  <ThumbnailContainer>
+                    <StyledThumbnail
+                      src={videos.thumbnail}
+                      alt="Video thumbnail"
+                    />
+                    <HoverContainer>
+                      <StyledHoverText>VISA</StyledHoverText>
+                    </HoverContainer>
+                  </ThumbnailContainer>
                   <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
                   <StyledVideoText>
                     Antal visningar: {videos.__v}
@@ -91,9 +121,8 @@ const SearchExercise = () => {
               </Link>
             ))}
         </SearchResultContainer>
-      </ContentContainer>
+      </StyledContentContainer>
     </AdminLayout>
   );
 };
-
 export default SearchExercise;
