@@ -18,11 +18,11 @@ const HeroWrapper = styled.div`
 `;
 
 const HeroLeft = styled.div`
-  flex: 1;
+  flex: 1.2;
 `;
 
 const HeroRight = styled.div`
-  @media (min-width: 700px) {
+  @media (min-width: 1020px) {
     background-image: linear-gradient(
         0.25turn,
         #f5e6cf,
@@ -45,13 +45,9 @@ const HeaderContainer = styled.div`
 const StyledHeroHeader = styled.h1`
   font-size: 2.8em;
   margin: 10% auto;
-  @media (min-width: 700px) {
+  @media (min-width: 520px) {
     font-size: 4em;
     margin: 110px auto;
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    transform: translate(-20%, -20%);
   }
 `;
 
@@ -63,12 +59,6 @@ const PanelButtonContainer = styled.nav`
   align-items: center;
   padding-bottom: 10%;
   justify-content: center;
-  @media (min-width: 700px) {
-    position: absolute;
-    top: 70%;
-    left: 20%;
-    transform: translate(-20%, -50%);
-  }
 `;
 
 const PatientPanel = () => {
@@ -76,11 +66,10 @@ const PatientPanel = () => {
     <PatientLayout>
       <StyledBody />
       <HeroWrapper>
-        <HeroLeft />
-        <HeroRight />
-        <HeaderContainer>
-          <StyledHeroHeader>Välkommen!</StyledHeroHeader>
-
+        <HeroLeft>
+          <HeaderContainer>
+            <StyledHeroHeader>Välkommen!</StyledHeroHeader>
+          </HeaderContainer>
           <PanelButtonContainer>
             <PanelButton to="/QrScanner" icon="qrcode" size="44">
               Scanna övning
@@ -89,7 +78,9 @@ const PatientPanel = () => {
               Se statistik
             </PanelButton>
           </PanelButtonContainer>
-        </HeaderContainer>
+        </HeroLeft>
+
+        <HeroRight />
       </HeroWrapper>
     </PatientLayout>
   );
