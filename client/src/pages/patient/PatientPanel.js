@@ -25,12 +25,12 @@ const HeroRight = styled.div`
   @media (min-width: 1020px) {
     background-image: linear-gradient(
         0.25turn,
-        #f5e6cf,
-        5%,
-        rgba(255, 239, 213, 0.1)
+        #f5e6cf 0%,
+        rgba(255, 239, 213, 0.1) 15% 100%
       ),
       url(${hero});
     background-repeat: no-repeat;
+    background-position: 50% 50%;
     background-size: cover;
     position: relative;
     height: 80vh;
