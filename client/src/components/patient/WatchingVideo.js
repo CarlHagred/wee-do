@@ -220,7 +220,7 @@ const WatchExercise = () => {
               <FaThumbsUp />
             </StyledReward>
             <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
-            <P>Du har {patientStatistics} gånger kvar att göra idag!</P>
+            <p>Du har {patientStatistics} gånger kvar att göra idag!</p>
           </>
         ) : null}
 
