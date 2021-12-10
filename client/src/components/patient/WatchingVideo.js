@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import ConfettiExplosion from "@reonomy/react-confetti-explosion";
 import { FaThumbsUp } from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
-import { shakeHead, pulse, bounce } from "react-animations";
+import { pulse, bounce } from "react-animations";
 
 import {
   getSession,
@@ -111,12 +111,16 @@ const WatchExercise = () => {
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
+  const [patientStatistics, setPatientStatistics] = useState([]);
+  const [patient, setPatient] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedSession = await getSession();
       setPatientName(fetchedSession.data.name);
       const fetchPatient = await getOnePatient(fetchedSession.data.name);
       setActive(fetchPatient.data.active);
+      setPatient(fetchPatient.data.statistics);
     };
     fetchData();
   }, []);
@@ -138,6 +142,28 @@ const WatchExercise = () => {
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
+
+      const date = new Date();
+
+      patient.forEach((stat) => {
+        let counter = 1;
+        if (stat.vidId === videoId) {
+          for (let i = 0; i < stat.watchedTime.length; i++) {
+            const todayDate = date.toISOString().substring(0, 10);
+            const statDates = stat.watchedTime[i].substring(0, 10);
+
+            if (todayDate === statDates) {
+              counter++;
+            }
+          }
+          let amountOfTimesLeft = stat.amountOfTimes - counter;
+          if (amountOfTimesLeft >= 0) {
+            setPatientStatistics(amountOfTimesLeft);
+          } else {
+            setPatientStatistics(0);
+          }
+        }
+      });
     }
     if (handleClick.data === "Inactive") {
       setShowActive(true);
@@ -194,6 +220,7 @@ const WatchExercise = () => {
               <FaThumbsUp />
             </StyledReward>
             <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
+            <P>Du har {patientStatistics} gånger kvar att göra idag!</P>
           </>
         ) : null}
 
