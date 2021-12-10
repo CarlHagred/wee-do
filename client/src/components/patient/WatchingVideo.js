@@ -1,23 +1,60 @@
 import React, { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import ConfettiExplosion from "@reonomy/react-confetti-explosion";
+import { FaThumbsUp } from "react-icons/fa";
+import ReactTooltip from "react-tooltip";
+import { pulse, bounce } from "react-animations";
+
 import {
   getSession,
   postWatchedVideo,
   getTitleAndDescById,
   getOnePatient,
 } from "../../api";
-import Button from "../common/Button";
-import PatientLayout from "./PatientLayout";
-import ReactPlayer from "../common/ReactPlayer";
-import styled, { keyframes } from "styled-components";
 
-import ConfettiExplosion from "@reonomy/react-confetti-explosion";
-import { FaThumbsUp } from "react-icons/fa";
-import { bounce } from "react-animations";
+import PatientLayout from "./PatientLayout";
+import Button from "../common/Button";
+import ReactPlayer from "../common/ReactPlayer";
+
+const StyledDisabledButton = styled(Button)``;
+
+const StyledActiveButton = styled(Button)`
+  animation: 1s ${keyframes`${pulse}`};
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 15px 10px 0 10px;
+  @media (min-width: 650px) {
+    padding: 15px 0 0 0;
+  }
+`;
+
+const StyledVideoTitle = styled.h2`
+  font-size: 1.5em;
+  font-weight: 600;
+`;
+
+const StyledVideoText = styled.p`
+  color: #787878;
+`;
+
+const StyledDivider = styled.hr`
+  align-content: center;
+  width: 100%;
+  margin-top: 0.5em;
+  border: 1px solid;
+  border-color: #d9d9d9;
+`;
 
 const StyledInactiveHint = styled.p`
-  font-size: 0.9em;
+  font-size: 1.3em;
   font-style: italic;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const StyledReward = styled.p`
@@ -27,30 +64,31 @@ const StyledReward = styled.p`
   border-radius: 50%;
   color: #ffffff;
   font-size: 30px;
-  margin-top: 20px;
 `;
 
 const StyledConfettiShown = styled.div`
   position: fixed;
 `;
+
+const ActionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  justify-content: center;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2em;
+  margin: 0 auto;
 `;
 
-const H2 = styled.h2`
-  font-size: 1.5em;
-  padding: 10px;
-  font-weight: 600;
-  text-align: center;
-`;
-
-const P = styled.p`
-  color: gray;
-  padding: 10px;
-  text-align: center;
+const ConfettiContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const WatchExercise = () => {
@@ -82,11 +120,10 @@ const WatchExercise = () => {
       setPatientName(fetchedSession.data.name);
       const fetchPatient = await getOnePatient(fetchedSession.data.name);
       setActive(fetchPatient.data.active);
-      setPatient(fetchPatient.data.statistics)
+      setPatient(fetchPatient.data.statistics);
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const titleAndDesc = async (id) => {
@@ -105,31 +142,28 @@ const WatchExercise = () => {
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
-        
+
       const date = new Date();
-      
 
       patient.forEach((stat) => {
-        let counter = 1; 
-        if(stat.vidId === videoId){
+        let counter = 1;
+        if (stat.vidId === videoId) {
           for (let i = 0; i < stat.watchedTime.length; i++) {
             const todayDate = date.toISOString().substring(0, 10);
-            const statDates = stat.watchedTime[i].substring(0,10);
+            const statDates = stat.watchedTime[i].substring(0, 10);
 
-            if(todayDate === statDates){
+            if (todayDate === statDates) {
               counter++;
             }
           }
-          let amountOfTimesLeft =  stat.amountOfTimes - counter;
-          if(amountOfTimesLeft>= 0){
+          let amountOfTimesLeft = stat.amountOfTimes - counter;
+          if (amountOfTimesLeft >= 0) {
             setPatientStatistics(amountOfTimesLeft);
-          }
-          else{
+          } else {
             setPatientStatistics(0);
           }
         }
       });
-      
     }
     if (handleClick.data === "Inactive") {
       setShowActive(true);
@@ -146,10 +180,18 @@ const WatchExercise = () => {
       setVideoEnded(true);
     },
   };
+
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
-      <ButtonContainer>
+      {isTitleAndDescFetched && (
+        <TextContainer>
+          <StyledVideoTitle>{title}</StyledVideoTitle>
+          <StyledVideoText>{description}</StyledVideoText>
+          <StyledDivider />
+        </TextContainer>
+      )}
+      <ConfettiContainer>
         {isExploding && (
           <StyledConfettiShown>
             <ConfettiExplosion
@@ -161,17 +203,15 @@ const WatchExercise = () => {
             />
           </StyledConfettiShown>
         )}
-      </ButtonContainer>
-      {isTitleAndDescFetched && (
-        <>
-          <H2>{title}</H2>
-          <P>{description}</P>
-        </>
-      )}
+      </ConfettiContainer>
 
-      <ButtonContainer>
+      <ActionContainer>
         {videoEnded && !exerciseDone ? (
-          <Button onClick={handleEvent}>Jag har gjort övningen</Button>
+          <ButtonContainer>
+            <StyledActiveButton onClick={handleEvent}>
+              Jag har gjort övningen
+            </StyledActiveButton>
+          </ButtonContainer>
         ) : null}
 
         {exerciseDone && !showActive ? (
@@ -179,16 +219,24 @@ const WatchExercise = () => {
             <StyledReward>
               <FaThumbsUp />
             </StyledReward>
-            <StyledInactiveHint>Jättebra jobbat!!</StyledInactiveHint>
-            <P>Du har {patientStatistics} gånger kvar att göra idag!</P>
+            <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
+            <p>Du har {patientStatistics} gånger kvar att göra idag!</p>
           </>
         ) : null}
 
         {!videoEnded && (
-          <>
-            <Button disabled>Jag har gjort övningen</Button>
-            <P>Du måste se klart videon innan du kan trycka på knappen!</P>
-          </>
+          <ButtonContainer>
+            <StyledDisabledButton
+              data-tip
+              data-for="watchVideo"
+              disabledTooltip
+            >
+              Jag har gjort övningen
+            </StyledDisabledButton>
+            <ReactTooltip id="watchVideo" place="bottom" effect="solid">
+              Du måste se klart videon innan du kan trycka på knappen!
+            </ReactTooltip>
+          </ButtonContainer>
         )}
 
         {showActive ? (
@@ -201,9 +249,7 @@ const WatchExercise = () => {
             </StyledInactiveHint>
           </>
         ) : null}
-      </ButtonContainer>
-
-      
+      </ActionContainer>
     </PatientLayout>
   );
 };
