@@ -47,21 +47,38 @@ const Statistics = () => {
     patientStatistics.forEach((stat) => {
         let emptyObject = {};
         let counter = 0;
+        let counterStreak = 0;
+        let day = 0;
+
         for (let i = 0; i < stat.watchedTime.length; i++) {
-            const todayDate = date.toISOString().substring(0, 10);
+            let todayDate = date.toISOString().substring(0, 10);
             const statDates = stat.watchedTime[i].substring(0,10);
 
             if(todayDate === statDates){
               counter++;
             }
+
+            let amountOfTimesLeft =  stat.amountOfTimes - counter;
+            if(amountOfTimesLeft === 0){
+                day++
+                todayDate = date.setDate(date.getDate() - day)
+                counterStreak++
+                emptyObject.streak = counterStreak;
+                stats.push(emptyObject)
+            }
+
+            console.log(day);
+
           }
           let amountOfTimesLeft =  stat.amountOfTimes - counter;
+
           if(amountOfTimesLeft >= 0){
-            emptyObject.vidId = stat.vidId;
+            emptyObject.vidTitle = stat.vidTitle;
             emptyObject.timesLeft = amountOfTimesLeft;
+            emptyObject.streak = counterStreak;
           }
           else{
-            emptyObject.vidId = stat.vidId;
+            emptyObject.vidTitle = stat.vidTitle;
             emptyObject.timesLeft = 0;
           }
           stats.push(emptyObject);
@@ -76,12 +93,16 @@ const Statistics = () => {
                         <StyledStatistics>
                             <br/>
                             <p>
-                                <strong>Video: </strong>{" "}
-                                {stat.vidId}
+                                <strong>Video titel: </strong>{" "}
+                                {stat.vidTitle}
                             </p>
                             <p>
                                 <strong>Antal gånger kvar: </strong>
                                 {stat.timesLeft !== 0 ? stat.timesLeft  : "Kom tillbaka imorgon, du är klar för idag!"}
+                            </p>
+                            <p>
+                                <strong>Antal dagar på raken: </strong>
+                                {stat.streak}
                             </p>
                             <br/>
                         </StyledStatistics>
