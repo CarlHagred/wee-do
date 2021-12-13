@@ -1,7 +1,6 @@
 import React from "react";
 import QRCode from "react-qr-code";
 import styled from "styled-components";
-import { getTitleAndDescById } from "../../api";
 
 import {
   StyledQrFlexContainer,
@@ -21,14 +20,6 @@ const StyledParagraph = styled.p`
   text-align: left;
   font-size: 1em;
 `;
-
-const DescriptionValue = (props) => {
-  const desc = getTitleAndDescById(props.id);
-
-  return desc;
-};
-
-//<DescriptionValue id={props.id} />
 
 const QRCreator = (props) => {
   return (

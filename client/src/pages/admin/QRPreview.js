@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getAllVideos } from "../../api";
 
 import QRCreator from "../../components/admin/QRCreator";
-import DescriptionValue from "../../components/admin/QRCreator";
 import ContentContainer from "../../components/common/ContentContainer";
 
 const QRPreview = () => {
