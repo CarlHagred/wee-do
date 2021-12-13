@@ -6,38 +6,91 @@ import { getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
-import { Flexbox, VideoItem } from "../../components/common/Flexbox";
-import ContentContainer from "../../components/common/ContentContainer";
 
-const StyledH1 = styled.h1`
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  text-align: left;
-
-  caption-side: top;
-  border-collapse: separate;
-  border-spacing: 5px;
-  width: 100%;
-  margin: 1em 0;
-  justify-content: left;
-  border-radius: 4px;
-
-  background-color: #c2c2c2;
-  border-radius: 4px;
-  font-size: 1.2em;
+const StyledContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  align-content: center;
+  margin: 3em auto 0 auto;
+  @media (max-width: 1085px) {
+    max-width: 660px;
+  }
+  @media (max-width: 768px) {
+    max-width: 328px;
+    min-width: 250px;
+  }
 `;
 
-const StyledTitle = styled.p`
+const StyledThumbnail = styled.img`
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+`;
+
+const HoverContainer = styled.div`
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+`;
+
+const ThumbnailContainer = styled.div`
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
+  :hover ${StyledThumbnail} {
+    opacity: 0.3;
+  }
+  :hover ${HoverContainer} {
+    opacity: 1;
+  }
+`;
+
+const StyledHoverText = styled.div`
+  font-size: 32px;
+  padding: 16px 32px;
+  color: white;
+`;
+
+const StyledHeader = styled.h1`
+  font-size: 1.2em;
+  padding-bottom: 1em;
+  font-weight: 600;
+`;
+
+const SearchResultContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.2em;
+`;
+
+const VideoContainer = styled.div`
+  height: 260px;
+`;
+
+const StyledVideoTitle = styled.h1`
   font-weight: bold;
-  width: 250px;
+  width: 280px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+`;
+
+const StyledVideoText = styled.p`
+  font-size: 0.9em;
+  color: darkgrey;
 `;
 
 const SearchExercise = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
       const allVideos = await getAllVideos();
@@ -47,37 +100,41 @@ const SearchExercise = () => {
   }, []);
   return (
     <AdminLayout>
-      <ContentContainer>
+      <StyledContentContainer>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
             setSearchedName(e.target.value);
           }}
         />
-        <StyledH1>Övningar</StyledH1>
-        <Flexbox>
+        <StyledHeader>Övningar</StyledHeader>
+        <SearchResultContainer>
           {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
             .map((videos) => (
               <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
-                <VideoItem key={videos._id}>
-                  <img src={videos.thumbnail} alt="profile pic" />
-                  <br></br>
-                  <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <br></br>
-                  Antal visningar: {videos.__v}
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                </VideoItem>
+                <VideoContainer key={videos._id}>
+                  <ThumbnailContainer>
+                    <StyledThumbnail
+                      src={videos.thumbnail}
+                      alt="Video thumbnail"
+                    />
+                    <HoverContainer>
+                      <StyledHoverText>VISA</StyledHoverText>
+                    </HoverContainer>
+                  </ThumbnailContainer>
+                  <StyledVideoTitle>{videos.videoTitle}</StyledVideoTitle>
+                  <StyledVideoText>
+                    Antal visningar: {videos.__v}
+                  </StyledVideoText>
+                </VideoContainer>
               </Link>
             ))}
-        </Flexbox>
-      </ContentContainer>
+        </SearchResultContainer>
+      </StyledContentContainer>
     </AdminLayout>
   );
 };
-
 export default SearchExercise;

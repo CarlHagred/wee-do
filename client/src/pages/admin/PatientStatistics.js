@@ -171,7 +171,7 @@ const PatientStatistics = () => {
                   <br />
                   <strong>Video: </strong>
                   <StyledLink to={`../exercise/${stat.vidId}`}>
-                    {stat.vidId}
+                    {stat.vidTitle}
                   </StyledLink>
                   <br />
                   <strong>Scans: </strong>
