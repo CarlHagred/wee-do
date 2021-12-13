@@ -38,19 +38,14 @@ const StyledDivider = styled.hr`
   border-color: #d9d9d9;
 `;
 
-const ActionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 120px;
-  justify-content: center;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  gap: 5px;
+  max-width: 640px;
+  justify-content: space-between;
+  min-height: 100px;
+  align-content: center;
 `;
 
 const Video = () => {
@@ -101,19 +96,17 @@ const Video = () => {
         </TextContainer>
       )}
 
-      <ActionContainer>
-        <ButtonContainer>
-          <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-            <Button icon="qrcode">Generera QR-kod</Button>
-          </Link>
+      <ButtonContainer>
+        <Link to={`/admin/exercise/qrpreview/${videoId}`}>
+          <Button icon="qrcode">Generera QR-kod</Button>
+        </Link>
 
-          <Link to={`/admin/search/exercise`}>
-            <Button onClick={handleEvent} icon="trash">
-              Radera
-            </Button>
-          </Link>
-        </ButtonContainer>
-      </ActionContainer>
+        <Link to={`/admin/search/exercise`}>
+          <Button onClick={handleEvent} icon="trash" outlinedTheme>
+            Radera
+          </Button>
+        </Link>
+      </ButtonContainer>
     </AdminLayout>
   );
 };
