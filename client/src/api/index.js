@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = "https://weedo-v1.herokuapp.com/api";
+const serverUrl = "http://localhost:8000/api";
 
 /* ===== Patient calls ===== */
 

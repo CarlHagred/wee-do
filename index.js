@@ -29,7 +29,7 @@ const __dirname = dirname(__filename);
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://weedo-v1.herokuapp.com",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -54,6 +54,7 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
+
 //Database connection
 const databaseConnection = async () => {
   try {
