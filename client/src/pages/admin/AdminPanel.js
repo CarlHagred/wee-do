@@ -9,7 +9,7 @@ import PanelButton from "../../components/common/PanelButton";
 import hero from "../../components/images/AdminHeroBanner.png";
 
 const StyledHero = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 40vh;
   background-image: url(${hero});
   background-position: center;
