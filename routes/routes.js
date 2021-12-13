@@ -50,7 +50,10 @@ router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
 router.post("/postscan/:name/:videoId", postScan);
-router.post("/postwatchedvideo/:name/:videoId/:active/:title", postWatchedVideo);
+router.post(
+  "/postwatchedvideo/:name/:videoId/:active/:title",
+  postWatchedVideo
+);
 router.post(
   "/postselectedexercises/:name/:selectedexercises",
   postSelectedVideos
@@ -73,8 +76,14 @@ router.post("/updateDatabase", async (req, res) => {
   UpdateDatabase(res);
 });
 
-router.post('/upload',  fileToServer(), async (req, res) => { verifyUser(req) });
-router.get('/oauth2callback?', async (req, res) => { uploadAndCallback(req, res) });
-router.post('/updateDatabase', async (req, res) => { UpdateDatabase(res) });
+router.post("/upload", fileToServer(), async (req, res) => {
+  verifyUser(req);
+});
+router.get("/oauth2callback?", async (req, res) => {
+  uploadAndCallback(req, res);
+});
+router.post("/updateDatabase", async (req, res) => {
+  UpdateDatabase(res);
+});
 
 export default router;

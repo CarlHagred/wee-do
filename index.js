@@ -7,6 +7,10 @@ import mongoose from "mongoose";
 import passport from "passport";
 import session from "express-session";
 import localStrategy from "./controllers/config/passportConfig.js";
+import * as path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 /* 
     FÖR ATT STARTA SERVER GÖR FÖLJANDE: 
     1. ligg i mappen /wee-do/server/ och skriv "npm install"
@@ -18,10 +22,9 @@ import localStrategy from "./controllers/config/passportConfig.js";
 //configuration of env file
 dotenv.config();
 
-const PORT = process.env.PORT;
-
 const app = express();
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 //middleware with passport
 app.use(express.json());
 app.use(
@@ -43,21 +46,24 @@ app.use(passport.session());
 
 app.use(express.static("public")); //osäker om nödvändig
 localStrategy(passport);
-app.use(routes);
-//app.use(videoRoutes);
+app.use("/api", routes);
 app.use(morgan("dev"));
+
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 //Database connection
-const CONNECTION_URI = process.env.CONNECTION_DB_URI;
 const databaseConnection = async () => {
   try {
-    await mongoose.connect(CONNECTION_URI, {
+    await mongoose.connect(process.env.CONNECTION_DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(PORT, () => {
-      console.log(
-        `Server upp and running, and connected to database on port: ${PORT}`
-      );
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server upp and running, and connected to database`);
     });
   } catch (error) {
     //denna console-loggen är bra om man får fel vid serverstart
@@ -65,4 +71,5 @@ const databaseConnection = async () => {
   }
 };
 databaseConnection();
+
 export default app;
