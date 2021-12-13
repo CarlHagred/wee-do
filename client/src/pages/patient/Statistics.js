@@ -58,13 +58,15 @@ const Statistics = () => {
               counter++;
             }
 
-            let amountOfTimesLeft =  stat.amountOfTimes - counter;
-            if(amountOfTimesLeft === 0){
-                day++
-                todayDate = date.setDate(date.getDate() - day)
+            //let amountOfTimesLeft =  stat.amountOfTimes - counter;
+            
+            if(todayDate === statDates){
+                //todayDate = date.setDate(date.getDate() - day)
+                //day++
                 counterStreak++
-                emptyObject.streak = counterStreak;
-                stats.push(emptyObject)
+            }else{
+                counterStreak = 0;
+    
             }
 
             console.log(day);
@@ -80,6 +82,7 @@ const Statistics = () => {
           else{
             emptyObject.vidTitle = stat.vidTitle;
             emptyObject.timesLeft = 0;
+            emptyObject.streak = counterStreak
           }
           stats.push(emptyObject);
     })
@@ -93,7 +96,7 @@ const Statistics = () => {
                         <StyledStatistics>
                             <br/>
                             <p>
-                                <strong>Video titel: </strong>{" "}
+                                <strong>Video: </strong>{" "}
                                 {stat.vidTitle}
                             </p>
                             <p>
