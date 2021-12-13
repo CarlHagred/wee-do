@@ -29,7 +29,7 @@ const __dirname = dirname(__filename);
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://weedo-v1.herokuapp.com",
     credentials: true,
   })
 );
