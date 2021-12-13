@@ -2,8 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-import WdLogo from "../images/WdLogo";
-
 const StyledFooter = styled.footer`
   display: flex;
   flex-wrap: wrap;
@@ -14,12 +12,8 @@ const StyledFooter = styled.footer`
   padding: 20px;
 
   @media (min-width: 768px) {
-    padding: 20px 80px 30px 80px;
+    padding: 20px 40px;
   }
-`;
-
-const TopContainer = styled.div`
-  flex: 1;
 `;
 
 const BotttomContainer = styled.div`
@@ -27,14 +21,12 @@ const BotttomContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 40px;
-  @media (min-width: 400px) {
-  }
 `;
 
 const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 280px;
+  max-width: 300px;
 `;
 
 const StyledParagraph = styled.p`
@@ -71,15 +63,11 @@ const NavItem = styled(NavLink)`
 const Footer = () => {
   return (
     <StyledFooter>
-      <TopContainer>
-        <WdLogo width="128px" height="45px" fill="white" alt="WeeDo logotyp" />
-      </TopContainer>
-
       <BotttomContainer>
         <AboutContainer>
           <StyledParagraph>
-            WeeDo är ett samarbete mellan sjukgymnaster på Mobilt Sjukhus Team
-            och studenter på Malmö Universitet.
+            WeeDo är utvecklat av studenter vid Malmö Universitet i samarbete
+            med sjukgymnaster från Mobilt Sjukhus Team.
           </StyledParagraph>
         </AboutContainer>
         <NavMenu last="true">
