@@ -137,7 +137,6 @@ const WatchExercise = () => {
 
   const handleEvent = async () => {
     const handleClick = await postWatchedVideo(patientName, videoId, active, title);
-    console.log(title);
     if (handleClick.data === "Success") {
       setExerciseDone(true);
 
