@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { postVideo } from "../../api/index.js";
 
 import UserInput from "../common/UserInput";
@@ -13,22 +12,20 @@ const UploadVideo = () => {
         file: null,
     });
 
-    const handleChange = (event) => {
-        const inputValue =
-            event.target.name === "file"
-                ? event.target.files[0]
-                : event.target.value;
-        setForm({
-            ...form,
-            [event.target.name]: inputValue,
-        });
-    };
+  const handleChange = (event) => {
+    const inputValue =
+      event.target.name === "file" ? event.target.files[0] : event.target.value;
+    setForm({
+      ...form,
+      [event.target.name]: inputValue,
+    });
+  };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        const videoData = new FormData();
-        videoData.enctype = "multipart/form-data";
+    const videoData = new FormData();
+    videoData.enctype = "multipart/form-data";
 
         videoData.append("videoFile", form.file);
         videoData.append("title", form.title);
@@ -47,12 +44,14 @@ const UploadVideo = () => {
                         type="text"
                         name="title"
                         autoComplete="off"
+                        required
                         placeholder="Övningstitel"
                     />
                     <TextArea
                         onChange={handleChange}
                         type="text"
                         name="description"
+                        required
                         autoComplete="off"
                     />
                     <input
@@ -61,14 +60,16 @@ const UploadVideo = () => {
                         type="file"
                         name="file"
                         id="filechoose"
+                        required
                         placeholder="Add Video File"
                     />
                     <br></br>
                     <br></br>
+                        
                     <Button type="submit">Ladda upp ny övning</Button>
                 </div>
             </form>
         </div>
-    );
+  );
 };
 export default UploadVideo;

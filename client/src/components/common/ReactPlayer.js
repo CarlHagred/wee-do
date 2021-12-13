@@ -1,35 +1,38 @@
-import React from "react";
-import ReactPlayer from "react-player";
-import Styled from "styled-components"; 
+import styled from "styled-components";
+import ReactPlayer from "react-player/youtube";
 
+const StyledReactPlayer = styled(ReactPlayer)`
+  aspect-ratio: 16/9;
+  max-width: 640px;
+  margin: 0 auto;
+  @supports not (aspect-ratio: 16/9) {
+    iframe {
+      min-height: 320px;
+    }
+  }
+  @media (min-width: 650px) {
+    margin: 3em auto 0 auto;
+  }
+`;
 
-const Player = (url, className) => {
-    <ReactPlayer 
-        url={url}
-        className={className}
-        playing
-        width="100%"
-        height="100%"
-        controls={false}
-        muted
+const ReactPlayerComponent = (playerProps) => {
+  const playerVars = {
+    youtube: {
+      playerVars: { controls: 1, modestbranding: 1, rel: 0 },
+    },
+  };
+
+  const { url, playing, onEnded } = playerProps;
+
+  return (
+    <StyledReactPlayer
+      url={url}
+      width="100%"
+      height="100%"
+      playing={playing}
+      config={playerVars}
+      onEnded={onEnded}
     />
+  );
 };
-
-const AbsolutelyPositionedPlayer = Styled(Player)`
-    position: absolute;
-    top: 0;
-    left: 0;
-`;
-const RelativePositionWrapper = Styled.div`
-  position: relative;
-  padding-top: 56.25%;
-`;
-const ResponsivePlayer = () => {
-    return (
-        <RelativePositionWrapper>
-            <AbsolutelyPositionedPlayer />
-        </RelativePositionWrapper>
-    );
-}
-export default ResponsivePlayer;
-
+export default ReactPlayerComponent;

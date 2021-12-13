@@ -1,31 +1,32 @@
 import styled from "styled-components";
 
 const StyledInput = styled.input`
-    width: 100%;
-    box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 
-    border: 2px solid #ccc;
-    border-radius: 4px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
 
-    font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
 
-    padding: 8px 16px;
-    margin-bottom: 10px;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+  text-align: left;
 `;
 
 const UserInput = (props) => {
-    return (
-        <StyledInput
-            id="input"
-            type="text"
-            placeholder="Användarnamn.."
-            onChange={props.onChange}
-            {...props}
-        />
-    );
+  return (
+    <StyledInput
+      id="input"
+      type="text"
+      placeholder="Användarnamn.."
+      onChange={props.onChange}
+      {...props}
+    />
+  );
 };
 
 export default UserInput;

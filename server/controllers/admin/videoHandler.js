@@ -14,9 +14,7 @@ import Videos from "../../models/videos.js";
 
 import dotenv from "dotenv";
 
-import axios from "axios";
-
-
+dotenv.config();
 
 const service = google.youtube('v3');
 
@@ -60,26 +58,33 @@ export const redirectToLogin = async (oauth2Client, { filename, title, descripti
     open(authUrl);
 };
 
-export const uploadVideo = async (auth, { title, description, file }) => {
-
-    await service.videos.insert({
-        auth: auth,
-        part: 'snippet,contentDetails,status',
-        resource: {
-            snippet: {
-                title,
-                description,
+export const uploadVideo = async (auth, { title, description, file }, response) => {
+    try {
+        await service.videos.insert({
+            auth: auth,
+            part: 'snippet,contentDetails,status',
+            resource: {
+                snippet: {
+                    title,
+                    description,
+                },
+                status: {
+                    privacyStatus: 'private'
+                }
             },
-            status: {
-                privacyStatus: 'private'
+            media: {
+                body: file
             }
-        },
-        media: {
-            body: file
-        }
-    });
-    // Update the mongo after each upload.
-    //UpdateDatabase(req, res); 
+        });
+            // Update the mongo after each upload.
+            //UpdateDatabase(req, res);    
+    } catch (error) {
+        process.on('unhandledRejection', (reason, promise) => {
+            // do something
+        });
+        response.redirect("http://localhost:3000/error");
+    }
+    
 }
 
 
@@ -97,9 +102,7 @@ export const fileToServer = () => {
     const uploader =  multer({ storage });
 
     return uploader.single('videoFile'); 
-
 } 
-
 
 export const verifyUser = async (request) => {
     const { file } = request;    
@@ -111,15 +114,13 @@ export const verifyUser = async (request) => {
         const { title, description } = request.body; 
         
         const oauth = authorize();
-
+        
         await redirectToLogin(oauth, { filename, title, description });
     }
 }
 
 export const uploadAndCallback = async (request, response) => {
-
     
-
     const { code, state } = request.query;
 
     const { filename, title, description } = JSON.parse(state); 
@@ -134,43 +135,36 @@ export const uploadAndCallback = async (request, response) => {
         title,
         description,
         file: fs.createReadStream(`videos/${filename}`)
-    })
+    }, response)
 
-    response.redirect("http://localhost:3000/success");
+    response.redirect("http://localhost:3000/success");  
+
+    
 }
-
-
-
-
-
-dotenv.config();
-
-const url = process.env.FetchVidUrl;
 
 export const UpdateDatabase = async (req, res) => {
 
     try 
     {
-        const data = await axios.get(url);
-
-        for (let i in data.data.items) 
+        service.playlistItems.list({part: "snippet", playlistId: process.env.playlistId, key: process.env.API_KEY, maxResults: 50}).then(res => 
         {
-            const video = new Videos(
+             
+            for(let i in res.data.items) 
+            {
+                let vid = res.data.items[i].snippet.resourceId.videoId;
+                let url = `http://img.youtube.com/vi/${vid}/mqdefault.jpg`;
+                const video = new Videos({
+                    videoId: vid, 
+                    videoTitle: res.data.items[i].snippet.title, 
+                    description: res.data.items[i].snippet.description,
+                    thumbnail: url
+                });
+                Videos.findOne({ videoId: video.videoId }, function (err, existingVideo) 
                 {
-                    videoId: data.data.items[i].contentDetails.videoId,
-                    videoTitle: data.data.items[i].snippet.title,
-                    description: data.data.items[i].snippet.description,
-                    thumbnail: data.data.items[i].snippet.thumbnails.high.url,
-                }
-            );
-
-            Videos.findOne({ videoId: video.videoId }, function (err, existingVideo) 
-                {
-                    if (existingVideo == null) video.save();
-                }
-            );
-        }
-        console.log('updated db from client side'); 
+                    if(existingVideo === null) video.save(); 
+                });
+            }
+        })   
     } catch (error) 
     {
         res.send('Error occured while updating the db due to: ' + error.message);
