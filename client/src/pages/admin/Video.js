@@ -43,9 +43,10 @@ const ButtonContainer = styled.div`
   flex-wrap: wrap;
   margin: 0 auto;
   max-width: 640px;
-  justify-content: space-between;
-  min-height: 120px;
+  justify-content: space-around;
+  min-height: 150px;
   align-content: center;
+  gap: 10px;
 `;
 
 const Video = () => {
