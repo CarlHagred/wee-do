@@ -58,6 +58,16 @@ const Statistics = () => {
               counter++;
             }
 
+            const checkOncePerDay = () => {
+                let executed = false;
+                return () => {
+                    if(!executed){
+                        executed = true;
+                    }
+                }
+
+            }
+
             //let amountOfTimesLeft =  stat.amountOfTimes - counter;
             
             if(todayDate === statDates){
