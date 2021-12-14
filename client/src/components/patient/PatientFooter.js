@@ -16,7 +16,7 @@ const StyledFooter = styled.footer`
   }
 `;
 
-const BotttomContainer = styled.div`
+const FooterContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -63,7 +63,7 @@ const NavItem = styled(NavLink)`
 const Footer = () => {
   return (
     <StyledFooter>
-      <BotttomContainer>
+      <FooterContainer>
         <AboutContainer>
           <StyledParagraph>
             WeeDo är utvecklat av studenter vid Malmö Universitet i samarbete
@@ -78,7 +78,7 @@ const Footer = () => {
             <NavItem to="/about">Om WeeDo</NavItem>
           </NavContainer>
         </NavMenu>
-      </BotttomContainer>
+      </FooterContainer>
     </StyledFooter>
   );
 };
