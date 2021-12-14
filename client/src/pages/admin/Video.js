@@ -44,7 +44,7 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
   justify-content: space-between;
-  min-height: 100px;
+  min-height: 120px;
   align-content: center;
 `;
 
