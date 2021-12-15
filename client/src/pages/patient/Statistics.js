@@ -48,38 +48,47 @@ const Statistics = () => {
         let emptyObject = {};
         let counter = 0;
         let counterStreak = 0;
-        let day = 0;
 
         for (let i = 0; i < stat.watchedTime.length; i++) {
             let todayDate = date.toISOString().substring(0, 10);
-            const statDates = stat.watchedTime[i].substring(0,10);
+            const statDates = stat.watchedTime[i].substring(0, 10);
 
             if(todayDate === statDates){
               counter++;
             }
-
-            const checkOncePerDay = () => {
-                let executed = false;
-                return () => {
-                    if(!executed){
-                        executed = true;
-                    }
-                }
-
-            }
-
             //let amountOfTimesLeft =  stat.amountOfTimes - counter;
+            let startDate = new Date(todayDate);
+            let endDate =  new Date(statDates);
+            console.log(startDate);
+            console.log(endDate);
+
+            console.log(startDate.getHours());
+            console.log(endDate.getHours());
+
+            console.log(startDate.getTime() - endDate.getTime());
+            let ms = startDate.getTime() - endDate.getTime()
             
-            if(todayDate === statDates){
-                //todayDate = date.setDate(date.getDate() - day)
-                //day++
-                counterStreak++
+            let hours = (ms / (1000 * 60 * 60));
+            console.log(hours);
+
+
+
+            // Check if time between todayDate and statDates hasn't surpassed 24 hours
+            //if(startDate - endDate < 24)
+            if(hours < 24){
+
+
+                // If counter is more than 1 and todayDate 
+                if(counterStreak < 1 && todayDate ){
+                    // Add to counter
+                    counterStreak++
+                }
             }else{
+                // If not the same day or haven't done the exerice during the 24 hours
+                // Set counter too 0 again
                 counterStreak = 0;
     
             }
-
-            console.log(day);
 
           }
           let amountOfTimesLeft =  stat.amountOfTimes - counter;
