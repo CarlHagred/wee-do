@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import moment from 'moment';
+import Moment from 'react-moment';
 
 import {
   deletePatientIndex,
@@ -138,6 +142,11 @@ const PatientStatistics = () => {
     window.location = `/admin/select/${patient.name}`;
   };
 
+  const [dateState, setDateState] = useState(new Date());
+
+  const changeDate = (e) => {
+    setDateState(e)};
+
   return (
     <AdminLayout>
       <ContentContainer>
@@ -191,6 +200,11 @@ const PatientStatistics = () => {
             ))}
           </>
         </StyledContainer>
+        <Calendar 
+      value={dateState}
+      onChange={changeDate}
+      />
+    <p>Valt datum är <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
         <StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>
