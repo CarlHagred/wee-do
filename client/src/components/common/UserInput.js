@@ -17,7 +17,24 @@ const StyledInput = styled.input`
   text-align: left;
 `;
 
-const UserInput = (props) => {
+const StyledInputPatien = styled(StyledInput)`
+  height: 4em;
+  font-size: 1.7em;
+`;
+
+export const PatientInput = (props) => {
+  return (
+    <StyledInputPatien
+      id="input"
+      type="text"
+      placeholder="Användarnamn..."
+      onChange={props.onChange}
+      {...props}
+    />
+  );
+};
+
+export const UserInput = (props) => {
   return (
     <StyledInput
       id="input"
@@ -29,4 +46,4 @@ const UserInput = (props) => {
   );
 };
 
-export default UserInput;
+export default UserInput + PatientInput;
