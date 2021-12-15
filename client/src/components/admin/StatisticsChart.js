@@ -36,7 +36,7 @@ const StatisticsChart = (props) => {
 
   props.patientStatistics.forEach((entry) => {
     const dataset = {};
-    dataset.label = entry.vidId;
+    dataset.label = entry.vidTitle;
     dataset.fill = false;
     dataset.tension = 0.2;
     let randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -80,3 +80,4 @@ const StatisticsChart = (props) => {
 };
 
 export default StatisticsChart;
+
