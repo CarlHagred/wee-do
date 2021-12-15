@@ -24,7 +24,7 @@ const LoginPatient = () => {
   const handleSubmit = () => {
     console.log(`försöker logga in med ${loginName}`);
     const postData = {
-      name: loginName.trim(),
+      name: loginName.trim().toLowerCase(),
     };
 
     loginPatient(postData);
