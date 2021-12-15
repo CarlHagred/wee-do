@@ -87,8 +87,8 @@ const PatientStatistics = () => {
   const customDeletePatient = async () => {
     const conf = await Confirm(
       "Är du säker på att du vill radera " + name + "?",
+      "Radera patient",
       "Radera",
-      "OK",
       "Avbryt"
     );
     if (conf) {
