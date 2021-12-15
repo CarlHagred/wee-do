@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { Confirm } from "react-st-modal";
 
 import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
 
@@ -61,7 +62,20 @@ const Video = () => {
     fetchData();
   }, [videos]);
 
-  const handleEvent = () => {
+  const customDeleteVideo = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill radera denna video?",
+      "Radera video",
+      "Radera",
+      "Avbryt"
+    );
+    if (conf) {
+      deleteVideo();
+      window.location = "/admin/search/exercise";
+    }
+  };
+
+  const deleteVideo = () => {
     deleteVideoIndex(videoId);
   };
 
@@ -101,12 +115,9 @@ const Video = () => {
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
           <Button icon="qrcode">Generera QR-kod</Button>
         </Link>
-
-        <Link to={`/admin/search/exercise`}>
-          <Button onClick={handleEvent} icon="trash" outlinedTheme>
-            Radera
-          </Button>
-        </Link>
+        <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
+          Radera
+        </Button>
       </ButtonContainer>
     </AdminLayout>
   );
