@@ -59,7 +59,7 @@ const Help = () => {
     try {
       const currentActivity = await getAllActivePatients();
       if (!currentActivity.data) {
-        throw new Error(`fucking fel brur ${currentActivity.status}`);
+        throw new Error(`Error: ${currentActivity.status}`);
       }
       if (currentActivity) {
         setActive(currentActivity.data[0].name);
@@ -71,7 +71,7 @@ const Help = () => {
     try {
       const currentPatient = await getSession();
       if (!currentPatient) {
-        throw new Error(`fucking fel brur ${currentPatient.status}`);
+        throw new Error(`Error: ${currentPatient.status}`);
       }
       if (currentPatient) {
         setPatient(currentPatient.data.name);
