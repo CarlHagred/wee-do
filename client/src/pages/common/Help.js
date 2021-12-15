@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
+import Button from "../../components/common/Button"
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -59,19 +60,19 @@ const Help = () => {
     try {
       const currentActivity = await getAllActivePatients();
       if (!currentActivity.data) {
-        throw new Error(`fucking fel brur ${currentActivity.status}`);
+        throw new Error(`Error: ${currentActivity.status}`);
       }
       if (currentActivity) {
         setActive(currentActivity.data[0].name);
       }
     } catch (e) {}
   };
-
+ 
   const getPatient = async () => {
     try {
       const currentPatient = await getSession();
       if (!currentPatient) {
-        throw new Error(`fucking fel brur ${currentPatient.status}`);
+        throw new Error(`Error ${currentPatient.status}`);
       }
       if (currentPatient) {
         setPatient(currentPatient.data.name);
@@ -108,6 +109,11 @@ const Help = () => {
       setOpen3(false);
     }
   };
+
+  
+  const goBack = () => {
+    window.history.back()
+  }
 
   return (
     <PatientLayout>
@@ -181,6 +187,7 @@ const Help = () => {
             </>
           ) : null}
         </StyledDiv>
+        <Button onClick={goBack}>Tillbaka</Button>
       </StyledContainer>
     </PatientLayout>
   );
