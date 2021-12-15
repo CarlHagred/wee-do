@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { Confirm } from "react-st-modal";
 
 import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
 
