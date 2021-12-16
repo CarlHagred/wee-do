@@ -56,9 +56,18 @@ const Statistics = () => {
             if(todayDate === statDates){
               counter++;
             }
-            //let amountOfTimesLeft =  stat.amountOfTimes - counter;
-            let startDate = new Date(todayDate);
-            let endDate =  new Date(statDates);
+
+            // Date variables 
+            let startDate = parseInt(date);
+            let endDate =  statDates;
+
+            // Remove is ISO string formating to integer
+            let noStringStatDates = endDate.replace('', '');
+            let parsedStatDates = parseInt(noStringStatDates);
+
+            console.log(startDate);
+            console.log(parsedStatDates);
+
             console.log(startDate);
             console.log(endDate);
 
@@ -76,12 +85,12 @@ const Statistics = () => {
             // Check if time between todayDate and statDates hasn't surpassed 24 hours
             //if(startDate - endDate < 24)
             if(hours < 24){
-
-
-                // If counter is more than 1 and todayDate 
+                // If counter is more than 1 today 
                 if(counterStreak < 1 && todayDate ){
                     // Add to counter
                     counterStreak++
+                }else{
+                    break; // FUNGERAR?
                 }
             }else{
                 // If not the same day or haven't done the exerice during the 24 hours
