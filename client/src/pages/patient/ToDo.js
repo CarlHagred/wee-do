@@ -3,7 +3,7 @@ import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout"; 
 
 
-const MyVideos = () => { 
+const ToDo = () => { 
     const [myVideos, setMyVideos] = useState([]); 
     const [isError, setIsError] = useState(false); 
     const [isLoading, setIsLoading] = useState(true); 
@@ -25,7 +25,6 @@ const MyVideos = () => {
     }, []); 
 
     const videos = JSON.stringify(myVideos.data);
-    console.log(myVideos.data); 
     
     return (
         <PatientLayout>
@@ -37,4 +36,4 @@ const MyVideos = () => {
     );
 }
  
-export default MyVideos;
+export default ToDo;

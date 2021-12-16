@@ -117,7 +117,7 @@ export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 export const getVideoUrl = (params) => axios.get(`${serverUrl}/getvideourl`, { params });
 
 export const getMyVideos = async (params) => {
-  return axios.get(`${serverUrl}/getmyvideos`, { params });  
+  return axios.get(`${serverUrl}/getmyvideostodo`, { params });  
 }
 
 export const postScan = (name, videoId) =>

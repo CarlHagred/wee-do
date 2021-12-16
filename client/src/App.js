@@ -10,7 +10,7 @@ import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientPanel from "./pages/patient/PatientPanel";
 import QrScanner from "./pages/patient/QrScanner";
 import Statistics from "./pages/patient/Statistics";
-import MyVideos from "./pages/patient/MyVideos";
+import ToDo from "./pages/patient/ToDo";
 import PatientHelp from "./pages/patient/PatientHelp";
 import PatientAbout from "./pages/patient/PatientAbout";
 
@@ -50,7 +50,7 @@ function App() {
         <ProtectedRoutePatient exact path="/activitypanel" component={PatientPanel}/>
         <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <ProtectedRoutePatient exact path="/statistics" component={Statistics}/>
-        <ProtectedRoutePatient exact path="/myvideos" component={MyVideos}/>
+        <ProtectedRoutePatient exact path="/todo" component={ToDo}/>
         <Route exact path="/admin" component={AdminLogin} />
         <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
 

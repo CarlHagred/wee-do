@@ -77,8 +77,8 @@ const PatientPanel = () => {
             <PanelButton to="/statistics" icon="statistics" size="44">
               Se statistik
             </PanelButton>
-            <PanelButton to="/myvideos" icon="exercising-films-icon" size="44">
-              Mina övningar
+            <PanelButton to="/todo" icon="exercising-films-icon" size="44">
+              Övningar att göra
             </PanelButton>
           </PanelButtonContainer>
         </HeroLeft>
