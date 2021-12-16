@@ -194,8 +194,8 @@ const Help = () => {
           ) : null}
         </StyledDiv>
         {isCookie === null ? 
-        <StyledButton>
-          <Button id="button" onClick={goBack}>Tillbaka</Button>
+        <StyledButton id="button" onClick={goBack}>
+          Tillbaka
         </StyledButton>
         : null }
       </StyledContainer>

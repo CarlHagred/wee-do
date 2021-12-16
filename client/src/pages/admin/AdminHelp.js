@@ -47,11 +47,6 @@ const StyledDiv = styled.div`
   margin: 0% auto 1% auto;
 `;
 
-const StyledButton = styled(Button)`
-  margin: auto;
-  margin-top: 8%;
-`;
-
 const Help = () => {
   const [patient, setPatient] = useState("");
   const [active, setActive] = useState([]);
@@ -112,10 +107,6 @@ const Help = () => {
       setOpen3(false);
     }
   };
-  
-  const goBack = () => {
-    window.history.back()
-  }
 
   return (
     <AdminLayout>
@@ -171,9 +162,6 @@ const Help = () => {
             </>
           ) : null}
         </StyledDiv>
-        <StyledButton>
-          <Button id="button" onClick={goBack}>Tillbaka</Button>
-        </StyledButton>
       </StyledContainer>
     </AdminLayout>
   );
