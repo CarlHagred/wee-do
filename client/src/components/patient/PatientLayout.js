@@ -16,10 +16,13 @@ const PageContainer = styled.div`
 `;
 
 const Layout = ({ children }) => {
+
+  let isCookie = localStorage.getItem("isAuthenticatedPatient");
+  
   return (
     <PageWrapper>
       <ThemeProvider theme={PatientTheme}>
-        <PatientNavbar />
+        {isCookie !== null ? <PatientNavbar /> : null }
         <PageContainer>{children}</PageContainer>
         <PatientFooter />
       </ThemeProvider>
