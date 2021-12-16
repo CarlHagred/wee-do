@@ -187,19 +187,23 @@ export const getVideoUrl = async (req, res) => {
 };
 
 export const getMyVideos = async (req, res) => {
+
   const name = req.query.name;
 
-  console.log('name in server: ', name); 
   if(name) {
     const patient = await Patient.findOne({name: name}); 
+
     if(!patient) {
       return res.status(403).json({data: 'No videos due to null patient'}); 
-    } 
+    }; 
     
     const data = patient.statistics.filter(video => {
       return video.amountOfTimes; 
-    })
+    });
+
     return res.json({data: data})
-  }
+  };
+
   return res.status(403).json({data: 'No videos due to null patient'});
+
 };
