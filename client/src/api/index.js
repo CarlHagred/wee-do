@@ -33,9 +33,9 @@ export const getAllInactivePatients = () =>
 
 /* ===== Session calls ===== */
 
-export const getSession = () =>
-  axios.get(`${serverUrl}/getsession`, { withCredentials: true });
-
+export const getSession = () => {
+  return axios.get(`${serverUrl}/getsession`, { withCredentials: true });
+}
 export const getAdminSession = () =>
   axios.get(`${serverUrl}/getadminsession`, { withCredentials: true });
 
@@ -117,7 +117,7 @@ export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 export const getVideoUrl = (params) => axios.get(`${serverUrl}/getvideourl`, { params });
 
 export const getMyVideos = async (params) => {
- await axios.get(`${serverUrl}/getmyvideos`, { params });
+  return axios.get(`${serverUrl}/getmyvideos`, { params });  
 }
 
 export const postScan = (name, videoId) =>

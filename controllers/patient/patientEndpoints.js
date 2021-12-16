@@ -24,7 +24,7 @@ export const loginPatient = (req, res, next) => {
 
 //Hämtar den pågående sessionen
 export const getSession =  (req, res) => {
-   res.json(req.user);
+  res.json(req.user); 
 };
 
 //Förstör den pågående sessionen
@@ -186,10 +186,8 @@ export const getVideoUrl = async (req, res) => {
   }
 };
 
-export const getMyVideos =  (req, res) => {
+export const getMyVideos = (req, res) => {
   const name = req.query.name;
   console.log(name);  
-  res.json({message: "Salam Alykum, here are your videos"}); 
+  res.json({message: "Salam Alykum, here are your videos mr: ", name}); 
 };
- 
-
