@@ -2,30 +2,34 @@ import { useEffect, useState } from "react";
 import { getSession, getMyVideos } from "../../api/index";
 
 const MyVideos = () => {
-    const [patientName, SetPatientName] = useState(""); 
-    //const [myVideos, setMyVideos] = useState([]); 
+    //const [patientName, SetPatientName] = useState(""); 
+    const [myVideos, setMyVideos] = useState([]); 
+    const [isError, setIsError] = useState(false); 
+    const [isLoading, setIsLoading] = useState(true); 
+
 
     useEffect(() => {
         const fetchData = async () => {        
-            await getSession().then(res => {
-                SetPatientName(res.data.name);
-            });
+           try{
+                const data = await getSession();
+                const name = data.data.name; 
+                const params = { name: name};
+                const videoData = await getMyVideos(params); 
+                setMyVideos(videoData); 
+           }catch {
+               setIsError(true); 
+           }
+           setIsLoading(false); 
         }
         fetchData();   
     }, []); 
 
-    const handleClick = () => {
-        console.log('name: ', patientName); 
-        const params = { name: patientName};
-        getMyVideos(params).then(res => {
-            console.log('videos: ', res.data); 
-        }); 
-    };
-
-
     return (
         <div>
-            <button onClick={() => handleClick()}>Mina övningar</button>
+            <h1>Mina övningar</h1>
+            <div>Is Loading: {isLoading.toString()}</div>
+            <div>{JSON.stringify(myVideos)}</div>
+            <div>Is Error: {isError.toString()}</div>
         </div>
     );
 }
