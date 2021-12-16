@@ -129,7 +129,7 @@ const Help = () => {
           {open1 === true ? (
             <StyledP>
               Om du har tappat bort ditt användarnamn måste du
-              komma i kontakt med Emil.
+              komma i kontakt med Sue.
             </StyledP>
           ) : null}
         </StyledDiv>
