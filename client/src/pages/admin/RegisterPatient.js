@@ -54,7 +54,7 @@ const RegisterPatient = () => {
 
   const routeChange = () => {
     
-    let path = "http://localhost:3000/admin/statistics/" + newPatient
+    let path = "http://localhost:3000/admin/select/" + newPatient
     window.location = path
   }
   
