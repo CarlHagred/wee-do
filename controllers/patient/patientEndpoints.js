@@ -192,8 +192,6 @@ export const getMyVideos = async (req, res) => {
   console.log('name in server: ', name); 
   if(name) {
     const patient = await Patient.findOne({name: name}); 
-   // console.log(patient);
-   // console.log(patient.statistics); 
     if(!patient) {
       return res.status(403).json({data: 'No videos due to null patient'}); 
     } 
