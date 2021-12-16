@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getSession, getMyVideos } from "../../api/index";
+import PatientLayout from "../../components/patient/PatientLayout"; 
 
-const MyVideos = () => {
-    //const [patientName, SetPatientName] = useState(""); 
+
+const MyVideos = () => { 
     const [myVideos, setMyVideos] = useState([]); 
     const [isError, setIsError] = useState(false); 
     const [isLoading, setIsLoading] = useState(true); 
-
 
     useEffect(() => {
         const fetchData = async () => {        
@@ -24,13 +24,16 @@ const MyVideos = () => {
         fetchData();   
     }, []); 
 
+    const videos = JSON.stringify(myVideos.data);
+    console.log(myVideos.data); 
+    
     return (
-        <div>
+        <PatientLayout>
             <h1>Mina övningar</h1>
             <div>Is Loading: {isLoading.toString()}</div>
-            <div>{JSON.stringify(myVideos)}</div>
+            <div>{videos}</div>
             <div>Is Error: {isError.toString()}</div>
-        </div>
+        </PatientLayout>
     );
 }
  
