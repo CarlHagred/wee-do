@@ -114,8 +114,11 @@ export const logoutAdmin = () => {
 
 export const getAllVideos = () => axios.get(`${serverUrl}/getvideos`);
 
-export const getVideoUrl = (params) =>
-  axios.get(`${serverUrl}/getvideourl`, { params });
+export const getVideoUrl = (params) => axios.get(`${serverUrl}/getvideourl`, { params });
+
+export const getMyVideos = async (params) => {
+ await axios.get(`${serverUrl}/getmyvideos`, { params });
+}
 
 export const postScan = (name, videoId) =>
   axios.post(`${serverUrl}/postscan/${name}/${videoId}`);

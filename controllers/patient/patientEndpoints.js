@@ -1,4 +1,5 @@
 import Patient from "../../models/patient.js";
+import Videos from "../../models/videos.js";
 
 import passport from "passport";
 import { loginAdmin } from "../admin/adminLogin.js";
@@ -22,8 +23,8 @@ export const loginPatient = (req, res, next) => {
 };
 
 //Hämtar den pågående sessionen
-export const getSession = (req, res) => {
-  res.json(req.user);
+export const getSession =  (req, res) => {
+   res.json(req.user);
 };
 
 //Förstör den pågående sessionen
@@ -168,8 +169,6 @@ export const setPatientActive = async (req, res) => {
   );
 };
 
-import Videos from "../../models/videos.js";
-
 export const getVideoUrl = async (req, res) => {
   try {
     const id = req.query.id;
@@ -186,3 +185,11 @@ export const getVideoUrl = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getMyVideos =  (req, res) => {
+  const name = req.query.name;
+  console.log(name);  
+  res.json({message: "Salam Alykum, here are your videos"}); 
+};
+ 
+

@@ -183,7 +183,7 @@ const Navbar = () => {
 
           <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
           <NavbarItem to="/statistics">Se statistik</NavbarItem>
-
+          <NavbarItem to="/myvideos">Mina övningar</NavbarItem>
           <PatientName>{patient.name}</PatientName>
 
           <NavbarItemLogout
