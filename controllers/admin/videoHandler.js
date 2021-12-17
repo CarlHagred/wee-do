@@ -6,8 +6,6 @@ import multer from "multer"
 
 import { v4 as uuid } from "uuid";
 
-import { readFile } from "fs/promises"; 
-
 import fs from "fs";
 
 import Videos from "../../models/videos.js";
@@ -20,25 +18,13 @@ const service = google.youtube('v3');
 
 const OAuth2 = google.auth.OAuth2;
 
-
-/**
- * @type {{
- *  web: {
- client_secret: string;
- client_id: string;
- redirect_uris: [string];
-*  }
-* }}
-*/
-const credentials = JSON.parse((await readFile('../server/credentials.json')).toString());
-
 export const authorize = () => {
     
-    const clientSecret = credentials.web.client_secret;
+    const clientSecret = process.env.client_secret;
     
-    const clientId = credentials.web.client_id;
+    const clientId = process.env.client_id;
     
-    const redirectUrl = credentials.web.redirect_uris[0];
+    const redirectUrl = process.env.redirect_uris;
     
     const oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
 
@@ -76,17 +62,14 @@ export const uploadVideo = async (auth, { title, description, file }, response) 
                 body: file
             }
         });
-            // Update the mongo after each upload.
-            //UpdateDatabase(req, res);    
+              
     } catch (error) {
         process.on('unhandledRejection', (reason, promise) => {
             // do something
         });
         response.redirect("http://localhost:3000/error");
     }
-    
 }
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -138,7 +121,6 @@ export const uploadAndCallback = async (request, response) => {
     }, response)
 
     response.redirect("http://localhost:3000/success");  
-
     
 }
 

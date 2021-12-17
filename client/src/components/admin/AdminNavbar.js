@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 
-import PatientTheme from "../../themes/PatientTheme";
+import AdminTheme from "../../themes/AdminTheme";
+
 import WdLogo from "../images/WdLogo";
 
 import Icon from "../common/Icons";
-import { customDialogPatient } from "../common/Confirmation";
-
-import { getSession } from "../../api";
+import { customDialogAdmin } from "../common/Confirmation";
 
 const StyledIcon = styled(Icon)`
   margin-right: 10px;
@@ -47,25 +46,7 @@ const NavbarItem = styled(NavLink)`
   @media (max-width: 768px) {
     display: none;
   }
-`;
-
-const PatientName = styled.div`
-  display: flex;
-  align-items: center;
-  color: white;
-  height: 100%;
-  font-size: 1em;
-  margin-left: auto;
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: right;
-    margin-right: 10px;
-    font-size: 1.2em;
-  }
-
-  @media (max-width: 410px) {
-    margin-right: 2%;
-  }
+  ${(p) => p.last && `margin-left: auto`}
 `;
 
 const NavbarItemLogout = styled.div`
@@ -75,7 +56,6 @@ const NavbarItemLogout = styled.div`
   color: white;
   height: 100%;
   font-size: 1em;
-  ${(p) => p.last && `margin-left: 10px`};
   &:hover,
   &.active {
     background-color: ${(props) => props.theme.palette.hover};
@@ -83,6 +63,7 @@ const NavbarItemLogout = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+  ${(p) => p.last && `margin-left: auto`}
 `;
 
 const NavbarItemBurger = styled(NavLink)`
@@ -113,7 +94,7 @@ const NavBarItemBurgerLogout = styled.div`
 const LogOut = styled(NavBarItemBurgerLogout)`
   justify-content: center;
   font-size: 1.3em;
-  background-color: ${(props) => props.theme.palette.hamburger};
+  background: #005999;
 `;
 
 const NavbarBurger = styled.button`
@@ -137,11 +118,6 @@ const NavbarLogo = styled(Link)`
     flex: 1;
     justify-content: center;
     padding: 0 70px 0 0;
-    margin-left: 70px;
-  }
-  @media (max-width: 410px) {
-    margin: 0;
-    padding: 0;
   }
 `;
 
@@ -149,46 +125,36 @@ const StyledDivider = styled.hr`
   align-content: center;
   width: 90%;
   margin: 0 auto;
-  border: 1px solid;
-  border-color: ${(props) => props.theme.palette.hamburger};
+  border: 1px solid #005999; ;
 `;
 
 const Navbar = () => {
-  /* === PATIENT SESSION === */
-  const [patient, setPatient] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedPatientSession = await getSession();
-      setPatient(fetchedPatientSession.data);
-    };
-    fetchData();
-  }, []);
-
-  /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
-  const url = "http://localhost:3000/activitypanel";
+  const url = "http://localhost:3000/adminpanel";
 
   if (window.location.href !== url) {
     return (
       <>
-        <NavbarMenu theme={PatientTheme}>
+        <NavbarMenu theme={AdminTheme}>
           <NavbarBurger>
             <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
           </NavbarBurger>
 
-          <NavbarLogo to="/activitypanel">
+          <NavbarLogo to="/adminpanel">
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
-
-          <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
-          <NavbarItem to="/statistics">Se statistik</NavbarItem>
-
-          <PatientName>{patient.name}</PatientName>
-
+          <NavbarItem to="/admin/register/patient">
+            Registrera Patient
+          </NavbarItem>
+          <NavbarItem to="/admin/search/patient">Sök Patient</NavbarItem>
+          <NavbarItem to="/admin/register/exercise">
+            Ladda upp övning
+          </NavbarItem>
+          <NavbarItem to="/admin/search/exercise">Sök övning</NavbarItem>
           <NavbarItemLogout
             isActive={() => false}
-            onClick={customDialogPatient}
+            onClick={customDialogAdmin}
             last="true"
           >
             Logga ut
@@ -196,25 +162,25 @@ const Navbar = () => {
         </NavbarMenu>
 
         <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/QrScanner" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="qrcode" /> Scanna övning
+          <NavbarItemBurger to="/admin/register/patient" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="add_user" /> Registrera Patient
           </NavbarItemBurger>
           <StyledDivider />
 
-          <NavbarItemBurger to="/statistics" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="statistics" /> Se statistik
+          <NavbarItemBurger to="/admin/search/patient" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="search" /> Sök Patient
           </NavbarItemBurger>
           <StyledDivider />
-          <NavbarItemBurger to="/help" onClick={closeMenu}>
-            Hjälp
+          <NavbarItemBurger to="/admin/register/exercise" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="upload" /> Ladda upp övning
           </NavbarItemBurger>
           <StyledDivider />
 
-          <NavbarItemBurger to="/about" onClick={closeMenu}>
-            Om WeeDo
+          <NavbarItemBurger to="/admin/search/exercise" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="search" /> Sök övning
           </NavbarItemBurger>
 
-          <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
+          <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
             Logga ut
           </LogOut>
         </StyledMobileNav>
@@ -224,20 +190,17 @@ const Navbar = () => {
   if (window.location.href === url) {
     return (
       <>
-        <NavbarMenu theme={PatientTheme}>
+        <NavbarMenu theme={AdminTheme}>
           <NavbarBurger>
             <Hamburger toggled={open} toggle={setOpen} rounded color="white" />
           </NavbarBurger>
 
-          <NavbarLogo to="/activitypanel">
+          <NavbarLogo to="/adminpanel">
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
-
-          <PatientName>{patient.name}</PatientName>
-
           <NavbarItemLogout
             isActive={() => false}
-            onClick={customDialogPatient}
+            onClick={customDialogAdmin}
             last="true"
           >
             Logga ut
@@ -246,10 +209,8 @@ const Navbar = () => {
 
         <StyledMobileNav open={open}>
           <StyledDivider />
-          <NavbarItemBurger to="/help" onClick={closeMenu}>
-            Hjälp
-          </NavbarItemBurger>
-          <LogOut to="/" isActive={() => false} onClick={customDialogPatient}>
+
+          <LogOut to="/" isActive={() => false} onClick={customDialogAdmin}>
             Logga ut
           </LogOut>
         </StyledMobileNav>
