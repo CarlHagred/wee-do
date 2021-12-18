@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
-import Button from "../../components/common/Button"
+import Button from "../../components/common/Button";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -72,7 +72,7 @@ const Help = () => {
       }
     } catch (e) {}
   };
- 
+
   const getPatient = async () => {
     try {
       const currentPatient = await getSession();
@@ -116,10 +116,10 @@ const Help = () => {
   };
 
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
-  
+
   const goBack = () => {
-    window.history.back()
-  }
+    window.history.back();
+  };
 
   return (
     <PatientLayout>
@@ -193,11 +193,11 @@ const Help = () => {
             </>
           ) : null}
         </StyledDiv>
-        {isCookie === null ? 
-        <StyledButton id="button" onClick={goBack}>
-          Tillbaka
-        </StyledButton>
-        : null }
+        {isCookie === null ? (
+          <StyledButton size="lg" onClick={goBack}>
+            Tillbaka
+          </StyledButton>
+        ) : null}
       </StyledContainer>
     </PatientLayout>
   );
