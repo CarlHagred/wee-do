@@ -89,7 +89,7 @@ const StyledVideoText = styled.p`
 `;
 
 const StyledDivider = styled.hr`
-  margin-top: 0.5em;
+  margin-top: 0.7em;
   border: 1px solid;
   border-color: #d9d9d9;
   max-width: 850px;
