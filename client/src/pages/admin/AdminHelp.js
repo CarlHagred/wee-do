@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import AdminLayout from "../../components/admin/AdminLayout"
-import { getAllActivePatients, getSession } from "../../api";
-import Button from "../../components/common/Button"
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -48,38 +46,9 @@ const StyledDiv = styled.div`
 `;
 
 const Help = () => {
-  const [patient, setPatient] = useState("");
-  const [active, setActive] = useState([]);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-
-  const getActivity = async () => {
-    try {
-      const currentActivity = await getAllActivePatients();
-      if (!currentActivity.data) {
-        throw new Error(`Error: ${currentActivity.status}`);
-      }
-      if (currentActivity) {
-        setActive(currentActivity.data[0].name);
-      }
-    } catch (e) {}
-  };
- 
-  const getPatient = async () => {
-    try {
-      const currentPatient = await getSession();
-      if (!currentPatient) {
-        throw new Error(`Error ${currentPatient.status}`);
-      }
-      if (currentPatient) {
-        setPatient(currentPatient.data.name);
-      }
-    } catch (e) {}
-  };
-
-  getActivity();
-  getPatient();
 
   const handleEvent1 = () => {
     if (open1 === false) {
