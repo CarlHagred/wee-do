@@ -15,7 +15,7 @@ const StyledButton = styled.button`
 
   margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
   margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
-  padding: 0.3em 1em;
+  padding: 0.6em 1.2em;
 
   width: ${(props) => (props.width === "wide" ? "100%" : "300px")};
 
@@ -36,6 +36,18 @@ const StyledButton = styled.button`
           border: 1px solid black;
           background: none;
           color: #707070;
+        `
+      : props.outlinedTheme
+      ? css`
+          border: 2px solid ${(props) => props.theme.palette.brand};
+          background: none;
+          color: ${(props) => props.theme.palette.brand};
+          padding: 0.5em 1em;
+          &:hover {
+            border: 2px solid red;
+            background: none;
+            color: red;
+          }
         `
       : props.disabledTooltip
       ? css`
