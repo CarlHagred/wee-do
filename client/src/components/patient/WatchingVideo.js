@@ -25,22 +25,33 @@ const StyledActiveButton = styled(Button)`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: 768px;
   margin: 0 auto;
   gap: 10px;
   padding: 15px 10px 0 10px;
-  @media (min-width: 650px) {
+  @media (min-width: 769px) {
     padding: 15px 0 0 0;
+  }
+  @media (min-width: 850px) {
+    padding: 15px 0 0 0;
+    max-width: 850px;
   }
 `;
 
 const StyledVideoTitle = styled.h2`
-  font-size: 1.5em;
   font-weight: 600;
+  font-size: 1.2em;
+  @media (min-width: 769px) {
+    font-size: 1.5em;
+  }
 `;
 
 const StyledVideoText = styled.p`
   color: #787878;
+  font-size: 1em;
+  @media (min-width: 769px) {
+    font-size: 1.3em;
+  }
 `;
 
 const StyledDivider = styled.hr`
@@ -136,7 +147,12 @@ const WatchExercise = () => {
   }, [videoId]);
 
   const handleEvent = async () => {
-    const handleClick = await postWatchedVideo(patientName, videoId, active, title);
+    const handleClick = await postWatchedVideo(
+      patientName,
+      videoId,
+      active,
+      title
+    );
     if (handleClick.data === "Success") {
       setExerciseDone(true);
 
