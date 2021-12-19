@@ -3,15 +3,15 @@ import ReactPlayer from "react-player/youtube";
 
 const StyledReactPlayer = styled(ReactPlayer)`
   aspect-ratio: 16/9;
-  max-width: 640px;
+  max-width: 850px;
   margin: 0 auto;
+  @media (min-width: 851px) {
+    margin: 3em auto 0 auto;
+  }
   @supports not (aspect-ratio: 16/9) {
     iframe {
-      min-height: 320px;
+      min-height: 432px;
     }
-  }
-  @media (min-width: 650px) {
-    margin: 3em auto 0 auto;
   }
 `;
 
