@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
+import { useHistory } from "react-router-dom";
 
 import { getNewPatient } from "../../api/index";
 
@@ -9,6 +10,10 @@ import Button from "../../components/common/Button";
 import ContentContainer from "../../components/common/ContentContainer";
 
 const StyledNewUsername = styled.p`
+  animation: 2s ${keyframes`${fadeIn}`};
+`;
+
+const StyledButton = styled(Button)`
   animation: 2s ${keyframes`${fadeIn}`};
 `;
 
@@ -36,13 +41,23 @@ const StyledNewPatient = styled.p`
 
 const RegisterPatient = () => {
   const [newPatient, setNewPatient] = useState("");
+  const [button, setButton] = useState(false)
+
+  let history = useHistory();
 
   const handleEvent = async () => {
     const newPatientName = await getNewPatient();
     console.log(newPatientName.data);
     setNewPatient(newPatientName.data);
+    setButton(true)
   };
 
+  const routeChange = () => {
+    
+    let path = "http://localhost:3000/admin/select/" + newPatient
+    window.location = path
+  }
+  
   return (
     <AdminLayout>
       <ContentContainer>
@@ -58,6 +73,12 @@ const RegisterPatient = () => {
           <Button icon="add_user" onClick={handleEvent}>
             Skapa användarnamn
           </Button>
+          {button === true ?
+          <StyledButton onClick={routeChange}>
+              Välj övningar till patient
+          </StyledButton>
+          :
+          null }
         </RegisterContainer>
       </ContentContainer>
     </AdminLayout>
