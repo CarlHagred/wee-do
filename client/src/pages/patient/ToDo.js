@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 import styled from "styled-components";
@@ -44,6 +46,25 @@ const ToDo = () => {
         <StyledHeader>Mina övningar</StyledHeader>
         <div>Is Loading: {isLoading.toString()}</div>
         <div>{videos}</div>
+        <ul>
+          {myVideos?.data?.data.map((video) => {
+            return (
+              <li>
+                <Link
+                  to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
+                  key={video.vidId}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
+                  />
+                  {video.vidTitle}
+                  Du har gjort denna: {video.amountOfTimes} gånger
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
         <div>Is Error: {isError.toString()}</div>
       </Wrapper>
     </PatientLayout>
