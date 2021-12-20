@@ -193,7 +193,7 @@ const Help = () => {
             </>
           ) : null}
         </StyledDiv>
-        {isCookie === null ? (
+        {isCookie === null && active !== null ? (
           <StyledButton size="lg" onClick={goBack}>
             Tillbaka
           </StyledButton>
