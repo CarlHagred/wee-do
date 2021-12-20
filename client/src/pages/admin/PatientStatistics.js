@@ -5,19 +5,22 @@ import { Confirm } from "react-st-modal";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 
 import {
   deletePatientIndex,
   getOnePatient,
   setPatientInactiveIndex,
   setPatientActiveIndex,
+  //getOnePatientStatisticsIndex,
 } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
+import { set } from "mongoose";
+import { ImNext } from "react-icons/im";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -88,6 +91,8 @@ const PatientStatistics = () => {
     fetchData();
   }, [name]);
 
+  
+
   const customDeletePatient = async () => {
     const conf = await Confirm(
       "Är du säker på att du vill radera " + name + "?",
@@ -143,9 +148,45 @@ const PatientStatistics = () => {
   };
 
   const [dateState, setDateState] = useState(new Date());
+  let [arrayDate, setArrayDate] = useState([]);
+  //let [arrayDateTime, setArrayDateTime] = useState([]);
+
+
+  useEffect(() => {
+    let arrayDate2 = [];
+    //let arrayDate3 = [];
+
+    const date = moment(dateState).format('MMMM Do YYYY');
+
+    for (var i = 0; i<patientStatistics.length; i++){
+      for(var j = 0; j<patientStatistics[i].watchedTime.length; j++){
+        if (moment(patientStatistics[i].watchedTime[j]).format('MMMM Do YYYY') === date){
+          arrayDate2.push(patientStatistics[i]);
+          break;
+        }else{//console.log("else");
+        }
+      }
+    }
+    setArrayDate(arrayDate2);
+
+  //   for(var k = 0; k<arrayDate.length; k++){
+  //     const counter = 0;
+  //     for(var l = 0; l<arrayDate[k].watchedTime.length; l++){
+  //     if (moment(arrayDate[k].watchedTime[l]).format('MMMM Do YYYY') === date){
+  //       counter ++;
+  //       arrayDate3.push(counter);
+  //     }
+  //     console.log(counter);
+  //   }
+  // }
+
+    //setArrayDateTime(arrayDate3);
+  }, [dateState]);
 
   const changeDate = (e) => {
-    setDateState(e)};
+    setDateState(e)
+}
+
 
   return (
     <AdminLayout>
@@ -205,12 +246,39 @@ const PatientStatistics = () => {
       onChange={changeDate}
       />
     <p>Valt datum är <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
+    <>
+            {arrayDate.map((stat) => (
+              <React.Fragment key={stat.vidId}>
+                <StyledStatistics>
+                  <br />
+                  <strong>Video: </strong>
+                  <StyledLink to={`../exercise/${stat.vidId}`}>
+                    {stat.vidTitle}
+                  </StyledLink>
+                  <br />
+                  <strong>Tid för visning:</strong>
+                    {stat.watchedTime.map((time, index) => ( 
+                      <p style={{ marginTop: 5 }} key={index}> 
+                        {time.replace("T", ", ").slice(0, -8)}
+                      </p>
+                    ))}
+                  
+                  <br />
+                  <strong>Antal förväntade idag: </strong>
+                  3
+                </StyledStatistics>
+              </React.Fragment>
+            ))}
+          </>
         <StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>
       </ContentContainer>
     </AdminLayout>
   );
+  
 };
+
+
 
 export default PatientStatistics;
