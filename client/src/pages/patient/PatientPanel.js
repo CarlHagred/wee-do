@@ -78,7 +78,7 @@ const PatientPanel = () => {
               Se statistik
             </PanelButton>
             <PanelButton to="/todo" icon="gym_user" size="44">
-              Övningar att göra
+              Mina övningar
             </PanelButton>
           </PanelButtonContainer>
         </HeroLeft>
