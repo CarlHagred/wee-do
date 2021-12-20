@@ -5,22 +5,18 @@ import { Confirm } from "react-st-modal";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
-//import Moment from 'react-moment';
 
 import {
   deletePatientIndex,
   getOnePatient,
   setPatientInactiveIndex,
   setPatientActiveIndex,
-  //getOnePatientStatisticsIndex,
 } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
-import { set } from "mongoose";
-import { ImNext } from "react-icons/im";
 
 const ButtonContainer = styled.div`
   display: flex;

@@ -151,9 +151,6 @@ export const deleteVideoIndex = async (params) => {
     .then((response) => {});
 };
 
-//export const getOnePatientStatisticsIndex = (name, dateState) =>
-  //axios.get(`${serverUrl}/getonepatient/${name}/${dateState}`);
-
 
 export const updateDatabase = async () =>
   await axios.post(`${serverUrl}/updateDatabase`);
