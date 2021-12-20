@@ -44,8 +44,6 @@ const ToDo = () => {
     <PatientLayout>
       <Wrapper>
         <StyledHeader>Mina övningar</StyledHeader>
-        <div>Is Loading: {isLoading.toString()}</div>
-        <div>{videos}</div>
         <ul>
           {myVideos?.data?.data.map((video) => {
             return (
@@ -64,8 +62,6 @@ const ToDo = () => {
             );
           })}
         </ul>
-
-        <div>Is Error: {isError.toString()}</div>
       </Wrapper>
     </PatientLayout>
   );
