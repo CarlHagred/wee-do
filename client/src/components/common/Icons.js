@@ -9,6 +9,7 @@ import { GiWeightLiftingUp } from "react-icons/gi";
 
 import SearchPatient from "../images/IconSearchPatient";
 import SearchExercise from "../images/IconSearchExercise";
+import IconExcerciseList from "../images/IconExerciseList";
 
 // Ikoner hämtas från https://react-icons.github.io/react-icons/
 // Fler ikoner?: Nya ikoner importeras och läggs in i variants
@@ -30,6 +31,7 @@ const variants = {
   patientInactive: MdPersonOff,
   patientActive: BsFillPersonFill,
   gym_user: GiWeightLiftingUp,
+  exercise_list: IconExcerciseList,
 };
 
 const Icon = ({ name, ...props }) => {

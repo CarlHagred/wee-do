@@ -71,14 +71,11 @@ const PatientPanel = () => {
             <StyledHeroHeader>Välkommen!</StyledHeroHeader>
           </HeaderContainer>
           <PanelButtonContainer>
-            <PanelButton to="/QrScanner" icon="qrcode" size="44">
-              Scanna övning
+            <PanelButton to="/todo" icon="gym_user" size="44">
+              Mina övningar
             </PanelButton>
             <PanelButton to="/statistics" icon="statistics" size="44">
               Se statistik
-            </PanelButton>
-            <PanelButton to="/todo" icon="gym_user" size="44">
-              Mina övningar
             </PanelButton>
           </PanelButtonContainer>
         </HeroLeft>

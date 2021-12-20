@@ -180,10 +180,8 @@ const Navbar = () => {
           <NavbarLogo to="/activitypanel">
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
-
-          <NavbarItem to="/QrScanner">Scanna övning</NavbarItem>
-          <NavbarItem to="/statistics">Se statistik</NavbarItem>
           <NavbarItem to="/todo">Mina övningar</NavbarItem>
+          <NavbarItem to="/statistics">Se statistik</NavbarItem>
           <PatientName>{patient.name}</PatientName>
 
           <NavbarItemLogout
