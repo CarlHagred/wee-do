@@ -80,7 +80,7 @@ const StyledVideoTitle = styled.h2`
   }
 `;
 
-const StyledVideoText = styled.p`
+const StyledVideoText = styled.div`
   color: #787878;
   font-size: 1em;
   @media (min-width: 769px) {
@@ -95,13 +95,13 @@ const StyledDivider = styled.hr`
   max-width: 850px;
 `;
 
-const StyledInactiveHint = styled.p`
+const StyledInactiveHint = styled.div`
   font-size: 1.3em;
   font-style: italic;
   margin-top: 10px;
 `;
 
-const StyledReward = styled.p`
+const StyledReward = styled.div`
   animation: 3s ${keyframes`${bounce}`};
   background-color: #41bbc7;
   padding: 20px 25px;
@@ -158,12 +158,8 @@ const WatchExercise = () => {
       const fetchedSession = await getSession();
       setPatientName(fetchedSession.data.name);
       const fetchPatient = await getOnePatient(fetchedSession.data.name);
-      // TA BORT if-satsen innan PR
-      if (fetchPatient.data) {
-        setActive(fetchPatient.data.active);
-        setPatient(fetchPatient.data.statistics);
-      }
-      // TA BORT if-satsen innan PR
+      setActive(fetchPatient.data.active);
+      setPatient(fetchPatient.data.statistics);
     };
     fetchData();
   }, []);
