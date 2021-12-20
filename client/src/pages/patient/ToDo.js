@@ -79,6 +79,9 @@ const StyledVideoTitle = styled.h1`
   width: 280px;
   padding-top: 10px;
   padding-bottom: 5px;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 const StyledVideoText = styled.p`
