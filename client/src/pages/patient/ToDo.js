@@ -62,7 +62,7 @@ const StyledHoverText = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 1.2em;
+  font-size: 2em;
   padding-bottom: 1em;
   font-weight: 600;
 `;
@@ -84,14 +84,6 @@ const StyledVideoTitle = styled.h1`
 const StyledVideoText = styled.p`
   font-size: 0.9em;
   color: darkgrey;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 3rem;
-  flex-direction: column;
-  text-align: center;
 `;
 
 const ToDo = () => {
@@ -120,34 +112,32 @@ const ToDo = () => {
   return (
     <PatientLayout>
       <StyledContentContainer>
-        <Wrapper>
-          <StyledHeader>Mina övningar</StyledHeader>
-          <SearchResultContainer>
-            {myVideos?.data?.data.map((video) => {
-              return (
-                <Link
-                  to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
-                  key={video.vidId}
-                >
-                  <VideoContainer>
-                    <ThumbnailContainer>
-                      <img
-                        src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
-                      />
-                      <HoverContainer>
-                        <StyledHoverText>VISA</StyledHoverText>
-                      </HoverContainer>
-                    </ThumbnailContainer>
-                    <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
-                    <StyledVideoText>
-                      Du har gjort denna: {video.amountOfTimes} gånger{" "}
-                    </StyledVideoText>
-                  </VideoContainer>
-                </Link>
-              );
-            })}
-          </SearchResultContainer>
-        </Wrapper>
+        <StyledHeader>Mina övningar</StyledHeader>
+        <SearchResultContainer>
+          {myVideos?.data?.data.map((video) => {
+            return (
+              <Link
+                to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
+                key={video.vidId}
+              >
+                <VideoContainer>
+                  <ThumbnailContainer>
+                    <StyledThumbnail
+                      src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
+                    />
+                    <HoverContainer>
+                      <StyledHoverText>VISA</StyledHoverText>
+                    </HoverContainer>
+                  </ThumbnailContainer>
+                  <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
+                  <StyledVideoText>
+                    Du har gjort denna: {video.amountOfTimes} gånger{" "}
+                  </StyledVideoText>
+                </VideoContainer>
+              </Link>
+            );
+          })}
+        </SearchResultContainer>
       </StyledContentContainer>
     </PatientLayout>
   );
