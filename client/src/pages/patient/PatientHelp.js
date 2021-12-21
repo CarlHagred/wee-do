@@ -19,7 +19,7 @@ const StyledHeader = styled.h1`
 
 const StyledDiv = styled.div`
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 `;
 
 const StyledTitle = styled.p`
