@@ -21,7 +21,7 @@ const StyledPanelButton = styled(NavLink)`
 const StyledPanelText = styled.p`
   align-self: flex-start;
   color: white;
-  font-size: 1.3em;
+  font-size: 1.4em;
   position: absolute;
   bottom: 20%;
   left: 20%;
