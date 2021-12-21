@@ -246,6 +246,7 @@ const WatchExercise = () => {
                 data-tip
                 data-for="watchVideo"
                 disabledTooltip
+                size="lg"
               >
                 Jag har gjort övningen
               </StyledDisabledButton>
@@ -257,7 +258,7 @@ const WatchExercise = () => {
 
           {scene === 2 && (
             <ButtonContainer>
-              <StyledActiveButton onClick={handleEvent}>
+              <StyledActiveButton size="lg" onClick={handleEvent}>
                 Jag har gjort övningen
               </StyledActiveButton>
             </ButtonContainer>
