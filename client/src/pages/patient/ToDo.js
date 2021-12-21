@@ -122,8 +122,6 @@ const StyledVideoText = styled.p`
 
 const ToDo = () => {
   const [myVideos, setMyVideos] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,15 +132,12 @@ const ToDo = () => {
         const videoData = await getMyVideos(params);
         setMyVideos(videoData);
       } catch {
-        setIsError(true);
+        console.log('Error occured fetching videos with amount of times left'); 
       }
-      setIsLoading(false);
     };
     fetchData();
   }, []);
-
-  const videos = JSON.stringify(myVideos.data);
-
+  
   return (
     <PatientLayout>
       <StyledContentContainer>
