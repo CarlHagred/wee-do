@@ -50,7 +50,7 @@ const LoginPatient = () => {
         onChange={(e) => setLoginName(e.target.value)}
         placeholder="Skriv användarnamn här"
       />
-      <Button width="wide" onClick={handleSubmit}>
+      <Button width="wide" size="lg" onClick={handleSubmit}>
         Logga in
       </Button>
     </LoginContainer>
