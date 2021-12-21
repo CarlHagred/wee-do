@@ -13,12 +13,16 @@ import ReactPlayer from "../../components/common/ReactPlayer";
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: 768px;
   margin: 0 auto;
   gap: 10px;
   padding: 15px 10px 0 10px;
-  @media (min-width: 650px) {
+  @media (min-width: 769px) {
     padding: 15px 0 0 0;
+  }
+  @media (min-width: 850px) {
+    padding: 15px 0 0 0;
+    max-width: 850px;
   }
 `;
 
@@ -48,6 +52,9 @@ const ButtonContainer = styled.div`
   min-height: 150px;
   align-content: center;
   gap: 10px;
+  @media (min-width: 769px) {
+    height: 100px;
+  }
 `;
 
 const Video = () => {

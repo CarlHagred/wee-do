@@ -68,6 +68,7 @@ const StyledLoginHeader = styled.div`
 
 const StyledHelp = styled(NavLink)`
   margin-top: 3em;
+  font-size: 1.5em;
 `;
 
 const PatientLogin = () => {

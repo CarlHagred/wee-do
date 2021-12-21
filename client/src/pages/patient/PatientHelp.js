@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
+import Button from "../../components/common/Button";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -46,6 +47,11 @@ const StyledDiv = styled.div`
   margin: 0% auto 1% auto;
 `;
 
+const StyledButton = styled(Button)`
+  margin: auto;
+  margin-top: 12%;
+`;
+
 const Help = () => {
   const [patient, setPatient] = useState("");
   const [active, setActive] = useState([]);
@@ -59,7 +65,7 @@ const Help = () => {
     try {
       const currentActivity = await getAllActivePatients();
       if (!currentActivity.data) {
-        throw new Error(`fucking fel brur ${currentActivity.status}`);
+        throw new Error(`Error: ${currentActivity.status}`);
       }
       if (currentActivity) {
         setActive(currentActivity.data[0].name);
@@ -71,7 +77,7 @@ const Help = () => {
     try {
       const currentPatient = await getSession();
       if (!currentPatient) {
-        throw new Error(`fucking fel brur ${currentPatient.status}`);
+        throw new Error(`Error ${currentPatient.status}`);
       }
       if (currentPatient) {
         setPatient(currentPatient.data.name);
@@ -107,6 +113,12 @@ const Help = () => {
     if (open3 === true) {
       setOpen3(false);
     }
+  };
+
+  let isCookie = localStorage.getItem("isAuthenticatedPatient");
+
+  const goBack = () => {
+    window.history.back();
   };
 
   return (
@@ -181,6 +193,11 @@ const Help = () => {
             </>
           ) : null}
         </StyledDiv>
+        {isCookie === null ? (
+          <StyledButton size="lg" onClick={goBack}>
+            Tillbaka
+          </StyledButton>
+        ) : null}
       </StyledContainer>
     </PatientLayout>
   );

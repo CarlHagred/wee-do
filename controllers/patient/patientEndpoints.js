@@ -129,6 +129,21 @@ export const postSelectedVideos = async (req, res) => {
   });
 };
 
+export const deleteSelectedVideo = async (req, res) => {
+  const patientName = req.body.patientName;
+  const videoId = req.body.videoId;
+
+  await Patient.updateOne(
+    { name: patientName },
+    { $pull: { statistics: { vidId: videoId } } },
+    (err, doc) => {
+      if (doc) {
+        res.status(200).send("Success");
+      }
+    }
+  );
+};
+
 export const deletePatient = async (req, res) => {
   const name = req.body.name;
   await Patient.deleteOne({ name: name }).then((patient) => {
