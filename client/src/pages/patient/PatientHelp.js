@@ -5,8 +5,6 @@ import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
 import Button from "../../components/common/Button";
 
-const StyledContainer = styled.div``;
-
 const StyledHeader = styled.h1`
   font-size: 3.5em;
   text-align: center;
@@ -20,7 +18,8 @@ const StyledHeader = styled.h1`
 `;
 
 const StyledDiv = styled.div`
-  margin: 0 30px 15px 30px;
+  margin: 0 auto;
+  width: 80%;
 `;
 
 const StyledTitle = styled.p`
@@ -131,82 +130,79 @@ const Help = () => {
 
   return (
     <PatientLayout>
-      <StyledContainer>
-        <StyledHeader>Hjälp</StyledHeader>
+      <StyledHeader>Hjälp</StyledHeader>
 
-        <StyledDiv>
-          <StyledTitle onClick={handleEvent1}>
-            Jag har tappat bort mitt användarnamn eller QR-kod:
-          </StyledTitle>
-          {open1 === true ? (
-            <StyledP>
-              Om du har tappat bort ditt användarnamn eller QR-kod måste du
-              komma i kontakt med sjukhuset du besökte när du fick ditt
-              användarnamn eller QR-kod och be om ett nytt.
-            </StyledP>
-          ) : null}
-        </StyledDiv>
-
-        <StyledDiv>
-          <StyledTitle onClick={handleEvent2}>
-            Jag kan inte skanna in min QR-kod:
-          </StyledTitle>
-          {open2 === true ? (
-            <div>
-              <StyledP>
-                Om det inte fungerar att skanna in QR-koden, kontrollera
-                följande:
-              </StyledP>
-
-              <StyledLi>Kontrollera så att din kamera fungerar.</StyledLi>
-              <StyledLi>
-                Har du accepterat (ja/nej) att webbsidan får använda sig av din
-                kamera?
-              </StyledLi>
-              <StyledLi>
-                Om du inte har det, gå till din webbläsare {">"} Inställningar{" "}
-                {">"} Integritet och säkerhet {">"} Webbplatsinställningar {">"}{" "}
-                Kamera och godkänn användningen av din kamera-enhet.
-              </StyledLi>
-              <StyledLi>
-                Testa att öka ljusstyrkan på skärmen du skannar din QR-kod på,
-                eller testa att tända en lampa.
-              </StyledLi>
-              <StyledLi>Stödjer din enhet skanning av QR-koder?</StyledLi>
-            </div>
-          ) : null}
-        </StyledDiv>
-
-        <StyledDiv>
-          <StyledTitle onClick={handleEvent3}>
-            Det fungerar inte att logga in:
-          </StyledTitle>
-          {open3 === true ? (
-            <>
-              <StyledP>
-                Om det inte fungerar att logga in, kontrollera följande:
-              </StyledP>
-
-              <StyledLi>
-                Kontrollera att ditt användarnamn stämmer, 6 tecken.
-              </StyledLi>
-              <StyledLi>Kontrollera din nätverksanslutning</StyledLi>
-              {patient === active ? (
-                <StyledLi>
-                  Om det fortfarande inte fungerar, kontakta Region Skånes
-                  Servicedesk Telefon: {phoneNr}, knappval 2 (IT) följt av 5
-                  (övrigt).
-                </StyledLi>
-              ) : null}
-            </>
-          ) : null}
-        </StyledDiv>
-        {isCookie === null && active !== null ? (
-          <StyledButton size="lg" onClick={goBack}>
-            Tillbaka
-          </StyledButton>
+      <StyledDiv>
+        <StyledTitle onClick={handleEvent1}>
+          Jag har tappat bort mitt användarnamn eller QR-kod:
+        </StyledTitle>
+        {open1 === true ? (
+          <StyledP>
+            Om du har tappat bort ditt användarnamn eller QR-kod måste du komma
+            i kontakt med sjukhuset du besökte när du fick ditt användarnamn
+            eller QR-kod och be om ett nytt.
+          </StyledP>
         ) : null}
-      </StyledContainer>
+      </StyledDiv>
+
+      <StyledDiv>
+        <StyledTitle onClick={handleEvent2}>
+          Jag kan inte skanna in min QR-kod:
+        </StyledTitle>
+        {open2 === true ? (
+          <div>
+            <StyledP>
+              Om det inte fungerar att skanna in QR-koden, kontrollera följande:
+            </StyledP>
+
+            <StyledLi>Kontrollera så att din kamera fungerar.</StyledLi>
+            <StyledLi>
+              Har du accepterat (ja/nej) att webbsidan får använda sig av din
+              kamera?
+            </StyledLi>
+            <StyledLi>
+              Om du inte har det, gå till din webbläsare {">"} Inställningar{" "}
+              {">"} Integritet och säkerhet {">"} Webbplatsinställningar {">"}{" "}
+              Kamera och godkänn användningen av din kamera-enhet.
+            </StyledLi>
+            <StyledLi>
+              Testa att öka ljusstyrkan på skärmen du skannar din QR-kod på,
+              eller testa att tända en lampa.
+            </StyledLi>
+            <StyledLi>Stödjer din enhet skanning av QR-koder?</StyledLi>
+          </div>
+        ) : null}
+      </StyledDiv>
+
+      <StyledDiv>
+        <StyledTitle onClick={handleEvent3}>
+          Det fungerar inte att logga in:
+        </StyledTitle>
+        {open3 === true ? (
+          <>
+            <StyledP>
+              Om det inte fungerar att logga in, kontrollera följande:
+            </StyledP>
+
+            <StyledLi>
+              Kontrollera att ditt användarnamn stämmer, 6 tecken.
+            </StyledLi>
+            <StyledLi>Kontrollera din nätverksanslutning</StyledLi>
+            {patient === active ? (
+              <StyledLi>
+                Om det fortfarande inte fungerar, kontakta Region Skånes
+                Servicedesk Telefon: {phoneNr}, knappval 2 (IT) följt av 5
+                (övrigt).
+              </StyledLi>
+            ) : null}
+          </>
+        ) : null}
+      </StyledDiv>
+      {isCookie === null && active !== null ? (
+        <StyledButton size="lg" onClick={goBack}>
+          Tillbaka
+        </StyledButton>
+      ) : null}
     </PatientLayout>
   );
 };
