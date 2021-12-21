@@ -48,7 +48,7 @@ const StyledP = styled.p`
 const StyledLi = styled.li`
   font-size: 1.5em;
   margin-top: 1%;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   padding-left: 8%;
   @media (max-width: 375px) {
     font-size: 1.1rem;
