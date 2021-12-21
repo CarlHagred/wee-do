@@ -43,8 +43,6 @@ const RegisterPatient = () => {
   const [newPatient, setNewPatient] = useState("");
   const [button, setButton] = useState(false)
 
-  let history = useHistory();
-
   const handleEvent = async () => {
     const newPatientName = await getNewPatient();
     console.log(newPatientName.data);
@@ -53,9 +51,7 @@ const RegisterPatient = () => {
   };
 
   const routeChange = () => {
-    
-    let path = "http://localhost:3000/admin/select/" + newPatient
-    window.location = path
+    window.location = "/admin/select/" + newPatient
   }
   
   return (
