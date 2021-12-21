@@ -18,6 +18,7 @@ import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -38,8 +39,10 @@ const StyledContainer = styled.div`
 
 const StyledPatient = styled.p`
   background-color: #ccc;
-  padding: 4px;
+  padding: 25px;
   border-radius: 3px;
+  text-align: center;
+  justify-content: middle;
 `;
 
 const StyledLink = styled(Link)`
@@ -69,6 +72,21 @@ const StyledChart = styled.div`
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
+`;
+
+const ListPanelWrapper = styled.div`
+  justify-content: top;
+`;
+
+const ListPanel = styled.nav`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2em;
+  align-items: top;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
 `;
 
 const PatientStatistics = () => {
@@ -145,12 +163,12 @@ const PatientStatistics = () => {
 
   const [dateState, setDateState] = useState(new Date());
   let [arrayDate, setArrayDate] = useState([]);
-  //let [arrayDateTime, setArrayDateTime] = useState([]);
+  let [arrayDateTime, setArrayDateTime] = useState([]);
 
 
   useEffect(() => {
     let arrayDate2 = [];
-    //let arrayDate3 = [];
+    let arrayDate3 = [];
 
     const date = moment(dateState).format('MMMM Do YYYY');
 
@@ -159,24 +177,24 @@ const PatientStatistics = () => {
         if (moment(patientStatistics[i].watchedTime[j]).format('MMMM Do YYYY') === date){
           arrayDate2.push(patientStatistics[i]);
           break;
-        }else{//console.log("else");
+        }else{
         }
       }
     }
     setArrayDate(arrayDate2);
 
-  //   for(var k = 0; k<arrayDate.length; k++){
-  //     const counter = 0;
-  //     for(var l = 0; l<arrayDate[k].watchedTime.length; l++){
-  //     if (moment(arrayDate[k].watchedTime[l]).format('MMMM Do YYYY') === date){
-  //       counter ++;
-  //       arrayDate3.push(counter);
-  //     }
-  //     console.log(counter);
-  //   }
-  // }
-
-    //setArrayDateTime(arrayDate3);
+    let counter = 0;
+    for(var k = 0; k<arrayDate2.length; k++){
+      for(var l = 0; l<arrayDate2[k].watchedTime.length; l++){
+        if (moment(arrayDate2[k].watchedTime[l]).format('MMMM Do YYYY') === date){
+          counter++;
+        }
+      }
+    if(counter != 0){
+      arrayDate3.push(counter);}
+      counter = 0;
+    }
+    setArrayDateTime(arrayDate3);
   }, [dateState]);
 
   const changeDate = (e) => {
@@ -190,8 +208,9 @@ const PatientStatistics = () => {
         <StyledContainer>
           <>
             <h2>Statistik</h2>
+            <br />
             <StyledPatient>
-              <strong>Användarnamn: </strong>
+              <strong>Patient-id: </strong>
               {patient.name}
             </StyledPatient>
           </>
@@ -210,66 +229,38 @@ const PatientStatistics = () => {
             )}
             <Button onClick={handleSelectExcersice}>Välj övningar</Button>
           </ButtonContainer>
-          <>
-            {patientStatistics.map((stat) => (
-              <React.Fragment key={stat.vidId}>
-                <StyledStatistics>
-                  <br />
-                  <strong>Video: </strong>
-                  <StyledLink to={`../exercise/${stat.vidId}`}>
-                    {stat.vidTitle}
-                  </StyledLink>
-                  <br />
-                  <strong>Scans: </strong>
-                  {stat.scans}
-                  <br />
-                  <strong>Antal visningar: </strong>
-                  {stat.timesWatched}
-                  <br />
-                  <strong>Tid för visning:</strong>
-                  {stat.watchedTime.map((time, index) => (
-                    <p style={{ marginTop: 5 }} key={index}>
-                      {time.replace("T", ", ").slice(0, -8)}
-                    </p>
-                  ))}
-                </StyledStatistics>
-              </React.Fragment>
-            ))}
-          </>
         </StyledContainer>
-        <Calendar 
-      value={dateState}
-      onChange={changeDate}
-      />
-    <p>Valt datum är <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
-    <>
-            {arrayDate.map((stat) => (
-              <React.Fragment key={stat.vidId}>
-                <StyledStatistics>
-                  <br />
-                  <strong>Video: </strong>
-                  <StyledLink to={`../exercise/${stat.vidId}`}>
-                    {stat.vidTitle}
-                  </StyledLink>
-                  <br />
-                  <strong>Tid för visning:</strong>
-                    {stat.watchedTime.map((time, index) => ( 
-                      <p style={{ marginTop: 5 }} key={index}> 
-                        {time.replace("T", ", ").slice(0, -8)}
-                      </p>
-                    ))}
-                  
-                  <br />
-                  <strong>Antal förväntade idag: </strong>
+
+
+        <ListPanelWrapper>
+          <ListPanel>
+        <Calendar value={dateState} onChange={changeDate}/>
+        <p>Valt datum är <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
+        <>
+          {arrayDate.map((stat, index) => (
+            <React.Fragment key={stat.vidId}>
+              <StyledStatistics>
+                <br />
+                <strong>Video: </strong>
+                  <StyledLink to={`../exercise/${stat.vidId}`}>{stat.vidTitle}</StyledLink>
+                <br />
+                <strong>Antal gånger idag: {arrayDateTime[index]}</strong>     
+                <br />
+                <strong>Antal förväntade idag: </strong>
                   3
-                </StyledStatistics>
-              </React.Fragment>
-            ))}
-          </>
+                  {/*<p>{stat.amountOfTimes}</p>*/}
+              </StyledStatistics>
+            </React.Fragment>
+          ))}
+        </>
+        </ListPanel>
+        </ListPanelWrapper>
+      
         <StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>
-      </ContentContainer>
+        </ContentContainer>
+      
     </AdminLayout>
   );
   
@@ -278,3 +269,9 @@ const PatientStatistics = () => {
 
 
 export default PatientStatistics;
+
+
+
+                  /*<p style={{ marginTop: 5 }} key={index}> 
+                   {time.replace("T", ", ").slice(0, -8)}
+                  </p>*/
