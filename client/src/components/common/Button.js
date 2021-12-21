@@ -10,11 +10,9 @@ const StyledButton = styled.button`
   background: ${(props) => props.theme.palette.brand};
   color: white;
 
-  font-size: ${(props) => (props.size === "lg" ? "2" : "1.2")}em;
+  font-size: ${(props) => (props.size === "lg" ? "1.4" : "1.2")}em;
   font-weight: bold;
 
-  margin-top: ${(props) => (props.size === "lg" ? "1" : "0")}em;
-  margin-bottom: ${(props) => (props.size === "lg" ? "1" : "0")}em;
   padding: 0.6em 1.2em;
 
   width: ${(props) => (props.width === "wide" ? "100%" : "300px")};
