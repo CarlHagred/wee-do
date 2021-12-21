@@ -26,7 +26,6 @@ const PageWrapper = styled.div`
 `;
 
 const StyledContainerItem = styled.div`
-  font-size: 20px;
   flex: 1;
 `;
 
