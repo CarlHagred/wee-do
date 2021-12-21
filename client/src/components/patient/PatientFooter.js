@@ -67,7 +67,7 @@ const Footer = () => {
         <AboutContainer>
           <StyledParagraph>
             WeeDo är utvecklat av studenter vid Malmö Universitet i samarbete
-            med sjukgymnaster från Mobilt Sjukhus Team.
+            med fysioterapeuter och arbetsterapeuter från Mobilt Sjukhus Team.
           </StyledParagraph>
         </AboutContainer>
         <NavMenu last="true">

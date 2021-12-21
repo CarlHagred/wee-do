@@ -6,7 +6,7 @@ import { loginPatient } from "../../api";
 import PatientTheme from "../../themes/PatientTheme";
 
 import Button from "../common/Button";
-import UserInput from "../common/UserInput";
+import { PatientInput } from "../common/UserInput";
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -24,7 +24,7 @@ const LoginPatient = () => {
   const handleSubmit = () => {
     console.log(`försöker logga in med ${loginName}`);
     const postData = {
-      name: loginName.trim(),
+      name: loginName.trim().toLowerCase(),
     };
 
     loginPatient(postData);
@@ -41,14 +41,14 @@ const LoginPatient = () => {
   return (
     <LoginContainer>
       <span id="patientError" />
-      <UserInput
+      <PatientInput
         theme={PatientTheme}
         type="text"
         name="name"
         id="loginPatient"
         onKeyDown={listener}
         onChange={(e) => setLoginName(e.target.value)}
-        placeholder="Skriv användarnamn här..."
+        placeholder="Skriv användarnamn här"
       />
       <Button width="wide" onClick={handleSubmit}>
         Logga in

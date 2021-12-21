@@ -19,9 +19,11 @@ import {
   postScan,
   postSelectedVideos,
   deletePatient,
+  getMyVideos,
   getVideoUrl,
   setPatientInactive,
   setPatientActive,
+  deleteSelectedVideo,
 } from "../controllers/patient/patientEndpoints.js";
 
 import {
@@ -49,6 +51,7 @@ router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
+router.get("/getmyvideostodo", getMyVideos); 
 router.post("/postscan/:name/:videoId", postScan);
 router.post(
   "/postwatchedvideo/:name/:videoId/:active/:title",
@@ -58,6 +61,7 @@ router.post(
   "/postselectedexercises/:name/:selectedexercises",
   postSelectedVideos
 );
+router.delete("/deleteSelectedVideo", deleteSelectedVideo);
 router.delete("/deletevideo", deleteVideos);
 router.get("/getVideoTitleAndDescription", getVideoTitleById);
 router.delete("/deletepatient", deletePatient);

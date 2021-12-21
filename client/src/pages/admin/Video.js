@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { Confirm } from "react-st-modal";
 
 import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
 
@@ -12,12 +13,16 @@ import ReactPlayer from "../../components/common/ReactPlayer";
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 640px;
+  max-width: 768px;
   margin: 0 auto;
   gap: 10px;
   padding: 15px 10px 0 10px;
-  @media (min-width: 650px) {
+  @media (min-width: 769px) {
     padding: 15px 0 0 0;
+  }
+  @media (min-width: 850px) {
+    padding: 15px 0 0 0;
+    max-width: 850px;
   }
 `;
 
@@ -47,6 +52,9 @@ const ButtonContainer = styled.div`
   min-height: 150px;
   align-content: center;
   gap: 10px;
+  @media (min-width: 769px) {
+    height: 100px;
+  }
 `;
 
 const Video = () => {
@@ -61,7 +69,20 @@ const Video = () => {
     fetchData();
   }, [videos]);
 
-  const handleEvent = () => {
+  const customDeleteVideo = async () => {
+    const conf = await Confirm(
+      "Är du säker på att du vill radera denna video?",
+      "Radera video",
+      "Radera",
+      "Avbryt"
+    );
+    if (conf) {
+      deleteVideo();
+      window.location = "/admin/search/exercise";
+    }
+  };
+
+  const deleteVideo = () => {
     deleteVideoIndex(videoId);
   };
 
@@ -101,12 +122,9 @@ const Video = () => {
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
           <Button icon="qrcode">Generera QR-kod</Button>
         </Link>
-
-        <Link to={`/admin/search/exercise`}>
-          <Button onClick={handleEvent} icon="trash" outlinedTheme>
-            Radera
-          </Button>
-        </Link>
+        <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
+          Radera
+        </Button>
       </ButtonContainer>
     </AdminLayout>
   );

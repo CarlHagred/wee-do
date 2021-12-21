@@ -1,4 +1,5 @@
 import Patient from "../../models/patient.js";
+import Videos from "../../models/videos.js";
 
 import passport from "passport";
 import { loginAdmin } from "../admin/adminLogin.js";
@@ -22,8 +23,8 @@ export const loginPatient = (req, res, next) => {
 };
 
 //Hämtar den pågående sessionen
-export const getSession = (req, res) => {
-  res.json(req.user);
+export const getSession =  (req, res) => {
+  res.json(req.user); 
 };
 
 //Förstör den pågående sessionen
@@ -128,6 +129,21 @@ export const postSelectedVideos = async (req, res) => {
   });
 };
 
+export const deleteSelectedVideo = async (req, res) => {
+  const patientName = req.body.patientName;
+  const videoId = req.body.videoId;
+
+  await Patient.updateOne(
+    { name: patientName },
+    { $pull: { statistics: { vidId: videoId } } },
+    (err, doc) => {
+      if (doc) {
+        res.status(200).send("Success");
+      }
+    }
+  );
+};
+
 export const deletePatient = async (req, res) => {
   const name = req.body.name;
   await Patient.deleteOne({ name: name }).then((patient) => {
@@ -168,8 +184,6 @@ export const setPatientActive = async (req, res) => {
   );
 };
 
-import Videos from "../../models/videos.js";
-
 export const getVideoUrl = async (req, res) => {
   try {
     const id = req.query.id;
@@ -185,4 +199,26 @@ export const getVideoUrl = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+export const getMyVideos = async (req, res) => {
+
+  const name = req.query.name;
+
+  if(name) {
+    const patient = await Patient.findOne({name: name}); 
+
+    if(!patient) {
+      return res.status(403).json({data: 'No videos due to null patient'}); 
+    }; 
+    
+    const data = patient.statistics.filter(video => {
+      return video.amountOfTimes; 
+    });
+
+    return res.json({data: data})
+  };
+
+  return res.status(403).json({data: 'No videos due to null patient'});
+
 };

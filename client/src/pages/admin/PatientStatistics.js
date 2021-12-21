@@ -11,12 +11,14 @@ import {
   getOnePatient,
   setPatientInactiveIndex,
   setPatientActiveIndex,
+  deleteSelectedVideo,
 } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
+import { BsReverseBackspaceReverse } from "react-icons/bs";
 
 
 const ButtonContainer = styled.div`
@@ -110,13 +112,25 @@ const PatientStatistics = () => {
   const customDeletePatient = async () => {
     const conf = await Confirm(
       "Är du säker på att du vill radera " + name + "?",
+      "Radera patient",
       "Radera",
-      "OK",
       "Avbryt"
     );
     if (conf) {
       deletePatient();
       window.location = "/admin/search/patient";
+    }
+  };
+
+  const customDeleteSelectedExercise = async (patientName, videoId) => {
+    const conf = await Confirm(
+      "Är du säker på att du vill ta bort den valda övningen?",
+      "Ja",
+      "Ja",
+      "Avbryt"
+    );
+    if (conf) {
+      deleteSelectedVideo(patientName, videoId);
     }
   };
 
@@ -213,6 +227,33 @@ const PatientStatistics = () => {
               <strong>Patient-id: </strong>
               {patient.name}
             </StyledPatient>
+          </>
+          <>
+            <h1>Valda Övningar </h1>
+            {patientStatistics.map((stats) => (
+              <>
+                {(() => {
+                  if (stats.amountOfTimes != undefined) {
+                    return (
+                      <>
+                        <p>
+                          {stats.vidId}: {stats.amountOfTimes}
+                        </p>
+                        <Button
+                          onClick={() =>
+                            customDeleteSelectedExercise(
+                              patient.name,
+                              stats.vidId
+                            )
+                          }
+                          icon="trash"
+                        />
+                      </>
+                    );
+                  }
+                })()}
+              </>
+            ))}
           </>
           <ButtonContainer>
             <Button onClick={customDeletePatient} icon="trash">
