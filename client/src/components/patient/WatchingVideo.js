@@ -16,6 +16,40 @@ import PatientLayout from "./PatientLayout";
 import Button from "../common/Button";
 import ReactPlayer from "../common/ReactPlayer";
 
+const StyledIcon = styled(FaThumbsUp)`
+  margin-bottom: 5px;
+  margin-left: 2px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 768px;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 15px 10px 0 10px;
+  @media (min-width: 769px) {
+    flex-direction: row;
+    padding: 15px 0 0 0;
+  }
+  @media (min-width: 850px) {
+    padding: 15px 0 0 0;
+    max-width: 850px;
+  }
+`;
+
+const Left = styled.div`
+  flex: 2;
+`;
+
+const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 0 20px;
+`;
+
 const StyledDisabledButton = styled(Button)``;
 
 const StyledActiveButton = styled(Button)`
@@ -46,7 +80,7 @@ const StyledVideoTitle = styled.h2`
   }
 `;
 
-const StyledVideoText = styled.p`
+const StyledVideoText = styled.div`
   color: #787878;
   font-size: 1em;
   @media (min-width: 769px) {
@@ -55,30 +89,27 @@ const StyledVideoText = styled.p`
 `;
 
 const StyledDivider = styled.hr`
-  align-content: center;
-  width: 100%;
-  margin-top: 0.5em;
+  margin-top: 0.7em;
   border: 1px solid;
   border-color: #d9d9d9;
+  max-width: 850px;
 `;
 
-const StyledInactiveHint = styled.p`
+const StyledInactiveHint = styled.div`
   font-size: 1.3em;
   font-style: italic;
   margin-top: 10px;
 `;
 
-const StyledReward = styled.p`
+const StyledReward = styled.div`
   animation: 3s ${keyframes`${bounce}`};
   background-color: #41bbc7;
   padding: 20px 25px;
   border-radius: 50%;
   color: #ffffff;
   font-size: 30px;
-`;
-
-const StyledConfettiShown = styled.div`
-  position: fixed;
+  width: 80px;
+  position: absolute;
 `;
 
 const ActionContainer = styled.div`
@@ -96,10 +127,8 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
 `;
 
-const ConfettiContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const StyledConfettiShown = styled.div`
+  position: fixed;
 `;
 
 const WatchExercise = () => {
@@ -110,9 +139,8 @@ const WatchExercise = () => {
   const vid = videoUrl;
   const videoId = videoUrl.split("/").pop();
 
-  const [videoEnded, setVideoEnded] = useState(false);
+  const [scene, setScene] = useState(1);
   const [isExploding, setIsExploding] = useState(false);
-  const [exerciseDone, setExerciseDone] = useState(false);
 
   const [patientName, setPatientName] = useState("");
   const [active, setActive] = useState(true);
@@ -154,10 +182,11 @@ const WatchExercise = () => {
       title
     );
     if (handleClick.data === "Success") {
-      setExerciseDone(true);
+      setScene(3);
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
+      setTimeout(() => setScene(4), 4000);
 
       const date = new Date();
 
@@ -182,10 +211,11 @@ const WatchExercise = () => {
       });
     }
     if (handleClick.data === "Inactive") {
-      setShowActive(true);
-      setExerciseDone(true);
+      setScene(3);
+
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
+      setTimeout(() => setScene(4), 4000);
     }
   };
 
@@ -193,79 +223,89 @@ const WatchExercise = () => {
     url: vid,
     playing: false,
     onEnded: () => {
-      setVideoEnded(true);
+      setScene(2);
     },
   };
 
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
-      {isTitleAndDescFetched && (
-        <TextContainer>
-          <StyledVideoTitle>{title}</StyledVideoTitle>
-          <StyledVideoText>{description}</StyledVideoText>
-          <StyledDivider />
-        </TextContainer>
-      )}
-      <ConfettiContainer>
-        {isExploding && (
-          <StyledConfettiShown>
-            <ConfettiExplosion
-              force={0.6}
-              duration={4000}
-              particleCount={150}
-              floorHeight={1500}
-              floorWidth={1600}
-            />
-          </StyledConfettiShown>
-        )}
-      </ConfettiContainer>
 
-      <ActionContainer>
-        {videoEnded && !exerciseDone ? (
-          <ButtonContainer>
-            <StyledActiveButton onClick={handleEvent}>
-              Jag har gjort övningen
-            </StyledActiveButton>
-          </ButtonContainer>
-        ) : null}
-
-        {exerciseDone && !showActive ? (
-          <>
-            <StyledReward>
-              <FaThumbsUp />
-            </StyledReward>
-            <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
-            <p>Du har {patientStatistics} gånger kvar att göra idag!</p>
-          </>
-        ) : null}
-
-        {!videoEnded && (
-          <ButtonContainer>
-            <StyledDisabledButton
-              data-tip
-              data-for="watchVideo"
-              disabledTooltip
-            >
-              Jag har gjort övningen
-            </StyledDisabledButton>
-            <ReactTooltip id="watchVideo" place="bottom" effect="solid">
-              Du måste se klart videon innan du kan trycka på knappen!
-            </ReactTooltip>
-          </ButtonContainer>
+      <Wrapper>
+        {isTitleAndDescFetched && (
+          <Left>
+            <StyledVideoTitle>{title}</StyledVideoTitle>
+            <StyledVideoText>{description}</StyledVideoText>
+          </Left>
         )}
 
-        {showActive ? (
-          <>
-            <StyledReward>
-              <FaThumbsUp />
-            </StyledReward>
-            <StyledInactiveHint>
-              Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
-            </StyledInactiveHint>
-          </>
-        ) : null}
-      </ActionContainer>
+        <Right>
+          {scene === 1 && (
+            <ButtonContainer>
+              <StyledDisabledButton
+                data-tip
+                data-for="watchVideo"
+                disabledTooltip
+              >
+                Jag har gjort övningen
+              </StyledDisabledButton>
+              <ReactTooltip id="watchVideo" place="bottom" effect="solid">
+                Du måste se klart videon innan du kan trycka på knappen!
+              </ReactTooltip>
+            </ButtonContainer>
+          )}
+
+          {scene === 2 && (
+            <ButtonContainer>
+              <StyledActiveButton onClick={handleEvent}>
+                Jag har gjort övningen
+              </StyledActiveButton>
+            </ButtonContainer>
+          )}
+
+          {scene === 3 && (
+            <>
+              <StyledReward>
+                <StyledIcon />
+                {isExploding && (
+                  <StyledConfettiShown>
+                    <ConfettiExplosion
+                      force={0.6}
+                      duration={4000}
+                      particleCount={150}
+                      floorHeight={1500}
+                      floorWidth={1600}
+                    />
+                  </StyledConfettiShown>
+                )}
+              </StyledReward>
+            </>
+          )}
+
+          {scene === 4 && (
+            <>
+              <StyledInactiveHint>Jättebra jobbat!</StyledInactiveHint>
+              <p>Du har {patientStatistics} gånger kvar att göra idag!</p>
+            </>
+          )}
+
+          {showActive && (
+            <>
+              <StyledReward>
+                <FaThumbsUp />
+              </StyledReward>
+              <StyledInactiveHint>
+                Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
+              </StyledInactiveHint>
+            </>
+          )}
+        </Right>
+      </Wrapper>
+      <TextContainer>
+        <StyledDivider />
+      </TextContainer>
+
+      <ActionContainer></ActionContainer>
     </PatientLayout>
   );
 };
