@@ -8,7 +8,6 @@ import NotFoundPage from "./pages/common/404";
 /* ===== Patient Pages ===== */
 import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientPanel from "./pages/patient/PatientPanel";
-import ExerciseList from "./pages/patient/ExerciseList";
 import QrScanner from "./pages/patient/QrScanner";
 import Statistics from "./pages/patient/Statistics";
 import ToDo from "./pages/patient/ToDo";
@@ -53,11 +52,7 @@ function App() {
           path="/activitypanel"
           component={PatientPanel}
         />
-        <ProtectedRoutePatient
-          exact
-          path="/exerciselist"
-          component={ExerciseList}
-        />
+
         <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <ProtectedRoutePatient
           exact
