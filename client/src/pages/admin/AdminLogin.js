@@ -7,7 +7,7 @@ import AdminTheme from "../../themes/AdminTheme";
 import { loginAdmin } from "../../api";
 
 import Button from "../../components/common/Button";
-import UserInput from "../../components/common/UserInput";
+import { UserInput } from "../../components/common/UserInput";
 import WdLogo from "../../components/images/WdLogo";
 import Icon from "../../components/common/Icons";
 
