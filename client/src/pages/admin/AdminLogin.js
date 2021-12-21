@@ -83,7 +83,7 @@ const StyledLoginHeader = styled.div`
 const AdminLogin = () => {
   let isCookie = localStorage.getItem("isAuthenticatedAdmin");
   if (isCookie !== null) {
-    window.location = "http://localhost:3000/adminpanel";
+    window.location = "/adminpanel";
   }
 
   const [loginName, setLoginName] = useState("");

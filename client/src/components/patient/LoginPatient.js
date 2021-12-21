@@ -15,7 +15,7 @@ const LoginContainer = styled.div`
 const LoginPatient = () => {
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   if (isCookie !== null) {
-    window.location= "http://localhost:3000/activitypanel";
+    window.location= "/activitypanel";
   }
 
   const [loginName, setLoginName] = useState("");
