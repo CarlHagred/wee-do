@@ -21,6 +21,10 @@ const StyledButton = styled.button`
 
   cursor: pointer;
 
+  @media (max-width: 375px) {
+    font-size: ${(props) => (props.size === "lg" ? "1.2" : "1.2")}em;
+  }
+
   ${(props) =>
     props.disabled
       ? css`

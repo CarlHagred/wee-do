@@ -20,6 +20,10 @@ const StyledInput = styled.input`
 const StyledInputPatien = styled(StyledInput)`
   height: 2.5em;
   font-size: 1.5em;
+  @media (max-width: 375px) {
+    font-size: 1.3em;
+    height: 2em;
+  }
 `;
 
 export const PatientInput = (props) => {
