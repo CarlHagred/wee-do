@@ -17,7 +17,7 @@ const StyledInput = styled.input`
   text-align: left;
 `;
 
-const StyledInputPatien = styled(StyledInput)`
+const StyledInputPatient = styled(StyledInput)`
   height: 2.5em;
   font-size: 1.5em;
   @media (max-width: 375px) {
@@ -28,7 +28,7 @@ const StyledInputPatien = styled(StyledInput)`
 
 export const PatientInput = (props) => {
   return (
-    <StyledInputPatien
+    <StyledInputPatient
       id="input"
       type="text"
       placeholder="Användarnamn..."
