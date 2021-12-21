@@ -36,6 +36,12 @@ const LoginPatient = () => {
     if (event.keyCode === key) {
       handleSubmit();
     }
+    if (event.keyCode === 38) {
+      event.preventDefault();
+    }
+    if (event.keyCode === 40) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -43,12 +49,15 @@ const LoginPatient = () => {
       <span id="patientError" />
       <PatientInput
         theme={PatientTheme}
-        type="text"
+        type="number"
         name="name"
         id="loginPatient"
+        onWheel={(event) => {
+          event.currentTarget.blur();
+        }}
         onKeyDown={listener}
         onChange={(e) => setLoginName(e.target.value)}
-        placeholder="Skriv användarnamn här"
+        placeholder="Skriv användar-id här..."
       />
       <Button width="wide" onClick={handleSubmit}>
         Logga in

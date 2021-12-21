@@ -20,13 +20,21 @@ const StyledInput = styled.input`
 const StyledInputPatien = styled(StyledInput)`
   height: 2.5em;
   font-size: 1.5em;
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
 `;
 
 export const PatientInput = (props) => {
   return (
     <StyledInputPatien
       id="input"
-      type="text"
+      type="number"
       placeholder="Användarnamn..."
       onChange={props.onChange}
       {...props}
