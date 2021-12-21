@@ -23,8 +23,8 @@ export const loginPatient = (req, res, next) => {
 };
 
 //Hämtar den pågående sessionen
-export const getSession =  (req, res) => {
-  res.json(req.user); 
+export const getSession = (req, res) => {
+  res.json(req.user);
 };
 
 //Förstör den pågående sessionen
@@ -109,12 +109,14 @@ export const postSelectedVideos = async (req, res) => {
               $push: {
                 statistics: {
                   vidId: value.id,
-                  vidTitle: req.params.title,
+                  vidTitle: value.title,
                   scans: 0,
                   timesWatched: 0,
                   scanTime: [],
                   watchedTime: [],
                   amountOfTimes: value.amount,
+                  set: value.set,
+                  rep: value.rep,
                 },
               },
             },
@@ -202,23 +204,21 @@ export const getVideoUrl = async (req, res) => {
 };
 
 export const getMyVideos = async (req, res) => {
-
   const name = req.query.name;
 
-  if(name) {
-    const patient = await Patient.findOne({name: name}); 
+  if (name) {
+    const patient = await Patient.findOne({ name: name });
 
-    if(!patient) {
-      return res.status(403).json({data: 'No videos due to null patient'}); 
-    }; 
-    
-    const data = patient.statistics.filter(video => {
-      return video.amountOfTimes; 
+    if (!patient) {
+      return res.status(403).json({ data: "No videos due to null patient" });
+    }
+
+    const data = patient.statistics.filter((video) => {
+      return video.amountOfTimes;
     });
 
-    return res.json({data: data})
-  };
+    return res.json({ data: data });
+  }
 
-  return res.status(403).json({data: 'No videos due to null patient'});
-
+  return res.status(403).json({ data: "No videos due to null patient" });
 };
