@@ -5,51 +5,59 @@ import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
 import Button from "../../components/common/Button";
 
-const StyledContainer = styled.div`
-  text-align: left;
-  margin: 2.3em;
-`;
+const StyledContainer = styled.div``;
 
-const StyledH2 = styled.h2`
+const StyledHeader = styled.h1`
   font-size: 3.5em;
   text-align: center;
-  margin: 2% auto 2% auto;
   font-weight: 900;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @media (max-width: 375px) {
+    font-size: 2.5em;
+  }
+`;
+
+const StyledDiv = styled.div`
+  margin: 0 30px 15px 30px;
 `;
 
 const StyledTitle = styled.p`
   font-weight: bold;
   font-size: 2em;
-  margin: 0% auto 0% auto;
-  padding: 2%;
   border-radius: 25px;
+  padding: 10px;
   &:hover {
     background-color: lightgrey;
+  }
+  @media (max-width: 375px) {
+    font-size: 1.3rem;
   }
 `;
 
 const StyledP = styled.p`
   font-size: 1.5em;
   margin-top: 1%;
-  margin-bottom: 1%;
-  padding-left: 5%;
+  margin-bottom: 5%;
+  padding-left: 3%;
+  @media (max-width: 375px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const StyledLi = styled.li`
   font-size: 1.5em;
   margin-top: 1%;
-  margin-bottom: 1%;
-  padding-left: 5%;
-`;
-
-const StyledDiv = styled.div`
-  width: 80%;
-  margin: 0% auto 1% auto;
+  margin-bottom: 5%;
+  padding-left: 8%;
+  @media (max-width: 375px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const StyledButton = styled(Button)`
-  margin: auto;
-  margin-top: 12%;
+  margin: 30px auto;
 `;
 
 const Help = () => {
@@ -124,7 +132,7 @@ const Help = () => {
   return (
     <PatientLayout>
       <StyledContainer>
-        <StyledH2>Hjälp</StyledH2>
+        <StyledHeader>Hjälp</StyledHeader>
 
         <StyledDiv>
           <StyledTitle onClick={handleEvent1}>
