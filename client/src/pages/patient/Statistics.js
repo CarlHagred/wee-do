@@ -10,11 +10,14 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   text-align: left;
   margin-bottom: 5%;
+  margin-left: 4%;
+  margin-right: 4%;
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 2em;
-  padding: 1em;
+  font-size: 2.5em;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
   font-weight: 600;
 `;
 
@@ -24,8 +27,6 @@ const StyledStatistics = styled.div`
   padding: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
-  margin-left: 4%;
-  margin-right: 4%;
   color: #22201c;
   :hover {
     background: #7dabab;
