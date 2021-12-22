@@ -7,6 +7,30 @@ import { ImQrcode } from "react-icons/im";
 import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 
+const WrapTest = styled.div`
+  width: 1000px;
+  margin: auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const Item = styled.div`
+  width: 32%;
+  padding-bottom: 18%; /* 32:18, i.e. 16:9 */
+  margin-bottom: 2%; /* (100-32*3)/2 */
+  background-color: green;
+`;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  background-color: lightblue;
+  margin: 0 auto;
+`;
+
 const StyledHeader = styled.h1`
   font-size: 2em;
   padding-top: 1em;
@@ -141,39 +165,53 @@ const ToDo = () => {
   return (
     <PatientLayout>
       <StyledHeader>Mina övningar</StyledHeader>
-      <ExerciseContainer>
-        {myVideos?.data?.data.map((video) => {
-          return (
-            <Link
-              to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
-              key={video.vidId}
-            >
-              <VideoContainer>
-                <ThumbnailContainer>
-                  <StyledThumbnail
-                    src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
-                  />
-                  <HoverContainer>
-                    <StyledHoverText>VISA</StyledHoverText>
-                  </HoverContainer>
-                </ThumbnailContainer>
-                <TextContainer>
-                  <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
-                  <StyledVideoText>
-                    Du har gjort övningen: {video.amountOfTimes} gånger
-                  </StyledVideoText>
-                </TextContainer>
-              </VideoContainer>
-            </Link>
-          );
-        })}
-        <NavContainer to="/QrScanner">
-          <IconContainer>
-            <ImQrcode size="80px" fill="white" />
-          </IconContainer>
-          <StyledText>Scanna övning</StyledText>
-        </NavContainer>
-      </ExerciseContainer>
+      <Wrapper>
+        <ExerciseContainer>
+          {myVideos?.data?.data.map((video) => {
+            return (
+              <Link
+                to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
+                key={video.vidId}
+              >
+                <VideoContainer>
+                  <ThumbnailContainer>
+                    <StyledThumbnail
+                      src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
+                    />
+                    <HoverContainer>
+                      <StyledHoverText>VISA</StyledHoverText>
+                    </HoverContainer>
+                  </ThumbnailContainer>
+                  <TextContainer>
+                    <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
+                    <StyledVideoText>
+                      Du har gjort övningen: {video.amountOfTimes} gånger
+                    </StyledVideoText>
+                  </TextContainer>
+                </VideoContainer>
+              </Link>
+            );
+          })}
+          <NavContainer to="/QrScanner">
+            <IconContainer>
+              <ImQrcode size="80px" fill="white" />
+            </IconContainer>
+            <StyledText>Scanna övning</StyledText>
+          </NavContainer>
+        </ExerciseContainer>
+      </Wrapper>
+
+      <WrapTest>
+        <Container>
+          {myVideos?.data?.data.map((video) => {
+            return (
+              <Item
+                src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
+              ></Item>
+            );
+          })}
+        </Container>
+      </WrapTest>
     </PatientLayout>
   );
 };
