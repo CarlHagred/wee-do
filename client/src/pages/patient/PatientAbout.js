@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
+import { getAllActivePatients, getSession } from "../../api";
+import Button from "../../components/common/Button";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 
@@ -8,21 +12,85 @@ const StyledContainter = styled.div`
   align-items: center;
 `;
 
-const StyledH2 = styled.h2`
-  font-weight: 600;
-  font-size: 30px;
+const StyledHeader = styled.h1`
+  font-size: 3.5em;
+  text-align: center;
+  font-weight: 900;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @media (max-width: 375px) {
+    font-size: 2.5em;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  margin: 30px auto;
+`;
+
+const StyledP = styled.p`
+  font-size: 1.5em;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  padding-left: 3%;
+  @media (max-width: 375px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const StyledA = styled.a`
+  display: block;
+  width: fit-content;
+  margin: 0% 0% 0% 3%;
+  font-size: 1.4em;
+  padding: 0.8%;
+  &:hover {
+    background-color: lightgrey;
+  }
 `;
 
 const About = () => {
+  let isCookie = localStorage.getItem("isAuthenticatedPatient");
+  let history = useHistory();
+  const [patient, setPatient] = useState("");
+  const [active, setActive] = useState([]);
+
+  const getActivity = async () => {
+    try {
+      const currentActivity = await getAllActivePatients();
+      if (!currentActivity.data) {
+        throw new Error(`Error: ${currentActivity.status}`);
+      }
+      if (currentActivity) {
+        setActive(currentActivity.data[0].name);
+      }
+    } catch (e) {}
+  };
+
+  const getPatient = async () => {
+    try {
+      const currentPatient = await getSession();
+      if (!currentPatient) {
+        throw new Error(`Error ${currentPatient.status}`);
+      }
+      if (currentPatient) {
+        setPatient(currentPatient.data.name);
+      }
+    } catch (e) {}
+  };
+
+  const goBack = () => {
+    history.push("/")
+  };
+
   return (
     <PatientLayout>
       <StyledContainter>
-        <StyledH2>Om WeeDo:</StyledH2>
-        <br />
-        <p>
+        <StyledHeader>Om WeeDo:</StyledHeader>
+        <StyledP>
           WeeDo är ett samarbete mellan Mobilt Sjukhus Team och Malmö Universitetet.
-        </p>
-        <p>
+        </StyledP>
+        <StyledP>
           Vi är en grupp studenter som går vårt sista år som
           Informationsarkitekter och Systemutvecklare. För vårt examensprojekt
           blev vi utvalda att samarbeta med Mobilt Sjukhus Team för att utveckla en
@@ -31,25 +99,30 @@ const About = () => {
           vill ge patienter möjlighet till att sköta återhämtning och
           fysioterapi från sitt eget hem, samtidigt som man bibehåller en
           kontinuerlig kontakt med sin fysioterapeft.
-        </p>
-        <br />
-        <p>
+        </StyledP>
+
+        <StyledP>
           <strong>
             Vill du veta mer Malmö Universitet och om de två programmen, följ
             länkarna nedan:
           </strong>
-        </p>
-        <br />
-        <a href="https://mau.se/">Malmö Universitet</a>
-        <br />
-        <a href="https://mau.se/sok-utbildning/program/tgiaa/">
+        </StyledP>
+        
+        <StyledA href="https://mau.se/">Malmö Universitet</StyledA>
+        
+        <StyledA href="https://mau.se/sok-utbildning/program/tgiaa/">
           Informationsarkitektur
-        </a>
-        <br />
-        <a href="https://mau.se/sok-utbildning/program/tgsya/">
+        </StyledA>
+        
+        <StyledA href="https://mau.se/sok-utbildning/program/tgsya/">
           Systemutveckling
-        </a>
-        <br />
+        </StyledA>
+        
+        {isCookie === null && active !== null ? (
+        <StyledButton size="lg" onClick={goBack}>
+          Tillbaka
+        </StyledButton>
+      ) : null}
       </StyledContainter>
     </PatientLayout>
   );
