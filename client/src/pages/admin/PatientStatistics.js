@@ -74,6 +74,7 @@ const StyledClendar = styled.div`
   }
 `;
 
+
 const StyledPatient = styled.p`
   background-color: #ccc;
   padding: 25px;
@@ -93,13 +94,43 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledCalAndStatLeft = styled.div`
+  .sides{
+margin:0;
+  }
+  .left{
+  float:left;
+  width:75%;
+  overflow:hidden;  
+  }
+ 
+`;
+
+
+const StyledCalAndStatRight = styled.div`
+  .sides{
+  margin:0;
+  }
+  .right{
+  float:left;
+  width:25%;
+  overflow:hidden;
+  } 
+`;
+
 const StyledStatistics = styled.div`
-  background-color: rgb(247, 247, 248, 100%);
+  //background-color: rgb(247, 247, 248, 100%);
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
   border-radius: 4px;
   margin-top: 5px;
   margin-bottom: 5px;
+  padding: 10px;
+  margin: 5px;
+  p {
+    font-size: 1em;
+    padding: 2px;
+  }
 `;
 
 const StyledChart = styled.div`
@@ -123,6 +154,21 @@ const ListPanel = styled.nav`
   gap: 1em;
   align-items: center;
   margin-bottom: 1%;
+  justify-content: left;
+`;
+
+const ListPanelWrapper2 = styled.div`
+  justify-content: top;
+`;
+
+const ListPanel2 = styled.nav`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10em;
+  align-items: top;
+  margin-top: 5px;
+  margin-bottom: 5%;
   justify-content: left;
 `;
 
@@ -300,7 +346,7 @@ const PatientStatistics = () => {
                       <ListPanelWrapper>
           <ListPanel>
                         <h3><StyledHr/><br/>
-                          {stats.vidTitle}
+                          {/*{stats.vidTitle}*/}
                           <p>Antal gånger per dag: {stats.amountOfTimes}</p>
                         <p>Antal sets per gång: 3</p>
                         <p>Antal reps per set: 15</p>
@@ -330,41 +376,43 @@ const PatientStatistics = () => {
         <hr/>
         <br/>
 
-        
-            
-          <StyledClendar>
+        <StyledClendar>
+        <ListPanelWrapper2>
+          <ListPanel2>
+            <StyledCalAndStatLeft>
+          
             <h2>Kalender</h2>
 
-          
+        
         <Calendar value={dateState} onChange={changeDate}/>
-        <p>Valt datum är <b>{moment(dateState).format('LL')}</b></p></StyledClendar>
+        </StyledCalAndStatLeft>
 
-        <ListPanelWrapper>
-          <ListPanel>
+        <StyledCalAndStatRight>
+        <h2>Statistik för {moment(dateState).format('LL')}</h2>
           {arrayDate.map((stat, index) => (
             <React.Fragment key={stat.vidId}>
               <StyledStatistics>
-                <br />
-                <strong>Video: </strong>
-                  <StyledLink to={`../exercise/${stat.vidId}`}>{stat.vidTitle}</StyledLink>
-                <br />
-                <strong>Antal gånger idag: {arrayDateTime[index]}</strong>     
-                <br />
-                <strong>Antal förväntade idag: </strong>
-                  3
-                  {/*<p>{stat.amountOfTimes}</p>*/}
+                <p>Övning: </p>
+                  <StyledLink to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLink>
+                <p>Antal gånger idag: {arrayDateTime[index]}</p>     
+                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {
+                  
+                }             
               </StyledStatistics>
             </React.Fragment>
           ))}
-        
-        
-        </ListPanel>
-        </ListPanelWrapper>
+                    </StyledCalAndStatRight>
+          </ListPanel2>
+          </ListPanelWrapper2>
+          </StyledClendar>
+          
 
       
-        <StyledChart>
+
+      
+        {/*<StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
-        </StyledChart>
+        </StyledChart>*/}
         </ContentContainer>
       
     </AdminLayout>
