@@ -4,33 +4,46 @@ import { getSession, getOnePatient } from "../../api";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 5%;
+  margin-left: 4%;
+  margin-right: 4%;
+`;
+
+const StyledHeader = styled.h1`
+  font-size: 2.5em;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
+  font-weight: 600;
+`;
+
 const StyledStatistics = styled.div`
-  background-color: rgb(247, 247, 248, 100%);
-  border: solid;
-  border-color: rgba(218, 223, 225, 0.3);
+  background-color: #e0eded;
   border-radius: 4px;
+  padding: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
+  color: #22201c;
   :hover {
-    background: rgb(108, 153, 255, 33%);
+    background: #7dabab;
+    cursor: pointer;
+  }
+`;
+
+const StyledTitle = styled.p`
+  font-weight: 600;
+  font-size: 1.2em;
+  @media (min-width: 769px) {
+    font-size: 1.5em;
   }
 `;
 
 const StyledP = styled.p`
-  margin-left: 1.5em;
-  margin-top: 0.5em;
-`;
-
-const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 3rem;
-  flex-direction: column;
-  text-align: left;
-`;
-const StyledHeader = styled.h1`
-  font-size: 3em;
-  margin-left: 0.5em;
+  padding: 5px 0;
 `;
 
 const Statistics = () => {
@@ -76,14 +89,10 @@ const Statistics = () => {
         {stats.map((stat) => (
           <React.Fragment key={stat.vidId}>
             <StyledStatistics>
+              <StyledTitle>{stat.vidId}</StyledTitle>
               <StyledP>
-                <strong>Video: </strong> {stat.vidId}
-              </StyledP>
-              <StyledP>
-                <strong>Antal gånger kvar: </strong>
-                {stat.timesLeft !== 0
-                  ? stat.timesLeft
-                  : "Kom tillbaka imorgon, du är klar för idag!"}
+                Antal gånger kvar:{" "}
+                {stat.timesLeft !== 0 ? stat.timesLeft : "Du är klar för idag!"}
               </StyledP>
             </StyledStatistics>
           </React.Fragment>

@@ -40,10 +40,9 @@ const StyledNewPatient = styled.p`
 `;
 
 const RegisterPatient = () => {
+  let history = useHistory();
   const [newPatient, setNewPatient] = useState("");
   const [button, setButton] = useState(false)
-
-  let history = useHistory();
 
   const handleEvent = async () => {
     const newPatientName = await getNewPatient();
@@ -53,9 +52,7 @@ const RegisterPatient = () => {
   };
 
   const routeChange = () => {
-    
-    let path = "http://localhost:3000/admin/select/" + newPatient
-    window.location = path
+    history.push("/admin/select/" + newPatient)
   }
   
   return (

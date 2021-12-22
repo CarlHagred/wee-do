@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -133,6 +133,7 @@ const StyledHr = styled.hr`
 
 
 const PatientStatistics = () => {
+  let history = useHistory();
   const { name } = useParams();
   const [patient, setPatient] = useState([]);
   const [patientStatistics, setPatientStatistics] = useState([]);
@@ -159,7 +160,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deletePatient();
-      window.location = "/admin/search/patient";
+      history.push("/admin/search/patient");
     }
   };
 
@@ -184,7 +185,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       setPatientInactive();
-      window.location = "/admin/search/patient";
+      history.push("/admin/search/patient");
     }
   };
 
@@ -197,7 +198,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       setPatientActive();
-      window.location = "/admin/search/patient";
+      history.push("/admin/search/patient");
     }
   };
 
@@ -213,7 +214,7 @@ const PatientStatistics = () => {
   };
 
   const handleSelectExcersice = () => {
-    window.location = `/admin/select/${patient.name}`;
+    history.push(`/admin/select/${patient.name}`);
   };
 
   const [dateState, setDateState] = useState(new Date());

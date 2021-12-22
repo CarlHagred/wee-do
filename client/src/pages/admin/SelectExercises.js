@@ -44,6 +44,8 @@ const SelectExercises = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
   const [amount, setAmount] = useState([]);
+  const [set, setSet] = useState([]);
+  const [rep, setRep] = useState([]);
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
   const history = useHistory();
@@ -70,7 +72,10 @@ const SelectExercises = () => {
 
       let newSelection = {
         id: videos[index].videoId,
+        title: videos[index].videoTitle,
         amount: parseInt(amount[index]),
+        set: parseInt(set[index]),
+        rep: parseInt(rep[index]),
       };
       newArr.push(newSelection);
     });
@@ -83,10 +88,22 @@ const SelectExercises = () => {
     setCheckedState(arr);
   };
 
-  const handleAmountChange = (value, index, id) => {
+  const handleAmountChange = (value, index) => {
     let newArr = [...amount];
     newArr[index] = parseInt(value);
     setAmount(newArr);
+  };
+
+  const handleSetChange = (value, index) => {
+    let newArr = [...set];
+    newArr[index] = parseInt(value);
+    setSet(newArr);
+  };
+
+  const handleRepChange = (value, index) => {
+    let newArr = [...rep];
+    newArr[index] = parseInt(value);
+    setRep(newArr);
   };
 
   const handleSubmit = () => {
@@ -125,17 +142,31 @@ const SelectExercises = () => {
                     <select
                       value={amount[index]}
                       onChange={(e) => {
-                        handleAmountChange(
-                          e.target.value,
-                          index,
-                          videos.videoId
-                        );
+                        handleAmountChange(e.target.value, index);
                       }}
                     >
                       {amountOptions.map((option) => (
-                        <option value={option}>
-                          Antal gånger per dag: {option}
-                        </option>
+                        <option value={option}>GPD: {option}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={set[index]}
+                      onChange={(e) => {
+                        handleSetChange(e.target.value, index);
+                      }}
+                    >
+                      {amountOptions.map((option) => (
+                        <option value={option}>SET: {option}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={rep[index]}
+                      onChange={(e) => {
+                        handleRepChange(e.target.value, index);
+                      }}
+                    >
+                      {amountOptions.map((option) => (
+                        <option value={option}>REP: {option}</option>
                       ))}
                     </select>
                     <input
