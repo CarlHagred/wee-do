@@ -47,13 +47,15 @@ const StyledP = styled.p`
 `;
 
 const Statistics = () => {
+  /* === PATIENT SESSION === */
   const [patientStatistics, setPatientStatistics] = useState([]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const fetchedUsername = await getSession();
       const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
       setPatientStatistics(fetchedPatient.data.statistics);
+      
     };
     fetchData();
   }, []);

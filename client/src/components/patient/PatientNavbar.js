@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import Hamburger from "hamburger-react";
 
 import PatientTheme from "../../themes/PatientTheme";
@@ -154,19 +154,29 @@ const StyledDivider = styled.hr`
 `;
 
 const Navbar = () => {
+  const history = useHistory();
+
   /* === PATIENT SESSION === */
   const [patient, setPatient] = useState("");
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedPatientSession = await getSession();
-      const fetchedPatient = await getOnePatient(fetchedPatientSession.data.name)
-      setPatient(fetchedPatientSession.data);
-      setStatus(fetchedPatient.data);
+      try {
+        const fetchedPatientSession = await getSession();
+        const fetchedPatient = await getOnePatient(fetchedPatientSession.data.name)
+        setPatient(fetchedPatientSession.data);
+        setStatus(fetchedPatient.data);
+      } catch (error) {
+        if(status.active == null){
+          localStorage.clear()
+          history.push("/"); 
+        }
+      }  
     };
     fetchData();
-  }, []);
+  }, [history, status.active]);
+
 
   /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
