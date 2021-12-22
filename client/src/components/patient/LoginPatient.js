@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 import { loginPatient } from "../../api";
 
@@ -17,7 +16,6 @@ const LoginContainer = styled.div`
 const LoginPatient = () => {
   let history = useHistory();
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
-  let history = useHistory();
   if (isCookie !== null) {
     history.push("/activitypanel");
   }
