@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import { loginPatient } from "../../api";
 
@@ -13,9 +14,10 @@ const LoginContainer = styled.div`
 `;
 
 const LoginPatient = () => {
+  let history = useHistory();
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   if (isCookie !== null) {
-    window.location= "/activitypanel";
+    history.push("/activitypanel");
   }
 
   const [loginName, setLoginName] = useState("");
