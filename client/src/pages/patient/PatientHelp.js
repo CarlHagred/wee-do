@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
 import Button from "../../components/common/Button";
-import { useHistory } from "react-router-dom";
+
 
 const StyledHeader = styled.h1`
   font-size: 3.5em;

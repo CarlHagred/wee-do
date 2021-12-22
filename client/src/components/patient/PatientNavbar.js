@@ -171,7 +171,7 @@ const Navbar = () => {
   /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
-  const url = "http://localhost:3000/activitypanel";
+  const url = "/activitypanel";
 
   if (window.location.href !== url) {
     return (
