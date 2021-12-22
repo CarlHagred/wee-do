@@ -91,7 +91,7 @@ const Statistics = () => {
             <StyledStatistics>
               <StyledTitle>{stat.vidId}</StyledTitle>
               <StyledP>
-                Antal gånger kvar:
+                Antal gånger kvar:{" "}
                 {stat.timesLeft !== 0 ? stat.timesLeft : "Du är klar för idag!"}
               </StyledP>
             </StyledStatistics>
