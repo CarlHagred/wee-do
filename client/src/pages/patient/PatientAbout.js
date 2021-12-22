@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { getAllActivePatients, getSession } from "../../api";
 import Button from "../../components/common/Button";
 
 import PatientLayout from "../../components/patient/PatientLayout";
@@ -52,32 +50,6 @@ const StyledA = styled.a`
 const About = () => {
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   let history = useHistory();
-  const [patient, setPatient] = useState("");
-  const [active, setActive] = useState([]);
-
-  const getActivity = async () => {
-    try {
-      const currentActivity = await getAllActivePatients();
-      if (!currentActivity.data) {
-        throw new Error(`Error: ${currentActivity.status}`);
-      }
-      if (currentActivity) {
-        setActive(currentActivity.data[0].name);
-      }
-    } catch (e) {}
-  };
-
-  const getPatient = async () => {
-    try {
-      const currentPatient = await getSession();
-      if (!currentPatient) {
-        throw new Error(`Error ${currentPatient.status}`);
-      }
-      if (currentPatient) {
-        setPatient(currentPatient.data.name);
-      }
-    } catch (e) {}
-  };
 
   const goBack = () => {
     history.push("/")
@@ -118,7 +90,7 @@ const About = () => {
           Systemutveckling
         </StyledA>
         
-        {isCookie === null && active !== null ? (
+        {isCookie === null ? (
         <StyledButton size="lg" onClick={goBack}>
           Tillbaka
         </StyledButton>
