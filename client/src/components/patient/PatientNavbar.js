@@ -194,8 +194,8 @@ const Navbar = () => {
         </NavbarMenu>
 
         <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/QrScanner" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="qrcode" /> Scanna övning
+          <NavbarItemBurger to="/todo" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="gym_user" /> Mina övningar
           </NavbarItemBurger>
           <StyledDivider />
 
