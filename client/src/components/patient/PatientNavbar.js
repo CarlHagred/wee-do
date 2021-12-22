@@ -9,7 +9,7 @@ import WdLogo from "../images/WdLogo";
 import Icon from "../common/Icons";
 import { customDialogPatient } from "../common/Confirmation";
 
-import { getSession } from "../../api";
+import { getSession, getOnePatient } from "../../api";
 
 const StyledIcon = styled(Icon)`
   margin-right: 10px;
@@ -156,10 +156,14 @@ const StyledDivider = styled.hr`
 const Navbar = () => {
   /* === PATIENT SESSION === */
   const [patient, setPatient] = useState("");
+  const [status, setStatus] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPatientSession = await getSession();
+      const fetchedPatient = await getOnePatient(fetchedPatientSession.data.name)
       setPatient(fetchedPatientSession.data);
+      setStatus(fetchedPatient.data);
     };
     fetchData();
   }, []);
@@ -182,7 +186,8 @@ const Navbar = () => {
           </NavbarLogo>
           <NavbarItem to="/todo">Mina övningar</NavbarItem>
           <NavbarItem to="/statistics">Se statistik</NavbarItem>
-          <PatientName>{patient.name}</PatientName>
+          
+          <PatientName>{status.active === false ? "Inaktiv" : patient.name}</PatientName>
 
           <NavbarItemLogout
             isActive={() => false}
@@ -231,7 +236,7 @@ const Navbar = () => {
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
 
-          <PatientName>{patient.name}</PatientName>
+          <PatientName>{status.active === false ? "Inaktiv" : patient.name}</PatientName>
 
           <NavbarItemLogout
             isActive={() => false}
