@@ -21,6 +21,7 @@ const ExerciseContainer = styled.div`
   gap: 0.5em;
   @media (min-width: 415px) {
     grid-template-columns: repeat(1, 1fr);
+    margin: 1em 5em;
   }
 
   @media (min-width: 640px) {
