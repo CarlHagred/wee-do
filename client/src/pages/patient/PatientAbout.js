@@ -20,12 +20,12 @@ const About = () => {
         <StyledH2>Om WeeDo:</StyledH2>
         <br />
         <p>
-          WeeDo är ett samarbete mellan Region Skåne och Malmö Universitetet.
+          WeeDo är ett samarbete mellan Mobilt Sjukhus Team och Malmö Universitetet.
         </p>
         <p>
           Vi är en grupp studenter som går vårt sista år som
           Informationsarkitekter och Systemutvecklare. För vårt examensprojekt
-          blev vi utvalda att samarbeta med Region Skåne för att utveckla en
+          blev vi utvalda att samarbeta med Mobilt Sjukhus Team för att utveckla en
           webbapplikation för att brygga avståndet mellan patienter och dess
           fysioterapeuter. Region Skåne göra en webbapplikation för att kunna
           vill ge patienter möjlighet till att sköta återhämtning och

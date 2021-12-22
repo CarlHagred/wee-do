@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
       <ThemeProvider theme={PatientTheme}>
         {isCookie !== null ? <PatientNavbar /> : null }
         <PageContainer>{children}</PageContainer>
-        <PatientFooter />
+        {isCookie !== null ? <PatientFooter /> : null }
       </ThemeProvider>
     </PageWrapper>
   );
