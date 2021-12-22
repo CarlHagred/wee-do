@@ -7,53 +7,20 @@ import { ImQrcode } from "react-icons/im";
 import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 
-const NavContainer = styled(NavLink)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: ${(props) => props.theme.palette.brand};
-  border-radius: 2em;
-  position: relative;
-  padding: 1.2em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-  height: 180px;
-  &:hover {
-    border-style: solid;
-    background-color: ${(props) => props.theme.palette.hover};
-  }
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 160px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledText = styled.div`
-  font-size: 1.2em;
-  color: white;
+const TextContainer = styled.div`
+  padding: 0.2em 0.5em;
 `;
 
 const StyledContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
-  align-content: center;
-  margin: 3em auto 0 auto;
-  @media (max-width: 1085px) {
-    max-width: 660px;
-  }
-  @media (max-width: 768px) {
-    max-width: 328px;
-    min-width: 250px;
-  }
+  margin: 2em auto;
 `;
 
+const ExerciseContainer = styled.div``;
+
 const VideoContainer = styled.div`
-  height: 260px;
+  padding-bottom: 1.5em;
 `;
 
 const StyledThumbnail = styled.img`
@@ -76,6 +43,12 @@ const HoverContainer = styled.div`
   text-align: center;
 `;
 
+const StyledHoverText = styled.div`
+  font-size: 32px;
+  padding: 16px 32px;
+  color: white;
+`;
+
 const ThumbnailContainer = styled.div`
   position: relative;
   background-color: rgba(0, 0, 0, 0.9);
@@ -87,23 +60,11 @@ const ThumbnailContainer = styled.div`
   }
 `;
 
-const StyledHoverText = styled.div`
-  font-size: 32px;
-  padding: 16px 32px;
-  color: white;
-`;
-
 const StyledHeader = styled.h1`
   font-size: 2em;
   padding-bottom: 1em;
   font-weight: 600;
-`;
-
-const ExerciseContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 2.4em;
+  text-align: center;
 `;
 
 const StyledVideoTitle = styled.h1`
@@ -120,6 +81,38 @@ const StyledVideoText = styled.p`
   font-size: 0.9em;
 `;
 
+const NavContainer = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: ${(props) => props.theme.palette.brand};
+  border-radius: 2em;
+  position: relative;
+  padding: 1.2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  height: 180px;
+  width: 240px;
+  margin: 2em auto;
+  &:hover {
+    border-style: solid;
+    background-color: ${(props) => props.theme.palette.hover};
+  }
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 160px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledText = styled.div`
+  font-size: 1.2em;
+  color: white;
+`;
+
 const ToDo = () => {
   const [myVideos, setMyVideos] = useState([]);
 
@@ -132,12 +125,12 @@ const ToDo = () => {
         const videoData = await getMyVideos(params);
         setMyVideos(videoData);
       } catch {
-        console.log('Error occured fetching videos with amount of times left'); 
+        console.log("Error occured fetching videos with amount of times left");
       }
     };
     fetchData();
   }, []);
-  
+
   return (
     <PatientLayout>
       <StyledContentContainer>
@@ -158,10 +151,12 @@ const ToDo = () => {
                       <StyledHoverText>VISA</StyledHoverText>
                     </HoverContainer>
                   </ThumbnailContainer>
-                  <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
-                  <StyledVideoText>
-                    Du har gjort denna: {video.amountOfTimes} gånger
-                  </StyledVideoText>
+                  <TextContainer>
+                    <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
+                    <StyledVideoText>
+                      Du har gjort övningen: {video.amountOfTimes} gånger
+                    </StyledVideoText>
+                  </TextContainer>
                 </VideoContainer>
               </Link>
             );
