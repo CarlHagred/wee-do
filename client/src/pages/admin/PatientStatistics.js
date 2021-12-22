@@ -131,10 +131,6 @@ const StyledHr = styled.hr`
   width: 400px;
 `;
 
-const StyledCal = styled.div`
-width: 2000px;
-height: 1500px;
-`;
 
 const PatientStatistics = () => {
   const { name } = useParams();
