@@ -7,30 +7,6 @@ import { ImQrcode } from "react-icons/im";
 import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 
-const WrapTest = styled.div`
-  width: 1000px;
-  margin: auto;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const Item = styled.div`
-  width: 32%;
-  padding-bottom: 18%; /* 32:18, i.e. 16:9 */
-  margin-bottom: 2%; /* (100-32*3)/2 */
-  background-color: green;
-`;
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  background-color: lightblue;
-  margin: 0 auto;
-`;
-
 const StyledHeader = styled.h1`
   font-size: 2em;
   padding-top: 1em;
@@ -39,14 +15,21 @@ const StyledHeader = styled.h1`
 `;
 
 const ExerciseContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 2em auto;
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2em;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin: 1em auto;
+  gap: 0.5em;
+  @media (min-width: 415px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1em 5em;
+  }
+  @media (min-width: 930px) {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1em 5em;
   }
 `;
 
@@ -112,7 +95,7 @@ const StyledVideoText = styled.p`
   font-size: 0.9em;
 `;
 
-const NavContainer = styled(NavLink)`
+const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,10 +106,13 @@ const NavContainer = styled(NavLink)`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   height: 180px;
   width: 240px;
-  margin: 2em auto;
+  margin: 1em auto;
   &:hover {
     border-style: solid;
     background-color: ${(props) => props.theme.palette.hover};
+  }
+  @media (min-width: 640px) {
+    margin: 0 auto;
   }
 `;
 
@@ -165,53 +151,41 @@ const ToDo = () => {
   return (
     <PatientLayout>
       <StyledHeader>Mina övningar</StyledHeader>
-      <Wrapper>
-        <ExerciseContainer>
-          {myVideos?.data?.data.map((video) => {
-            return (
-              <Link
-                to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
-                key={video.vidId}
-              >
-                <VideoContainer>
-                  <ThumbnailContainer>
-                    <StyledThumbnail
-                      src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
-                    />
-                    <HoverContainer>
-                      <StyledHoverText>VISA</StyledHoverText>
-                    </HoverContainer>
-                  </ThumbnailContainer>
-                  <TextContainer>
-                    <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
-                    <StyledVideoText>
-                      Du har gjort övningen: {video.amountOfTimes} gånger
-                    </StyledVideoText>
-                  </TextContainer>
-                </VideoContainer>
-              </Link>
-            );
-          })}
-          <NavContainer to="/QrScanner">
+      <ExerciseContainer>
+        {myVideos?.data?.data.map((video) => {
+          return (
+            <Link
+              to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
+              key={video.vidId}
+            >
+              <VideoContainer>
+                <ThumbnailContainer>
+                  <StyledThumbnail
+                    src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
+                  />
+                  <HoverContainer>
+                    <StyledHoverText>VISA</StyledHoverText>
+                  </HoverContainer>
+                </ThumbnailContainer>
+                <TextContainer>
+                  <StyledVideoTitle>{video.vidTitle}</StyledVideoTitle>
+                  <StyledVideoText>
+                    Du har gjort övningen: {video.amountOfTimes} gånger
+                  </StyledVideoText>
+                </TextContainer>
+              </VideoContainer>
+            </Link>
+          );
+        })}
+        <NavLink to="/QrScanner">
+          <NavContainer>
             <IconContainer>
               <ImQrcode size="80px" fill="white" />
             </IconContainer>
             <StyledText>Scanna övning</StyledText>
           </NavContainer>
-        </ExerciseContainer>
-      </Wrapper>
-
-      <WrapTest>
-        <Container>
-          {myVideos?.data?.data.map((video) => {
-            return (
-              <Item
-                src={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
-              ></Item>
-            );
-          })}
-        </Container>
-      </WrapTest>
+        </NavLink>
+      </ExerciseContainer>
     </PatientLayout>
   );
 };
