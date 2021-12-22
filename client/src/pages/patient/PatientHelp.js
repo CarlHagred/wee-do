@@ -29,6 +29,7 @@ const StyledTitle = styled.p`
   padding: 10px;
   &:hover {
     background-color: lightgrey;
+    cursor: pointer;
   }
   @media (max-width: 375px) {
     font-size: 1.3rem;
