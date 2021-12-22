@@ -7,14 +7,18 @@ import { ImQrcode } from "react-icons/im";
 import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 
-const TextContainer = styled.div`
-  padding: 0.2em 0.5em;
+const StyledHeader = styled.h1`
+  font-size: 2em;
+  padding-top: 1em;
+  font-weight: 600;
+  text-align: center;
 `;
 
 const StyledContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   margin: 2em auto;
+  @media (min-width: 768px) {
+    width: 240px;
+  }
 `;
 
 const ExerciseContainer = styled.div``;
@@ -60,12 +64,7 @@ const ThumbnailContainer = styled.div`
   }
 `;
 
-const StyledHeader = styled.h1`
-  font-size: 2em;
-  padding-bottom: 1em;
-  font-weight: 600;
-  text-align: center;
-`;
+const TextContainer = styled.div``;
 
 const StyledVideoTitle = styled.h1`
   font-weight: bold;
@@ -133,8 +132,8 @@ const ToDo = () => {
 
   return (
     <PatientLayout>
+      <StyledHeader>Mina övningar</StyledHeader>
       <StyledContentContainer>
-        <StyledHeader>Mina övningar</StyledHeader>
         <ExerciseContainer>
           {myVideos?.data?.data.map((video) => {
             return (
