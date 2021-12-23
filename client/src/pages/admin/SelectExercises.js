@@ -37,6 +37,18 @@ const StyledTitle = styled.p`
 
 const StyledDiv = styled.div`
   font-size: 1.2em;
+  margin-top: 3%;
+  padding: 1%;
+`;
+
+const StyledLi = styled.li`
+  list-style-type: none;
+  margin: 2% 5% 2% 0%;
+  width: 28%;
+`;
+
+const StyledButton = styled(Button)`
+  margin: auto;
 `;
 
 const SelectExercises = () => {
@@ -115,7 +127,6 @@ const SelectExercises = () => {
   return (
     <AdminLayout>
       <ContentContainer>
-        <Button onClick={handleSubmit}>spara övningar</Button>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
@@ -123,20 +134,21 @@ const SelectExercises = () => {
           }}
         />
         <StyledH1>Övningar</StyledH1>
+        <StyledButton onClick={handleSubmit}>Spara övningar</StyledButton>
         <Flexbox>
           {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
             .map((videos, index) => (
-              <li key={index}>
+              <StyledLi key={index}>
                 <VideoItem key={videos._id}>
                   <StyledTitle>{videos.videoTitle}</StyledTitle>
                   <img
                     src={videos.thumbnail}
                     alt="profile pic"
-                    width="250px"
-                    height="200px"
+                    width="100%"
+                    height="100%"
                   />
                   <StyledDiv>
                     <select
@@ -180,7 +192,7 @@ const SelectExercises = () => {
                     <label for="checked"></label>
                   </StyledDiv>
                 </VideoItem>
-              </li>
+              </StyledLi>
             ))}
         </Flexbox>
       </ContentContainer>
