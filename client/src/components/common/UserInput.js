@@ -26,6 +26,22 @@ const StyledInputPatient = styled(StyledInput)`
   }
 `;
 
+const StyledCheckBox = styled.input`
+  height: 1.6em;
+  width: 1.6em;
+`;
+
+export const QrCheckBox = (props) => {
+  return (
+    <StyledCheckBox
+      id="input"
+      type="checkbox"
+      onChange={props.onChange}
+      {...props}
+    />
+  );
+};
+
 export const PatientInput = (props) => {
   return (
     <StyledInputPatient
@@ -50,4 +66,4 @@ export const UserInput = (props) => {
   );
 };
 
-export default UserInput + PatientInput;
+export default UserInput + PatientInput + QrCheckBox;

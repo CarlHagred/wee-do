@@ -3,12 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
+import { QrCheckBox } from "../../components/common/UserInput";
 
 import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ReactPlayer from "../../components/common/ReactPlayer";
+import AdminTheme from "../../themes/AdminTheme";
 
 const TextContainer = styled.div`
   display: flex;
@@ -55,6 +57,17 @@ const ButtonContainer = styled.div`
   @media (min-width: 769px) {
     height: 100px;
   }
+`;
+
+const CheckAndLabelContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 1.8em;
+  padding-right: 0.2em;
+  display: center;
 `;
 
 const Video = () => {
@@ -120,6 +133,15 @@ const Video = () => {
       )}
 
       <ButtonContainer>
+        <CheckAndLabelContainer>
+          <StyledLabel>Med Qr-Kod?</StyledLabel>
+          <QrCheckBox
+            theme={AdminTheme}
+            type="checkbox"
+            name="name"
+            id="qrCheck"
+          />
+        </CheckAndLabelContainer>
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
           <Button icon="imageCard">Generera Kort</Button>
         </Link>
