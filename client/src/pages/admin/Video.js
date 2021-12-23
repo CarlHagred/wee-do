@@ -120,7 +120,7 @@ const Video = () => {
 
       <ButtonContainer>
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-          <Button icon="qrcode">Generera QR-kod</Button>
+          <Button icon="imageCard">Generera Kort</Button>
         </Link>
         <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
           Radera
