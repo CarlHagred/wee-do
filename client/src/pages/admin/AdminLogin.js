@@ -10,6 +10,7 @@ import Button from "../../components/common/Button";
 import { UserInput } from "../../components/common/UserInput";
 import WdLogo from "../../components/images/WdLogo";
 import Icon from "../../components/common/Icons";
+import { useHistory } from "react-router-dom";
 
 const StyledBody = createGlobalStyle`
   @media (min-width: 740px) {
@@ -26,7 +27,6 @@ const PageWrapper = styled.div`
 `;
 
 const StyledContainerItem = styled.div`
-  font-size: 20px;
   flex: 1;
 `;
 
@@ -82,10 +82,10 @@ const StyledLoginHeader = styled.div`
 `;
 
 const AdminLogin = () => {
+  let history = useHistory();
   let isCookie = localStorage.getItem("isAuthenticatedAdmin");
   if (isCookie !== null) {
-    localStorage.clear();
-    window.location.reload();
+    history.push("/adminpanel");
   }
 
   const [loginName, setLoginName] = useState("");

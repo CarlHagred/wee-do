@@ -5,6 +5,7 @@ import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
 import { BsGraphUp, BsFillPersonFill, BsCardImage } from "react-icons/bs";
 import { MdPersonOff } from "react-icons/md";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 import SearchPatient from "../images/IconSearchPatient";
 import SearchExercise from "../images/IconSearchExercise";
@@ -29,6 +30,7 @@ const variants = {
   patientInactive: MdPersonOff,
   patientActive: BsFillPersonFill,
   imageCard: BsCardImage,
+  gym_user: GiWeightLiftingUp,
 };
 
 const Icon = ({ name, ...props }) => {

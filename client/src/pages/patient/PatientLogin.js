@@ -52,23 +52,32 @@ const StyledHero = styled.img`
 `;
 
 const StyledContentContainer = styled.div`
-  background: white;
-  display: flex;
   flex: 1;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 0 20px;
-  margin-bottom: 8%;
+  justify-content: space-evenly;
+  height: 400px;
+  background: white;
+  margin: 0 30px;
+  @media (max-width: 375px) {
+    margin: 0 20px;
+  }
 `;
 
 const StyledLoginHeader = styled.div`
-  font-size: 2rem;
-  margin: 40px 0;
+  font-size: 3rem;
+  @media (max-width: 740px) {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    font-size: 2.3rem;
+  }
 `;
 
 const StyledHelp = styled(NavLink)`
-  margin-top: 3em;
   font-size: 1.5em;
+  @media (max-width: 740px) {
+    margin: 50px 0;
+  }
 `;
 
 const PatientLogin = () => {

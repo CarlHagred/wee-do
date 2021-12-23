@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
@@ -58,6 +58,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Video = () => {
+  let history = useHistory();
   const { videoId } = useParams();
   const [videos, setVideos] = useState([]);
 
@@ -78,7 +79,7 @@ const Video = () => {
     );
     if (conf) {
       deleteVideo();
-      window.location = "/admin/search/exercise";
+      history.push("/admin/search/exercise");
     }
   };
 
