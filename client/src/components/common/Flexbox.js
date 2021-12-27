@@ -1,26 +1,30 @@
 import styled from "styled-components";
 
-const StyledFlexbox = styled.div`
+const StyledFlexboxParent = styled.div`
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: baseline;
   flex-wrap: wrap;
+`;
+
+const StyledFlexbox = styled(StyledFlexboxParent)`
   margin: 1em;
 `;
 
-const StyledCardFlexbox = styled(StyledFlexbox)`
+const StyledCardFlexbox = styled(StyledFlexboxParent)`
   align-items: center;
   justify-content: space-evenly;
 `;
 
-const CardFlexContainer = styled(StyledFlexbox)`
+const CardFlexContainer = styled(StyledFlexboxParent)`
   width: 210mm;
   height: 258mm;
 `;
 
-const CardHalfContainer = styled(StyledCardFlexbox)`
-  height: 50%;
+const CardHalfContainer = styled(StyledFlexboxParent)`
+  height: 141mm;
+  justify-content: space-evenly;
 `;
 
 const CardItem = styled.div`

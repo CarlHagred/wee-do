@@ -3,14 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
-import { QrCheckBox } from "../../components/common/UserInput";
+import { CustomDatalist, UserInput } from "../../components/common/UserInput";
 
-import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
+import {
+  deleteVideoIndex,
+  getAllVideos,
+  getTitleAndDescById,
+  getAllActivePatients,
+} from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ReactPlayer from "../../components/common/ReactPlayer";
-import AdminTheme from "../../themes/AdminTheme";
 
 const TextContainer = styled.div`
   display: flex;
@@ -45,6 +49,10 @@ const StyledDivider = styled.hr`
   border-color: #d9d9d9;
 `;
 
+const Input = styled(UserInput)`
+  width: 40%;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -57,17 +65,6 @@ const ButtonContainer = styled.div`
   @media (min-width: 769px) {
     height: 100px;
   }
-`;
-
-const CheckAndLabelContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 1.8em;
-  padding-right: 0.2em;
-  display: center;
 `;
 
 const Video = () => {
@@ -110,16 +107,26 @@ const Video = () => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
+  const [patientsActive, setPatientsActive] = useState([]);
 
-  useEffect(() => {
-    const titleAndDesc = async (id) => {
-      const response = await getTitleAndDescById(id);
-      setTitle(response.title);
-      setDescription(response.description);
-      setIsTitleAndDescFetched(true);
-    };
-    titleAndDesc(videoId);
-  }, [videoId]);
+  useEffect(
+    () => {
+      const titleAndDesc = async (id) => {
+        const response = await getTitleAndDescById(id);
+        setTitle(response.title);
+        setDescription(response.description);
+        setIsTitleAndDescFetched(true);
+      };
+      const fetchData = async () => {
+        const allActivePatients = await getAllActivePatients();
+        setPatientsActive(allActivePatients.data);
+      };
+      titleAndDesc(videoId);
+      fetchData();
+    },
+    [videoId],
+    []
+  );
 
   return (
     <AdminLayout>
@@ -133,16 +140,24 @@ const Video = () => {
       )}
 
       <ButtonContainer>
-        <CheckAndLabelContainer>
-          <StyledLabel>Med Qr-Kod?</StyledLabel>
-          <QrCheckBox
-            theme={AdminTheme}
-            type="checkbox"
-            name="name"
-            id="qrCheck"
-          />
-        </CheckAndLabelContainer>
-        <Link to={`/admin/exercise/qrpreview/${videoId}`}>
+        <Input
+          list="userList"
+          id="userInput"
+          placeholder="Patient..."
+          width={"40px"}
+        />
+        <CustomDatalist id="userList">
+          {patientsActive
+            .filter((patient) => {
+              return patient.statistics.some((stats) => {
+                return stats.vidId.includes(videoId);
+              });
+            })
+            .map((patient) => (
+              <option key={patient._id} value={patient.name} />
+            ))}
+        </CustomDatalist>
+        <Link to={`/admin/exercise/qrpreview/${videoId}`} target={"_blank"}>
           <Button icon="imageCard">Generera Kort</Button>
         </Link>
         <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
@@ -153,3 +168,11 @@ const Video = () => {
   );
 };
 export default Video;
+
+/*
+
+*/
+
+/*
+
+*/

@@ -11,14 +11,14 @@ import {
 const StyledH1 = styled.h1`
   margin: 0.2em;
   font-family: "Roboto", sans-serif;
-  font-size: 5em;
+  font-size: 4em;
   text-align: center;
 `;
 
 const StyledParagraph = styled.p`
   font-family: "Roboto", sans-serif;
-  text-align: left;
-  font-size: 1em;
+  text-align: center;
+  font-size: 2em;
 `;
 
 const QRCreator = (props) => {
@@ -32,9 +32,13 @@ const QRCreator = (props) => {
           <img src={props.image} alt={props.image} width="40%" />
           <QRCode value={props.id} marginWidth={20} />
         </StyledCardHalfContainer>
-        <StyledCardHalfContainer justify-content={"center"}>
+        <StyledCardHalfContainer
+          justify-items={"center"}
+          display={"flex"}
+          margin={"1em"}
+        >
           <StyledCardItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>{props.description}</StyledParagraph>
           </StyledCardItem>
         </StyledCardHalfContainer>
       </StyledCardFlexContainer>

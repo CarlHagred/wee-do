@@ -26,17 +26,21 @@ const StyledInputPatient = styled(StyledInput)`
   }
 `;
 
-const StyledCheckBox = styled.input`
-  height: 1.6em;
-  width: 1.6em;
+const StyledDatalist = styled.datalist`
+  font-size: 16px;
+  background-color: white;
+  text-align: left;
+  border-radius: 4px;
+  height: 20px;
+  width: 30px;
 `;
 
-export const QrCheckBox = (props) => {
+export const CustomDatalist = (props) => {
   return (
-    <StyledCheckBox
-      id="input"
-      type="checkbox"
-      onChange={props.onChange}
+    <StyledDatalist
+      id="datalist"
+      name="name"
+      placeholder="skriv här..."
       {...props}
     />
   );
@@ -66,4 +70,4 @@ export const UserInput = (props) => {
   );
 };
 
-export default UserInput + PatientInput + QrCheckBox;
+export default UserInput + PatientInput + CustomDatalist;
