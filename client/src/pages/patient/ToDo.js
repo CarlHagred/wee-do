@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { ImQrcode } from "react-icons/im";
 
@@ -65,17 +64,16 @@ const ToDo = () => {
   return (
     <PatientLayout>
       <CardLayout header="Mina övningar">
-        {myVideos?.data?.data.map((video) => {
-          return (
+        {myVideos?.data?.data.map((video) => (
+          <Link to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}>
             <Card
               key={video.vidId}
-              link={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}
               thumbnail={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
               title={video.vidTitle}
-              text={video.amountOfTimes}
+              text={`Du har gjort övningen: ${video.amountOfTimes} gånger`}
             />
-          );
-        })}
+          </Link>
+        ))}
 
         <NavLink to="/QrScanner">
           <NavContainer>

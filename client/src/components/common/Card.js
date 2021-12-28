@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const VideoContainer = styled.div`
-  padding-bottom: 1.5em;
+  //padding-bottom: 1.5em;
+  pointer-events: none;
+  cursor: none;
 `;
 
 const StyledThumbnail = styled.img`
@@ -66,22 +67,18 @@ const StyledVideoText = styled.p`
 
 const Card = (props) => {
   return (
-    <Link to={props.link}>
-      <VideoContainer>
-        <ThumbnailContainer>
-          <StyledThumbnail src={props.thumbnail} />
-          <HoverContainer>
-            <StyledHoverText>VISA</StyledHoverText>
-          </HoverContainer>
-        </ThumbnailContainer>
-        <TextContainer>
-          <StyledVideoTitle>{props.title}</StyledVideoTitle>
-          <StyledVideoText>
-            Du har gjort övningen: {props.text} gånger
-          </StyledVideoText>
-        </TextContainer>
-      </VideoContainer>
-    </Link>
+    <VideoContainer>
+      <ThumbnailContainer>
+        <StyledThumbnail src={props.thumbnail} />
+        <HoverContainer>
+          <StyledHoverText>VISA</StyledHoverText>
+        </HoverContainer>
+      </ThumbnailContainer>
+      <TextContainer>
+        <StyledVideoTitle>{props.title}</StyledVideoTitle>
+        <StyledVideoText>{props.text}</StyledVideoText>
+      </TextContainer>
+    </VideoContainer>
   );
 };
 

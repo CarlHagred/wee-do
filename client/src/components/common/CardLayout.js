@@ -1,18 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledHeader = styled.h1`
-  font-size: 2em;
-  padding-top: 1em;
-  font-weight: 600;
-  text-align: center;
-`;
-
 const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   margin: 1em auto;
-  gap: 0.5em;
+  gap: 2em 0.5em;
   @media (min-width: 415px) {
     grid-template-columns: repeat(1, 1fr);
     margin: 1em 5em;
@@ -27,14 +20,8 @@ const CardWrapper = styled.div`
   }
 `;
 
-const CardLayout = (props) => {
-  return (
-    <>
-      <StyledHeader>{props.header}</StyledHeader>
-
-      <CardWrapper>{props.children}</CardWrapper>
-    </>
-  );
+const CardLayout = ({ children }) => {
+  return <CardWrapper>{children}</CardWrapper>;
 };
 
 export default CardLayout;

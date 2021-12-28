@@ -7,28 +7,15 @@ import { getAllVideos, postSelectedExercises } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
-import { Flexbox, VideoItem } from "../../components/common/Flexbox";
-import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
+import CardLayout from "../../components/common/CardLayout";
+import Card from "../../components/common/Card";
+import Header from "../../components/common/Header";
 
-const StyledH1 = styled.h1`
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  text-align: left;
-
-  caption-side: top;
-  border-collapse: separate;
-  border-spacing: 5px;
-  width: 100%;
-  margin: 1em 0;
-  justify-content: left;
-  border-radius: 4px;
-
-  background-color: #c2c2c2;
-  border-radius: 4px;
-  font-size: 1.2em;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StyledTitle = styled.p`
@@ -114,76 +101,75 @@ const SelectExercises = () => {
 
   return (
     <AdminLayout>
-      <ContentContainer>
-        <Button onClick={handleSubmit}>spara övningar</Button>
+      <Wrapper>
+        <Header>Välj övningar</Header>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
             setSearchedName(e.target.value);
           }}
         />
-        <StyledH1>Övningar</StyledH1>
-        <Flexbox>
-          {videos
-            .filter((videos) => {
-              return videos.videoTitle.includes(searchedName) ? videos : null;
-            })
-            .map((videos, index) => (
-              <li key={index}>
-                <VideoItem key={videos._id}>
-                  <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <img
-                    src={videos.thumbnail}
-                    alt="profile pic"
-                    width="250px"
-                    height="200px"
-                  />
-                  <StyledDiv>
-                    <select
-                      value={amount[index]}
-                      onChange={(e) => {
-                        handleAmountChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>GPD: {option}</option>
-                      ))}
-                    </select>
-                    <select
-                      value={set[index]}
-                      onChange={(e) => {
-                        handleSetChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>SET: {option}</option>
-                      ))}
-                    </select>
-                    <select
-                      value={rep[index]}
-                      onChange={(e) => {
-                        handleRepChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>REP: {option}</option>
-                      ))}
-                    </select>
-                    <input
-                      type="checkbox"
-                      id={`custom-checkbox-${index}`}
-                      checked={checkedState[index]}
-                      onChange={() =>
-                        handleCheckBoxChange(index, videos.videoId)
-                      }
-                    />
-                    <label for="checked"></label>
-                  </StyledDiv>
-                </VideoItem>
-              </li>
-            ))}
-        </Flexbox>
-      </ContentContainer>
+      </Wrapper>
+
+      <CardLayout>
+        {videos
+          .filter((videos) => {
+            return videos.videoTitle
+              .toLowerCase()
+              .includes(searchedName.toLowerCase())
+              ? videos
+              : null;
+          })
+          .map((videos, index) => (
+            <div key={index}>
+              <Card
+                key={videos._id}
+                thumbnail={videos.thumbnail}
+                title={videos.videoTitle}
+              />
+              <StyledDiv>
+                <select
+                  value={amount[index]}
+                  onChange={(e) => {
+                    handleAmountChange(e.target.value, index);
+                  }}
+                >
+                  {amountOptions.map((option) => (
+                    <option value={option}>GPD: {option}</option>
+                  ))}
+                </select>
+                <select
+                  value={set[index]}
+                  onChange={(e) => {
+                    handleSetChange(e.target.value, index);
+                  }}
+                >
+                  {amountOptions.map((option) => (
+                    <option value={option}>SET: {option}</option>
+                  ))}
+                </select>
+                <select
+                  value={rep[index]}
+                  onChange={(e) => {
+                    handleRepChange(e.target.value, index);
+                  }}
+                >
+                  {amountOptions.map((option) => (
+                    <option value={option}>REP: {option}</option>
+                  ))}
+                </select>
+                <input
+                  type="checkbox"
+                  id={`custom-checkbox-${index}`}
+                  checked={checkedState[index]}
+                  onChange={() => handleCheckBoxChange(index, videos.videoId)}
+                />
+                <label for="checked"></label>
+              </StyledDiv>
+            </div>
+          ))}
+      </CardLayout>
+      <Button onClick={handleSubmit}>spara övningar</Button>
     </AdminLayout>
   );
 };
