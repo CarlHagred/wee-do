@@ -37,6 +37,18 @@ const StyledTitle = styled.p`
 
 const StyledDiv = styled.div`
   font-size: 1.2em;
+  margin-top: 3%;
+  padding: 1%;
+`;
+
+const StyledLi = styled.li`
+  list-style-type: none;
+  margin: 2% 5% 2% 0%;
+  width: 28%;
+`;
+
+const StyledButton = styled(Button)`
+  margin: auto;
 `;
 
 const SelectExercises = () => {
@@ -44,6 +56,8 @@ const SelectExercises = () => {
   const [videos, setVideos] = useState([]);
   const [searchedName, setSearchedName] = useState("");
   const [amount, setAmount] = useState([]);
+  const [set, setSet] = useState([]);
+  const [rep, setRep] = useState([]);
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
   const history = useHistory();
@@ -70,7 +84,10 @@ const SelectExercises = () => {
 
       let newSelection = {
         id: videos[index].videoId,
+        title: videos[index].videoTitle,
         amount: parseInt(amount[index]),
+        set: parseInt(set[index]),
+        rep: parseInt(rep[index]),
       };
       newArr.push(newSelection);
     });
@@ -83,10 +100,22 @@ const SelectExercises = () => {
     setCheckedState(arr);
   };
 
-  const handleAmountChange = (value, index, id) => {
+  const handleAmountChange = (value, index) => {
     let newArr = [...amount];
     newArr[index] = parseInt(value);
     setAmount(newArr);
+  };
+
+  const handleSetChange = (value, index) => {
+    let newArr = [...set];
+    newArr[index] = parseInt(value);
+    setSet(newArr);
+  };
+
+  const handleRepChange = (value, index) => {
+    let newArr = [...rep];
+    newArr[index] = parseInt(value);
+    setRep(newArr);
   };
 
   const handleSubmit = () => {
@@ -98,7 +127,6 @@ const SelectExercises = () => {
   return (
     <AdminLayout>
       <ContentContainer>
-        <Button onClick={handleSubmit}>spara övningar</Button>
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
@@ -106,36 +134,51 @@ const SelectExercises = () => {
           }}
         />
         <StyledH1>Övningar</StyledH1>
+        <StyledButton onClick={handleSubmit}>Spara övningar</StyledButton>
         <Flexbox>
           {videos
             .filter((videos) => {
               return videos.videoTitle.includes(searchedName) ? videos : null;
             })
             .map((videos, index) => (
-              <li key={index}>
+              <StyledLi key={index}>
                 <VideoItem key={videos._id}>
                   <StyledTitle>{videos.videoTitle}</StyledTitle>
                   <img
                     src={videos.thumbnail}
                     alt="profile pic"
-                    width="250px"
-                    height="200px"
+                    width="100%"
+                    height="100%"
                   />
                   <StyledDiv>
                     <select
                       value={amount[index]}
                       onChange={(e) => {
-                        handleAmountChange(
-                          e.target.value,
-                          index,
-                          videos.videoId
-                        );
+                        handleAmountChange(e.target.value, index);
                       }}
                     >
                       {amountOptions.map((option) => (
-                        <option value={option}>
-                          Antal gånger per dag: {option}
-                        </option>
+                        <option value={option}>GPD: {option}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={set[index]}
+                      onChange={(e) => {
+                        handleSetChange(e.target.value, index);
+                      }}
+                    >
+                      {amountOptions.map((option) => (
+                        <option value={option}>SET: {option}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={rep[index]}
+                      onChange={(e) => {
+                        handleRepChange(e.target.value, index);
+                      }}
+                    >
+                      {amountOptions.map((option) => (
+                        <option value={option}>REP: {option}</option>
                       ))}
                     </select>
                     <input
@@ -149,7 +192,7 @@ const SelectExercises = () => {
                     <label for="checked"></label>
                   </StyledDiv>
                 </VideoItem>
-              </li>
+              </StyledLi>
             ))}
         </Flexbox>
       </ContentContainer>

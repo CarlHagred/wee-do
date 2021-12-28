@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { loginPatient } from "../../api";
@@ -13,10 +14,10 @@ const LoginContainer = styled.div`
 `;
 
 const LoginPatient = () => {
+  let history = useHistory();
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   if (isCookie !== null) {
-    localStorage.clear();
-    window.location.reload();
+    history.push("/activitypanel");
   }
 
   const [loginName, setLoginName] = useState("");
@@ -59,7 +60,7 @@ const LoginPatient = () => {
         onChange={(e) => setLoginName(e.target.value)}
         placeholder="Skriv användar-id här..."
       />
-      <Button width="wide" onClick={handleSubmit}>
+      <Button width="wide" size="lg" onClick={handleSubmit}>
         Logga in
       </Button>
     </LoginContainer>

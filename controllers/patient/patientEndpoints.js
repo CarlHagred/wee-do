@@ -1,4 +1,5 @@
 import Patient from "../../models/patient.js";
+import Videos from "../../models/videos.js";
 
 import passport from "passport";
 import { loginAdmin } from "../admin/adminLogin.js";
@@ -108,12 +109,14 @@ export const postSelectedVideos = async (req, res) => {
               $push: {
                 statistics: {
                   vidId: value.id,
-                  vidTitle: req.params.title,
+                  vidTitle: value.title,
                   scans: 0,
                   timesWatched: 0,
                   scanTime: [],
                   watchedTime: [],
                   amountOfTimes: value.amount,
+                  set: value.set,
+                  rep: value.rep,
                 },
               },
             },
@@ -183,8 +186,6 @@ export const setPatientActive = async (req, res) => {
   );
 };
 
-import Videos from "../../models/videos.js";
-
 export const getVideoUrl = async (req, res) => {
   try {
     const id = req.query.id;
@@ -200,4 +201,24 @@ export const getVideoUrl = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+export const getMyVideos = async (req, res) => {
+  const name = req.query.name;
+
+  if (name) {
+    const patient = await Patient.findOne({ name: name });
+
+    if (!patient) {
+      return res.status(403).json({ data: "No videos due to null patient" });
+    }
+
+    const data = patient.statistics.filter((video) => {
+      return video.amountOfTimes;
+    });
+
+    return res.json({ data: data });
+  }
+
+  return res.status(403).json({ data: "No videos due to null patient" });
 };

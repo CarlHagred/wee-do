@@ -19,6 +19,7 @@ import {
   postScan,
   postSelectedVideos,
   deletePatient,
+  getMyVideos,
   getVideoUrl,
   setPatientInactive,
   setPatientActive,
@@ -50,6 +51,7 @@ router.get("/getadminsession", getAdminSession);
 router.delete("/logoutadmin", deleteAdminSession);
 router.get("/getvideourl", getVideoUrl);
 router.get("/getvideos", getVideos);
+router.get("/getmyvideostodo", getMyVideos); 
 router.post("/postscan/:name/:videoId", postScan);
 router.post(
   "/postwatchedvideo/:name/:videoId/:active/:title",
