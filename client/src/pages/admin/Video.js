@@ -155,12 +155,7 @@ const Video = () => {
       )}
 
       <ButtonContainer>
-        <Input
-          list="userList"
-          id="userInput"
-          placeholder="Patient..."
-          width={"40px"}
-        />
+        <Input list="userList" id="userInput" placeholder="Patient..." />
         <CustomDatalist id="userList">
           {patientsActive
             .filter((patient) => {
