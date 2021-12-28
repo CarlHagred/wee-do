@@ -17,11 +17,14 @@ const StyledH1 = styled.h1`
 
 const StyledParagraph = styled.p`
   font-family: "Roboto", sans-serif;
-  text-align: center;
+  text-align: left;
   font-size: 2em;
 `;
 
 const QRCreator = (props) => {
+  if (!props.patient) {
+    return <div />;
+  }
   return (
     <>
       <StyledCardFlexContainer>
@@ -39,6 +42,14 @@ const QRCreator = (props) => {
         >
           <StyledCardItem>
             <StyledParagraph>{props.description}</StyledParagraph>
+
+            <StyledParagraph>
+              Utför övningen {props.patient.amountOfTimes} gånger om dagen
+            </StyledParagraph>
+
+            <StyledParagraph>Sets: {props.patient.set}</StyledParagraph>
+
+            <StyledParagraph>Reps: {props.patient.rep}</StyledParagraph>
           </StyledCardItem>
         </StyledCardHalfContainer>
       </StyledCardFlexContainer>

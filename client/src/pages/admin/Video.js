@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Children } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -10,11 +10,26 @@ import {
   getAllVideos,
   getTitleAndDescById,
   getAllActivePatients,
+  getOnePatient,
 } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ReactPlayer from "../../components/common/ReactPlayer";
+
+const handleSubmit = async (vid) => {
+  const patient = document.getElementById("userInput").value.trim();
+  if (!patient) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
+  }
+  if (!(await getOnePatient(patient)).data) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
+  }
+  window.location = `/admin/exercise/qrpreview/${vid}/${patient}`;
+  document.getElementById("userInput").style.borderColor = "green";
+};
 
 const TextContainer = styled.div`
   display: flex;
@@ -157,9 +172,17 @@ const Video = () => {
               <option key={patient._id} value={patient.name} />
             ))}
         </CustomDatalist>
-        <Link to={`/admin/exercise/qrpreview/${videoId}`} target={"_blank"}>
-          <Button icon="imageCard">Generera Kort</Button>
-        </Link>
+        <select id="selectedPatient" />
+        <Button
+          type="submit"
+          icon="imageCard"
+          onClick={() => {
+            handleSubmit(videoId);
+          }}
+        >
+          Generera Kort
+        </Button>
+
         <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
           Radera
         </Button>
@@ -168,11 +191,3 @@ const Video = () => {
   );
 };
 export default Video;
-
-/*
-
-*/
-
-/*
-
-*/
