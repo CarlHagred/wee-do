@@ -19,7 +19,6 @@ import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
-
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -30,8 +29,21 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled.div`
   display: flex;
-  width: 5px;`;
+  width: 5px;
+  padding: 1px;
+  `;
 
+const StyledCalendarStatistic = styled.div`
+  display: flex;
+  position: absolute;
+  top: 27em;
+  left: 45em;
+  right: 10;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  
+  `;
 
 const StyledContainer = styled.div`
   h2 {
@@ -74,7 +86,6 @@ const StyledClendar = styled.div`
   }
 `;
 
-
 const StyledPatient = styled.p`
   background-color: #ccc;
   padding: 25px;
@@ -96,16 +107,14 @@ const StyledLink = styled(Link)`
 
 const StyledCalAndStatLeft = styled.div`
   .sides{
-margin:0;
+  margin:0;
   }
   .left{
   float:left;
   width:75%;
   overflow:hidden;  
   }
- 
 `;
-
 
 const StyledCalAndStatRight = styled.div`
   .sides{
@@ -177,7 +186,6 @@ const StyledHr = styled.hr`
   width: 400px;
 `;
 
-
 const PatientStatistics = () => {
   let history = useHistory();
   const { name } = useParams();
@@ -194,8 +202,6 @@ const PatientStatistics = () => {
     };
     fetchData();
   }, [name]);
-
-  
 
   const customDeletePatient = async () => {
     const conf = await Confirm(
@@ -267,7 +273,6 @@ const PatientStatistics = () => {
   let [arrayDate, setArrayDate] = useState([]);
   let [arrayDateTime, setArrayDateTime] = useState([]);
 
-
   useEffect(() => {
     let arrayDate2 = [];
     let arrayDate3 = [];
@@ -310,11 +315,13 @@ const PatientStatistics = () => {
         <StyledContainer>
           <>
             <h2>Statistik</h2>
-            <br />
+            <br/>
+            <br/>
             <StyledPatient>
               <strong>Patient-id: </strong>
               {patient.name}
             </StyledPatient>
+            <br/>
           </>
           <ButtonContainer>
           <Button onClick={handleSelectExcersice}>Välj övningar</Button>
@@ -331,6 +338,7 @@ const PatientStatistics = () => {
               Radera patient
             </Button>
           </ButtonContainer>
+          <br/>
           <hr/>
           <br/>
           <>
@@ -362,6 +370,38 @@ const PatientStatistics = () => {
                           icon="trash" outlinedTheme
                         />
                         </StyledButton>
+                        <StyledCalendarStatistic>
+                        <StyledClendar>
+        <ListPanelWrapper2>
+          <ListPanel2>
+            <StyledCalAndStatLeft>
+          
+            <h2>Kalender</h2>
+            <br/>
+        
+        <Calendar value={dateState} onChange={changeDate}/>
+        </StyledCalAndStatLeft>
+
+        <StyledCalAndStatRight>
+        <h2>Statistik för {moment(dateState).format('LL')}</h2>
+        <br/>
+          {arrayDate.map((stat, index) => (
+            <React.Fragment key={stat.vidId}>
+              <StyledStatistics>
+                <p>Övning: </p>
+                  <StyledLink to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLink>
+                <p>Antal gånger idag: {arrayDateTime[index]}</p>     
+                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {
+                  
+                }             
+              </StyledStatistics>
+            </React.Fragment>
+          ))}
+                    </StyledCalAndStatRight>
+          </ListPanel2>
+          </ListPanelWrapper2>
+          </StyledClendar>
+                        </StyledCalendarStatistic>
                         </ListPanel>
         </ListPanelWrapper>
                       </>
@@ -375,15 +415,14 @@ const PatientStatistics = () => {
         </StyledContainer>
         <hr/>
         <br/>
-
+      
         <StyledClendar>
         <ListPanelWrapper2>
           <ListPanel2>
             <StyledCalAndStatLeft>
           
             <h2>Kalender</h2>
-
-        
+                
         <Calendar value={dateState} onChange={changeDate}/>
         </StyledCalAndStatLeft>
 
@@ -404,7 +443,7 @@ const PatientStatistics = () => {
                     </StyledCalAndStatRight>
           </ListPanel2>
           </ListPanelWrapper2>
-          </StyledClendar>
+          </StyledClendar> 
           
 
       
