@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const VideoContainer = styled.div`
-  //padding-bottom: 1.5em;
-  pointer-events: none;
-  cursor: none;
-`;
-
 const StyledThumbnail = styled.img`
   opacity: 1;
   display: block;
@@ -46,12 +40,12 @@ const ThumbnailContainer = styled.div`
 
 const TextContainer = styled.div`
   margin: 0 3%;
-  @media (min-width: 768px) {
+  @media (min-width: 415px) {
     margin: 0;
   }
 `;
 
-const StyledVideoTitle = styled.h1`
+const Title = styled.h1`
   font-weight: bold;
   width: 280px;
   padding-top: 10px;
@@ -61,13 +55,15 @@ const StyledVideoTitle = styled.h1`
   }
 `;
 
-const StyledVideoText = styled.p`
+const Text = styled.p`
   font-size: 0.9em;
 `;
 
+const CardContainer = styled.div``;
+
 const Card = (props) => {
   return (
-    <VideoContainer>
+    <CardContainer className={props.className}>
       <ThumbnailContainer>
         <StyledThumbnail src={props.thumbnail} />
         <HoverContainer>
@@ -75,10 +71,10 @@ const Card = (props) => {
         </HoverContainer>
       </ThumbnailContainer>
       <TextContainer>
-        <StyledVideoTitle>{props.title}</StyledVideoTitle>
-        <StyledVideoText>{props.text}</StyledVideoText>
+        <Title>{props.title}</Title>
+        <Text>{props.text}</Text>
       </TextContainer>
-    </VideoContainer>
+    </CardContainer>
   );
 };
 

@@ -5,7 +5,7 @@ const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   margin: 1em auto;
-  gap: 2em 0.5em;
+  gap: 2em 1em;
   @media (min-width: 415px) {
     grid-template-columns: repeat(1, 1fr);
     margin: 1em 5em;

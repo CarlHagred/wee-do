@@ -12,8 +12,26 @@ import CardLayout from "../../components/common/CardLayout";
 import Card from "../../components/common/Card";
 import TopWrapper from "../../components/common/TopWrapper";
 
+const StyledCheckBox = styled.input`
+  width: 1.8em;
+  height: 1.8em;
+`;
+
+const StyledCard = styled(Card)`
+  pointer-events: none;
+  cursor: none;
+`;
+
 const CheckBoxRow = styled.div`
-  font-size: 1.2em;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+  font-size: 0.9em;
+  margin: 0 3%;
+  @media (min-width: 415px) {
+    margin: 0;
+  }
 `;
 
 const SelectExercises = () => {
@@ -26,7 +44,6 @@ const SelectExercises = () => {
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
   const history = useHistory();
-
   const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
@@ -100,7 +117,6 @@ const SelectExercises = () => {
         />
         <Button onClick={handleSubmit}>Spara övningar</Button>
       </TopWrapper>
-
       <CardLayout>
         {videos
           .filter((videos) => {
@@ -112,7 +128,7 @@ const SelectExercises = () => {
           })
           .map((videos, index) => (
             <div key={index}>
-              <Card
+              <StyledCard
                 key={videos._id}
                 thumbnail={videos.thumbnail}
                 title={videos.videoTitle}
@@ -148,7 +164,7 @@ const SelectExercises = () => {
                     <option value={option}>REP: {option}</option>
                   ))}
                 </select>
-                <input
+                <StyledCheckBox
                   type="checkbox"
                   id={`custom-checkbox-${index}`}
                   checked={checkedState[index]}
