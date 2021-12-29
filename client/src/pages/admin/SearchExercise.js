@@ -33,7 +33,11 @@ const SearchExercise = () => {
       <CardLayout>
         {videos
           .filter((videos) => {
-            return videos.videoTitle.includes(searchedName) ? videos : null;
+            return videos.videoTitle
+              .toLowerCase()
+              .includes(searchedName.toLowerCase())
+              ? videos
+              : null;
           })
           .map((videos) => (
             <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
