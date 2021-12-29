@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import Select from "react-select";
 
 import { getAllVideos, postSelectedExercises } from "../../api";
 
@@ -13,8 +13,9 @@ import Card from "../../components/common/Card";
 import TopWrapper from "../../components/common/TopWrapper";
 
 const StyledCheckBox = styled.input`
-  width: 1.8em;
-  height: 1.8em;
+  width: 3em;
+  height: 3em;
+  margin: 0 auto;
 `;
 
 const StyledCard = styled(Card)`
@@ -25,10 +26,8 @@ const StyledCard = styled(Card)`
 const CheckBoxRow = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 1em;
-
-  font-size: 0.9em;
-  margin: 0 3%;
+  gap: 0.5em;
+  font-size: 0.8em;
   @media (min-width: 415px) {
     margin: 0;
   }
@@ -134,36 +133,40 @@ const SelectExercises = () => {
                 title={videos.videoTitle}
               />
               <CheckBoxRow>
-                <select
-                  value={amount[index]}
-                  onChange={(e) => {
-                    handleAmountChange(e.target.value, index);
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `GPD: ${option}`,
+                  }))}
+                  placeholder="GPD"
+                  defaultInputValue={amount[index]}
+                  onChange={(option) => {
+                    handleAmountChange(option.value, index);
                   }}
-                >
-                  {amountOptions.map((option) => (
-                    <option value={option}>GPD: {option}</option>
-                  ))}
-                </select>
-                <select
-                  value={set[index]}
-                  onChange={(e) => {
-                    handleSetChange(e.target.value, index);
+                />
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `SET: ${option}`,
+                  }))}
+                  placeholder="SET"
+                  defaultInputValue={set[index]}
+                  onChange={(option) => {
+                    handleSetChange(option.value, index);
                   }}
-                >
-                  {amountOptions.map((option) => (
-                    <option value={option}>SET: {option}</option>
-                  ))}
-                </select>
-                <select
-                  value={rep[index]}
-                  onChange={(e) => {
-                    handleRepChange(e.target.value, index);
+                />
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `REP: ${option}`,
+                  }))}
+                  placeholder="REP"
+                  defaultInputValue={rep[index]}
+                  onChange={(option) => {
+                    handleRepChange(option.value, index);
                   }}
-                >
-                  {amountOptions.map((option) => (
-                    <option value={option}>REP: {option}</option>
-                  ))}
-                </select>
+                />
+
                 <StyledCheckBox
                   type="checkbox"
                   id={`custom-checkbox-${index}`}
