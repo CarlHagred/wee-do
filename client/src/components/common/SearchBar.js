@@ -4,9 +4,9 @@ import { IoMdSearch } from "react-icons/io";
 
 const StyledSearch = styled.div`
   display: flex;
-  position: relative;
 
-  width: 80%;
+  width: 100%;
+
   box-sizing: border-box;
 
   border: 2px solid #ccc;
@@ -14,8 +14,6 @@ const StyledSearch = styled.div`
 
   font-size: 16px;
   background-color: white;
-
-  margin-bottom: 20px;
 `;
 
 const StyledInput = styled.input`

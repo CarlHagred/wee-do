@@ -6,6 +6,9 @@ import { getAllVideos } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
+import CardLayout from "../../components/common/CardLayout";
+import Card from "../../components/common/Card";
+import TopWrapper from "../../components/common/TopWrapper";
 
 const StyledContentContainer = styled.div`
   display: flex;
@@ -100,13 +103,32 @@ const SearchExercise = () => {
   }, []);
   return (
     <AdminLayout>
-      <StyledContentContainer>
+      <TopWrapper header="Sök övning">
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
             setSearchedName(e.target.value);
           }}
         />
+      </TopWrapper>
+
+      <CardLayout>
+        {videos
+          .filter((videos) => {
+            return videos.videoTitle.includes(searchedName) ? videos : null;
+          })
+          .map((videos) => (
+            <Link to={`/admin/exercise/${videos.videoId}`} key={videos._id}>
+              <Card
+                key={videos._id}
+                thumbnail={videos.thumbnail}
+                title={videos.videoTitle}
+                text={`Antal visningar: ${videos.__v}`}
+              />
+            </Link>
+          ))}
+      </CardLayout>
+      <StyledContentContainer>
         <StyledHeader>Övningar</StyledHeader>
         <SearchResultContainer>
           {videos

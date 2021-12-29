@@ -10,19 +10,9 @@ import SearchBar from "../../components/common/SearchBar";
 import Button from "../../components/common/Button";
 import CardLayout from "../../components/common/CardLayout";
 import Card from "../../components/common/Card";
-import Header from "../../components/common/Header";
+import TopWrapper from "../../components/common/TopWrapper";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyledTitle = styled.p`
-  font-weight: bold;
-`;
-
-const StyledDiv = styled.div`
+const CheckBoxRow = styled.div`
   font-size: 1.2em;
 `;
 
@@ -101,15 +91,15 @@ const SelectExercises = () => {
 
   return (
     <AdminLayout>
-      <Wrapper>
-        <Header>Välj övningar</Header>
+      <TopWrapper header="Välj övningar">
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
             setSearchedName(e.target.value);
           }}
         />
-      </Wrapper>
+        <Button onClick={handleSubmit}>Spara övningar</Button>
+      </TopWrapper>
 
       <CardLayout>
         {videos
@@ -127,7 +117,7 @@ const SelectExercises = () => {
                 thumbnail={videos.thumbnail}
                 title={videos.videoTitle}
               />
-              <StyledDiv>
+              <CheckBoxRow>
                 <select
                   value={amount[index]}
                   onChange={(e) => {
@@ -165,11 +155,10 @@ const SelectExercises = () => {
                   onChange={() => handleCheckBoxChange(index, videos.videoId)}
                 />
                 <label for="checked"></label>
-              </StyledDiv>
+              </CheckBoxRow>
             </div>
           ))}
       </CardLayout>
-      <Button onClick={handleSubmit}>spara övningar</Button>
     </AdminLayout>
   );
 };
