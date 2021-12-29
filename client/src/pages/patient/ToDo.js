@@ -7,6 +7,7 @@ import { getSession, getMyVideos } from "../../api/index";
 import PatientLayout from "../../components/patient/PatientLayout";
 import CardLayout from "../../components/common/CardLayout";
 import Card from "../../components/common/Card";
+import TopWrapper from "../../components/common/TopWrapper";
 
 const NavContainer = styled.div`
   display: flex;
@@ -63,7 +64,8 @@ const ToDo = () => {
 
   return (
     <PatientLayout>
-      <CardLayout header="Mina övningar">
+      <TopWrapper header="Mina övningar" />
+      <CardLayout>
         {myVideos?.data?.data.map((video) => (
           <Link to={`/watch?title=http://www.youtube.com/embed/${video.vidId}`}>
             <Card

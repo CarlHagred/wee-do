@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const StyledHeader = styled.h1`
   font-size: 3em;
-  color: #007ab3;
-  margin-bottom: 0.5em;
+  color: ${(props) => props.theme.palette.header};
+  margin-bottom: 0.4em;
 `;
 
 const Header = ({ children }) => {

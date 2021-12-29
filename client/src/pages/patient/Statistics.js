@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getSession, getOnePatient } from "../../api";
 
 import PatientLayout from "../../components/patient/PatientLayout";
+import TopWrapper from "../../components/common/TopWrapper";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -12,13 +13,6 @@ const StyledWrapper = styled.div`
   margin-bottom: 5%;
   margin-left: 4%;
   margin-right: 4%;
-`;
-
-const StyledHeader = styled.h1`
-  font-size: 2.5em;
-  padding-top: 1.5em;
-  padding-bottom: 1em;
-  font-weight: 600;
 `;
 
 const StyledStatistics = styled.div`
@@ -85,7 +79,7 @@ const Statistics = () => {
   return (
     <PatientLayout>
       <StyledWrapper>
-        <StyledHeader>Statistik</StyledHeader>
+        <TopWrapper header="Min statistik" />
         {stats.map((stat) => (
           <React.Fragment key={stat.vidId}>
             <StyledStatistics>

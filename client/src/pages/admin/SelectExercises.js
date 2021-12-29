@@ -12,6 +12,10 @@ import CardLayout from "../../components/common/CardLayout";
 import Card from "../../components/common/Card";
 import TopWrapper from "../../components/common/TopWrapper";
 
+const StyledButton = styled(Button)`
+  margin: 3em auto;
+`;
+
 const StyledCheckBox = styled.input`
   width: 3em;
   height: 3em;
@@ -114,7 +118,6 @@ const SelectExercises = () => {
             setSearchedName(e.target.value);
           }}
         />
-        <Button onClick={handleSubmit}>Spara övningar</Button>
       </TopWrapper>
       <CardLayout>
         {videos
@@ -178,6 +181,7 @@ const SelectExercises = () => {
             </div>
           ))}
       </CardLayout>
+      <StyledButton onClick={handleSubmit}>Spara övningar</StyledButton>
     </AdminLayout>
   );
 };
