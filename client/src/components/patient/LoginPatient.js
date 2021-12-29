@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { loginPatient } from "../../api";
@@ -14,10 +13,9 @@ const LoginContainer = styled.div`
 `;
 
 const LoginPatient = () => {
-  let history = useHistory();
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   if (isCookie !== null) {
-    history.push("/activitypanel");
+    window.location= "/activitypanel";
   }
 
   const [loginName, setLoginName] = useState("");
@@ -37,12 +35,6 @@ const LoginPatient = () => {
     if (event.keyCode === key) {
       handleSubmit();
     }
-    if (event.keyCode === 38) {
-      event.preventDefault();
-    }
-    if (event.keyCode === 40) {
-      event.preventDefault();
-    }
   };
 
   return (
@@ -50,15 +42,12 @@ const LoginPatient = () => {
       <span id="patientError" />
       <PatientInput
         theme={PatientTheme}
-        type="number"
+        type="text"
         name="name"
         id="loginPatient"
-        onWheel={(event) => {
-          event.currentTarget.blur();
-        }}
         onKeyDown={listener}
         onChange={(e) => setLoginName(e.target.value)}
-        placeholder="Skriv användar-id här..."
+        placeholder="Skriv användarnamn här"
       />
       <Button width="wide" size="lg" onClick={handleSubmit}>
         Logga in

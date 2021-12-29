@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 
 import PatientTheme from "../../themes/PatientTheme";
@@ -154,33 +154,20 @@ const StyledDivider = styled.hr`
 `;
 
 const Navbar = () => {
-  const history = useHistory();
-
   /* === PATIENT SESSION === */
   const [patient, setPatient] = useState("");
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const fetchedPatientSession = await getSession();
-        const fetchedPatient = await getOnePatient(
-          fetchedPatientSession.data.name
-        );
-        setPatient(fetchedPatientSession.data);
-        setStatus(fetchedPatient.data);
-      } catch (error) {
-        if (status.active == null) {
-          localStorage.clear();
-          history.push("/");
-        }
-      }
+      const fetchedPatientSession = await getSession();
+      setPatient(fetchedPatientSession.data);
     };
     fetchData();
-  }, [history, status.active]);
+  }, []);
 
   /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
   const [open, setOpen] = useState(false);
-  const url = "/activitypanel";
+  const url = "http://localhost:3000/activitypanel";
 
   if (window.location.href !== url) {
     return (

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 import PatientLayout from "../../components/patient/PatientLayout";
 import { getAllActivePatients, getSession } from "../../api";
 import Button from "../../components/common/Button";
-
 
 const StyledHeader = styled.h1`
   font-size: 3.5em;
@@ -63,7 +61,6 @@ const StyledButton = styled(Button)`
 `;
 
 const Help = () => {
-  let history = useHistory();
   const [patient, setPatient] = useState("");
   const [active, setActive] = useState([]);
   const [open1, setOpen1] = useState(false);
@@ -129,7 +126,7 @@ const Help = () => {
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
 
   const goBack = () => {
-    history.push("/")
+    window.history.back();
   };
 
   return (

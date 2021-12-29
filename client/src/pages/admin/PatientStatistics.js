@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
 
 import {
@@ -71,7 +71,6 @@ const StyledChart = styled.div`
 `;
 
 const PatientStatistics = () => {
-  let history = useHistory();
   const { name } = useParams();
   const [patient, setPatient] = useState([]);
   const [patientStatistics, setPatientStatistics] = useState([]);
@@ -96,7 +95,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deletePatient();
-      history.push("/admin/search/patient");
+      window.location = "/admin/search/patient";
     }
   };
 
@@ -121,7 +120,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       setPatientInactive();
-      history.push("/admin/search/patient");
+      window.location = "/admin/search/patient";
     }
   };
 
@@ -134,7 +133,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       setPatientActive();
-      history.push("/admin/search/patient");
+      window.location = "/admin/search/patient";
     }
   };
 
@@ -150,7 +149,7 @@ const PatientStatistics = () => {
   };
 
   const handleSelectExcersice = () => {
-    history.push(`/admin/select/${patient.name}`);
+    window.location = `/admin/select/${patient.name}`;
   };
 
   return (

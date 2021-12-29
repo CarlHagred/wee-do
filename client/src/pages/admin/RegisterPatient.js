@@ -40,7 +40,6 @@ const StyledNewPatient = styled.p`
 `;
 
 const RegisterPatient = () => {
-  let history = useHistory();
   const [newPatient, setNewPatient] = useState("");
   const [button, setButton] = useState(false)
 
@@ -52,7 +51,7 @@ const RegisterPatient = () => {
   };
 
   const routeChange = () => {
-    history.push("/admin/select/" + newPatient)
+    window.location = "/admin/select/" + newPatient
   }
   
   return (

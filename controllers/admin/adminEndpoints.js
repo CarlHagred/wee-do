@@ -2,8 +2,7 @@ import Patient from "../../models/patient.js";
 import Videos from "../../models/videos.js";
 
 export const postPatient = async (req, res) => {
-  const createRandomName = () =>
-    Math.floor(Math.random() * 899999 + 100000).toString();
+  const createRandomName = () => Math.random().toString(20).substr(2, 6);
   const name = createRandomName();
 
   Patient.findOne({ name: name }, async (err, doc) => {
@@ -19,7 +18,7 @@ export const postPatient = async (req, res) => {
         name: name,
         statistics: [],
         videos: [],
-        active: true,
+        active: true
       });
       await newPatient.save();
       //skickar det skapade namnet till klienten så det kan visas för personalen
@@ -49,7 +48,7 @@ export const getOnePatient = async (req, res) => {
 
 export const getActivePatients = async (req, res) => {
   try {
-    const patients = await Patient.find({ active: true });
+    const patients = await Patient.find({active: true});
     res.status(200).json(patients);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -58,12 +57,13 @@ export const getActivePatients = async (req, res) => {
 
 export const getInactivePatients = async (req, res) => {
   try {
-    const patients = await Patient.find({ active: false });
+    const patients = await Patient.find({active: false});
     res.status(200).json(patients);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
+
 
 //Hämtar alla inlagda övningar
 export const getVideos = async (req, res) => {
