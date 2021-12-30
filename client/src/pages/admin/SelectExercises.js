@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import Select from "react-select";
 
 import { getAllVideos, postSelectedExercises } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
-import { Flexbox, VideoItem } from "../../components/common/Flexbox";
-import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
+import CardLayout from "../../components/common/CardLayout";
+import Card from "../../components/common/Card";
+import TopWrapper from "../../components/common/TopWrapper";
 
-const StyledH1 = styled.h1`
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  text-align: left;
-
-  caption-side: top;
-  border-collapse: separate;
-  border-spacing: 5px;
-  width: 100%;
-  margin: 1em 0;
-  justify-content: left;
-  border-radius: 4px;
-
-  background-color: #c2c2c2;
-  border-radius: 4px;
-  font-size: 1.2em;
+const StyledButton = styled(Button)`
+  margin: 3em auto;
 `;
 
-const StyledTitle = styled.p`
-  font-weight: bold;
+const StyledCheckBox = styled.input`
+  width: 3em;
+  height: 3em;
+  margin: 0 auto;
 `;
 
-const StyledDiv = styled.div`
-  font-size: 1.2em;
+const StyledCard = styled(Card)`
+  pointer-events: none;
+  cursor: none;
+`;
+
+const CheckBoxRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  font-size: 0.8em;
+  @media (min-width: 415px) {
+    margin: 0;
+  }
 `;
 
 const SelectExercises = () => {
@@ -49,7 +47,6 @@ const SelectExercises = () => {
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
   const history = useHistory();
-
   const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
@@ -114,76 +111,77 @@ const SelectExercises = () => {
 
   return (
     <AdminLayout>
-      <ContentContainer>
-        <Button onClick={handleSubmit}>spara övningar</Button>
+      <TopWrapper header="Välj övningar">
         <SearchBar
           placeholder="Sök efter en övning... "
           onChange={(e) => {
             setSearchedName(e.target.value);
           }}
         />
-        <StyledH1>Övningar</StyledH1>
-        <Flexbox>
-          {videos
-            .filter((videos) => {
-              return videos.videoTitle.includes(searchedName) ? videos : null;
-            })
-            .map((videos, index) => (
-              <li key={index}>
-                <VideoItem key={videos._id}>
-                  <StyledTitle>{videos.videoTitle}</StyledTitle>
-                  <img
-                    src={videos.thumbnail}
-                    alt="profile pic"
-                    width="250px"
-                    height="200px"
-                  />
-                  <StyledDiv>
-                    <select
-                      value={amount[index]}
-                      onChange={(e) => {
-                        handleAmountChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>GPD: {option}</option>
-                      ))}
-                    </select>
-                    <select
-                      value={set[index]}
-                      onChange={(e) => {
-                        handleSetChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>SET: {option}</option>
-                      ))}
-                    </select>
-                    <select
-                      value={rep[index]}
-                      onChange={(e) => {
-                        handleRepChange(e.target.value, index);
-                      }}
-                    >
-                      {amountOptions.map((option) => (
-                        <option value={option}>REP: {option}</option>
-                      ))}
-                    </select>
-                    <input
-                      type="checkbox"
-                      id={`custom-checkbox-${index}`}
-                      checked={checkedState[index]}
-                      onChange={() =>
-                        handleCheckBoxChange(index, videos.videoId)
-                      }
-                    />
-                    <label for="checked"></label>
-                  </StyledDiv>
-                </VideoItem>
-              </li>
-            ))}
-        </Flexbox>
-      </ContentContainer>
+      </TopWrapper>
+      <CardLayout>
+        {videos
+          .filter((videos) => {
+            return videos.videoTitle
+              .toLowerCase()
+              .includes(searchedName.toLowerCase())
+              ? videos
+              : null;
+          })
+          .map((videos, index) => (
+            <div key={index}>
+              <StyledCard
+                key={videos._id}
+                thumbnail={videos.thumbnail}
+                title={videos.videoTitle}
+              />
+              <CheckBoxRow>
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `GPD: ${option}`,
+                  }))}
+                  placeholder="GPD"
+                  defaultInputValue={amount[index]}
+                  onChange={(option) => {
+                    handleAmountChange(option.value, index);
+                  }}
+                />
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `SET: ${option}`,
+                  }))}
+                  placeholder="SET"
+                  defaultInputValue={set[index]}
+                  onChange={(option) => {
+                    handleSetChange(option.value, index);
+                  }}
+                />
+                <Select
+                  options={amountOptions.map((option) => ({
+                    value: option,
+                    label: `REP: ${option}`,
+                  }))}
+                  placeholder="REP"
+                  defaultInputValue={rep[index]}
+                  onChange={(option) => {
+                    handleRepChange(option.value, index);
+                  }}
+                />
+
+                <StyledCheckBox
+                  type="checkbox"
+                  id={`custom-checkbox-${index}`}
+                  checked={checkedState[index]}
+                  onChange={() => handleCheckBoxChange(index, videos.videoId)}
+                />
+                <label for="checked"></label>
+              </CheckBoxRow>
+            </div>
+          ))}
+      </CardLayout>
+      <StyledButton onClick={handleSubmit}>Spara övningar</StyledButton>
     </AdminLayout>
   );
 };

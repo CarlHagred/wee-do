@@ -5,6 +5,7 @@ const PatientTheme = {
     button_hover: "#FFF",
     hover: "#006d72",
     hamburger: "#335e6b",
+    header: "#000000",
   },
 };
 
