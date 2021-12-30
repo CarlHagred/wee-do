@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import moment from 'moment';
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import moment from "moment";
 
 import {
   deletePatientIndex,
@@ -34,7 +34,7 @@ const StyledButtonsTrash = styled.div`
   flex-wrap: wrap;
   width: 5px;
   padding: 1px;
-  `;
+`;
 
 const StyledAllContainer = styled.div`
   h2 {
@@ -72,7 +72,7 @@ const StyledCalendarStatistic = styled.div`
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
-  `;
+`;
 
 const StyledClendar = styled.div`
   h2 {
@@ -110,25 +110,25 @@ const StyledLinkVideoTitle = styled(Link)`
 `;
 
 const StyledCalAndStatLeft = styled.div`
-  .sides{
-  margin:0;
+  .sides {
+    margin: 0;
   }
-  .left{
-  float:left;
-  width:75%;
-  overflow:hidden;  
+  .left {
+    float: left;
+    width: 75%;
+    overflow: hidden;
   }
 `;
 
 const StyledCalAndStatRight = styled.div`
-  .sides{
-  margin:0;
+  .sides {
+    margin: 0;
   }
-  .right{
-  float:left;
-  width:25%;
-  overflow:hidden;
-  } 
+  .right {
+    float: left;
+    width: 25%;
+    overflow: hidden;
+  }
 `;
 
 const StyledStatisticsBox = styled.div`
@@ -183,7 +183,6 @@ const ListPanel2 = styled.nav`
   margin-top: 5px;
   margin-bottom: 5%;
   justify-content: left;
-  
 `;
 
 const StyledHr = styled.hr`
@@ -279,39 +278,45 @@ const PatientStatistics = () => {
   let [arrayDateTime, setArrayDateTime] = useState([]);
 
   useEffect(() => {
-  let arrayDate2 = [];
-  let arrayDate3 = [];
+    let arrayDate2 = [];
+    let arrayDate3 = [];
 
-    const date = moment(dateState).format('MMMM Do YYYY');
+    const date = moment(dateState).format("MMMM Do YYYY");
 
-    for (var i = 0; i<patientStatistics.length; i++){
-      for(var j = 0; j<patientStatistics[i].watchedTime.length; j++){
-        if (moment(patientStatistics[i].watchedTime[j]).format('MMMM Do YYYY') === date){
+    for (var i = 0; i < patientStatistics.length; i++) {
+      for (var j = 0; j < patientStatistics[i].watchedTime.length; j++) {
+        if (
+          moment(patientStatistics[i].watchedTime[j]).format("MMMM Do YYYY") ===
+          date
+        ) {
           arrayDate2.push(patientStatistics[i]);
           break;
-        }else{
+        } else {
         }
       }
     }
     setArrayDate(arrayDate2);
 
     let counter = 0;
-    for(var k = 0; k<arrayDate2.length; k++){
-      for(var l = 0; l<arrayDate2[k].watchedTime.length; l++){
-        if (moment(arrayDate2[k].watchedTime[l]).format('MMMM Do YYYY') === date){
+    for (var k = 0; k < arrayDate2.length; k++) {
+      for (var l = 0; l < arrayDate2[k].watchedTime.length; l++) {
+        if (
+          moment(arrayDate2[k].watchedTime[l]).format("MMMM Do YYYY") === date
+        ) {
           counter++;
         }
       }
-      if(counter !== 0){
-        arrayDate3.push(counter);}
-        counter = 0;
+      if (counter !== 0) {
+        arrayDate3.push(counter);
       }
-      setArrayDateTime(arrayDate3);
+      counter = 0;
+    }
+    setArrayDateTime(arrayDate3);
   }, [dateState]);
 
   const changeDate = (e) => {
-    setDateState(e)
-  }
+    setDateState(e);
+  };
 
   return (
     <AdminLayout>
@@ -319,106 +324,141 @@ const PatientStatistics = () => {
         <StyledAllContainer>
           <>
             <h2>Statistik</h2>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <StyledPatientID>
               <strong>Patient-id: </strong>
               {patient.name}
             </StyledPatientID>
-            <br/>
+            <br />
           </>
           <StyledButtonsTop>
             <Button onClick={handleSelectExcersice} width="fixed">
               Välj övningar
             </Button>
             {patientStatus ? (
-              <Button onClick={customPatientInactive} icon="patientInactive" width="fixed">
+              <Button
+                onClick={customPatientInactive}
+                icon="patientInactive"
+                width="fixed"
+              >
                 Gör patient inaktiv
               </Button>
             ) : (
-              <Button onClick={customPatientActive} icon="patientActive" width="fixed">
+              <Button
+                onClick={customPatientActive}
+                icon="patientActive"
+                width="fixed"
+              >
                 Gör patient aktiv
               </Button>
             )}
-              <Button onClick={customDeletePatient} icon="trash" width="fixed" outlinedTheme>
-               Radera patient
-              </Button>
+            <Button
+              onClick={customDeletePatient}
+              icon="trash"
+              width="fixed"
+              outlinedTheme
+            >
+              Radera patient
+            </Button>
           </StyledButtonsTop>
-            <br/>
-            <hr/>
-            <br/>
+          <br />
+          <hr />
+          <br />
           <>
-          <StyledValdaOvningar>
-            <h2>Valda Övningar </h2>
-            <br/>
+            <StyledValdaOvningar>
+              <h2>Valda Övningar </h2>
+              <br />
               {patientStatistics.map((stats) => (
-              <>
-                {(() => {
-                  if (stats.amountOfTimes != undefined) {
-                    return (
-                      <>
-          <ListPanelWrapper>
-            <ListPanel>
-              <h3>
-                <StyledHr/><br/>
-                  {/*{stats.vidTitle}*/}
-                  <p>Antal gånger per dag: {stats.amountOfTimes}</p>
-                  <p>Antal sets per gång: 3</p>
-                  <p>Antal reps per set: 15</p>
-              </h3>
-                  <StyledButtonsTrash>
-                     <Button
-                        onClick={() =>
-                          customDeleteSelectedExercise(
-                            patient.name,
-                            stats.vidId
-                          )
-                        }
-                          icon="trash" outlinedTheme
-                      />
-                  </StyledButtonsTrash>
-                    <StyledCalendarStatistic>
-                      <StyledClendar>
-          <ListPanelWrapper2>
-            <ListPanel2>
-             <StyledCalAndStatLeft>
-              <h2>Kalender</h2>
-              <br/>  
-                <Calendar value={dateState} onChange={changeDate}/>
-            </StyledCalAndStatLeft>
-            <StyledCalAndStatRight>
-              <h2>Statistik för {moment(dateState).format('LL')}</h2>
-              <br/>
-                {arrayDate.map((stat, index) => (
-            <React.Fragment key={stat.vidId}>
-              <StyledStatisticsBox>
-                <p>Övning: </p>
-                  <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLinkVideoTitle>
-                <p>Antal gånger idag: {arrayDateTime[index]}</p>     
-                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {}             
-              </StyledStatisticsBox>
-            </React.Fragment>
-          ))}
-                    </StyledCalAndStatRight>
-          </ListPanel2>
-          </ListPanelWrapper2>
-          </StyledClendar>
-        </StyledCalendarStatistic>
-        </ListPanel>
-        </ListPanelWrapper>
-                      </>
-                    );
-                  }
-                })()}
-              </>
-            ))}</StyledValdaOvningar>
+                <>
+                  {(() => {
+                    if (stats.amountOfTimes != undefined) {
+                      return (
+                        <>
+                          <ListPanelWrapper>
+                            <ListPanel>
+                              <h3>
+                                <StyledHr />
+                                <br />
+                                {/*{stats.vidTitle}*/}
+                                <p>
+                                  Antal gånger per dag: {stats.amountOfTimes}
+                                </p>
+                                <p>Antal sets per gång: 3</p>
+                                <p>Antal reps per set: 15</p>
+                              </h3>
+                              <StyledButtonsTrash>
+                                <Button
+                                  onClick={() =>
+                                    customDeleteSelectedExercise(
+                                      patient.name,
+                                      stats.vidId
+                                    )
+                                  }
+                                  icon="trash"
+                                  outlinedTheme
+                                />
+                              </StyledButtonsTrash>
+                              <StyledCalendarStatistic>
+                                <StyledClendar>
+                                  <ListPanelWrapper2>
+                                    <ListPanel2>
+                                      <StyledCalAndStatLeft>
+                                        <h2>Kalender</h2>
+                                        <br />
+                                        <Calendar
+                                          value={dateState}
+                                          onChange={changeDate}
+                                        />
+                                      </StyledCalAndStatLeft>
+                                      <StyledCalAndStatRight>
+                                        <h2>
+                                          Statistik för{" "}
+                                          {moment(dateState).format("LL")}
+                                        </h2>
+                                        <br />
+                                        {arrayDate.map((stat, index) => (
+                                          <React.Fragment key={stat.vidId}>
+                                            <StyledStatisticsBox>
+                                              <p>Övning: </p>
+                                              <StyledLinkVideoTitle
+                                                to={`../exercise/${stat.vidId}`}
+                                              >
+                                                {/*stat.vidTitle*/}
+                                              </StyledLinkVideoTitle>
+                                              <p>
+                                                Antal gånger idag:{" "}
+                                                {arrayDateTime[index]}
+                                              </p>
+                                              <p>
+                                                Antal förväntade idag: 3
+                                                {/*<p>{stat.amountOfTimes}</p>*/}
+                                              </p>{" "}
+                                              {}
+                                            </StyledStatisticsBox>
+                                          </React.Fragment>
+                                        ))}
+                                      </StyledCalAndStatRight>
+                                    </ListPanel2>
+                                  </ListPanelWrapper2>
+                                </StyledClendar>
+                              </StyledCalendarStatistic>
+                            </ListPanel>
+                          </ListPanelWrapper>
+                        </>
+                      );
+                    }
+                  })()}
+                </>
+              ))}
+            </StyledValdaOvningar>
           </>
         </StyledAllContainer>
-        <hr/>
+        <hr />
         {/*<StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>*/}
-        </ContentContainer>
+      </ContentContainer>
     </AdminLayout>
   );
 };
