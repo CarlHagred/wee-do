@@ -163,5 +163,6 @@ export const deleteVideoIndex = async (params) => {
     .then((response) => {});
 };
 
+
 export const updateDatabase = async () =>
   await axios.post(`${serverUrl}/updateDatabase`);
