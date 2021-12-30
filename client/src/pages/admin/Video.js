@@ -49,7 +49,7 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
   justify-content: space-around;
-  min-height: 150px;
+  min-height: 100px;
   align-content: center;
   gap: 10px;
   @media (min-width: 769px) {
