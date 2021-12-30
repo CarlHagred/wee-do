@@ -19,33 +19,24 @@ import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
-const ButtonContainer = styled.div`
+const StyledButtonsTop = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   margin: 2em 0;
 `;
 
-const StyledButton = styled.div`
+const StyledButtonsTrash = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 5px;
   padding: 1px;
   `;
 
-const StyledCalendarStatistic = styled.div`
-  display: flex;
-  position: absolute;
-  top: 27em;
-  left: 45em;
-  right: 10;
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  
-  `;
-
-const StyledContainer = styled.div`
+const StyledAllContainer = styled.div`
   h2 {
     text-align: center;
     font-size: 2.5em;
@@ -70,6 +61,19 @@ const StyledValdaOvningar = styled.div`
   }
 `;
 
+const StyledCalendarStatistic = styled.div`
+  display: flex;
+  position: absolute;
+  top: 27em;
+  left: 45em;
+  right: 10;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: lighter;
+  `;
+
 const StyledClendar = styled.div`
   h2 {
     text-align: left;
@@ -86,7 +90,7 @@ const StyledClendar = styled.div`
   }
 `;
 
-const StyledPatient = styled.p`
+const StyledPatientID = styled.p`
   background-color: #ccc;
   padding: 25px;
   border-radius: 3px;
@@ -94,7 +98,7 @@ const StyledPatient = styled.p`
   justify-content: middle;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLinkVideoTitle = styled(Link)`
   color: #0000ff;
   :hover {
     text-decoration: underline;
@@ -127,7 +131,7 @@ const StyledCalAndStatRight = styled.div`
   } 
 `;
 
-const StyledStatistics = styled.div`
+const StyledStatisticsBox = styled.div`
   //background-color: rgb(247, 247, 248, 100%);
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
@@ -179,6 +183,7 @@ const ListPanel2 = styled.nav`
   margin-top: 5px;
   margin-bottom: 5%;
   justify-content: left;
+  
 `;
 
 const StyledHr = styled.hr`
@@ -274,8 +279,8 @@ const PatientStatistics = () => {
   let [arrayDateTime, setArrayDateTime] = useState([]);
 
   useEffect(() => {
-    let arrayDate2 = [];
-    let arrayDate3 = [];
+  let arrayDate2 = [];
+  let arrayDate3 = [];
 
     const date = moment(dateState).format('MMMM Do YYYY');
 
@@ -297,112 +302,109 @@ const PatientStatistics = () => {
           counter++;
         }
       }
-    if(counter !== 0){
-      arrayDate3.push(counter);}
-      counter = 0;
-    }
-    setArrayDateTime(arrayDate3);
+      if(counter !== 0){
+        arrayDate3.push(counter);}
+        counter = 0;
+      }
+      setArrayDateTime(arrayDate3);
   }, [dateState]);
 
   const changeDate = (e) => {
     setDateState(e)
-}
-
+  }
 
   return (
     <AdminLayout>
       <ContentContainer>
-        <StyledContainer>
+        <StyledAllContainer>
           <>
             <h2>Statistik</h2>
             <br/>
             <br/>
-            <StyledPatient>
+            <StyledPatientID>
               <strong>Patient-id: </strong>
               {patient.name}
-            </StyledPatient>
+            </StyledPatientID>
             <br/>
           </>
-          <ButtonContainer>
-          <Button onClick={handleSelectExcersice}>Välj övningar</Button>
+          <StyledButtonsTop>
+            <Button onClick={handleSelectExcersice} width="fixed">
+              Välj övningar
+            </Button>
             {patientStatus ? (
-              <Button onClick={customPatientInactive} icon="patientInactive">
+              <Button onClick={customPatientInactive} icon="patientInactive" width="fixed">
                 Gör patient inaktiv
               </Button>
             ) : (
-              <Button onClick={customPatientActive} icon="patientActive">
+              <Button onClick={customPatientActive} icon="patientActive" width="fixed">
                 Gör patient aktiv
               </Button>
             )}
-            <Button onClick={customDeletePatient} icon="trash" outlinedTheme>
-              Radera patient
-            </Button>
-          </ButtonContainer>
-          <br/>
-          <hr/>
-          <br/>
+              <Button onClick={customDeletePatient} icon="trash" width="fixed" outlinedTheme>
+               Radera patient
+              </Button>
+          </StyledButtonsTop>
+            <br/>
+            <hr/>
+            <br/>
           <>
           <StyledValdaOvningar>
             <h2>Valda Övningar </h2>
             <br/>
-            {patientStatistics.map((stats) => (
+              {patientStatistics.map((stats) => (
               <>
                 {(() => {
                   if (stats.amountOfTimes != undefined) {
                     return (
                       <>
-                      <ListPanelWrapper>
-          <ListPanel>
-                        <h3><StyledHr/><br/>
-                          {/*{stats.vidTitle}*/}
-                          <p>Antal gånger per dag: {stats.amountOfTimes}</p>
-                        <p>Antal sets per gång: 3</p>
-                        <p>Antal reps per set: 15</p>
-                        </h3>
-                        <StyledButton>
-                        <Button
-                          onClick={() =>
-                            customDeleteSelectedExercise(
-                              patient.name,
-                              stats.vidId
-                            )
-                          }
+          <ListPanelWrapper>
+            <ListPanel>
+              <h3>
+                <StyledHr/><br/>
+                  {/*{stats.vidTitle}*/}
+                  <p>Antal gånger per dag: {stats.amountOfTimes}</p>
+                  <p>Antal sets per gång: 3</p>
+                  <p>Antal reps per set: 15</p>
+              </h3>
+                  <StyledButtonsTrash>
+                     <Button
+                        onClick={() =>
+                          customDeleteSelectedExercise(
+                            patient.name,
+                            stats.vidId
+                          )
+                        }
                           icon="trash" outlinedTheme
-                        />
-                        </StyledButton>
-                        <StyledCalendarStatistic>
-                        <StyledClendar>
-        <ListPanelWrapper2>
-          <ListPanel2>
-            <StyledCalAndStatLeft>
-          
-            <h2>Kalender</h2>
-            <br/>
-        
-        <Calendar value={dateState} onChange={changeDate}/>
-        </StyledCalAndStatLeft>
-
-        <StyledCalAndStatRight>
-        <h2>Statistik för {moment(dateState).format('LL')}</h2>
-        <br/>
-          {arrayDate.map((stat, index) => (
+                      />
+                  </StyledButtonsTrash>
+                    <StyledCalendarStatistic>
+                      <StyledClendar>
+          <ListPanelWrapper2>
+            <ListPanel2>
+             <StyledCalAndStatLeft>
+              <h2>Kalender</h2>
+              <br/>  
+                <Calendar value={dateState} onChange={changeDate}/>
+            </StyledCalAndStatLeft>
+            <StyledCalAndStatRight>
+              <h2>Statistik för {moment(dateState).format('LL')}</h2>
+              <br/>
+                {arrayDate.map((stat, index) => (
             <React.Fragment key={stat.vidId}>
-              <StyledStatistics>
+              <StyledStatisticsBox>
                 <p>Övning: </p>
-                  <StyledLink to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLink>
+                  <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLinkVideoTitle>
                 <p>Antal gånger idag: {arrayDateTime[index]}</p>     
-                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {
-                  
-                }             
-              </StyledStatistics>
+                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {}             
+              </StyledStatisticsBox>
             </React.Fragment>
           ))}
                     </StyledCalAndStatRight>
           </ListPanel2>
           </ListPanelWrapper2>
           </StyledClendar>
-                        </StyledCalendarStatistic>
-                        </ListPanel>
+        </StyledCalendarStatistic>
+        </ListPanel>
         </ListPanelWrapper>
                       </>
                     );
@@ -411,60 +413,14 @@ const PatientStatistics = () => {
               </>
             ))}</StyledValdaOvningar>
           </>
-
-        </StyledContainer>
+        </StyledAllContainer>
         <hr/>
-        <br/>
-      
-        <StyledClendar>
-        <ListPanelWrapper2>
-          <ListPanel2>
-            <StyledCalAndStatLeft>
-          
-            <h2>Kalender</h2>
-                
-        <Calendar value={dateState} onChange={changeDate}/>
-        </StyledCalAndStatLeft>
-
-        <StyledCalAndStatRight>
-        <h2>Statistik för {moment(dateState).format('LL')}</h2>
-          {arrayDate.map((stat, index) => (
-            <React.Fragment key={stat.vidId}>
-              <StyledStatistics>
-                <p>Övning: </p>
-                  <StyledLink to={`../exercise/${stat.vidId}`}>{/*stat.vidTitle*/}</StyledLink>
-                <p>Antal gånger idag: {arrayDateTime[index]}</p>     
-                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p> {
-                  
-                }             
-              </StyledStatistics>
-            </React.Fragment>
-          ))}
-                    </StyledCalAndStatRight>
-          </ListPanel2>
-          </ListPanelWrapper2>
-          </StyledClendar> 
-          
-
-      
-
-      
         {/*<StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>*/}
         </ContentContainer>
-      
     </AdminLayout>
   );
-  
 };
 
-
-
 export default PatientStatistics;
-
-
-
-                  /*<p style={{ marginTop: 5 }} key={index}> 
-                   {time.replace("T", ", ").slice(0, -8)}
-                  </p>*/
