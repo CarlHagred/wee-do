@@ -15,9 +15,62 @@ import {
 } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
-import ContentContainer from "../../components/common/ContentContainer";
 import Button from "../../components/common/Button";
+import TopWrapper from "../../components/common/TopWrapper";
 import StatisticsChart from "../../components/admin/StatisticsChart";
+
+const ExerciseWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1em 0;
+  min-width: 180px;
+`;
+
+const ParagraphWrapper = styled.div``;
+
+const StyledButtonsTrash = styled.div`
+  margin: 0 auto;
+`;
+
+const ContentParagraph = styled.p`
+  font-size: 1em;
+  padding: 2px;
+`;
+
+const ContentHeader = styled.h2`
+  text-align: left;
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+`;
+
+const StyledTopHr = styled.hr`
+  color: black;
+  width: 100%;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  margin: 0 5em;
+  font-weight: lighter;
+`;
+
+const ChoosenExerciseContainer = styled.div`
+  flex: 1;
+`;
+
+const CalendarContainer = styled.div`
+  flex: 1;
+`;
+
+const DailyStatisticsContainer = styled.div`
+  flex: 1;
+`;
 
 const StyledButtonsTop = styled.div`
   display: flex;
@@ -29,69 +82,9 @@ const StyledButtonsTop = styled.div`
   margin: 2em 0;
 `;
 
-const StyledButtonsTrash = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 5px;
-  padding: 1px;
-`;
-
-const StyledAllContainer = styled.div`
-  h2 {
-    text-align: center;
-    font-size: 2.5em;
-  }
-  p {
-    font-size: 1.2em;
-  }
-`;
-
-const StyledValdaOvningar = styled.div`
-  h2 {
-    text-align: left;
-    font-size: 1.5em;
-  }
-  h3 {
-    font-size: 1.2em;
-    padding: 2px;
-  }
-  p {
-    font-size: 1em;
-    padding: 2px;
-  }
-`;
-
-const StyledCalendarStatistic = styled.div`
-  display: flex;
-  position: absolute;
-  top: 27em;
-  left: 45em;
-  right: 10;
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-weight: lighter;
-`;
-
-const StyledClendar = styled.div`
-  h2 {
-    text-align: left;
-    font-size: 1.5em;
-    padding: 2px;
-  }
-  h3 {
-    font-size: 1.2em;
-    padding: 2px;
-  }
-  p {
-    font-size: 1em;
-    padding: 2px;
-  }
-`;
-
-const StyledPatientID = styled.p`
+const NEW_StyledPatientID = styled.div`
   background-color: #ccc;
+  width: 100%;
   padding: 25px;
   border-radius: 3px;
   text-align: center;
@@ -136,10 +129,9 @@ const StyledStatisticsBox = styled.div`
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
   border-radius: 4px;
-  margin-top: 5px;
-  margin-bottom: 5px;
   padding: 10px;
-  margin: 5px;
+  margin: 5px 0;
+  min-width: 350px;
   p {
     font-size: 1em;
     padding: 2px;
@@ -147,6 +139,7 @@ const StyledStatisticsBox = styled.div`
 `;
 
 const StyledChart = styled.div`
+  // SPARA
   background-color: rgb(247, 247, 248, 100%);
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
@@ -155,39 +148,8 @@ const StyledChart = styled.div`
   margin-bottom: 5px;
 `;
 
-const ListPanelWrapper = styled.div`
-  justify-content: top;
-  flex-wrap: wrap;
-`;
-
-const ListPanel = styled.nav`
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1em;
-  align-items: center;
-  margin-bottom: 1%;
-  justify-content: left;
-`;
-
-const ListPanelWrapper2 = styled.div`
-  justify-content: top;
-`;
-
-const ListPanel2 = styled.nav`
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 10em;
-  align-items: top;
-  margin-top: 5px;
-  margin-bottom: 5%;
-  justify-content: left;
-`;
-
 const StyledHr = styled.hr`
   color: lightgrey;
-  width: 400px;
 `;
 
 const PatientStatistics = () => {
@@ -320,145 +282,118 @@ const PatientStatistics = () => {
 
   return (
     <AdminLayout>
-      <ContentContainer>
-        <StyledAllContainer>
-          <>
-            <h2>Statistik</h2>
-            <br />
-            <br />
-            <StyledPatientID>
-              <strong>Patient-id: </strong>
-              {patient.name}
-            </StyledPatientID>
-            <br />
-          </>
-          <StyledButtonsTop>
-            <Button onClick={handleSelectExcersice} width="fixed">
-              Välj övningar
-            </Button>
-            {patientStatus ? (
-              <Button
-                onClick={customPatientInactive}
-                icon="patientInactive"
-                width="fixed"
-              >
-                Gör patient inaktiv
-              </Button>
-            ) : (
-              <Button
-                onClick={customPatientActive}
-                icon="patientActive"
-                width="fixed"
-              >
-                Gör patient aktiv
-              </Button>
-            )}
+      <TopWrapper header="Statistik">
+        <NEW_StyledPatientID>
+          <strong>Patient-id: </strong>
+          {patient.name}
+        </NEW_StyledPatientID>
+        <StyledButtonsTop>
+          <Button onClick={handleSelectExcersice} width="fixed">
+            Välj övningar
+          </Button>
+          {patientStatus ? (
             <Button
-              onClick={customDeletePatient}
-              icon="trash"
+              onClick={customPatientInactive}
+              icon="patientInactive"
               width="fixed"
-              outlinedTheme
             >
-              Radera patient
+              Gör patient inaktiv
             </Button>
-          </StyledButtonsTop>
-          <br />
-          <hr />
-          <br />
+          ) : (
+            <Button
+              onClick={customPatientActive}
+              icon="patientActive"
+              width="fixed"
+            >
+              Gör patient aktiv
+            </Button>
+          )}
+          <Button
+            onClick={customDeletePatient}
+            icon="trash"
+            width="fixed"
+            outlinedTheme
+          >
+            Radera patient
+          </Button>
+        </StyledButtonsTop>
+        <StyledTopHr />
+      </TopWrapper>
+      <ContentWrapper>
+        <ChoosenExerciseContainer>
           <>
-            <StyledValdaOvningar>
-              <h2>Valda Övningar </h2>
-              <br />
-              {patientStatistics.map((stats) => (
-                <>
-                  {(() => {
-                    if (stats.amountOfTimes != undefined) {
-                      return (
-                        <>
-                          <ListPanelWrapper>
-                            <ListPanel>
-                              <h3>
-                                <StyledHr />
-                                <br />
-                                {/*{stats.vidTitle}*/}
-                                <p>
-                                  Antal gånger per dag: {stats.amountOfTimes}
-                                </p>
-                                <p>Antal sets per gång: 3</p>
-                                <p>Antal reps per set: 15</p>
-                              </h3>
-                              <StyledButtonsTrash>
-                                <Button
-                                  onClick={() =>
-                                    customDeleteSelectedExercise(
-                                      patient.name,
-                                      stats.vidId
-                                    )
-                                  }
-                                  icon="trash"
-                                  outlinedTheme
-                                />
-                              </StyledButtonsTrash>
-                              <StyledCalendarStatistic>
-                                <StyledClendar>
-                                  <ListPanelWrapper2>
-                                    <ListPanel2>
-                                      <StyledCalAndStatLeft>
-                                        <h2>Kalender</h2>
-                                        <br />
-                                        <Calendar
-                                          value={dateState}
-                                          onChange={changeDate}
-                                        />
-                                      </StyledCalAndStatLeft>
-                                      <StyledCalAndStatRight>
-                                        <h2>
-                                          Statistik för{" "}
-                                          {moment(dateState).format("LL")}
-                                        </h2>
-                                        <br />
-                                        {arrayDate.map((stat, index) => (
-                                          <React.Fragment key={stat.vidId}>
-                                            <StyledStatisticsBox>
-                                              <p>Övning: </p>
-                                              <StyledLinkVideoTitle
-                                                to={`../exercise/${stat.vidId}`}
-                                              >
-                                                {/*stat.vidTitle*/}
-                                              </StyledLinkVideoTitle>
-                                              <p>
-                                                Antal gånger idag:{" "}
-                                                {arrayDateTime[index]}
-                                              </p>
-                                              <p>
-                                                Antal förväntade idag: 3
-                                                {/*<p>{stat.amountOfTimes}</p>*/}
-                                              </p>{" "}
-                                              {}
-                                            </StyledStatisticsBox>
-                                          </React.Fragment>
-                                        ))}
-                                      </StyledCalAndStatRight>
-                                    </ListPanel2>
-                                  </ListPanelWrapper2>
-                                </StyledClendar>
-                              </StyledCalendarStatistic>
-                            </ListPanel>
-                          </ListPanelWrapper>
-                        </>
-                      );
-                    }
-                  })()}
-                </>
-              ))}
-            </StyledValdaOvningar>
+            <ContentHeader>Valda Övningar </ContentHeader>
+            {patientStatistics.map((stats) => (
+              <>
+                {(() => {
+                  if (stats.amountOfTimes != undefined) {
+                    return (
+                      <>
+                        <StyledHr />
+                        {/*{stats.vidTitle}*/}
+                        <ExerciseWrapper>
+                          <ParagraphWrapper>
+                            <ContentParagraph>
+                              Antal gånger per dag: {stats.amountOfTimes}
+                            </ContentParagraph>
+                            <ContentParagraph>
+                              Antal sets per gång: 3
+                            </ContentParagraph>
+                            <ContentParagraph>
+                              Antal reps per set: 15
+                            </ContentParagraph>
+                          </ParagraphWrapper>
+                          <StyledButtonsTrash>
+                            <Button
+                              onClick={() =>
+                                customDeleteSelectedExercise(
+                                  patient.name,
+                                  stats.vidId
+                                )
+                              }
+                              icon="trash"
+                              outlinedTheme
+                            />
+                          </StyledButtonsTrash>
+                        </ExerciseWrapper>
+                      </>
+                    );
+                  }
+                })()}
+              </>
+            ))}
           </>
-        </StyledAllContainer>
-        <hr />
-        {/*<StyledChart>
+        </ChoosenExerciseContainer>
+
+        <CalendarContainer>
+          <ContentHeader>Kalender</ContentHeader>
+          <Calendar value={dateState} onChange={changeDate} />
+        </CalendarContainer>
+
+        <DailyStatisticsContainer>
+          <ContentHeader>
+            Statistik för {moment(dateState).format("LL")}
+          </ContentHeader>
+          {arrayDate.map((stat, index) => (
+            <div key={stat.vidId}>
+              <StyledStatisticsBox>
+                <p>Övning: </p>
+                <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
+                  {/*stat.vidTitle*/}
+                </StyledLinkVideoTitle>
+                <p>Antal gånger idag: {arrayDateTime[index]}</p>
+                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p>
+                {}
+              </StyledStatisticsBox>
+            </div>
+          ))}
+        </DailyStatisticsContainer>
+      </ContentWrapper>
+
+      <hr />
+      {/*<StyledChart>
           <StatisticsChart patientStatistics={patientStatistics} />
         </StyledChart>*/}
-      </ContentContainer>
     </AdminLayout>
   );
 };
