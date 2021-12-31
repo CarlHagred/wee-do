@@ -32,14 +32,18 @@ const StyledPatientID = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
   flex-direction: row;
-  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  gap: 1em;
 `;
 
 const StyledSectionHr = styled.hr`
   color: black;
-  margin: 0 5em;
+  margin: 0 1em;
+  @media (min-width: 415px) {
+    margin: 0 5em;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -58,8 +62,12 @@ const ChoosenExerciseContainer = styled.div`
 
 const ContentHeader = styled.h2`
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1.3em;
   padding-bottom: 0.3em;
+  @media (min-width: 415px) {
+    min-width: 350px;
+    font-size: 1.5em;
+  }
 `;
 
 const StyledHr = styled.hr`
@@ -87,6 +95,9 @@ const StyledTrashButton = styled.div`
 `;
 
 const CalendarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   flex: 1;
 `;
@@ -101,12 +112,15 @@ const StyledStatistics = styled.div`
   flex-wrap: wrap;
   align-items: center;
   padding: 0.5em;
-  min-width: 350px;
+  min-width: 320px;
   background-color: rgb(247, 247, 248, 100%);
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
   border-radius: 4px;
   margin-bottom: 1em;
+  @media (min-width: 415px) {
+    min-width: 350px;
+  }
 `;
 
 const StyledLinkVideoTitle = styled(Link)`
@@ -374,9 +388,9 @@ const PatientStatistics = () => {
       </ContentWrapper>
 
       <StyledSectionHr />
-      <StyledChart>
+      {/* <StyledChart>
         <StatisticsChart patientStatistics={patientStatistics} />
-      </StyledChart>
+      </StyledChart>*/}
     </AdminLayout>
   );
 };
