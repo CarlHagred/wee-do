@@ -19,35 +19,27 @@ import Button from "../../components/common/Button";
 import TopWrapper from "../../components/common/TopWrapper";
 import StatisticsChart from "../../components/admin/StatisticsChart";
 
-const ExerciseWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 1em 0;
-  min-width: 180px;
-`;
-
-const ParagraphWrapper = styled.div``;
-
-const StyledButtonsTrash = styled.div`
-  margin: 0 auto;
-`;
-
-const ContentParagraph = styled.p`
-  font-size: 1em;
-  padding: 2px;
-`;
-
-const ContentHeader = styled.h2`
-  text-align: left;
-  font-size: 1.5em;
-  padding-bottom: 0.3em;
-`;
-
-const StyledTopHr = styled.hr`
-  color: black;
+const StyledPatientID = styled.div`
+  background-color: #ccc;
   width: 100%;
+  padding: 25px;
+  border-radius: 3px;
+  text-align: center;
+  justify-content: middle;
+  font-size: 1.3em;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const StyledSectionHr = styled.hr`
+  color: black;
+  margin: 0 5em;
 `;
 
 const ContentWrapper = styled.div`
@@ -56,7 +48,7 @@ const ContentWrapper = styled.div`
   flex-wrap: wrap;
   gap: 2em;
   justify-content: center;
-  margin: 0 5em;
+  margin: 2em 5em;
   font-weight: lighter;
 `;
 
@@ -64,7 +56,38 @@ const ChoosenExerciseContainer = styled.div`
   flex: 1;
 `;
 
+const ContentHeader = styled.h2`
+  text-align: left;
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+`;
+
+const StyledHr = styled.hr`
+  color: lightgrey;
+`;
+
+const StyledExercise = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1em 0;
+  min-width: 180px;
+`;
+
+const ParagraphContainer = styled.div``;
+
+const StyledParagraph = styled.p`
+  font-size: 1em;
+  padding: 2px;
+`;
+
+const StyledTrashButton = styled.div`
+  margin: 0 auto;
+`;
+
 const CalendarContainer = styled.div`
+  text-align: center;
   flex: 1;
 `;
 
@@ -72,23 +95,18 @@ const DailyStatisticsContainer = styled.div`
   flex: 1;
 `;
 
-const StyledButtonsTop = styled.div`
+const StyledStatistics = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
-  margin: 2em 0;
-`;
-
-const NEW_StyledPatientID = styled.div`
-  background-color: #ccc;
-  width: 100%;
-  padding: 25px;
-  border-radius: 3px;
-  text-align: center;
-  justify-content: middle;
+  padding: 0.5em;
+  min-width: 350px;
+  background-color: rgb(247, 247, 248, 100%);
+  border: solid;
+  border-color: rgba(218, 223, 225, 0.3);
+  border-radius: 4px;
+  margin-bottom: 1em;
 `;
 
 const StyledLinkVideoTitle = styled(Link)`
@@ -102,54 +120,12 @@ const StyledLinkVideoTitle = styled(Link)`
   }
 `;
 
-const StyledCalAndStatLeft = styled.div`
-  .sides {
-    margin: 0;
-  }
-  .left {
-    float: left;
-    width: 75%;
-    overflow: hidden;
-  }
-`;
-
-const StyledCalAndStatRight = styled.div`
-  .sides {
-    margin: 0;
-  }
-  .right {
-    float: left;
-    width: 25%;
-    overflow: hidden;
-  }
-`;
-
-const StyledStatisticsBox = styled.div`
-  //background-color: rgb(247, 247, 248, 100%);
-  border: solid;
-  border-color: rgba(218, 223, 225, 0.3);
-  border-radius: 4px;
-  padding: 10px;
-  margin: 5px 0;
-  min-width: 350px;
-  p {
-    font-size: 1em;
-    padding: 2px;
-  }
-`;
-
 const StyledChart = styled.div`
-  // SPARA
   background-color: rgb(247, 247, 248, 100%);
   border: solid;
   border-color: rgba(218, 223, 225, 0.3);
   border-radius: 4px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
-const StyledHr = styled.hr`
-  color: lightgrey;
+  margin: 2em 5em;
 `;
 
 const PatientStatistics = () => {
@@ -283,11 +259,11 @@ const PatientStatistics = () => {
   return (
     <AdminLayout>
       <TopWrapper header="Statistik">
-        <NEW_StyledPatientID>
+        <StyledPatientID>
           <strong>Patient-id: </strong>
           {patient.name}
-        </NEW_StyledPatientID>
-        <StyledButtonsTop>
+        </StyledPatientID>
+        <ButtonContainer>
           <Button onClick={handleSelectExcersice} width="fixed">
             Välj övningar
           </Button>
@@ -316,9 +292,9 @@ const PatientStatistics = () => {
           >
             Radera patient
           </Button>
-        </StyledButtonsTop>
-        <StyledTopHr />
+        </ButtonContainer>
       </TopWrapper>
+      <StyledSectionHr />
       <ContentWrapper>
         <ChoosenExerciseContainer>
           <>
@@ -331,19 +307,19 @@ const PatientStatistics = () => {
                       <>
                         <StyledHr />
                         {/*{stats.vidTitle}*/}
-                        <ExerciseWrapper>
-                          <ParagraphWrapper>
-                            <ContentParagraph>
+                        <StyledExercise>
+                          <ParagraphContainer>
+                            <StyledParagraph>
                               Antal gånger per dag: {stats.amountOfTimes}
-                            </ContentParagraph>
-                            <ContentParagraph>
+                            </StyledParagraph>
+                            <StyledParagraph>
                               Antal sets per gång: 3
-                            </ContentParagraph>
-                            <ContentParagraph>
+                            </StyledParagraph>
+                            <StyledParagraph>
                               Antal reps per set: 15
-                            </ContentParagraph>
-                          </ParagraphWrapper>
-                          <StyledButtonsTrash>
+                            </StyledParagraph>
+                          </ParagraphContainer>
+                          <StyledTrashButton>
                             <Button
                               onClick={() =>
                                 customDeleteSelectedExercise(
@@ -354,8 +330,8 @@ const PatientStatistics = () => {
                               icon="trash"
                               outlinedTheme
                             />
-                          </StyledButtonsTrash>
-                        </ExerciseWrapper>
+                          </StyledTrashButton>
+                        </StyledExercise>
                       </>
                     );
                   }
@@ -376,24 +352,31 @@ const PatientStatistics = () => {
           </ContentHeader>
           {arrayDate.map((stat, index) => (
             <div key={stat.vidId}>
-              <StyledStatisticsBox>
-                <p>Övning: </p>
-                <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
-                  {/*stat.vidTitle*/}
-                </StyledLinkVideoTitle>
-                <p>Antal gånger idag: {arrayDateTime[index]}</p>
-                <p>Antal förväntade idag: 3{/*<p>{stat.amountOfTimes}</p>*/}</p>
+              <StyledStatistics>
+                <ParagraphContainer>
+                  <StyledParagraph>Övning: </StyledParagraph>
+                  <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
+                    {/*stat.vidTitle*/}
+                  </StyledLinkVideoTitle>
+                  <StyledParagraph>
+                    Antal gånger idag: {arrayDateTime[index]}
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    Antal förväntade idag: 3{/*{stat.amountOfTimes}*/}
+                  </StyledParagraph>
+                </ParagraphContainer>
+
                 {}
-              </StyledStatisticsBox>
+              </StyledStatistics>
             </div>
           ))}
         </DailyStatisticsContainer>
       </ContentWrapper>
 
-      <hr />
-      {/*<StyledChart>
-          <StatisticsChart patientStatistics={patientStatistics} />
-        </StyledChart>*/}
+      <StyledSectionHr />
+      <StyledChart>
+        <StatisticsChart patientStatistics={patientStatistics} />
+      </StyledChart>
     </AdminLayout>
   );
 };
