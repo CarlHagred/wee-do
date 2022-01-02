@@ -209,26 +209,44 @@ const Guide = () => {
           </GuideItem>
           <GuideItem>
             <GuideTitle id="statistik">Statistik</GuideTitle>
+
+            <ListItem>Vald patient</ListItem>
+            <StyledParagraph>
+              Här visas Patient-id på vald patient.
+            </StyledParagraph>
+
+            <ListItem>
+              Välj övningar, Gör patient inaktiv och Radera patient
+            </ListItem>
+            <StyledParagraph>
+              Välj övningar för aktuell patient, gör patient inaktiv eller
+              radera patient.
+            </StyledParagraph>
+
             <ListItem>Valda övningar</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Här visas Patientens valda övningar med antal gånger per dag,
+              antal sets per gång och antal reps per set. Det finns även
+              möjlighet att radera en vald övning från patienten.
+            </StyledParagraph>
 
             <ListItem>Kalender</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj ett datum i kalendern för att se vilka övningar som utförts.
+              Resultatet presenteras till höger om kalendern kalendern (se nr 5
+              "Statistik för dag"). Är det tomt så har det ej utförts någon
+              övning den dagen.
+            </StyledParagraph>
 
             <ListItem>Statistik för dag</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Här visas resultatet för dag vald i kalendern.
+            </StyledParagraph>
 
             <ListItem>Diagram</ListItem>
-            <StyledParagraph></StyledParagraph>
-
-            <ListItem>Välj övningar</ListItem>
-            <StyledParagraph></StyledParagraph>
-
-            <ListItem>Gör patient inaktiv</ListItem>
-            <StyledParagraph></StyledParagraph>
-
-            <ListItem>Radera patien</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Här visas diagram över de övningar som patienten utfört.
+            </StyledParagraph>
 
             <StyledImg src={statistik} />
             <HashLink smooth to={"#top"}>
@@ -238,16 +256,30 @@ const Guide = () => {
           <GuideItem>
             <GuideTitle id="valj-ovning">Välj övning</GuideTitle>
             <ListItem>Sök övning</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Sök efter en övning eller välj bland alla övningar som presenteras
+              på sidan.
+            </StyledParagraph>
 
             <ListItem>Välj GPD, SET och REP</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              {" "}
+              Börja med att välja <strong>GPD:</strong> Antal gånger per dag,{" "}
+              <strong>SET:</strong> antal sets per gång, <strong>REP:</strong>{" "}
+              antal reps per set.
+            </StyledParagraph>
 
             <ListItem>Välj övning</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj övning genom att klicka i rutan så visas en bock. Välj fler
+              övningar eller gå vidare till spara övningar.
+            </StyledParagraph>
 
             <ListItem>Spara övningar</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Genom att klicka på knappen "Spara övningar" så läggs de valda
+              övningarna till för patienten.
+            </StyledParagraph>
 
             <StyledImg src={valj_ovningar} />
             <HashLink smooth to={"#top"}>
@@ -255,7 +287,9 @@ const Guide = () => {
             </HashLink>
           </GuideItem>
           <GuideItem>
-            <GuideTitle id="ladda-upp-ovning">Ladda upp övning</GuideTitle>
+            <GuideTitle id="ladda-upp-ovning">
+              Ladda upp övning - ** Inväntar färdig sida **
+            </GuideTitle>
             <ListItem>Instruktion</ListItem>
             <StyledParagraph></StyledParagraph>
             <ListItem>Instruktion</ListItem>
@@ -274,10 +308,16 @@ const Guide = () => {
           <GuideItem>
             <GuideTitle id="sok-ovning">Sök övning</GuideTitle>
             <ListItem>Sök</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Sök efter en övning eller välj bland alla övningar som visas på
+              sidan.
+            </StyledParagraph>
 
             <ListItem>Visa</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj en övning och klicka på visa så visas övningen på en egen
+              sida.
+            </StyledParagraph>
 
             <StyledImg src={sok_ovning} />
             <HashLink smooth to={"#top"}>
@@ -287,13 +327,20 @@ const Guide = () => {
           <GuideItem>
             <GuideTitle id="visa-ovning">Visa övning</GuideTitle>
             <ListItem>Spela</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj PLAY för att spela upp videon.
+            </StyledParagraph>
 
             <ListItem>Generera QR-kod</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj "Generera QR-kod" för att skriva ut ett kort med övningens
+              namn, QR-kod och en bild på videon.{" "}
+            </StyledParagraph>
 
             <ListItem>Radera</ListItem>
-            <StyledParagraph></StyledParagraph>
+            <StyledParagraph>
+              Välj radera för att ta bort en övning.
+            </StyledParagraph>
 
             <StyledImg src={visa_ovning} />
             <HashLink smooth to={"#top"}>
