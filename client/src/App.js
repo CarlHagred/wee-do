@@ -29,6 +29,7 @@ import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
 import Video from "./pages/admin/Video";
 import WatchExercise from "./components/patient/WatchingVideo";
+import Guide from "./pages/admin/Guide";
 import { ProtectedRouteAdmin } from "./components/protectedRoutes/ProtectedRoutesAdmin";
 import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
 
@@ -106,6 +107,8 @@ function App() {
           path="/admin/exercise/qrpreview/:id"
           component={QRPreview}
         />
+
+        <ProtectedRouteAdmin exact path="/admin/guide" component={Guide} />
 
         <Route exact path="/test" component={QRPreview} />
         <Route exact path="/showcase" component={Showcase} />
