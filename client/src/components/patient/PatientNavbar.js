@@ -164,19 +164,20 @@ const Navbar = () => {
     const fetchData = async () => {
       try {
         const fetchedPatientSession = await getSession();
-        const fetchedPatient = await getOnePatient(fetchedPatientSession.data.name)
+        const fetchedPatient = await getOnePatient(
+          fetchedPatientSession.data.name
+        );
         setPatient(fetchedPatientSession.data);
         setStatus(fetchedPatient.data);
       } catch (error) {
-        if(status.active == null){
-          localStorage.clear()
-          history.push("/"); 
+        if (status.active == null) {
+          localStorage.clear();
+          history.push("/");
         }
-      }  
+      }
     };
     fetchData();
   }, [history, status.active]);
-
 
   /* === NAVBAR ===*/
   const closeMenu = () => setOpen(false);
@@ -196,8 +197,10 @@ const Navbar = () => {
           </NavbarLogo>
           <NavbarItem to="/todo">Mina övningar</NavbarItem>
           <NavbarItem to="/statistics">Se statistik</NavbarItem>
-          
-          <PatientName>{status.active === false ? "Inaktiv" : patient.name}</PatientName>
+
+          <PatientName>
+            {status.active === false ? "Inaktiv" : patient.name}
+          </PatientName>
 
           <NavbarItemLogout
             isActive={() => false}
@@ -209,8 +212,8 @@ const Navbar = () => {
         </NavbarMenu>
 
         <StyledMobileNav open={open}>
-          <NavbarItemBurger to="/QrScanner" onClick={closeMenu}>
-            <StyledIcon size="1.5em" name="qrcode" /> Scanna övning
+          <NavbarItemBurger to="/todo" onClick={closeMenu}>
+            <StyledIcon size="1.5em" name="gym_user" /> Mina övningar
           </NavbarItemBurger>
           <StyledDivider />
 
@@ -246,7 +249,9 @@ const Navbar = () => {
             <WdLogo width="4em" height="4em" fill="#FFFFFF" alt="WeeDo Logo" />
           </NavbarLogo>
 
-          <PatientName>{status.active === false ? "Inaktiv" : patient.name}</PatientName>
+          <PatientName>
+            {status.active === false ? "Inaktiv" : patient.name}
+          </PatientName>
 
           <NavbarItemLogout
             isActive={() => false}
