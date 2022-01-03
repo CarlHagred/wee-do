@@ -1,14 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Children } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
+import { CustomDatalist, UserInput } from "../../components/common/UserInput";
 
-import { deleteVideoIndex, getAllVideos, getTitleAndDescById } from "../../api";
+import {
+  deleteVideoIndex,
+  getAllVideos,
+  getTitleAndDescById,
+  getAllActivePatients,
+  getOnePatient,
+} from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ReactPlayer from "../../components/common/ReactPlayer";
+
+const handleSubmit = async (vid) => {
+  const patient = document.getElementById("userInput").value.trim();
+  if (!patient) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
+  }
+  if (!(await getOnePatient(patient)).data) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
+  }
+  window.location = `/admin/exercise/qrpreview/${vid}/${patient}`;
+  document.getElementById("userInput").style.borderColor = "green";
+};
 
 const TextContainer = styled.div`
   display: flex;
@@ -41,6 +62,10 @@ const StyledDivider = styled.hr`
   margin-top: 0.5em;
   border: 1px solid;
   border-color: #d9d9d9;
+`;
+
+const Input = styled(UserInput)`
+  width: 40%;
 `;
 
 const ButtonContainer = styled.div`
@@ -97,16 +122,26 @@ const Video = () => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
+  const [patientsActive, setPatientsActive] = useState([]);
 
-  useEffect(() => {
-    const titleAndDesc = async (id) => {
-      const response = await getTitleAndDescById(id);
-      setTitle(response.title);
-      setDescription(response.description);
-      setIsTitleAndDescFetched(true);
-    };
-    titleAndDesc(videoId);
-  }, [videoId]);
+  useEffect(
+    () => {
+      const titleAndDesc = async (id) => {
+        const response = await getTitleAndDescById(id);
+        setTitle(response.title);
+        setDescription(response.description);
+        setIsTitleAndDescFetched(true);
+      };
+      const fetchData = async () => {
+        const allActivePatients = await getAllActivePatients();
+        setPatientsActive(allActivePatients.data);
+      };
+      titleAndDesc(videoId);
+      fetchData();
+    },
+    [videoId],
+    []
+  );
 
   return (
     <AdminLayout>
@@ -120,11 +155,28 @@ const Video = () => {
       )}
 
       <ButtonContainer>
-        <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-          <Button icon="qrcode" width="fixed">
-            Generera QR-kod
-          </Button>
-        </Link>
+        <Input list="userList" id="userInput" placeholder="Patient..." />
+        <CustomDatalist id="userList">
+          {patientsActive
+            .filter((patient) => {
+              return patient.statistics.some((stats) => {
+                return stats.vidId.includes(videoId);
+              });
+            })
+            .map((patient) => (
+              <option key={patient._id} value={patient.name} />
+            ))}
+        </CustomDatalist>
+        <select id="selectedPatient" />
+        <Button
+          type="submit"
+          icon="imageCard"
+          onClick={() => {
+            handleSubmit(videoId);
+          }}
+        >
+          Generera Kort
+        </Button>
         <Button
           onClick={customDeleteVideo}
           icon="trash"

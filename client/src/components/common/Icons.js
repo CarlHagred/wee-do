@@ -3,7 +3,7 @@ import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload, MdAdminPanelSettings } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
-import { BsGraphUp, BsFillPersonFill } from "react-icons/bs";
+import { BsGraphUp, BsFillPersonFill, BsCardImage } from "react-icons/bs";
 import { MdPersonOff } from "react-icons/md";
 import { GiWeightLiftingUp } from "react-icons/gi";
 
@@ -29,6 +29,7 @@ const variants = {
   statistics: BsGraphUp,
   patientInactive: MdPersonOff,
   patientActive: BsFillPersonFill,
+  imageCard: BsCardImage,
   gym_user: GiWeightLiftingUp,
 };
 
