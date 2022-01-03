@@ -74,6 +74,7 @@ const Footer = () => {
           <NavContainer>
             <NavHeader>Information</NavHeader>
 
+            <NavItem to="/admin/guide">Användarguide</NavItem>
             <NavItem to="/admin/help">Hjälp</NavItem>
             <NavItem to="/admin/about">Om WeeDo</NavItem>
           </NavContainer>
