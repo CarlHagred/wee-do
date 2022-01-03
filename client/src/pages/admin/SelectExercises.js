@@ -106,7 +106,7 @@ const SelectExercises = () => {
   const handleSubmit = () => {
     if (selected.length === 0) return;
     postSelectedExercises(name, JSON.stringify(selected));
-    history.goBack();
+    window.location = `/admin/statistics/${name}`;
   };
 
   return (
