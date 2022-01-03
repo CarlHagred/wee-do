@@ -8,19 +8,46 @@ const StyledContainter = styled.div`
   align-items: center;
 `;
 
-const StyledH2 = styled.h2`
-  font-weight: 600;
-  font-size: 30px;
+const StyledHeader = styled.h1`
+  font-size: 3.5em;
+  text-align: center;
+  font-weight: 900;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @media (max-width: 375px) {
+    font-size: 2.5em;
+  }
+`;
+
+const StyledP = styled.p`
+  font-size: 1.5em;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  padding-left: 3%;
+  @media (max-width: 375px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const StyledA = styled.a`
+  display: block;
+  width: fit-content;
+  margin: 0% 0% 0% 3%;
+  font-size: 1.4em;
+  padding: 0.8%;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const About = () => {
   return (
     <AdminLayout>
       <StyledContainter>
-        <StyledH2>Om WeeDo:</StyledH2>
-        <br />
-        <p>WeeDo är ett samarbete mellan Region Skåne och Malmö Universitet.</p>
-        <p>
+        <StyledHeader>Om WeeDo:</StyledHeader>
+        <StyledP>WeeDo är ett samarbete mellan Mobilt Sjukhus Team och Malmö Universitet.</StyledP>
+        <StyledP>
           Vi är en grupp studenter som går vårt sista år som
           Informationsarkitekter och Systemutvecklare. För vårt examensprojekt
           blev vi utvalda att samarbeta med Region Skåne för att utveckla en
@@ -29,25 +56,25 @@ const About = () => {
           vill ge patienter möjlighet till att sköta återhämtning och
           fysioterapi från sitt eget hem, samtidigt som man bibehåller en
           kontinuerlig kontakt med sin fysioterapeft.
-        </p>
-        <br />
-        <p>
+        </StyledP>
+        
+        <StyledP>
           <strong>
             Vill du veta mer Malmö Universitet och om de två programmen, följ
             länkarna nedan:
           </strong>
-        </p>
-        <br />
-        <a href="https://mau.se/">Malmö Universitet</a>
-        <br />
-        <a href="https://mau.se/sok-utbildning/program/tgiaa/">
+        </StyledP>
+        
+        <StyledA href="https://mau.se/" target="_blank">Malmö Universitet</StyledA>
+        
+        <StyledA href="https://mau.se/sok-utbildning/program/tgiaa/" target="_blank">
           Informationsarkitektur
-        </a>
-        <br />
-        <a href="https://mau.se/sok-utbildning/program/tgsya/">
+        </StyledA>
+        
+        <StyledA href="https://mau.se/sok-utbildning/program/tgsya/" target="_blank">
           Systemutveckling
-        </a>
-        <br />
+        </StyledA>
+        
       </StyledContainter>
     </AdminLayout>
   );

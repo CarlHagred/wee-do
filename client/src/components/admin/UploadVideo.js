@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { postVideo } from "../../api/index.js";
+import styled from "styled-components";
 
 import { UserInput } from "../common/UserInput";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
-import styled from "styled-components";
+import TopWrapper from "../common/TopWrapper";
+
+const StyledInput = styled.input`
+  padding-bottom: 0.7em;
+`;
 
 const UploadVideo = () => {
   const [form, setForm] = useState({
@@ -34,42 +39,41 @@ const UploadVideo = () => {
     postVideo(videoData);
   };
 
-  const StyledInput = styled.input`
-    padding-bottom: 0.7em;
-  `;
-
   return (
-    <div className="upload-save-vid">
-      <form id="vid-submitting-form" onSubmit={handleSubmit}>
-        <div className="upload-video">
-          <UserInput
-            onChange={handleChange}
-            type="text"
-            name="title"
-            autoComplete="off"
-            required
-            placeholder="Övningstitel"
-          />
-          <TextArea
-            onChange={handleChange}
-            type="text"
-            name="description"
-            required
-            autoComplete="off"
-          />
-          <StyledInput
-            onChange={handleChange}
-            accept="video/mp4"
-            type="file"
-            name="file"
-            id="filechoose"
-            required
-            placeholder="Add Video File"
-          />
-          <Button type="submit">Ladda upp ny övning</Button>
-        </div>
-      </form>
-    </div>
+    <>
+      <TopWrapper header="Ladda upp övning" />
+      <div className="upload-save-vid">
+        <form id="vid-submitting-form" onSubmit={handleSubmit}>
+          <div className="upload-video">
+            <UserInput
+              onChange={handleChange}
+              type="text"
+              name="title"
+              autoComplete="off"
+              required
+              placeholder="Övningstitel"
+            />
+            <TextArea
+              onChange={handleChange}
+              type="text"
+              name="description"
+              required
+              autoComplete="off"
+            />
+            <StyledInput
+              onChange={handleChange}
+              accept="video/mp4"
+              type="file"
+              name="file"
+              id="filechoose"
+              required
+              placeholder="Add Video File"
+            />
+            <Button type="submit">Ladda upp ny övning</Button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 export default UploadVideo;
