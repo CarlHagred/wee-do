@@ -37,8 +37,7 @@ const StyledA = styled.a`
   font-size: 1.4em;
   padding: 0.8%;
   &:hover {
-    background-color: ${(props) => props.theme.palette.hover};
-    border-radius: 5px;
+    text-decoration: underline;
   }
 `;
 
