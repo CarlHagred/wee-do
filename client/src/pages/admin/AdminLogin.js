@@ -83,6 +83,7 @@ const StyledLoginHeader = styled.div`
 
 const AdminLogin = () => {
   let history = useHistory();
+  localStorage.removeItem("isAuthenticatedPatient");
   let isCookie = localStorage.getItem("isAuthenticatedAdmin");
   if (isCookie !== null) {
     history.push("/adminpanel");

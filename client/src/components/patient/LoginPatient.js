@@ -15,6 +15,7 @@ const LoginContainer = styled.div`
 
 const LoginPatient = () => {
   let history = useHistory();
+  localStorage.removeItem("isAuthenticatedAdmin");
   let isCookie = localStorage.getItem("isAuthenticatedPatient");
   if (isCookie !== null) {
     history.push("/activitypanel");
