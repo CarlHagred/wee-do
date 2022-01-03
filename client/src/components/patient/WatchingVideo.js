@@ -47,10 +47,11 @@ const Right = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  padding: 0 20px;
+  padding: 50px 0;
+  @media (min-width: 769px) {
+    padding: 0 20px;
+  }
 `;
-
-const StyledDisabledButton = styled(Button)``;
 
 const StyledActiveButton = styled(Button)`
   animation: 1s ${keyframes`${pulse}`};
@@ -89,10 +90,14 @@ const StyledVideoText = styled.div`
 `;
 
 const StyledDivider = styled.hr`
-  margin-top: 0.7em;
-  border: 1px solid;
-  border-color: #d9d9d9;
-  max-width: 850px;
+  display: none;
+  @media (min-width: 769px) {
+    display: block;
+    margin-top: 0.7em;
+    border: 1px solid;
+    border-color: #d9d9d9;
+    max-width: 850px;
+  }
 `;
 
 const StyledInactiveHint = styled.div`
@@ -242,14 +247,14 @@ const WatchExercise = () => {
         <Right>
           {scene === 1 && (
             <ButtonContainer>
-              <StyledDisabledButton
+              <Button
                 data-tip
                 data-for="watchVideo"
                 disabledTooltip
-                size="lg"
+                size="auto"
               >
                 Jag har gjort övningen
-              </StyledDisabledButton>
+              </Button>
               <ReactTooltip id="watchVideo" place="bottom" effect="solid">
                 Du måste se klart videon innan du kan trycka på knappen!
               </ReactTooltip>
@@ -258,7 +263,7 @@ const WatchExercise = () => {
 
           {scene === 2 && (
             <ButtonContainer>
-              <StyledActiveButton size="lg" onClick={handleEvent}>
+              <StyledActiveButton size="auto" onClick={handleEvent}>
                 Jag har gjort övningen
               </StyledActiveButton>
             </ButtonContainer>

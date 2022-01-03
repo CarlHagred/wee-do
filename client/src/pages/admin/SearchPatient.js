@@ -5,29 +5,24 @@ import { getAllActivePatients, getAllInactivePatients } from "../../api";
 
 import AdminLayout from "../../components/admin/AdminLayout";
 import SearchBar from "../../components/common/SearchBar";
-import ContentContainer from "../../components/common/ContentContainer";
-
-const ListPanelWrapper = styled.div`
-  justify-content: top;
-`;
+import TopWrapper from "../../components/common/TopWrapper";
 
 const ListPanel = styled.nav`
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 2em;
-  align-items: top;
-  margin-top: 5%;
-  margin-bottom: 5%;
   justify-content: center;
+  margin: 0 0.8em 2em 0.8em;
+  @media (min-width: 415px) {
+    margin: 0 5em 3em 5em;
+  }
 `;
 
 const StyledTable = styled.table`
   caption-side: top;
   border-collapse: separate;
   border-spacing: 5px;
-  width: 46%;
-  margin: 1em 0;
+  width: 50%;
   justify-content: left;
   border-radius: 4px;
 
@@ -35,7 +30,6 @@ const StyledTable = styled.table`
   th {
     padding: 5px 10px;
     border-radius: 4px;
-    font-family: "Roboto", sans-serif;
     font-size: 1em;
     text-align: left;
   }
@@ -78,68 +72,66 @@ const SearchPatient = () => {
 
   return (
     <AdminLayout>
-      <ContentContainer>
-        <ListPanelWrapper>
-          <ListPanel>
-            <SearchBar
-              placeholder="Sök efter en patient... "
-              onChange={(e) => {
-                setSearchedName(e.target.value);
-              }}
-            />
-            <StyledTable>
-              <colgroup>
-                <col />
-              </colgroup>
-              <thead>
-                <tr>
-                  <td>Aktiva patient-id:</td>
+      <TopWrapper header="Sök Patient">
+        <SearchBar
+          placeholder="Sök efter en patient... "
+          onChange={(e) => {
+            setSearchedName(e.target.value);
+          }}
+        />
+      </TopWrapper>
+      <ListPanel>
+        <StyledTable>
+          <colgroup>
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <td>Aktiva patient-id:</td>
+            </tr>
+          </thead>
+          {patientsActive
+            .filter((patient) => {
+              return patient.name.includes(searchedName) ? patient : null;
+            })
+            .map((patient) => (
+              <tbody key={patient._id}>
+                <tr
+                  onClick={() => {
+                    goToStatisticsPage(patient);
+                  }}
+                >
+                  <td>{patient.name}</td>
                 </tr>
-              </thead>
-              {patientsActive
-                .filter((patient) => {
-                  return patient.name.includes(searchedName) ? patient : null;
-                })
-                .map((patient) => (
-                  <tbody key={patient._id}>
-                    <tr
-                      onClick={() => {
-                        goToStatisticsPage(patient);
-                      }}
-                    >
-                      <td>{patient.name}</td>
-                    </tr>
-                  </tbody>
-                ))}
-            </StyledTable>
-            <StyledTable>
-              <colgroup>
-                <col />
-              </colgroup>
-              <thead>
-                <tr>
-                  <td>Inaktiva patient-id:</td>
+              </tbody>
+            ))}
+        </StyledTable>
+        <StyledTable>
+          <colgroup>
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <td>Inaktiva patient-id:</td>
+            </tr>
+          </thead>
+          {patientsInactive
+            .filter((patient) => {
+              return patient.name.includes(searchedName) ? patient : null;
+            })
+            .map((patient) => (
+              <tbody key={patient._id}>
+                <tr
+                  onClick={() => {
+                    goToStatisticsPage(patient);
+                  }}
+                >
+                  <td>{patient.name}</td>
                 </tr>
-              </thead>
-              {patientsInactive
-                .filter((patient) => {
-                  return patient.name.includes(searchedName) ? patient : null;
-                })
-                .map((patient) => (
-                  <tbody key={patient._id}>
-                    <tr
-                      onClick={() => {
-                        goToStatisticsPage(patient);
-                      }}
-                    >
-                      <td>{patient.name}</td>
-                    </tr>
-                  </tbody>
-                ))}
-            </StyledTable>
-          </ListPanel>
-        </ListPanelWrapper>
-      </ContentContainer>
+              </tbody>
+            ))}
+        </StyledTable>
+      </ListPanel>
     </AdminLayout>
   );
 };

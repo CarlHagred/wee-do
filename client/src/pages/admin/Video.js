@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
@@ -49,7 +49,7 @@ const ButtonContainer = styled.div`
   margin: 0 auto;
   max-width: 640px;
   justify-content: space-around;
-  min-height: 150px;
+  min-height: 100px;
   align-content: center;
   gap: 10px;
   @media (min-width: 769px) {
@@ -58,6 +58,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Video = () => {
+  let history = useHistory();
   const { videoId } = useParams();
   const [videos, setVideos] = useState([]);
 
@@ -78,7 +79,7 @@ const Video = () => {
     );
     if (conf) {
       deleteVideo();
-      window.location = "/admin/search/exercise";
+      history.push("/admin/search/exercise");
     }
   };
 
@@ -120,9 +121,16 @@ const Video = () => {
 
       <ButtonContainer>
         <Link to={`/admin/exercise/qrpreview/${videoId}`}>
-          <Button icon="qrcode">Generera QR-kod</Button>
+          <Button icon="qrcode" width="fixed">
+            Generera QR-kod
+          </Button>
         </Link>
-        <Button onClick={customDeleteVideo} icon="trash" outlinedTheme>
+        <Button
+          onClick={customDeleteVideo}
+          icon="trash"
+          width="fixed"
+          outlinedTheme
+        >
           Radera
         </Button>
       </ButtonContainer>
