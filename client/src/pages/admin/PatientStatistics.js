@@ -181,6 +181,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deleteSelectedVideo(patientName, videoId);
+      window.location.reload(true); 
     }
   };
 
@@ -313,44 +314,37 @@ const PatientStatistics = () => {
         <ChoosenExerciseContainer>
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
-            {patientStatistics.map((stats) => (
-              <>
+            <StyledHr />
+            {patientStatistics.map(stats => (
+              <div key={stats.vidId}>
                 {(() => {
-                  if (stats.amountOfTimes != undefined) {
                     return (
                       <>
-                        <StyledHr />
-                        {/*{stats.vidTitle}*/}
-                        <StyledExercise>
-                          <ParagraphContainer>
-                            <StyledParagraph>
-                              Antal gånger per dag: {stats.amountOfTimes}
-                            </StyledParagraph>
-                            <StyledParagraph>
-                              Antal sets per gång: 3
-                            </StyledParagraph>
-                            <StyledParagraph>
-                              Antal reps per set: 15
-                            </StyledParagraph>
-                          </ParagraphContainer>
-                          <StyledTrashButton>
-                            <Button
-                              onClick={() =>
-                                customDeleteSelectedExercise(
-                                  patient.name,
-                                  stats.vidId
-                                )
-                              }
-                              icon="trash"
-                              outlinedTheme
-                            />
-                          </StyledTrashButton>
-                        </StyledExercise>
+                        { (stats != null) ?
+                          <StyledExercise >
+                            <ParagraphContainer>
+                              <StyledParagraph> {`Övningstitel: ${stats.vidTitle}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal gåner per dag: ${stats.amountOfTimes}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal sets per gång: ${stats.set}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal reps per set: ${stats.rep}`} </StyledParagraph>
+                            </ParagraphContainer>
+                            <StyledTrashButton>
+                              <Button
+                                onClick={() =>
+                                  customDeleteSelectedExercise(
+                                    patient.name,
+                                    stats.vidId
+                                  )
+                                }
+                                icon="trash"
+                                outlinedTheme
+                              />
+                            </StyledTrashButton>
+                        </StyledExercise> : null}
                       </>
                     );
-                  }
                 })()}
-              </>
+              </div>
             ))}
           </>
         </ChoosenExerciseContainer>
@@ -370,13 +364,12 @@ const PatientStatistics = () => {
                 <ParagraphContainer>
                   <StyledParagraph>Övning: </StyledParagraph>
                   <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
-                    {/*stat.vidTitle*/}
                   </StyledLinkVideoTitle>
                   <StyledParagraph>
                     Antal gånger idag: {arrayDateTime[index]}
                   </StyledParagraph>
                   <StyledParagraph>
-                    Antal förväntade idag: 3{/*{stat.amountOfTimes}*/}
+                    Antal förväntade idag: 3
                   </StyledParagraph>
                 </ParagraphContainer>
 
@@ -386,11 +379,7 @@ const PatientStatistics = () => {
           ))}
         </DailyStatisticsContainer>
       </ContentWrapper>
-
       <StyledSectionHr />
-      {/* <StyledChart>
-        <StatisticsChart patientStatistics={patientStatistics} />
-      </StyledChart>*/}
     </AdminLayout>
   );
 };
