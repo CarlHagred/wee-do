@@ -55,7 +55,6 @@ const Statistics = () => {
       const fetchedUsername = await getSession();
       const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
       setPatientStatistics(fetchedPatient.data.statistics);
-      
     };
     fetchData();
   }, []);
@@ -65,6 +64,7 @@ const Statistics = () => {
   patientStatistics.forEach((stat) => {
     let emptyObject = {};
     let counter = 0;
+    let counterStreaks = 0;
     for (let i = 0; i < stat.watchedTime.length; i++) {
       const todayDate = date.toISOString().substring(0, 10);
       const statDates = stat.watchedTime[i].substring(0, 10);
@@ -77,9 +77,11 @@ const Statistics = () => {
     if (amountOfTimesLeft >= 0) {
       emptyObject.vidId = stat.vidTitle;
       emptyObject.timesLeft = amountOfTimesLeft;
+      emptyObject.streaks = counterStreaks;
     } else {
       emptyObject.vidId = stat.vidTitle;
       emptyObject.timesLeft = 0;
+      emptyObject.streaks = counterStreaks;
     }
     stats.push(emptyObject);
   });
@@ -95,6 +97,10 @@ const Statistics = () => {
               <StyledP>
                 Antal gånger kvar:{" "}
                 {stat.timesLeft !== 0 ? stat.timesLeft : "Du är klar för idag!"}
+              </StyledP>
+              <StyledP>
+                Antal dagar i sträck:{" "}
+                {stat.streaks !== 0 ? stat.streaks : 0}
               </StyledP>
             </StyledStatistics>
           </React.Fragment>
