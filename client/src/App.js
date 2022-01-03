@@ -103,7 +103,7 @@ function App() {
         />
         <ProtectedRouteAdmin
           exact
-          path="/admin/exercise/qrpreview/:id"
+          path="/admin/exercise/qrpreview/:id/:patient"
           component={QRPreview}
         />
 
