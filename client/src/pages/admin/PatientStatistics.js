@@ -152,7 +152,6 @@ const PatientStatistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPatient = await getOnePatient(name);
-      console.log(fetchedPatient);
       setPatient(fetchedPatient.data);
       setPatientStatistics(fetchedPatient.data.statistics);
       setPatientStatus(fetchedPatient.data.active);
@@ -321,7 +320,6 @@ const PatientStatistics = () => {
                 {(() => {
                     return (
                       <>
-                        {/*{stats.vidTitle}*/}
                         { (stats != null) ?
                           <StyledExercise >
                             <ParagraphContainer>
@@ -366,13 +364,12 @@ const PatientStatistics = () => {
                 <ParagraphContainer>
                   <StyledParagraph>Övning: </StyledParagraph>
                   <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
-                    {/*stat.vidTitle*/}
                   </StyledLinkVideoTitle>
                   <StyledParagraph>
                     Antal gånger idag: {arrayDateTime[index]}
                   </StyledParagraph>
                   <StyledParagraph>
-                    Antal förväntade idag: 3{/*{stat.amountOfTimes}*/}
+                    Antal förväntade idag: 3
                   </StyledParagraph>
                 </ParagraphContainer>
 
@@ -382,11 +379,7 @@ const PatientStatistics = () => {
           ))}
         </DailyStatisticsContainer>
       </ContentWrapper>
-
       <StyledSectionHr />
-      {/* <StyledChart>
-        <StatisticsChart patientStatistics={patientStatistics} />
-      </StyledChart>*/}
     </AdminLayout>
   );
 };
