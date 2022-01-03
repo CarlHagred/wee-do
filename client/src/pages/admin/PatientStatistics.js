@@ -152,6 +152,7 @@ const PatientStatistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedPatient = await getOnePatient(name);
+      console.log(fetchedPatient);
       setPatient(fetchedPatient.data);
       setPatientStatistics(fetchedPatient.data.statistics);
       setPatientStatus(fetchedPatient.data.active);
@@ -181,6 +182,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deleteSelectedVideo(patientName, videoId);
+      window.location.reload(true); 
     }
   };
 
@@ -313,44 +315,38 @@ const PatientStatistics = () => {
         <ChoosenExerciseContainer>
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
-            {patientStatistics.map((stats) => (
-              <>
+            <StyledHr />
+            {patientStatistics.map(stats => (
+              <div key={stats.vidId}>
                 {(() => {
-                  if (stats.amountOfTimes != undefined) {
                     return (
                       <>
-                        <StyledHr />
                         {/*{stats.vidTitle}*/}
-                        <StyledExercise>
-                          <ParagraphContainer>
-                            <StyledParagraph>
-                              Antal gånger per dag: {stats.amountOfTimes}
-                            </StyledParagraph>
-                            <StyledParagraph>
-                              Antal sets per gång: 3
-                            </StyledParagraph>
-                            <StyledParagraph>
-                              Antal reps per set: 15
-                            </StyledParagraph>
-                          </ParagraphContainer>
-                          <StyledTrashButton>
-                            <Button
-                              onClick={() =>
-                                customDeleteSelectedExercise(
-                                  patient.name,
-                                  stats.vidId
-                                )
-                              }
-                              icon="trash"
-                              outlinedTheme
-                            />
-                          </StyledTrashButton>
-                        </StyledExercise>
+                        { (stats != null) ?
+                          <StyledExercise >
+                            <ParagraphContainer>
+                              <StyledParagraph> {`Övningstitel: ${stats.vidTitle}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal gåner per dag: ${stats.amountOfTimes}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal sets per gång: ${stats.set}`} </StyledParagraph>
+                              <StyledParagraph> {`Antal reps per set: ${stats.rep}`} </StyledParagraph>
+                            </ParagraphContainer>
+                            <StyledTrashButton>
+                              <Button
+                                onClick={() =>
+                                  customDeleteSelectedExercise(
+                                    patient.name,
+                                    stats.vidId
+                                  )
+                                }
+                                icon="trash"
+                                outlinedTheme
+                              />
+                            </StyledTrashButton>
+                        </StyledExercise> : null}
                       </>
                     );
-                  }
                 })()}
-              </>
+              </div>
             ))}
           </>
         </ChoosenExerciseContainer>
