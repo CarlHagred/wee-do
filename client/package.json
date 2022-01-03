@@ -11,6 +11,7 @@
     "chart.js": "^3.3.0",
     "destyle.css": "^3.0.0",
     "hamburger-react": "^2.4.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",
     "react-calendar": "^3.5.0",
