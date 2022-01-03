@@ -18,6 +18,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import TopWrapper from "../../components/common/TopWrapper";
 import StatisticsChart from "../../components/admin/StatisticsChart";
+import { stat } from "fs";
 
 const StyledPatientID = styled.div`
   background-color: #ccc;
@@ -72,6 +73,7 @@ const ContentHeader = styled.h2`
 
 const StyledHr = styled.hr`
   color: lightgrey;
+  margin-bottom: 0.5em;
 `;
 
 const StyledExercise = styled.div`
@@ -320,17 +322,17 @@ const PatientStatistics = () => {
                     return (
                       <>
                         <StyledHr />
-                        {/*{stats.vidTitle}*/}
+                        {stats.vidTitle}
                         <StyledExercise>
                           <ParagraphContainer>
                             <StyledParagraph>
                               Antal gånger per dag: {stats.amountOfTimes}
                             </StyledParagraph>
                             <StyledParagraph>
-                              Antal sets per gång: 3
+                              Antal sets per gång: {stats.set}
                             </StyledParagraph>
                             <StyledParagraph>
-                              Antal reps per set: 15
+                              Antal reps per set: {stats.rep}
                             </StyledParagraph>
                           </ParagraphContainer>
                           <StyledTrashButton>
@@ -368,15 +370,14 @@ const PatientStatistics = () => {
             <div key={stat.vidId}>
               <StyledStatistics>
                 <ParagraphContainer>
-                  <StyledParagraph>Övning: </StyledParagraph>
                   <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
-                    {/*stat.vidTitle*/}
+                    {stat.vidTitle}
                   </StyledLinkVideoTitle>
                   <StyledParagraph>
                     Antal gånger idag: {arrayDateTime[index]}
                   </StyledParagraph>
                   <StyledParagraph>
-                    Antal förväntade idag: 3{/*{stat.amountOfTimes}*/}
+                    Antal förväntade idag: {stat.amountOfTimes}
                   </StyledParagraph>
                 </ParagraphContainer>
 
@@ -388,9 +389,9 @@ const PatientStatistics = () => {
       </ContentWrapper>
 
       <StyledSectionHr />
-      {/* <StyledChart>
+      <StyledChart>
         <StatisticsChart patientStatistics={patientStatistics} />
-      </StyledChart>*/}
+      </StyledChart>
     </AdminLayout>
   );
 };
