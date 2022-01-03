@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import AdminLayout from "../../components/admin/AdminLayout"
+import AdminLayout from "../../components/admin/AdminLayout";
+import TopWrapper from "../../components/common/TopWrapper";
 
 const StyledContainer = styled.div`
   text-align: left;
   margin: 2.3em;
-`;
-
-const StyledH2 = styled.h2`
-  font-size: 3.5em;
-  text-align: center;
-  margin: 2% auto 2% auto;
-  font-weight: 900;
 `;
 
 const StyledTitle = styled.p`
@@ -79,17 +73,16 @@ const Help = () => {
 
   return (
     <AdminLayout>
+      <TopWrapper header="Hjälp" />
       <StyledContainer>
-        <StyledH2>Hjälp</StyledH2>
-
         <StyledDiv>
           <StyledTitle onClick={handleEvent1}>
             Jag har tappat bort mitt användarnamn:
           </StyledTitle>
           {open1 === true ? (
             <StyledP>
-              Om du har tappat bort ditt användarnamn måste du
-              komma i kontakt med Sue.
+              Om du har tappat bort ditt användarnamn måste du komma i kontakt
+              med Sue.
             </StyledP>
           ) : null}
         </StyledDiv>
@@ -105,7 +98,10 @@ const Help = () => {
                 följande:
               </StyledP>
 
-              <StyledLi>Kontrollera så att en användare med samma användarnamn inte redan finns.</StyledLi>
+              <StyledLi>
+                Kontrollera så att en användare med samma användarnamn inte
+                redan finns.
+              </StyledLi>
             </div>
           ) : null}
         </StyledDiv>
@@ -117,16 +113,18 @@ const Help = () => {
           {open3 === true ? (
             <>
               <StyledP>
-                Om det inte fungerar att ladda upp en övning, kontrollera följande:
+                Om det inte fungerar att ladda upp en övning, kontrollera
+                följande:
               </StyledP>
 
               <StyledLi>
                 Kontrollera att en video med samma titel inte redan finns.
               </StyledLi>
               <StyledLi>Kontrollera din nätverksanslutning.</StyledLi>
-             
+
               <StyledLi>
-                Om du har laddat upp 6 stycken videos idag, måste du vänta tills imorgon för att ladda upp 6 till.
+                Om du har laddat upp 6 stycken videos idag, måste du vänta tills
+                imorgon för att ladda upp 6 till.
               </StyledLi>
             </>
           ) : null}
