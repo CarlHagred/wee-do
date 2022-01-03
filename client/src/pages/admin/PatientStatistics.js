@@ -175,7 +175,7 @@ const PatientStatistics = () => {
   const customDeleteSelectedExercise = async (patientName, videoId) => {
     const conf = await Confirm(
       "Är du säker på att du vill ta bort den valda övningen?",
-      "Ja",
+      "Radera vald övning",
       "Ja",
       "Avbryt"
     );
