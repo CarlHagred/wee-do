@@ -149,7 +149,6 @@ const WatchExercise = () => {
 
   const [patientName, setPatientName] = useState("");
   const [active, setActive] = useState(true);
-  const [showActive, setShowActive] = useState(false);
 
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
@@ -220,7 +219,7 @@ const WatchExercise = () => {
 
       setTimeout(() => setIsExploding(true), 300);
       setTimeout(() => setIsExploding(false), 4000);
-      setTimeout(() => setScene(4), 4000);
+      setTimeout(() => setScene(5), 4000);
     }
   };
 
@@ -295,11 +294,8 @@ const WatchExercise = () => {
             </>
           )}
 
-          {showActive && (
+          {scene === 5 && (
             <>
-              <StyledReward>
-                <FaThumbsUp />
-              </StyledReward>
               <StyledInactiveHint>
                 Jättebra jobbat, men du är inaktiv så din statistik sparas inte.
               </StyledInactiveHint>
