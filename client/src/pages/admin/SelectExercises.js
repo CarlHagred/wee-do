@@ -106,7 +106,7 @@ const SelectExercises = () => {
   const handleSubmit = () => {
     if (selected.length === 0) return;
     postSelectedExercises(name, JSON.stringify(selected));
-    history.goBack();
+    window.location = `/admin/statistics/${name}`;
   };
 
   return (
@@ -176,12 +176,12 @@ const SelectExercises = () => {
                   checked={checkedState[index]}
                   onChange={() => handleCheckBoxChange(index, videos.videoId)}
                 />
-                <label for="checked"></label>
+                
               </CheckBoxRow>
             </div>
           ))}
       </CardLayout>
-      <StyledButton onClick={handleSubmit}>Spara övningar</StyledButton>
+      <StyledButton onClick={handleSubmit}> Spara övningar </StyledButton>
     </AdminLayout>
   );
 };
