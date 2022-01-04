@@ -72,6 +72,7 @@ const ContentHeader = styled.h2`
 
 const StyledHr = styled.hr`
   color: lightgrey;
+  margin-bottom: 0.5em;
 `;
 
 const StyledExercise = styled.div`
@@ -181,6 +182,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deleteSelectedVideo(patientName, videoId);
+      window.location.reload(true);
     }
   };
 
@@ -313,24 +315,25 @@ const PatientStatistics = () => {
         <ChoosenExerciseContainer>
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
+            <StyledHr />
             {patientStatistics.map((stats) => (
-              <>
+              <div key={stats.vidId}>
                 {(() => {
-                  if (stats.amountOfTimes != undefined) {
+                  if (stats.amountOfTimes !== undefined) {
                     return (
                       <>
                         <StyledHr />
-                        {/*{stats.vidTitle}*/}
+                        {stats.vidTitle}
                         <StyledExercise>
                           <ParagraphContainer>
                             <StyledParagraph>
                               Antal gånger per dag: {stats.amountOfTimes}
                             </StyledParagraph>
                             <StyledParagraph>
-                              Antal sets per gång: 3
+                              Antal sets per gång: {stats.set}
                             </StyledParagraph>
                             <StyledParagraph>
-                              Antal reps per set: 15
+                              Antal reps per set: {stats.rep}
                             </StyledParagraph>
                           </ParagraphContainer>
                           <StyledTrashButton>
@@ -350,7 +353,7 @@ const PatientStatistics = () => {
                     );
                   }
                 })()}
-              </>
+              </div>
             ))}
           </>
         </ChoosenExerciseContainer>
@@ -368,15 +371,14 @@ const PatientStatistics = () => {
             <div key={stat.vidId}>
               <StyledStatistics>
                 <ParagraphContainer>
-                  <StyledParagraph>Övning: </StyledParagraph>
                   <StyledLinkVideoTitle to={`../exercise/${stat.vidId}`}>
-                    {/*stat.vidTitle*/}
+                    {stat.vidTitle}
                   </StyledLinkVideoTitle>
                   <StyledParagraph>
                     Antal gånger idag: {arrayDateTime[index]}
                   </StyledParagraph>
                   <StyledParagraph>
-                    Antal förväntade idag: 3{/*{stat.amountOfTimes}*/}
+                    Antal förväntade idag: {stat.amountOfTimes}
                   </StyledParagraph>
                 </ParagraphContainer>
 
@@ -386,11 +388,10 @@ const PatientStatistics = () => {
           ))}
         </DailyStatisticsContainer>
       </ContentWrapper>
-
       <StyledSectionHr />
-      {/* <StyledChart>
+      <StyledChart>
         <StatisticsChart patientStatistics={patientStatistics} />
-      </StyledChart>*/}
+      </StyledChart>
     </AdminLayout>
   );
 };
