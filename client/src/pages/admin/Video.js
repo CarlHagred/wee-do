@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect, Children } from "react";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Confirm } from "react-st-modal";
@@ -17,33 +17,19 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import ReactPlayer from "../../components/common/ReactPlayer";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 768px;
-  margin: 0 auto;
-  gap: 10px;
-  padding: 15px 10px 0 10px;
-  @media (min-width: 769px) {
-    flex-direction: row;
-    padding: 15px 0 0 0;
+const handleSubmit = async (vid) => {
+  const patient = document.getElementById("userInput").value.trim();
+  if (!patient) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
   }
-  @media (min-width: 850px) {
-    padding: 15px 0 0 0;
-    max-width: 850px;
+  if (!(await getOnePatient(patient)).data) {
+    document.getElementById("userInput").style.borderColor = "#E83544";
+    return;
   }
-`;
-
-const Left = styled.div`
-  flex: 2;
-`;
-
-const Right = styled.div`
-  text-align: right;
-  @media (min-width: 769px) {
-    padding: 0 20px;
-  }
-`;
+  window.location = `/admin/exercise/qrpreview/${vid}/${patient}`;
+  document.getElementById("userInput").style.borderColor = "green";
+};
 
 const TextContainer = styled.div`
   display: flex;
@@ -78,50 +64,23 @@ const StyledDivider = styled.hr`
   border-color: #d9d9d9;
 `;
 
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  @media (min-width: 769px) {
-  }
-  @media (min-width: 850px) {
-  }
-`;
-
-const StyledParagraph = styled.p`
-  font-size: 1.6em;
-`;
-
-const InputContainer = styled.div``;
-
 const Input = styled(UserInput)`
-  max-width: 400px;
+  width: 40%;
 `;
 
 const ButtonContainer = styled.div`
-  @media (min-width: 530px) {
-    margin-left: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 640px;
+  justify-content: space-around;
+  min-height: 100px;
+  align-content: center;
+  gap: 10px;
+  @media (min-width: 769px) {
+    height: 100px;
   }
 `;
-
-const handleSubmit = async (vid) => {
-  const patient = document.getElementById("userInput").value.trim();
-  if (!patient) {
-    document.getElementById("userInput").style.borderColor = "#E83544";
-    return;
-  }
-  if (!(await getOnePatient(patient)).data) {
-    document.getElementById("userInput").style.borderColor = "#E83544";
-    return;
-  }
-  window.location = `/admin/exercise/qrpreview/${vid}/${patient}`;
-  document.getElementById("userInput").style.borderColor = "green";
-};
 
 const Video = () => {
   let history = useHistory();
@@ -187,61 +146,46 @@ const Video = () => {
   return (
     <AdminLayout>
       <ReactPlayer {...playerProps} />
+      {isTitleAndDescFetched && (
+        <TextContainer>
+          <StyledVideoTitle>{title}</StyledVideoTitle>
+          <StyledVideoText>{description}</StyledVideoText>
+          <StyledDivider />
+        </TextContainer>
+      )}
 
-      <Wrapper>
-        {isTitleAndDescFetched && (
-          <Left>
-            <StyledVideoTitle>{title}</StyledVideoTitle>
-            <StyledVideoText>{description}</StyledVideoText>
-          </Left>
-        )}
-
-        <Right>
-          <Button
-            onClick={customDeleteVideo}
-            icon="trash"
-            outlinedTheme
-          ></Button>
-        </Right>
-      </Wrapper>
-      <TextContainer>
-        <StyledDivider />
-      </TextContainer>
-      <Wrapper2>
-        <StyledParagraph>Skapa kort:</StyledParagraph>
-
-        <InputContainer>
-          <Input
-            list="userList"
-            id="userInput"
-            placeholder="Ange patient-id..."
-          />
-          <CustomDatalist id="userList">
-            {patientsActive
-              .filter((patient) => {
-                return patient.statistics.some((stats) => {
-                  return stats.vidId.includes(videoId);
-                });
-              })
-              .map((patient) => (
-                <option key={patient._id} value={patient.name} />
-              ))}
-          </CustomDatalist>
-          <select id="selectedPatient" />
-        </InputContainer>
-
-        <ButtonContainer>
-          <Button
-            type="submit"
-            icon="imageCard"
-            onClick={() => {
-              handleSubmit(videoId);
-            }}
-          >
-            Visa kort
-          </Button>
-        </ButtonContainer>
-      </Wrapper2>
+      <ButtonContainer>
+        <Input list="userList" id="userInput" placeholder="Patient..." />
+        <CustomDatalist id="userList">
+          {patientsActive
+            .filter((patient) => {
+              return patient.statistics.some((stats) => {
+                return stats.vidId.includes(videoId);
+              });
+            })
+            .map((patient) => (
+              <option key={patient._id} value={patient.name} />
+            ))}
+        </CustomDatalist>
+        <select id="selectedPatient" />
+        <Button
+          type="submit"
+          icon="imageCard"
+          onClick={() => {
+            handleSubmit(videoId);
+          }}
+        >
+          Generera Kort
+        </Button>
+        <Button
+          onClick={customDeleteVideo}
+          icon="trash"
+          width="fixed"
+          outlinedTheme
+        >
+          Radera
+        </Button>
+      </ButtonContainer>
     </AdminLayout>
   );
 };

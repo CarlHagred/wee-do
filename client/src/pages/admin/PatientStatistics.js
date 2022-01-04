@@ -177,13 +177,12 @@ const PatientStatistics = () => {
   const customDeleteSelectedExercise = async (patientName, videoId) => {
     const conf = await Confirm(
       "Är du säker på att du vill ta bort den valda övningen?",
-      "Radera vald övning",
+      "Ja",
       "Ja",
       "Avbryt"
     );
     if (conf) {
       deleteSelectedVideo(patientName, videoId);
-      window.location.reload(true); 
     }
   };
 
@@ -316,9 +315,8 @@ const PatientStatistics = () => {
         <ChoosenExerciseContainer>
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
-            <StyledHr />
-            {patientStatistics.map(stats => (
-              <div key={stats.vidId}>
+            {patientStatistics.map((stats) => (
+              <>
                 {(() => {
                   if (stats.amountOfTimes != undefined) {
                     return (
@@ -352,8 +350,9 @@ const PatientStatistics = () => {
                         </StyledExercise>
                       </>
                     );
+                  }
                 })()}
-              </div>
+              </>
             ))}
           </>
         </ChoosenExerciseContainer>
@@ -388,6 +387,7 @@ const PatientStatistics = () => {
           ))}
         </DailyStatisticsContainer>
       </ContentWrapper>
+
       <StyledSectionHr />
       <StyledChart>
         <StatisticsChart patientStatistics={patientStatistics} />
