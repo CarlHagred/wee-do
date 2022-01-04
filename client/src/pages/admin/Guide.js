@@ -13,7 +13,6 @@ import sok_patient from "../../components/images/Guide/sok_patient.png";
 import statistik from "../../components/images/Guide/statistik.png";
 import sok_ovning from "../../components/images/Guide/sok_ovning.png";
 import visa_ovning from "../../components/images/Guide/visa_ovning.png";
-import ladda_upp_ovning from "../../components/images/Guide/ladda_upp_ovning.png";
 
 const GuideWrapper = styled.div`
   display: grid;
@@ -288,19 +287,20 @@ const Guide = () => {
             </HashLink>
           </GuideItem>
           <GuideItem>
-            <GuideTitle id="ladda-upp-ovning">Ladda upp övning</GuideTitle>
-            Systemet tillåter 6 uppladdningar per dag.
-            <ListItem>Titel</ListItem>
-            <StyledParagraph>Ange namn på övning.</StyledParagraph>
-            <ListItem>Benämning</ListItem>
-            <StyledParagraph>Ange beskrivande text.</StyledParagraph>
-            <ListItem>Välj fil</ListItem>
-            <StyledParagraph>Lägg till fil för övning.</StyledParagraph>
-            <ListItem>Ladda upp</ListItem>
-            <StyledParagraph>
-              Tryck på knappen "Ladda upp ny övning" för att ladda upp video.
-            </StyledParagraph>
-            <StyledImg src={ladda_upp_ovning}></StyledImg>
+            <GuideTitle id="ladda-upp-ovning">
+              Ladda upp övning - ** Inväntar färdig sida **
+            </GuideTitle>
+            <ListItem>Instruktion</ListItem>
+            <StyledParagraph></StyledParagraph>
+            <ListItem>Instruktion</ListItem>
+            <StyledParagraph></StyledParagraph>
+            <ListItem>Instruktion</ListItem>
+            <StyledParagraph></StyledParagraph>
+            <ListItem>Instruktion</ListItem>
+            <StyledParagraph></StyledParagraph>
+            <StyledImg></StyledImg>
+            <br />
+            Bild SAKNAS
             <HashLink smooth to={"#top"}>
               <StyledButton>Till toppen</StyledButton>
             </HashLink>
@@ -331,15 +331,15 @@ const Guide = () => {
               Välj PLAY för att spela upp videon.
             </StyledParagraph>
 
-            <ListItem>Radera</ListItem>
+            <ListItem>Generera QR-kod</ListItem>
             <StyledParagraph>
-              Välj radera för att ta bort en övning permanent.
+              Välj "Generera QR-kod" för att skriva ut ett kort med övningens
+              namn, QR-kod och en bild på videon.{" "}
             </StyledParagraph>
 
-            <ListItem>Skapa kort</ListItem>
+            <ListItem>Radera</ListItem>
             <StyledParagraph>
-              Skapa ett kort för utskrift till patient: Börja med att ange
-              patient-id och tryck sedan på "Visa kort".
+              Välj radera för att ta bort en övning.
             </StyledParagraph>
 
             <StyledImg src={visa_ovning} />

@@ -141,9 +141,9 @@ export const deleteSelectedVideo = async (req, res) => {
     (err, doc) => {
       if (doc) {
         res.status(200).send("Success");
-      } else { throw err } 
+      }
     }
-  ).clone().catch((error) => {console.log(error)});
+  );
 };
 
 export const deletePatient = async (req, res) => {
