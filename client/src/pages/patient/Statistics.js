@@ -61,20 +61,33 @@ const Statistics = () => {
 
   let stats = [];
   let date = new Date();
+  const todayDate = date.toISOString().substring(0, 10);
+  
   patientStatistics.forEach((stat) => {
     let emptyObject = {};
     let counter = 0;
     let counterStreaks = 0;
+    let dateCounter = 1;
+    let testDates;
+
     for (let i = 0; i < stat.watchedTime.length; i++) {
-      const todayDate = date.toISOString().substring(0, 10);
       const statDates = stat.watchedTime[i].substring(0, 10);
 
-      if (todayDate === statDates) {
-        counter++;
+      if(statDates === testDates){
+        dateCounter++;
       }
+      else{
+        dateCounter >= stat.amountOfTimes ? counterStreaks++ : counterStreaks = 0;
+        dateCounter = 1;
+      }
+
+      if (todayDate === statDates) counter++;
+      testDates = statDates;
     }
+
     let amountOfTimesLeft = stat.amountOfTimes - counter;
-    if (amountOfTimesLeft >= 0) {
+
+    if (amountOfTimesLeft > 0) {
       emptyObject.vidId = stat.vidTitle;
       emptyObject.timesLeft = amountOfTimesLeft;
       emptyObject.streaks = counterStreaks;
