@@ -317,7 +317,7 @@ const PatientStatistics = () => {
             {patientStatistics.map((stats) => (
               <>
                 {(() => {
-                  if (stats.amountOfTimes != undefined) {
+                  if (stats.amountOfTimes !== undefined) {
                     return (
                       <>
                         <StyledHr />
