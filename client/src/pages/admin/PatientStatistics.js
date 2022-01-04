@@ -182,7 +182,7 @@ const PatientStatistics = () => {
     );
     if (conf) {
       deleteSelectedVideo(patientName, videoId);
-      window.location.reload(true); 
+      window.location.reload(true);
     }
   };
 
@@ -316,7 +316,7 @@ const PatientStatistics = () => {
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
             <StyledHr />
-            {patientStatistics.map(stats => (
+            {patientStatistics.map((stats) => (
               <div key={stats.vidId}>
                 {(() => {
                   if (stats.amountOfTimes !== undefined) {
@@ -351,6 +351,7 @@ const PatientStatistics = () => {
                         </StyledExercise>
                       </>
                     );
+                  }
                 })()}
               </div>
             ))}
