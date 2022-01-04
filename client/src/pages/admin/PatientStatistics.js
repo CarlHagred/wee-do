@@ -18,6 +18,7 @@ import AdminLayout from "../../components/admin/AdminLayout";
 import Button from "../../components/common/Button";
 import TopWrapper from "../../components/common/TopWrapper";
 import StatisticsChart from "../../components/admin/StatisticsChart";
+import { stat } from "fs";
 
 const StyledPatientID = styled.div`
   background-color: #ccc;
