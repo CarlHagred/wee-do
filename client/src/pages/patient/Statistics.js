@@ -28,10 +28,6 @@ const StyledStatistics = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
   color: #22201c;
-  :hover {
-    background: #7dabab;
-    cursor: pointer;
-  }
 `;
 
 const StyledTitle = styled.p`
@@ -49,7 +45,7 @@ const StyledP = styled.p`
 const Statistics = () => {
   /* === PATIENT SESSION === */
   const [patientStatistics, setPatientStatistics] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedUsername = await getSession();
@@ -62,7 +58,7 @@ const Statistics = () => {
   let stats = [];
   let date = new Date();
   const todayDate = date.toISOString().substring(0, 10);
-  
+
   patientStatistics.forEach((stat) => {
     let emptyObject = {};
     let counter = 0;
@@ -73,11 +69,12 @@ const Statistics = () => {
     for (let i = 0; i < stat.watchedTime.length; i++) {
       const statDates = stat.watchedTime[i].substring(0, 10);
 
-      if(statDates === testDates){
+      if (statDates === testDates) {
         dateCounter++;
-      }
-      else{
-        dateCounter >= stat.amountOfTimes ? counterStreaks++ : counterStreaks = 0;
+      } else {
+        dateCounter >= stat.amountOfTimes
+          ? counterStreaks++
+          : (counterStreaks = 0);
         dateCounter = 1;
       }
 
@@ -112,8 +109,7 @@ const Statistics = () => {
                 {stat.timesLeft !== 0 ? stat.timesLeft : "Du är klar för idag!"}
               </StyledP>
               <StyledP>
-                Antal dagar i sträck:{" "}
-                {stat.streaks !== 0 ? stat.streaks : 0}
+                Antal dagar i sträck: {stat.streaks !== 0 ? stat.streaks : 0}
               </StyledP>
             </StyledStatistics>
           </React.Fragment>
