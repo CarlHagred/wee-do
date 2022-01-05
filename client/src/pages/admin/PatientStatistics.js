@@ -315,7 +315,6 @@ const PatientStatistics = () => {
         <ChoosenExerciseContainer>
           <>
             <ContentHeader>Valda Övningar </ContentHeader>
-            <StyledHr />
             {patientStatistics.map((stats) => (
               <div key={stats.vidId}>
                 {(() => {
