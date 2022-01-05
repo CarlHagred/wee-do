@@ -55,31 +55,46 @@ const Statistics = () => {
       const fetchedUsername = await getSession();
       const fetchedPatient = await getOnePatient(fetchedUsername.data.name);
       setPatientStatistics(fetchedPatient.data.statistics);
-      
     };
     fetchData();
   }, []);
 
   let stats = [];
   let date = new Date();
+  const todayDate = date.toISOString().substring(0, 10);
+  
   patientStatistics.forEach((stat) => {
     let emptyObject = {};
     let counter = 0;
+    let counterStreaks = 0;
+    let dateCounter = 1;
+    let testDates;
+
     for (let i = 0; i < stat.watchedTime.length; i++) {
-      const todayDate = date.toISOString().substring(0, 10);
       const statDates = stat.watchedTime[i].substring(0, 10);
 
-      if (todayDate === statDates) {
-        counter++;
+      if(statDates === testDates){
+        dateCounter++;
       }
+      else{
+        dateCounter >= stat.amountOfTimes ? counterStreaks++ : counterStreaks = 0;
+        dateCounter = 1;
+      }
+
+      if (todayDate === statDates) counter++;
+      testDates = statDates;
     }
+
     let amountOfTimesLeft = stat.amountOfTimes - counter;
-    if (amountOfTimesLeft >= 0) {
+
+    if (amountOfTimesLeft > 0) {
       emptyObject.vidId = stat.vidTitle;
       emptyObject.timesLeft = amountOfTimesLeft;
+      emptyObject.streaks = counterStreaks;
     } else {
       emptyObject.vidId = stat.vidTitle;
       emptyObject.timesLeft = 0;
+      emptyObject.streaks = counterStreaks;
     }
     stats.push(emptyObject);
   });
@@ -95,6 +110,10 @@ const Statistics = () => {
               <StyledP>
                 Antal gånger kvar:{" "}
                 {stat.timesLeft !== 0 ? stat.timesLeft : "Du är klar för idag!"}
+              </StyledP>
+              <StyledP>
+                Antal dagar i sträck:{" "}
+                {stat.streaks !== 0 ? stat.streaks : 0}
               </StyledP>
             </StyledStatistics>
           </React.Fragment>
