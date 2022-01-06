@@ -231,6 +231,8 @@ const WatchExercise = () => {
     },
   };
 
+  const patientStats = patient.find((element) => element.vidId == videoId);
+
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
@@ -239,7 +241,15 @@ const WatchExercise = () => {
         {isTitleAndDescFetched && (
           <Left>
             <StyledVideoTitle>{title}</StyledVideoTitle>
-            <StyledVideoText>{description}</StyledVideoText>
+            <StyledVideoText>
+              Du ska göra övningen {patientStats.amountOfTimes} gånger per dag
+            </StyledVideoText>
+            <StyledVideoText>
+              Du ska göra {patientStats.set} sets av repetitioner
+            </StyledVideoText>
+            <StyledVideoText>
+              Du ska göra {patientStats.rep} repetitioner
+            </StyledVideoText>
           </Left>
         )}
 
@@ -306,7 +316,6 @@ const WatchExercise = () => {
       <TextContainer>
         <StyledDivider />
       </TextContainer>
-
       <ActionContainer></ActionContainer>
     </PatientLayout>
   );
