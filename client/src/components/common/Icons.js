@@ -3,8 +3,9 @@ import { FaUser, FaUserPlus, FaTrashAlt } from "react-icons/fa";
 import { MdUpload, MdAdminPanelSettings } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { BiError, BiLogOut, BiNotepad } from "react-icons/bi";
-import { BsGraphUp , BsFillPersonFill} from "react-icons/bs";
+import { BsGraphUp, BsFillPersonFill, BsCardImage } from "react-icons/bs";
 import { MdPersonOff } from "react-icons/md";
+import { GiWeightLiftingUp } from "react-icons/gi";
 
 import SearchPatient from "../images/IconSearchPatient";
 import SearchExercise from "../images/IconSearchExercise";
@@ -13,27 +14,29 @@ import SearchExercise from "../images/IconSearchExercise";
 // Fler ikoner?: Nya ikoner importeras och läggs in i variants
 
 const variants = {
-    qrcode: ImQrcode,
-    user: FaUser,
-    add_user: FaUserPlus,
-    upload: MdUpload,
-    trash: FaTrashAlt,
-    search: IoMdSearch,
-    error: BiError,
-    exit: BiLogOut,
-    notepad: BiNotepad,
-    admin_panel: MdAdminPanelSettings,
-    search_patient: SearchPatient,
-    search_exercise: SearchExercise,
-    statistics: BsGraphUp,
-    patientInactive: MdPersonOff,
-    patientActive: BsFillPersonFill,
+  qrcode: ImQrcode,
+  user: FaUser,
+  add_user: FaUserPlus,
+  upload: MdUpload,
+  trash: FaTrashAlt,
+  search: IoMdSearch,
+  error: BiError,
+  exit: BiLogOut,
+  notepad: BiNotepad,
+  admin_panel: MdAdminPanelSettings,
+  search_patient: SearchPatient,
+  search_exercise: SearchExercise,
+  statistics: BsGraphUp,
+  patientInactive: MdPersonOff,
+  patientActive: BsFillPersonFill,
+  imageCard: BsCardImage,
+  gym_user: GiWeightLiftingUp,
 };
 
 const Icon = ({ name, ...props }) => {
-    const Tag = name in variants ? variants[name] : variants.error;
+  const Tag = name in variants ? variants[name] : variants.error;
 
-    return <Tag {...props} />;
+  return <Tag {...props} />;
 };
 
 export default Icon;

@@ -10,6 +10,7 @@ import PatientLogin from "./pages/patient/PatientLogin.js";
 import PatientPanel from "./pages/patient/PatientPanel";
 import QrScanner from "./pages/patient/QrScanner";
 import Statistics from "./pages/patient/Statistics";
+import ToDo from "./pages/patient/ToDo";
 import PatientHelp from "./pages/patient/PatientHelp";
 import PatientAbout from "./pages/patient/PatientAbout";
 
@@ -28,6 +29,7 @@ import UploadSucceeded from "./pages/admin/UploadSucceeded";
 import QRPreview from "./pages/admin/QRPreview";
 import Video from "./pages/admin/Video";
 import WatchExercise from "./components/patient/WatchingVideo";
+import Guide from "./pages/admin/Guide";
 import { ProtectedRouteAdmin } from "./components/protectedRoutes/ProtectedRoutesAdmin";
 import { ProtectedRoutePatient } from "./components/protectedRoutes/ProtectedRoutesPatient";
 
@@ -51,12 +53,14 @@ function App() {
           path="/activitypanel"
           component={PatientPanel}
         />
+
         <ProtectedRoutePatient exact path="/QrScanner" component={QrScanner} />
         <ProtectedRoutePatient
           exact
           path="/statistics"
           component={Statistics}
         />
+        <ProtectedRoutePatient exact path="/todo" component={ToDo} />
         <Route exact path="/admin" component={AdminLogin} />
         <ProtectedRouteAdmin exact path="/adminpanel" component={AdminPanel} />
 
@@ -100,9 +104,11 @@ function App() {
         />
         <ProtectedRouteAdmin
           exact
-          path="/admin/exercise/qrpreview/:id"
+          path="/admin/exercise/qrpreview/:id/:patient"
           component={QRPreview}
         />
+
+        <ProtectedRouteAdmin exact path="/admin/guide" component={Guide} />
 
         <Route exact path="/test" component={QRPreview} />
         <Route exact path="/showcase" component={Showcase} />
