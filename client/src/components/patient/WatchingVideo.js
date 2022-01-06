@@ -45,6 +45,7 @@ const Left = styled.div`
 const Right = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   flex: 1;
   padding: 50px 0;
