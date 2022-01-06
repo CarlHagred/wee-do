@@ -231,8 +231,11 @@ const WatchExercise = () => {
     },
   };
 
-  const patientStats = patient.find((element) => element.vidId == videoId);
+  const patientStats = patient.find((element) => element.vidId === videoId);
 
+  if (!patientStats) {
+    return <div />;
+  }
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
