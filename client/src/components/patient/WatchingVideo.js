@@ -152,7 +152,6 @@ const WatchExercise = () => {
   const [active, setActive] = useState(true);
 
   const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
   const [patientStatistics, setPatientStatistics] = useState([]);
@@ -173,7 +172,6 @@ const WatchExercise = () => {
     const titleAndDesc = async (id) => {
       const response = await getTitleAndDescById(id);
       setTitle(response.title);
-      setDescription(response.description);
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
