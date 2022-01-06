@@ -45,6 +45,7 @@ const Left = styled.div`
 const Right = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   flex: 1;
   padding: 50px 0;
@@ -151,7 +152,6 @@ const WatchExercise = () => {
   const [active, setActive] = useState(true);
 
   const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
   const [isTitleAndDescFetched, setIsTitleAndDescFetched] = useState(false);
 
   const [patientStatistics, setPatientStatistics] = useState([]);
@@ -172,7 +172,6 @@ const WatchExercise = () => {
     const titleAndDesc = async (id) => {
       const response = await getTitleAndDescById(id);
       setTitle(response.title);
-      setDescription(response.description);
       setIsTitleAndDescFetched(true);
     };
     titleAndDesc(videoId);
@@ -231,6 +230,11 @@ const WatchExercise = () => {
     },
   };
 
+  const patientStats = patient.find((element) => element.vidId === videoId);
+
+  if (!patientStats) {
+    return <div />;
+  }
   return (
     <PatientLayout>
       <ReactPlayer {...playerProps} />
@@ -239,7 +243,15 @@ const WatchExercise = () => {
         {isTitleAndDescFetched && (
           <Left>
             <StyledVideoTitle>{title}</StyledVideoTitle>
-            <StyledVideoText>{description}</StyledVideoText>
+            <StyledVideoText>
+              Du ska göra övningen {patientStats.amountOfTimes} gånger per dag
+            </StyledVideoText>
+            <StyledVideoText>
+              Du ska göra {patientStats.set} sets av repetitioner
+            </StyledVideoText>
+            <StyledVideoText>
+              Du ska göra {patientStats.rep} repetitioner
+            </StyledVideoText>
           </Left>
         )}
 
@@ -306,7 +318,6 @@ const WatchExercise = () => {
       <TextContainer>
         <StyledDivider />
       </TextContainer>
-
       <ActionContainer></ActionContainer>
     </PatientLayout>
   );
