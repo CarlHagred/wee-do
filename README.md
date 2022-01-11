@@ -1,21 +1,19 @@
 # WeeDo
 
 WeeDo is a collaboration between the Mobile Hospital Team and Malmö University.</br>
-  
+
 ## General Information
+
 WeeDo is a web application developed by a group of System developer and Information Architecture students in the combined Degree Project course ( [DA385A](https://utbildningsinfo.mau.se/kurs/da385a/kursplan/20212) and [DA392A](https://utbildningsinfo.mau.se/kurs/da392a/kursplan/20212) ). The purpose of the web application is to encourage patients to perform exercises from home with the help of video instructions and statistics while staff can monitor the patients' progress.
 </br>
 
 If you want to know more about Malmö University and about the two programs, follow
-             the links below:
+the links below:
 </br>
 
 - [Malmö University](https://mau.se/)
-        
 - [Information architecture](https://mau.se/sok-utbildning/program/tgiaa/)
-          
 - [System development](https://mau.se/sok-utbildning/program/tgsya/)
- 
 
 ## Technologies used
 
@@ -26,6 +24,7 @@ This project was created with [React](https://reactjs.org) and bootstrapped with
 - [MongoDB](http://www.mongodb.com)
 
 ### API
+
 - [YouTube](https://developers.google.com/youtube/v3)
 
 ### Libraries
@@ -35,6 +34,7 @@ This project was created with [React](https://reactjs.org) and bootstrapped with
 - [Styled Components](https://styled-components.com) (styled-components is a JavaScript library for styling React applications. It removes the mapping between styles and components, and lets you write actual CSS augmented with JavaScript.)
 
 ### Dependencies
+
         "@reonomy/react-confetti-explosion": "^1.0.3",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
@@ -62,7 +62,6 @@ This project was created with [React](https://reactjs.org) and bootstrapped with
         "react-web-qr-reader": "^1.0.4",
         "styled-components": "^5.3.1",
 
-
 ## Features
 
 The web application features two different interfaces</br>
@@ -82,6 +81,7 @@ The web application features two different interfaces</br>
 #### Search patients
 
 #### Show patient statistics
+
 - Current exercises
 - Calendar view
 - Diagram
@@ -93,6 +93,7 @@ The web application features two different interfaces</br>
 #### Search exercise
 
 #### View exercise
+
 - Print card with exercise + QR-code
 - Delete exercise
 
@@ -105,15 +106,18 @@ The web application features two different interfaces</br>
 #### About WeeDo
 
 #### My exercises
+
 - Choose exercise
 - Scan new exercise with QR-code
 
 #### View exercise
+
 - Watch video
 - View sets, reps and amount of times of the exercise
 - Mark exercise as completed - Confetti explosion for encouragement!
 
 #### Statistics
+
 - View statistics for completed exercises
 
 ## DEMO
@@ -127,10 +131,10 @@ The web application features two different interfaces</br>
 
 ```
 $ git clone https://github.com/CarlHagred/wee-do
-$ npm install
+$ npm ci
 ```
 
-#### Executing Program -  Server
+#### Executing Program - Server
 
 ```
 $ npm run dev
