@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Select from "react-select";
 
 import { getAllVideos, postSelectedExercises } from "../../api";
@@ -46,7 +46,6 @@ const SelectExercises = () => {
   const [rep, setRep] = useState([]);
   const [checkedState, setCheckedState] = useState([]);
   const [selected, setSelected] = useState([]);
-  const history = useHistory();
   const amountOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   useEffect(() => {
