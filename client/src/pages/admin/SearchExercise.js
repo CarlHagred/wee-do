@@ -45,7 +45,6 @@ const SearchExercise = () => {
                 key={videos._id}
                 thumbnail={videos.thumbnail}
                 title={videos.videoTitle}
-                /* text={`Antal visningar: ${videos.__v}`} */
               />
             </Link>
           ))}
