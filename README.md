@@ -23,9 +23,9 @@ This project was created with [React](https://reactjs.org) and bootstrapped with
 
 - [MongoDB](http://www.mongodb.com)
 
-### API
+### Third party API used
 
-- [YouTube](https://developers.google.com/youtube/v3)
+- [YouTube Data API API v3]
 
 ### Libraries
 
