@@ -72,7 +72,7 @@ const ToDo = () => {
               key={video.vidId}
               thumbnail={`https://img.youtube.com/vi/${video.vidId}/mqdefault.jpg`}
               title={video.vidTitle}
-              text={`Du har gjort övningen: ${video.amountOfTimes} gånger`}
+              text={`Du ska göra övningen: ${video.amountOfTimes} gånger per dag`}
             />
           </Link>
         ))}
